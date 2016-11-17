@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DefaultController extends Controller
 {
-  public function indexAction()
+  public function createAction()
   {
-    return $this->render('OrchardBundle:Default:new_orchard.html.twig');
+    return $this->render('OrchardBundle:Default:create.html.twig');
   }
 
   public function insertAction(Request $request) {
