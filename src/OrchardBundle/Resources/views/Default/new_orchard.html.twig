@@ -34,24 +34,28 @@
           <h3> Paso 1</h3>
           <div class="form-group">
             <label class="control-label">¿Cómo se llama tu huerto?</label>
-            <input maxlength="100" type="text" required class="form-control" placeholder="Introduce el nombre del huerto" name="form[name]" />
+            <input id="orchard-id" maxlength="100" type="hidden" required class="form-control" />
+            <input id="orchard-name" maxlength="100" type="text" required class="form-control" placeholder="Introduce el nombre del huerto"/>
           </div>
           <div class="form-group">
             <label class="control-label">¿Dónde está tu huerto?</label>
-            <input maxlength="100" type="text" required class="form-control" placeholder="Población" name="form[town]" /><br>
-            <input maxlength="100" type="text" required class="form-control" placeholder="Calle" name="form[street]" /><br>
+            <input id="orchard-town" maxlength="100" type="text" required class="form-control" placeholder="Población" /><br>
+            <input id="orchard-street" maxlength="100" type="text" required class="form-control" placeholder="Calle" /><br>
             
             <div style="width: 100% ">
-	            <input maxlength="100" type="text" class="form-control input-number" placeholder="Número" name="form[number]" />
-	            <input maxlength="100" type="text" required class="form-control input-zipcode" placeholder="Código postal" name="form[zipCode]" /><br><br><br>
-	            <button class="btn btn-primary nextBtn pull-right" type="button">Siguiente</button>
+	            <input id="orchard-number" maxlength="100" type="text" class="form-control input-number" placeholder="Número" />
+	            <input id="orchard-zipcode" maxlength="100" type="text" required class="form-control input-zipcode" placeholder="Código postal" /><br><br><br>
+              <button id="btn-siguiente" class="btn btn-primary nextBtn pull-right">Siguiente</button>
           	</div>
-
-
-
           </div>
         </div>
       </div>
+
+
+
+
+
+
     </div>
     <!--END STEP 1 -->
 
@@ -100,6 +104,40 @@
 	<script src='http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js'></script>
 
     <script src="{{ asset('js/form.js') }}"></script>
+
+{% endblock %}
+
+
+
+
+{% block javascripts %}
+
+  <script type="text/javascript">
+
+  $('#btn-siguiente').on('click', function() {
+    var form =  {
+      id: $('#orchard-id').val(),
+      name: $('#orchard-name').val(),
+      town: $('#orchard-town').val(),
+      street: $('#orchard-street').val(),
+      number: $('#orchard-number').val(),
+      zipcode: $('#orchard-zipcode').val()
+    };
+
+    $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      url: '/orchard/insert',
+      data: form,
+      success: function(data) {
+        $('input[id=orchard-id]').val(data.id);
+      }
+    });
+
+  });
+
+  </script>
+
 
 {% endblock %}
 
