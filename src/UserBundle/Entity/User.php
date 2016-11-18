@@ -3,10 +3,6 @@
 namespace UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Expose;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\VirtualProperty;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -37,7 +33,7 @@ class User
      * @var \Doctrine\Common\Collections\Collection|OrchardBundle\Entity\Orchard[]
      *
      * @ORM\ManyToMany(targetEntity="OrchardBundle\Entity\Orchard", mappedBy="users")
-     * @Expose
+     * 
      */
     protected $orchards;
 
@@ -61,7 +57,7 @@ class User
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -115,4 +111,3 @@ class User
         $orchard->removeOrchard($this);
     }
 }
-
