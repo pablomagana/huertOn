@@ -1,6 +1,6 @@
-orchard_homepage:
-    path:     /
-    defaults: { _controller: OrchardBundle:Default:index }
+orchard_create:
+    path:     /create
+    defaults: { _controller: OrchardBundle:Default:create }
 
 orchard_insert:
     path:     /insert
