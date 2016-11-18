@@ -6,17 +6,38 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use OrchardBundle\Entity\Orchard;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
-  public function createAction()
+  public function indexAction(){
+    $id=1;
+    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id);
+    return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user.name ));
+  }
+  public function createAction($_values)
   {
-    return $this->render('OrchardBundle:Default:create.html.twig');
+    switch ($_values) {
+      case '1':
+        return $this->render('OrchardBundle:Default:step1.html.twig');
+        break;
+      case '2':
+        return $this->render('OrchardBundle:Default:step2.html.twig');
+        break;
+      case '3':
+        return $this->render('OrchardBundle:Default:step3.html.twig');
+        break;
+
+      default:
+        return $this->render('OrchardBundle:Default:steps.html.twig');
+        break;
+    }
+
   }
 
   public function insertAction(Request $request) {
     if ($request->isXMLHttpRequest()) {
-     
+
       $id = $request->request->get('id');
       $name = $request->request->get('name');
       $town = $request->request->get('town');
