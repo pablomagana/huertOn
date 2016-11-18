@@ -1,0 +1,28 @@
+{% extends '::step-base.html.twig' %}
+
+{% block body %}
+
+<div class="row steps">
+  <div class="col-xs-12 col-md-5 col-lg-5">
+    <h1 class="display-5">¡Hola {{userName}}!</h1>
+      <small>Haz que más personas conozcan tu huerto</small>
+
+      <h4>Paso 1</h4>
+      <button type="button" class="btn btn-primary">Empezar</button>
+
+      <h4>Paso 2</h4>
+        <p><small>¿Qué pueden encontrar allí? (fotos, servicios...)</small></p>
+
+      <h4>Paso 3</h4>
+        <p><small>Cuéntanos algo más especial de tu huerto</small></p>
+
+
+  </div>
+
+  <div class="steps-right col-xs-12 col-md-7 col-lg-7">
+    <h2 class="display-3">Muchos urbanitas sólo conocen 1 o 2 huertos en tu ciudad y alrededores</h2>
+    <h1 class="display-4">¡Descúbreles el tuyo!</h1>
+  </div>
+</div>
+
+{% endblock %}

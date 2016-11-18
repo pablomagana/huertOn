@@ -13,7 +13,7 @@ class DefaultController extends Controller
   public function indexAction(){
     $id=1;
     $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id);
-    return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->name ));
+    return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() ));
   }
   public function createAction($_values)
   {
