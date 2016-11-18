@@ -2,82 +2,94 @@
 
 {% block body %}
 
-<div class="row step-1">
-  <div class="col-xs-12 col-md-5 col-lg-5">
-    <h1 class="display-3">Paso 1</h1>
-    <form>
-  <div class="form-group">
-    <label for="formGroupExampleInput">¿Cómo se llama tu huerto?</label>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Nombre de tu huerto">
-  </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput2">¿Dónde está tu huerto?</label>
-    <small id="fileHelp" class="form-text text-muted">Mueve el marcador para seleccionar la entrada de tu huerto.</small>
-  </div>
-</form>
+  <div class="row step-1">
+    <div class="col-xs-12 col-md-5 col-lg-5">
+      <h1 class="display-3">Paso 1</h1>
+      <form>
+        <div class="form-group">
+          <label for="form-name">¿Cómo se llama tu huerto?</label>
+          <input type="text" class="form-control" id="form-name" placeholder="Nombre de tu huerto">
+        </div>
+        <div class="form-group">
+          <label for="form-address">¿Dónde está tu huerto?<small id="fileHelp" class="form-text text-muted"><i>Mueve el marcador para seleccionar la entrada a tu huerto.</i></small></label>
 
-<button type="button" class="btn btn-secondary">Atràs</button>
-<button type="button" class="btn btn-primary">Siguiente</button>
-  </div>
+          <input type="text" id="orchard-town" hidden="hidden">
+          <input type="text" id="orchard-street" hidden="hidden">
+          <input type="text" id="orchard-number" hidden="hidden">
+          <input type="text" id="orchard-zipcode" hidden="hidden">
+          <input type="text" id="orchard-geometry" hidden="hidden">
 
-  <div class="map col-xs-12 col-md-7 col-lg-7">
-    <div id="map" class="map"></div>
+        </div>
+      </form>
+      
+      <div class="fixed-buttons">
+        <button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Atrás</button>
+        <button id="btn-siguiente" type="button" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Siguiente</button>
+      </div>
+
+    </div>
+
+    <div class="map col-xs-12 col-md-7 col-lg-7">
+      <div id="map" class="map"></div>
+    </div>
+  
+
   </div>
-</div>
 
 {% endblock %}
 
 
 {% block javascripts %}
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
-$('#btn-siguiente').on('click', function() {
-  var form =  {
-    id: $('#orchard-id').val(),
-    name: $('#orchard-name').val(),
-    town: $('#orchard-town').val(),
-    street: $('#orchard-street').val(),
-    number: $('#orchard-number').val(),
-    zipcode: $('#orchard-zipcode').val()
-  };
+    $('#btn-siguiente').on('click', function() {
+      var form =  {
+        id: $('#orchard-id').val(),
+        name: $('#orchard-name').val(),
+        town: $('#orchard-town').val(),
+        street: $('#orchard-street').val(),
+        number: $('#orchard-number').val(),
+        zipcode: $('#orchard-zipcode').val(),
+        geometry: $('#orchard-geometry').val()
+      };
 
-  $.ajax({
-    type: 'POST',
-    dataType: 'json',
-    url: '/orchard/insert',
-    data: form,
-    success: function(data) {
-      $('input[id=orchard-id]').val(data.id);
+      $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '/orchard/insert',
+        data: form,
+        success: function(data) {
+          $('input[id=orchard-id]').val(data.id);
+        }
+      });
+
+    });
+
+    var position;
+
+    var circle;
+
+    var polygon;
+
+    var marker;
+
+    if (navigator.geolocation) {
+      position = navigator.geolocation.getCurrentPosition(setPosition);
     }
-  });
 
-});
+    function setPosition(result){
+      position = result;
+      setMap();
+    }
 
-var position;
+    function setMap(){
+      var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 12);
+      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-var circle;
-
-var polygon;
-
-var marker;
-
-if (navigator.geolocation) {
-  position = navigator.geolocation.getCurrentPosition(setPosition);
-}
-
-function setPosition(result){
-  position = result;
-  setMap();
-}
-
-function setMap(){
-  var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 12);
-  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-  L.drawLocal = {
-    draw: {
-      toolbar: {
+      L.drawLocal = {
+        draw: {
+          toolbar: {
               // #TODO: this should be reorganized where actions are nested in actions
               // ex: actions.undo  or actions.cancel
               actions: {
@@ -317,42 +329,42 @@ function setMap(){
         //alert(data.features[0].properties.label);
       }
     });
-});
-
-var options = {
-  markers: {draggable :true},
-  layers: 'address',
-  'boundary.country': 'ES',
-  sources: 'oa'
-};
-
-var geocoder = L.control.geocoder('mapzen-9gW9cQ', options).addTo(map);
-
-document.querySelector('.leaflet-pelias-input').placeholder = "Busca tu dirección";
-
-document.querySelector('.leaflet-control-zoom-in').title = "Acercarse";
-
-document.querySelector('.leaflet-control-zoom-out').title = "Alejarse";
-
-geocoder.on('select', function (e) {
-
-  $('.leaflet-pelias-control').removeClass('leaflet-pelias-expanded');
-
-  if(drawnItems.getLayers() != null) {
-    map.removeLayer(drawnItems);
-  }
-
-  marker = geocoder.markers[0];
-
-  marker.on('dragend', function() { onDragEnd(marker); });
-
-  marker.on('dragstart', function() {
-    if(circle != null) {
-      map.removeLayer(circle);
-    }
   });
 
-  var latlng = marker.getLatLng();
+  var options = {
+    markers: {draggable :true},
+    layers: 'address',
+    'boundary.country': 'ES',
+    sources: 'oa'
+  };
+
+  var geocoder = L.control.geocoder('mapzen-9gW9cQ', options).addTo(map);
+
+  document.querySelector('.leaflet-pelias-input').placeholder = "Busca tu dirección";
+
+  document.querySelector('.leaflet-control-zoom-in').title = "Acercarse";
+
+  document.querySelector('.leaflet-control-zoom-out').title = "Alejarse";
+
+  geocoder.on('select', function (e) {
+
+    $('.leaflet-pelias-control').removeClass('leaflet-pelias-expanded');
+
+    if(drawnItems.getLayers() != null) {
+      map.removeLayer(drawnItems);
+    }
+
+    marker = geocoder.markers[0];
+
+    marker.on('dragend', function() { onDragEnd(marker); });
+
+    marker.on('dragstart', function() {
+      if(circle != null) {
+        map.removeLayer(circle);
+      }
+    });
+
+    var latlng = marker.getLatLng();
 
     //console.log('lat '+latlng.lat+", lng "+latlng.lng);
 
@@ -423,17 +435,9 @@ geocoder.on('select', function (e) {
           //alert(data.features[0].properties.label);
         }
       });
+    }
   }
-}
 
 </script>
 
 {% endblock %}
-
-
-
-
-
-
-
-
