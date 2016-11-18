@@ -74,18 +74,47 @@
 
     var marker;
 
+    var map = L.map('map');
+
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    map.setView([39.4077013, -0.5015955], 12);
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    function success(pos) {
+      var crd = pos.coords;
+
+      console.log('Your current position is:');
+      console.log('Latitude : ' + crd.latitude);
+      console.log('Longitude: ' + crd.longitude);
+      console.log('More or less ' + crd.accuracy + ' meters.');
+
+      setMap(crd);
+    };
+
+    function error(err) {
+      console.warn('ERROR(' + err.code + '): ' + err.message);
+      setMap();
+    };
+
     if (navigator.geolocation) {
       position = navigator.geolocation.getCurrentPosition(setPosition);
     }
 
-    function setPosition(result){
-      position = result;
-      setMap();
-    }
+    function setMap(crd){
 
-    function setMap(){
-      var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 12);
-      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+      if(crd != undefined) {
+        map.setView([crd.latitude, crd.longitude], 12);
+      }else{
+        map.setView([39.4077013, -0.5015955], 12);
+      }
 
       L.drawLocal = {
         draw: {
