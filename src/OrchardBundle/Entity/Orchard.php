@@ -3,10 +3,6 @@
 namespace OrchardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Expose;
-use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\VirtualProperty;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -15,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="orchard")
  * @ORM\Entity(repositoryClass="OrchardBundle\Repository\OrchardRepository")
  *
- * @ExclusionPolicy("all")
+ *
  */
 class Orchard
 {
@@ -39,7 +35,7 @@ class Orchard
      * @var string
      *
      * @ORM\Column(name="number", type="string", length=255)
-     * @Expose
+     * 
      */
     private $number;
 
@@ -47,7 +43,7 @@ class Orchard
      * @var string
      *
      * @ORM\Column(name="street", type="string", length=255)
-     * @Expose
+     *
      */
     private $street;
 
@@ -55,7 +51,7 @@ class Orchard
      * @var string
      *
      * @ORM\Column(name="town", type="string", length=255)
-     * @Expose
+     *
      */
     private $town;
 
@@ -63,7 +59,7 @@ class Orchard
      * @var string
      *
      * @ORM\Column(name="zip_code", type="string", length=255)
-     * @Expose
+     *
      */
     private $zipCode;
 
@@ -80,7 +76,7 @@ class Orchard
      *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      *  }
      * )
-     * @Expose
+     *
      */
     protected $users;
 
@@ -105,7 +101,7 @@ class Orchard
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -129,7 +125,7 @@ class Orchard
     public function setNumber($number)
     {
         $this->number = $number;
-    
+
         return $this;
     }
 
@@ -153,7 +149,7 @@ class Orchard
     public function setStreet($street)
     {
         $this->street = $street;
-    
+
         return $this;
     }
 
@@ -177,7 +173,7 @@ class Orchard
     public function setTown($town)
     {
         $this->town = $town;
-    
+
         return $this;
     }
 
@@ -201,7 +197,7 @@ class Orchard
     public function setZipCode($zipCode)
     {
         $this->zipCode = $zipCode;
-    
+
         return $this;
     }
 
@@ -227,10 +223,10 @@ class Orchard
 
     /**
      * Get the formatted address to display
-     * 
+     *
      * @param $separator: the separator between fields (default: ', ')
      * @return String
-     * @VirtualProperty 
+     * @VirtualProperty
      */
     public function getAddress($separator = ', '){
         if($this->getNumber() != null && $this->getStreet() != null && $this->getTown() != null && $this->getZipCode()){
@@ -239,7 +235,7 @@ class Orchard
         else{
             return $this->getStreet();
         }
-    } 
+    }
 
     /**
      * Default constructor, initializes collections
@@ -271,4 +267,3 @@ class Orchard
         $user->removeUser($this);
     }
 }
-
