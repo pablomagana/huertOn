@@ -2,123 +2,129 @@
 
 {% block body %}
 
-  <div class="row step-1">
-    <div class="col-xs-12 col-md-5 col-lg-5">
-      <h1 class="display-3">Paso 1</h1>
-      <form>
-        <div class="form-group">
-          <label for="form-name">¿Cómo se llama tu huerto?</label>
-          <input type="text" class="form-control" id="form-name" placeholder="Nombre de tu huerto">
-        </div>
-        <div class="form-group">
-          <label for="form-address">¿Dónde está tu huerto?<small id="fileHelp" class="form-text text-muted"><i>Mueve el marcador para seleccionar la entrada a tu huerto.</i></small></label>
-
-          <input type="text" id="orchard-town" hidden="hidden">
-          <input type="text" id="orchard-street" hidden="hidden">
-          <input type="text" id="orchard-number" hidden="hidden">
-          <input type="text" id="orchard-zipcode" hidden="hidden">
-          <input type="text" id="orchard-geometry" hidden="hidden">
-
-        </div>
-      </form>
-      
-      <div class="fixed-buttons">
-        <button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Atrás</button>
-        <button id="btn-siguiente" type="button" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Siguiente</button>
+<div class="row step-1">
+  <div class="col-xs-12 col-md-5 col-lg-5">
+    <h1 class="display-3">Paso 1</h1>
+    <form>
+      <div class="form-group">
+        <label for="form-name">¿Cómo se llama tu huerto?</label>
+        <input type="text" class="form-control" id="form-name" placeholder="Nombre de tu huerto">
       </div>
+      <div class="form-group">
+        <label for="form-address">¿Dónde está tu huerto?<small id="fileHelp" class="form-text text-muted"><i>Mueve el marcador para seleccionar la entrada a tu huerto.</i></small></label>
 
-    </div>
+        <input type="text" id="orchard-town" hidden="hidden">
+        <input type="text" id="orchard-street" hidden="hidden">
+        <input type="text" id="orchard-number" hidden="hidden">
+        <input type="text" id="orchard-zipcode" hidden="hidden">
+        <input type="text" id="orchard-geometry" hidden="hidden">
 
-    <div class="map col-xs-12 col-md-7 col-lg-7">
-      <div id="map" class="map"></div>
+      </div>
+    </form>
+
+    <div class="fixed-buttons">
+      <button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Atrás</button>
+      <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Siguiente</button>
     </div>
-  
 
   </div>
 
-{% endblock %}
+  <div class="map col-xs-12 col-md-7 col-lg-7">
+    <div id="map" class="map"></div>
+  </div>
+  
 
+</div>
+
+{% endblock %}
 
 {% block javascripts %}
 
-  <script type="text/javascript">
+<script type="text/javascript">
 
-    $('#btn-siguiente').on('click', function() {
-      var form =  {
-        id: $('#orchard-id').val(),
-        name: $('#orchard-name').val(),
-        town: $('#orchard-town').val(),
-        street: $('#orchard-street').val(),
-        number: $('#orchard-number').val(),
-        zipcode: $('#orchard-zipcode').val(),
-        geometry: $('#orchard-geometry').val()
-      };
+$(function() {
+  initMap();
+});
 
-      $.ajax({
-        type: 'POST',
-        dataType: 'json',
-        url: '/orchard/insert',
-        data: form,
-        success: function(data) {
-          $('input[id=orchard-id]').val(data.id);
-        }
-      });
+$('#btn-siguiente').on('click', function() {
+  var form =  {
+    id: $('#orchard-id').val(),
+    name: $('#orchard-name').val(),
+    town: $('#orchard-town').val(),
+    street: $('#orchard-street').val(),
+    number: $('#orchard-number').val(),
+    zipcode: $('#orchard-zipcode').val(),
+    geometry: $('#orchard-geometry').val()
+  };
 
-    });
-
-    var position;
-
-    var circle;
-
-    var polygon;
-
-    var marker;
-
-    var map = L.map('map');
-
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-    map.setView([39.4077013, -0.5015955], 12);
-
-    navigator.geolocation.getCurrentPosition(success, error, options);
-
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
-
-    function success(pos) {
-      var crd = pos.coords;
-
-      console.log('Your current position is:');
-      console.log('Latitude : ' + crd.latitude);
-      console.log('Longitude: ' + crd.longitude);
-      console.log('More or less ' + crd.accuracy + ' meters.');
-
-      setMap(crd);
-    };
-
-    function error(err) {
-      console.warn('ERROR(' + err.code + '): ' + err.message);
-      setMap();
-    };
-
-    if (navigator.geolocation) {
-      position = navigator.geolocation.getCurrentPosition(setPosition);
+  $.ajax({
+    type: 'POST',
+    dataType: 'json',
+    url: '/orchard/insert',
+    data: form,
+    success: function(data) {
+      $('#orchard-id').attr('value', data.id);
     }
+  });
 
-    function setMap(crd){
+});
 
-      if(crd != undefined) {
-        map.setView([crd.latitude, crd.longitude], 12);
-      }else{
-        map.setView([39.4077013, -0.5015955], 12);
-      }
+var map;
 
-      L.drawLocal = {
-        draw: {
-          toolbar: {
+// Initialise the FeatureGroup to store editable layers
+var editableItems = new L.FeatureGroup();
+
+var nonEditableItems = new L.FeatureGroup();
+
+var nonEditableItemsBackup = new L.FeatureGroup();
+
+function initMap() {
+  //Inicializamos el mapa y sus controles (es necesário tener un div de id="map") y lo centramos en Valencia por defecto
+  //Pedimos la geolocalización al usuario, si la acepta centramos el mapa en su ubicación, sinó mostramos el error por consola
+  map = L.map('map', {
+    zoomControl: false
+  });
+
+  L.control.zoom({
+    position: 'bottomright',
+    zoomInTitle: 'Acercar',
+    zoomOutTitle: 'Alejar'
+  }).addTo(map);
+
+  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+  map.setView([39.4077013, -0.5015955], 12);
+
+  navigator.geolocation.getCurrentPosition(success, error, options);
+
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+
+  function success(pos) {
+    var crd = pos.coords;
+
+    console.log('Your current position is:');
+    console.log('Latitude : ' + crd.latitude);
+    console.log('Longitude: ' + crd.longitude);
+    console.log('More or less ' + crd.accuracy + ' meters.');
+
+    setMap(crd);
+  };
+
+  function error(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+    setMap();
+  };
+}
+
+function initDraw() {
+  //Inicializamos el plugin Draw y añadimos la capa de layers que se van a poder editar (sólo polígonos)
+  L.drawLocal = {
+    draw: {
+      toolbar: {
               // #TODO: this should be reorganized where actions are nested in actions
               // ex: actions.undo  or actions.cancel
               actions: {
@@ -215,257 +221,254 @@
           }
         };
 
-  // Initialise the FeatureGroup to store editable layers
-  var drawnItems = new L.FeatureGroup();
-  map.addLayer(drawnItems);
-
-  // Initialise the draw control and pass it the FeatureGroup of editable layers
-  var drawControl = new L.Control.Draw({
-    draw: {
-      marker: false,
-      circle: false,
-      polyline: false,
-      rectangle: false,
-      polygon: {
-        allowIntersection: false,
-        showArea: true
+        // Initialise the draw control and pass it the FeatureGroup of editable layers
+        var drawControl = new L.Control.Draw({
+          draw: {
+            marker: false,
+            circle: false,
+            polyline: false,
+            rectangle: false,
+            polygon: {
+              allowIntersection: false,
+              showArea: true
+            }
+          },
+          edit: {
+            featureGroup: editableItems,
+            remove: false
+          }
+        });
+        map.addControl(drawControl);
       }
-    },
-    edit: {
-      featureGroup: drawnItems
-    }
-  });
-  map.addControl(drawControl);
 
-  
+function initGeocoder() {
+  //Inicializamos el plugin Geocoder y devolvemos la variable para poder utilizarla más tarde
+  var options = {
+    markers: {draggable :true},
+    layers: 'address',
+    'boundary.country': 'ES',
+    sources: 'oa',
+    position: 'topright',
+    fullWidth: false,
+    placeholder: 'Busca tu dirección'
+  };
+
+  var geocoder = L.control.geocoder('mapzen-9gW9cQ', options).addTo(map);
+
+  return geocoder;
+}
+
+function setMap(crd){
+  //Si el usuario ha permitido la geolocalización centramos el mapa en su ubicación
+  if(crd != undefined) {
+    map.setView([crd.latitude, crd.longitude], 12);
+  }
+
+  map.addLayer(editableItems);
+
+  map.addLayer(nonEditableItems);
+
+  initDraw();
+
+  var deleting = false;
 
   map.on('draw:drawstart', function (e) {
     var type = e.layerType,
     layer = e.layer;
 
-    if(polygon != null) {
-      map.removeLayer(polygon);
-    }
+    //Cuando empezemos a dibujar debemos borrar todas las capas para evitar conflictos
 
-    if(marker != null) {
-      map.removeLayer(marker);
-    }
+    clearEditableLayer(true);
 
-    if(circle != null) {
-      map.removeLayer(circle);
-    }
+    clearNonEditableLayer(true);
+
+    $('#orchard-geometry').attr('value', "");
   });
 
   map.on('draw:created', function (e) {
     var type = e.layerType,
     layer = e.layer;
 
-    if (type === 'marker') {
-          // Do marker specific actions
-        }
-
-        polygon = layer;
-
-      // Do whatever else you need to. (save to db, add to map etc)
-      map.addLayer(layer);
-
-      drawnItems.addLayer(layer);
-
-      marker = L.marker([layer.getBounds().getCenter().lat, layer.getBounds().getCenter().lng],
-        {draggable: true}
-        ).on('dragend', function() { onDragEnd(marker); }).addTo(map);
-
-      marker.on('dragstart', function() {
-        if(circle != null) {
-          map.removeLayer(circle);
-        }
-      });
-
-      drawnItems.addLayer(marker);
-
-      var latlng = marker.getLatLng();
-
-    //console.log('lat '+latlng.lat+", lng "+latlng.lng);
-
-    $.getJSON('https://search.mapzen.com/v1/reverse?api_key=mapzen-9gW9cQ&point.lat='+latlng.lat+'&point.lon='+latlng.lng+'&size=1&layers=address&boundary.country=ES', function(data, status, xhr) {
-      if(data.features[0] == undefined){
-        if(circle != null) {
-          map.removeLayer(circle);
-        }
-        marker.bindPopup('No se han encontrado resultados.').openPopup();
-      }else{
-        marker.bindPopup(data.features[0].properties.label).openPopup();
-        if(data.features[0].properties.locality != null){
-          if(circle != null) {
-            map.removeLayer(circle);
-          }
-          circle = L.circle([latlng.lat, latlng.lng], data.features[0].properties.distance*1000).addTo(map);
-          drawnItems.addLayer(circle);
-
-          //Guardamos address del marker en campo dirección del huerto o separamos los datos y la guardamos por separado (Calle, número, localidad, cp).
-          //Después guardamos el poligono como string en el campo geometry del huerto
-          var forma = layer.toGeoJSON()
-          var forma = JSON.stringify(forma);
-
-          var poligono = {
-            town: data.features[0].properties.locality,
-            street: data.features[0].properties.street,
-            number: data.features[0].properties.housenumber,
-            zipCode: data.features[0].properties.postalcode,
-            geometry: forma
-          }
-
-          $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: '/orchard/new',
-            data: poligono,
-            success: function(data) {
-              alert('Polígono guardado correctamente')
-            }
-          });
-        }else{
-          if(circle != null) {
-            map.removeLayer(circle);
-          }
-          circle = L.circle([latlng.lat, latlng.lng], data.features[0].properties.distance*1000).addTo(map);
-          drawnItems.addLayer(circle);
-
-          //Guardamos address del marker en campo dirección del huerto o separamos los datos y la guardamos por separado (Calle, número, localidad, cp).
-          //Después guardamos el poligono como string en el campo geometry del huerto
-          var forma = layer.toGeoJSON();
-          var forma = JSON.stringify(forma);
-          console.log(forma);
-
-          var poligono = {
-            town: data.features[0].properties.localadmin,
-            street: data.features[0].properties.street,
-            number: data.features[0].properties.housenumber,
-            zipCode: data.features[0].properties.postalcode,
-            geometry: forma
-          }
-
-          $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: '/orchard/new',
-            data: poligono,
-            success: function(data) {
-              alert('Polígono guardado correctamente')
-            }
-          });
-        }
-        //alert(data.features[0].properties.label);
+    layer.on('click', function(e) {
+      if(deleting) {
+        console.log('Borrando capa no editable');
+        clearNonEditableLayer(true);
       }
+    });
+
+    // Do whatever else you need to. (save to db, add to map etc)
+    map.addLayer(layer);
+
+    editableItems.addLayer(layer);
+
+    var marker = L.marker([layer.getBounds().getCenter().lat, layer.getBounds().getCenter().lng], {draggable: true});
+
+    prepareMarker(marker);
+  });
+
+  map.on('draw:edited', function (e) {
+    var layers = e.layers;
+    layers.eachLayer(function (layer) {
+        prepareGeometry(undefined, layer);
     });
   });
 
-  var options = {
-    markers: {draggable :true},
-    layers: 'address',
-    'boundary.country': 'ES',
-    sources: 'oa'
-  };
+  /*map.on('draw:deletestart', function (e) {
+    deleting = true;
+    console.log(nonEditableItems.getLayers());
+    nonEditableItemsBackup.addLayer((nonEditableItems.getLayers()[0]));
+    nonEditableItemsBackup.addLayer((nonEditableItems.getLayers()[nonEditableItems.getLayers().length - 1]));
 
-  var geocoder = L.control.geocoder('mapzen-9gW9cQ', options).addTo(map);
+    $("a[title='Guardar cambios.']").on('click', function(e) {
+      console.log('Has clickado guardar');
+    });
 
-  document.querySelector('.leaflet-pelias-input').placeholder = "Busca tu dirección";
+    $("a[title='Cancelar la edición, descarta todos los cambios.']").on('click', function(e) {
+      console.log('Has terminado de borrar');
+      deleting = false;
+      map.addLayer(nonEditableItemsBackup);
+      nonEditableItemsBackup.eachLayer(function(layer) {
+          map.addLayer(layer);
+      });
+    });
+  });*/
 
-  document.querySelector('.leaflet-control-zoom-in').title = "Acercarse";
-
-  document.querySelector('.leaflet-control-zoom-out').title = "Alejarse";
+  var geocoder = initGeocoder();
 
   geocoder.on('select', function (e) {
 
     $('.leaflet-pelias-control').removeClass('leaflet-pelias-expanded');
 
-    if(drawnItems.getLayers() != null) {
-      map.removeLayer(drawnItems);
-    }
+    clearEditableLayer(true);
 
-    marker = geocoder.markers[0];
+    clearNonEditableLayer(true);
 
-    marker.on('dragend', function() { onDragEnd(marker); });
+    $('#orchard-geometry').attr('value', "");
 
-    marker.on('dragstart', function() {
-      if(circle != null) {
-        map.removeLayer(circle);
-      }
-    });
+    var marker = geocoder.markers[0];
 
-    var latlng = marker.getLatLng();
+    prepareMarker(marker);
+  });
 
-    //console.log('lat '+latlng.lat+", lng "+latlng.lng);
+  geocoder.on('reset', function (e) {
+    clearNonEditableLayer(false);
+  });
 
-    $.getJSON('https://search.mapzen.com/v1/reverse?api_key=mapzen-9gW9cQ&point.lat='+latlng.lat+'&point.lon='+latlng.lng+'&size=1&layers=address&boundary.country=ES', function(data, status, xhr) {
+  function reverseGeocoding(marker) {
+    $.getJSON('https://search.mapzen.com/v1/reverse?api_key=mapzen-9gW9cQ&point.lat='+marker.getLatLng().lat+'&point.lon='+marker.getLatLng().lng+'&size=1&layers=address&boundary.country=ES', function(data, status, xhr) {
       if(data.features[0] == undefined){
-        if(circle != null) {
-          map.removeLayer(circle);
-        }
         marker.bindPopup('No se han encontrado resultados.').openPopup();
       }else{
         marker.bindPopup(data.features[0].properties.label).openPopup();
         if(data.features[0].properties.locality != null){
-          if(circle != null) {
-            map.removeLayer(circle);
-          }
-          circle = L.circle([latlng.lat, latlng.lng], data.features[0].properties.distance*1000).addTo(map);
-          drawnItems.addLayer(circle);
+          var circle = L.circle([marker.getLatLng().lat, marker.getLatLng().lng], data.features[0].properties.distance*1000).addTo(map);
+          nonEditableItems.addLayer(circle);
+          $('#orchard-town').attr('value', data.features[0].properties.locality);
+          $('#orchard-street').attr('value', data.features[0].properties.street);
+          $('#orchard-number').attr('value', data.features[0].properties.housenumber);
+          $('#orchard-zipcode').attr('value', data.features[0].properties.postalcode);
+          console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.locality+', CP '+data.features[0].properties.postalcode+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
         }else{
-          if(circle != null) {
-            map.removeLayer(circle);
-          }
-          circle = L.circle([latlng.lat, latlng.lng], data.features[0].properties.distance*1000).addTo(map);
-          drawnItems.addLayer(circle);
+          var circle = L.circle([marker.getLatLng().lat, marker.getLatLng().lng], data.features[0].properties.distance*1000).addTo(map);
+          nonEditableItems.addLayer(circle);
+          $('#orchard-town').attr('value', data.features[0].properties.localadmin);
+          $('#orchard-street').attr('value', data.features[0].properties.street);
+          $('#orchard-number').attr('value', data.features[0].properties.housenumber);
+          $('#orchard-zipcode').attr('value', data.features[0].properties.postalcode);
+          console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.localadmin+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
         }
-        //alert(data.features[0].properties.label);
       }
     });
-
-    //marker.bindPopup("<b>Evento sobre patatas</b><br>Saber más.");
-
-    //console.log('You’ve selected', e.feature.geometry.coordinates[0], ', ', e.feature.geometry.coordinates[1]);
-  });
-
-  geocoder.on('reset', function (e) {
-    if(circle != null) {
-      map.removeLayer(circle);
-    }
-  });
-
-  function onDragEnd(marker) {
-    var latlng = marker.getLatLng();
-
-      //console.log('lat '+latlng.lat+", lng "+latlng.lng);
-
-      $.getJSON('https://search.mapzen.com/v1/reverse?api_key=mapzen-9gW9cQ&point.lat='+latlng.lat+'&point.lon='+latlng.lng+'&size=1&layers=address&boundary.country=ES', function(data, status, xhr) {
-        if(data.features[0] == undefined){
-          if(circle != null) {
-            map.removeLayer(circle);
-          }
-          marker.bindPopup('No se han encontrado resultados.').openPopup();
-        }else{
-          marker.bindPopup(data.features[0].properties.label).openPopup();
-          if(data.features[0].properties.locality != null){
-            if(circle != null) {
-              map.removeLayer(circle);
-            }
-            circle = L.circle([latlng.lat, latlng.lng], data.features[0].properties.distance*1000).addTo(map);
-            drawnItems.addLayer(circle);
-            console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.locality+', CP '+data.features[0].properties.postalcode+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
-          }else{
-            if(circle != null) {
-              map.removeLayer(circle);
-            }
-            circle = L.circle([latlng.lat, latlng.lng], data.features[0].properties.distance*1000).addTo(map);
-            drawnItems.addLayer(circle);
-            console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.localadmin+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
-          }
-          //alert(data.features[0].properties.label);
-        }
-      });
+  
+    if(map.hasLayer(editableItems.getLayers()[editableItems.getLayers().length - 1])) {
+      prepareGeometry(marker, editableItems.getLayers()[editableItems.getLayers().length - 1]);
+    }else{
+      prepareGeometry(marker);
     }
   }
+
+  function storeGeometry(layer) {
+    //Layer puede ser tanto un polígono como un marcador
+    //Convertimos el layer a un objetivo GeoJSON y lo convertimos a string para poder guardarlo
+    var geojson = layer.toGeoJSON();
+    var forma = JSON.stringify(geojson);
+
+    return forma;
+  }
+
+  function retrieveGeometry(geometry) {
+    //Geometry será el string recuperado de la BBDD
+    //Convertimos el string en un objeto JSON eliminando los errores y lo añadimos al mapa
+    var geojsonFeature = JSON.parse(geometry.replace(/&quot;/g,'"'));
+
+    L.geoJSON(geojsonFeature).addTo(map);
+  }
+
+  function prepareMarker(marker) {
+    marker.on('dragend', function() { reverseGeocoding(marker); });
+
+    marker.on('dragstart', function() {
+      clearNonEditableLayer(false);
+    });
+
+    marker.addTo(map);
+
+    nonEditableItems.addLayer(marker);
+
+    reverseGeocoding(marker);
+  }
+
+  function prepareGeometry(marker, polygon) {
+    var geojsonFeature;
+    if(marker != undefined) {
+      geojsonFeature = {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [marker.getLatLng().lng, marker.getLatLng().lat]
+        }
+      };
+    }
+
+    if(polygon != undefined) {
+      var geojson = polygon.toGeoJSON()
+      var forma = JSON.stringify(geojson);
+
+      if(marker == undefined) {
+        $('#orchard-geometry').attr('value', $('#orchard-geometry').val().slice(0, 121)+forma+']');
+      }else{
+        $('#orchard-geometry').attr('value', '['+JSON.stringify(geojsonFeature)+', '+forma+']');
+      }
+    }else{
+      $('#orchard-geometry').attr('value', JSON.stringify(geojsonFeature));
+    }
+  }
+}
+
+function clearEditableLayer(all) {
+  editableItems.eachLayer(function(layer) {
+    if(all) {
+      map.removeLayer(layer);
+    }else{
+      if(layer instanceof L.Circle) {
+        map.removeLayer(layer);
+      }
+    }
+  });
+}
+
+function clearNonEditableLayer(all) {
+  nonEditableItems.eachLayer(function(layer) {
+    if(all) {
+      map.removeLayer(layer);
+    }else{
+      if(layer instanceof L.Circle) {
+        map.removeLayer(layer);
+      }
+    }
+  });
+}
 
 </script>
 
