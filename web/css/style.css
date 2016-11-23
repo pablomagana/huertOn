@@ -27,8 +27,14 @@ html,body,.map,.step-1,.steps {
 
 .steps-right {
   height: 100%;
+
 }
 
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
   /*+++++++++++++++++EndAlex+++++++++++++++++*/
 
 /* Extra-small (mobiles) */
