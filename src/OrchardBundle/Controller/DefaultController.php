@@ -14,8 +14,8 @@ class DefaultController extends Controller
     $id_user=1;
     $id_orchard=0;
     $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-    if(isset($POST["idOrchard"])){
-      $id = $POST["idOrchard"];
+    if(isset($GET["idOrchard"])){
+      $id = $GET["idOrchard"];
       $id_orchard = checkIdOrchard($id);
     }
     return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'->$id_orchard));
