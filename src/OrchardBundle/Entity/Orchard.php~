@@ -305,42 +305,4 @@ class Orchard
         $this->users->removeElement($user);
         $user->removeUser($this);
     }
-
-    /**
-     * Set step
-     *
-     * @param float $step
-     *
-     * @return Orchard
-     */
-    public function setStep($step)
-    {
-        $this->step = $step;
-    
-        return $this;
-    }
-
-    /**
-     * Get step
-     *
-     * @return float
-     */
-    public function getStep()
-    {
-        return $this->step;
-    }
-
-    /**
-     * Add user
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return Orchard
-     */
-    public function addUser(\UserBundle\Entity\User $user)
-    {
-        $this->users[] = $user;
-    
-        return $this;
-    }
 }
