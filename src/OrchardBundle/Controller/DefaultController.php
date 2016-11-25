@@ -12,26 +12,40 @@ class DefaultController extends Controller
 {
   public function indexAction(){
     $id_user=1;
+    $id_orchard=0;
     $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-    return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'->));
-  }
-  public function createAction($_values)
-  {
-    switch ($_values) {
-      case '1':
-        return $this->render('OrchardBundle:Default:step1.html.twig');
-        break;
-      case '2':
-        return $this->render('OrchardBundle:Default:step2.html.twig');
-        break;
-      case '3':
-        return $this->render('OrchardBundle:Default:step3.html.twig');
-        break;
-
-      default:
-        return $this->render('OrchardBundle:Default:steps.html.twig');
-        break;
+    if(isset($POST["idOrchard"])){
+      $id = $POST["idOrchard"];
+      $id_orchard = checkIdOrchard($id);
     }
+    return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'->$id_orchard));
+  }
+  public function createAction()
+  {
+    if(isset($POST["idOrchard"])){
+      $id = $GET["idOrchard"];
+      $id_orchard = checkIdOrchard($id);
+    }
+    if(checkStepOrchard($id)>0){
+      switch ($id_step) {
+        case :
+          return $this->render('OrchardBundle:Default:step11.html.twig');
+          break;
+        case :
+          return $this->render('OrchardBundle:Default:step12.html.twig');
+          break;
+        default:
+          $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+          return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'->$id_orchard));
+          break;
+      }
+
+    }else{
+      $id_user=1;
+      $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+      return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'->$id_orchard));
+    }
+    $step=0;
 
   }
 
@@ -68,9 +82,11 @@ class DefaultController extends Controller
   }
 }
 
-public function checkIdOrchard(){
-  $id_orchard=$POST["id_orchard"];
+public function checkIdOrchard($id_orchard){
   $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
-
-  return 
+  return $orchard->getid();
+}
+public function checkStepOrchard($id_orchard){
+  $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
+  return $orchard->getStep();
 }
