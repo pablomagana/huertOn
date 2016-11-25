@@ -11,9 +11,9 @@ use UserBundle\Entity\User;
 class DefaultController extends Controller
 {
   public function indexAction(){
-    $id=1;
-    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id);
-    return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() ));
+    $id_user=1;
+    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+    return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'->));
   }
   public function createAction($_values)
   {
@@ -66,4 +66,11 @@ class DefaultController extends Controller
           // Do something else
     }
   }
+}
+
+public function checkIdOrchard(){
+  $id_orchard=$POST["id_orchard"];
+  $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
+
+  return 
 }

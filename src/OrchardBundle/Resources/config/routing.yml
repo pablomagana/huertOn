@@ -6,7 +6,9 @@ orchard_create_step:
     defaults: { _controller: OrchardBundle:Default:create }
     requirements:
         _values: 1|2|3
-
+orchard_check_step:
+    path:     /check
+    defaults: { _controller: OrchardBundle:Default:create }
 orchard_insert:
     path:     /insert
     defaults: { _controller: OrchardBundle:Default:insert }
