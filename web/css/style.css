@@ -21,19 +21,32 @@ html,body,.map,.step-1,.steps {
 }
 
 .display-4 {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 400;
 }
-
+.steps-left {
+  padding: 30px;
+}
 .steps-right {
   height: 100%;
-
 }
-
-.vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+h4 {
+  display: inline;
+  margin-right: 50%;
+}
+.fa-check{
+  color: green;
+}
+.steps-right-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+small {
+  color: rgb(175, 175, 175);
+}
+.btn-steps {
+  margin-top: 10px;
 }
   /*+++++++++++++++++EndAlex+++++++++++++++++*/
 
@@ -45,6 +58,9 @@ html,body,.map,.step-1,.steps {
 	    z-index: 9999 !important;
 	    width: 93vw;
 	}
+  .steps-right {
+    display: none;
+  }
 }
 
 /* Small devices (tablets, 768px and up) */

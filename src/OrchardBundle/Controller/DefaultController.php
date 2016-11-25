@@ -20,32 +20,32 @@ class DefaultController extends Controller
     }
     return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'=>$id_orchard));
   }
-  public function createAction()
+  public function createAction($id)
   {
-    if(isset($POST["idOrchard"])){
-      $id = $GET["idOrchard"];
+    $id_orchard=0;
+    if(isset($id)){
+      $id = intval($id);
       $id_orchard = checkIdOrchard($id);
     }
     if(checkStepOrchard($id)>0){
       switch ($id_step) {
-        case :
+        case 11:
           return $this->render('OrchardBundle:Default:step11.html.twig');
           break;
-        case :
+        case 12:
           return $this->render('OrchardBundle:Default:step12.html.twig');
           break;
         default:
           $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-          return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'->$id_orchard));
+          return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'=>$id_orchard));
           break;
       }
 
-    }else{
-      $id_user=1;
-      $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-      return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'->$id_orchard));
-    }
-    $step=0;
+      }else{
+        $id_user=1;
+        $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+        return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'=>$id_orchard));
+      }
 
   }
 
@@ -77,7 +77,6 @@ class DefaultController extends Controller
       $id = $orchard->getId();
       return new JsonResponse(array('id' => $id));
   }
-}
 
 public function checkIdOrchard($id_orchard){
   $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
@@ -86,4 +85,5 @@ public function checkIdOrchard($id_orchard){
 public function checkStepOrchard($id_orchard){
   $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
   return $orchard->getStep();
+}
 }

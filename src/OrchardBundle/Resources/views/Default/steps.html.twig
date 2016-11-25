@@ -2,73 +2,76 @@
 {% block body %}
 
 <script type="text/javascript">
-$.ajax({
-    // la URL para la petición
-    url : '/orchard/check',
-
-    // la información a enviar
-    // (también es posible utilizar una cadena de datos)
-    data : { id : 123 },
-
-    // especifica si será una petición POST o GET
-    type : 'POST',
-
-    // el tipo de información que se espera de respuesta
-    dataType : 'json',
-
-    // código a ejecutar si la petición es satisfactoria;
-    // la respuesta es pasada como argumento a la función
-    success : function(json) {
-        $('<h1/>').text(json.title).appendTo('body');
-        $('<div class="content"/>')
-            .html(json.html).appendTo('body');
-    },
-
-    // código a ejecutar si la petición falla;
-    // son pasados como argumentos a la función
-    // el objeto de la petición en crudo y código de estatus de la petición
-    error : function(xhr, status) {
-        alert('Disculpe, existió un problema');
-    },
-
-    // código a ejecutar sin importar si la petición falló o no
-    complete : function(xhr, status) {
-        alert('Petición realizada');
-    }
-});
+// $.ajax({
+//     // la URL para la petición
+//     url : '/orchard/check',
+//
+//     // la información a enviar
+//     // (también es posible utilizar una cadena de datos)
+//     data : { id : 123 },
+//
+//     // especifica si será una petición POST o GET
+//     type : 'POST',
+//
+//     // el tipo de información que se espera de respuesta
+//     dataType : 'json',
+//
+//     // código a ejecutar si la petición es satisfactoria;
+//     // la respuesta es pasada como argumento a la función
+//     success : function(json) {
+//         $('<h1/>').text(json.title).appendTo('body');
+//         $('<div class="content"/>')
+//             .html(json.html).appendTo('body');
+//     },
+//
+//     // código a ejecutar si la petición falla;
+//     // son pasados como argumentos a la función
+//     // el objeto de la petición en crudo y código de estatus de la petición
+//     error : function(xhr, status) {
+//         alert('Disculpe, existió un problema');
+//     },
+//
+//     // código a ejecutar sin importar si la petición falló o no
+//     complete : function(xhr, status) {
+//         alert('Petición realizada');
+//     }
+// });
 </script>
 
 <div class="row steps">
-  <div class="col-xs-12 col-md-5 col-lg-5">
+  <div class="col-xs-12 col-md-5 col-lg-5 steps-left">
     <h1 class="display-4">¡Hola {{userName}}!</h1>
     <small>Haz que más personas conozcan tu huerto</small>
 
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-lg-12">
+      <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 1</h4>
+        <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         <p><small>Diles lo esencial (dónde está...)</small></p>
-        <a href="create/1"><button type="button" class="btn btn-primary">Empezar</button></a>
+        <a href="create/step/1"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-lg-12">
+      <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 2</h4>
         <p><small>¿Qué pueden encontrar allí? (fotos, servicios...)</small></p>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-lg-12">
+      <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 3</h4>
         <p><small>Cuéntanos algo más especial de tu huerto</small></p>
       </div>
     </div>
   </div>
 
-  <div class="steps-right col-xs-12 col-md-7 col-lg-7">
+  <div class="steps-right col-md-7 col-lg-7">
+    <div class="steps-right-text">
     <h2 class="display-3">Muchos urbanitas sólo conocen 1 o 2 huertos en tu ciudad y alrededores</h2>
     <h1 class="display-4">¡Descúbreles el tuyo!</h1>
+  </div>
   </div>
 </div>
 

@@ -32,7 +32,7 @@
   <div class="map col-xs-12 col-md-7 col-lg-7">
     <div id="map" class="map"></div>
   </div>
-  
+
 
 </div>
 
@@ -83,6 +83,7 @@ $('#btn-siguiente').on('click', function() {
     data: form,
     success: function(data) {
       $('#orchard-id').attr('value', data.id);
+      window.location.href = '/orchard/create/step?idOrchard'+data.id;
     }
   });
 
@@ -264,12 +265,11 @@ function initGeocoder() {
   //Inicializamos el plugin Geocoder y devolvemos la variable para poder utilizarla más tarde
   var options = {
     markers: {draggable :true},
-    layers: 'address',
-    'boundary.country': 'ES',
-    sources: 'oa',
     position: 'topright',
     fullWidth: false,
-    placeholder: 'Busca tu dirección'
+    placeholder: 'Busca tu dirección',
+    place: true,
+    expanded: true
   };
 
   var geocoder = L.control.geocoder('mapzen-9gW9cQ', options).addTo(map);
@@ -398,7 +398,7 @@ function setMap(crd){
         }
       }
     });
-  
+
     if(map.hasLayer(editableItems.getLayers()[editableItems.getLayers().length - 1])) {
       prepareGeometry(marker, editableItems.getLayers()[editableItems.getLayers().length - 1]);
     }else{
