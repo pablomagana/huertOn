@@ -64,6 +64,14 @@ class Orchard
     private $zipCode;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="geometry", type="string", length=10000)
+     *
+     */
+    private $geometry;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection|UserBundle\Entity\User[]
      *
      * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", inversedBy="orchards")
@@ -209,6 +217,30 @@ class Orchard
     public function getZipCode()
     {
         return $this->zipCode;
+    }
+
+    /**
+     * Set geometry
+     *
+     * @param string $geometry
+     *
+     * @return Orchard
+     */
+    public function setGeometry($geometry)
+    {
+        $this->geometry = $geometry;
+
+        return $this;
+    }
+
+    /**
+     * Get geometry
+     *
+     * @return string
+     */
+    public function getGeometry()
+    {
+        return $this->geometry;
     }
 
     /**

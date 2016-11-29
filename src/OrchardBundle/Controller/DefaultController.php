@@ -44,6 +44,7 @@ class DefaultController extends Controller
       $street = $request->request->get('street');
       $number = $request->request->get('number');
       $zipCode = $request->request->get('zipcode');
+      $geometry = $request->request->get('geometry');
 
       $orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id);
       if($orchard == null) {
@@ -55,6 +56,7 @@ class DefaultController extends Controller
       $orchard->setStreet($street);
       $orchard->setNumber($number);
       $orchard->setZipCode($zipCode);
+      $geometry->setGeometry($geometry);
 
       $em = $this->getDoctrine()->getManager();
       $em->persist($orchard);
