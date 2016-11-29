@@ -36,8 +36,6 @@ class DefaultController extends Controller
   }
 
   public function insertAction(Request $request) {
-    if ($request->isXMLHttpRequest()) {
-
       $id = $request->request->get('id');
       $name = $request->request->get('name');
       $town = $request->request->get('town');
@@ -57,6 +55,7 @@ class DefaultController extends Controller
       $orchard->setNumber($number);
       $orchard->setZipCode($zipCode);
       $geometry->setGeometry($geometry);
+      $orchard->setGeometry($geometry);
 
       $em = $this->getDoctrine()->getManager();
       $em->persist($orchard);
@@ -64,8 +63,5 @@ class DefaultController extends Controller
 
       $id = $orchard->getId();
       return new JsonResponse(array('id' => $id));
-    } else {
-          // Do something else
-    }
   }
 }

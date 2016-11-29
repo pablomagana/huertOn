@@ -66,7 +66,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="geometry", type="string", length=10000)
+     * @ORM\Column(name="geometry", type="text")
      *
      */
     private $geometry;
