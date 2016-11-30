@@ -48,7 +48,9 @@
         <h4>Paso 1</h4>
         <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         <p><small>Diles lo esencial (dónde está...)</small></p>
-        <a href="create/step/1"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+        {% if step is defined  and step > -1 %}
+          <a href="create/step/1"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+        {% endif %}
       </div>
     </div>
 
@@ -56,6 +58,9 @@
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 2</h4>
         <p><small>¿Qué pueden encontrar allí? (fotos, servicios...)</small></p>
+        {% if step is defined  and step >20 %}
+          <a href="create/step/11"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+        {% endif %}
       </div>
     </div>
 
@@ -63,6 +68,9 @@
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 3</h4>
         <p><small>Cuéntanos algo más especial de tu huerto</small></p>
+        {% if step is defined  and step >30 %}
+          <a href="create/step/11"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+        {% endif %}
       </div>
     </div>
   </div>
