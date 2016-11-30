@@ -2,6 +2,248 @@
 
 {% block body %}
 
+	<div class="row step-1">
 
+		<div class="col-xs-12 col-md-5 col-lg-5">
+			<h1 class="display-3">Paso 1.2</h1>
+			<form>
+				<div class="form-group steps-left">
+					<label><h4>¿Cómo pueden contactar conmigo?</h4></label><br>
+
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<label for="orchard-mail">Mail</label>
+							<input type="text" class="form-control" id="orchard-mail" placeholder="Escribe aquí tu email"><br>
+						</div>
+						
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<label for="orchard-telephone">Teléfono</label>
+							<input type="text" class="form-control" id="orchard-telephone" placeholder="Escribe aquí tu teléfono"><br>
+						</div>
+					</div>
+					<label for="orchard-web">Web / Blog</label>
+					<input type="text" class="form-control" id="orchard-web" placeholder="Escribe aquí tu Web / Blog">
+
+
+
+				<span class="input input--fumi">
+					<input class="input__field input__field--fumi" type="text" id="input-23" />
+					<label class="input__label input__label--fumi" for="input-23">
+						<i class="fa fa-fw fa-facebook-official icon icon--fumi"></i>
+						<span class="input__label-content input__label-content--fumi">Facebook</span>
+					</label>
+				</span>
+
+				<span class="input input--fumi">
+					<input class="input__field input__field--fumi" type="text" id="input-23" />
+					<label class="input__label input__label--fumi" for="input-23">
+						<i class="fa fa-fw fa-instagram icon icon--fumi"></i>
+						<span class="input__label-content input__label-content--fumi">Instagram</span>
+					</label>
+				</span>
+
+				<span class="input input--fumi">
+					<input class="input__field input__field--fumi" type="text" id="input-23" />
+					<label class="input__label input__label--fumi" for="input-23">
+						<i class="fa fa-fw fa-twitter icon icon--fumi"></i>
+						<span class="input__label-content input__label-content--fumi">Twitter</span>
+					</label>
+				</span>
+
+<!--
+				<div style="margin: 10px">
+					<input type="checkbox" aria-label="Checkbox for following text input" onclick="toggleCheckboxFacebook(this)" id="cbfacebook"> 
+					<i class="fa fa-facebook-official fa-lg"></i> 
+					<input type="hidden" class="form-control" id="facebook" placeholder="Facebook"><br>
+				</div>
+
+				<div style="margin: 10px">
+					<input type="checkbox" aria-label="Checkbox for following text input" onclick="toggleCheckboxInstagram(this)" id="cbinstagram"> 
+					<i class="fa fa-instagram fa-lg"></i>
+					<input type="hidden" class="form-control" id="instagram" placeholder="Instagram"><br>
+				</div>
+
+				<div style="margin: 10px">
+					<input type="checkbox" aria-label="Checkbox for following text input" onclick="toggleCheckboxTwitter(this)" id="cbtwitter"> 
+					<i class="fa fa-twitter fa-lg"></i>
+					<input type="hidden" class="form-control" id="twitter" placeholder="Twitter"><br>
+				</div>
+-->
+
+
+					<!--=========DESPLEGABLE=========-->
+					<p style="float: right;">
+						<a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+							Más redes sociales <i class="fa fa-chevron-down" aria-hidden="true"></i>
+						</a>
+					</p>
+					<div class="collapse" id="collapseExample">
+						<div class="card card-block">
+							<div style="margin: 10px">
+								<input type="checkbox" aria-label="Checkbox for following text input" onclick="toggleCheckboxFacebook(this)" id="cbfacebook"> 
+								<i class="fa fa-facebook-official fa-lg"></i> 
+								<input type="hidden" class="form-control" id="facebook" placeholder="Facebook"><br>
+							</div>
+
+							<div style="margin: 10px">
+								<input type="checkbox" aria-label="Checkbox for following text input" onclick="toggleCheckboxInstagram(this)" id="cbinstagram"> 
+								<i class="fa fa-instagram fa-lg"></i>
+								<input type="hidden" class="form-control" id="instagram" placeholder="Instagram"><br>
+							</div>
+
+							<div style="margin: 10px">
+								<input type="checkbox" aria-label="Checkbox for following text input" onclick="toggleCheckboxTwitter(this)" id="cbtwitter"> 
+								<i class="fa fa-twitter fa-lg"></i>
+								<input type="hidden" class="form-control" id="twitter" placeholder="Twitter"><br>
+							</div>
+						</div>
+					</div>
+					<!--=========DESPLEGABLE=========-->
+
+				</div>
+			</form>
+
+
+
+
+
+
+
+			<div class="fixed-buttons row">
+				<button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+				<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" disabled="disabled">Siguiente</button>
+			</div>
+
+		</div>
+
+		<div class="col-xs-12 col-md-7 col-lg-7 img-step12 steps-right">
+			<img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
+		</div>
+
+	</div>
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/classie/1.0.1/classie.js"></script>
+
+<script type="text/javascript">
+			(function() {
+				// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+				if (!String.prototype.trim) {
+					(function() {
+						// Make sure we trim BOM and NBSP
+						var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+						String.prototype.trim = function() {
+							return this.replace(rtrim, '');
+						};
+					})();
+				}
+
+				[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+					// in case the input is already filled..
+					if( inputEl.value.trim() !== '' ) {
+						classie.add( inputEl.parentNode, 'input--filled' );
+					}
+
+					// events:
+					inputEl.addEventListener( 'focus', onInputFocus );
+					inputEl.addEventListener( 'blur', onInputBlur );
+				} );
+
+				function onInputFocus( ev ) {
+					classie.add( ev.target.parentNode, 'input--filled' );
+				}
+
+				function onInputBlur( ev ) {
+					if( ev.target.value.trim() === '' ) {
+						classie.remove( ev.target.parentNode, 'input--filled' );
+					}
+				}
+			})();
+</script>
+
+
+
+
+
+	<script type="text/javascript">
+		var facebook = document.getElementById("facebook");
+		var twitter = document.getElementById("twitter");
+		var instagram = document.getElementById("instagram");
+
+		function toggleCheckboxFacebook(element){
+	        if (document.getElementById('cbfacebook').checked) {
+				facebook.setAttribute("type", "text");
+	        } else {
+				facebook.setAttribute("type", "hidden");
+	        }
+		}
+
+		function toggleCheckboxInstagram(element){
+	        if (document.getElementById('cbinstagram').checked) {
+				instagram.setAttribute("type", "text");
+	        } else {
+				instagram.setAttribute("type", "hidden");
+	        }
+		}
+
+		function toggleCheckboxTwitter(element){
+	        if (document.getElementById('cbtwitter').checked) {
+				twitter.setAttribute("type", "text");
+	        } else {
+				twitter.setAttribute("type", "hidden");
+	        }
+		}
+
+
+
+
+
+		$('form input').change(function() {
+			validateForm();
+		});
+
+		$('form input').keyup(function() {
+			validateForm();
+		});
+
+		function validateForm() {
+			var empty = false;
+			$('form input').each(function() {
+				if ($(this).val() == '') {
+					empty = true;
+				}
+			});
+
+			if (empty) {
+	        $('#btn-siguiente').attr('disabled', 'disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+	    } else {
+	        $('#btn-siguiente').removeAttr('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+	    }
+	}
+
+	$('#btn-siguiente').on('click', function() {
+		var form =  {
+			mail: $('#orchard-mail').val(),
+			telephone: $('#orchard-telephone').val(),
+			web: $('#orchard-web').val()
+		};
+
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			url: '/orchard/insert',
+			data: form,
+			success: function(data) {
+				$('#orchard-id').attr('value', data.id);
+			}
+		});
+
+	});
+</script>
 
 {% endblock %}
