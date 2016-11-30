@@ -11,28 +11,41 @@
         <input type="text" class="form-control" id="orchard-name" placeholder="Nombre de tu huerto">
       </div>
       <div class="form-group">
-        <label for="form-address">¿Dónde está tu huerto?<small id="fileHelp" class="form-text text-muted"><i>Mueve el marcador para seleccionar la entrada a tu huerto.</i></small></label>
+        <label for="form-address">¿Dónde está tu huerto?<small id="fileHelp" class="form-text text-muted">
+          <input type="text" class="form-control" id="autocomplete" placeholder="Dirección de tu huerto">
+          <i>Mueve el marcador para seleccionar la entrada a tu huerto.</i></small></label>
 
-        <input type="text" id="orchard-town" hidden="hidden">
-        <input type="text" id="orchard-street" hidden="hidden">
-        <input type="text" id="orchard-number" hidden="hidden">
-        <input type="text" id="orchard-zipcode" hidden="hidden">
-        <input type="text" id="orchard-geometry" hidden="hidden">
+          <input type="text" id="orchard-town" hidden="hidden">
+          <input type="text" id="orchard-street" hidden="hidden">
+          <input type="text" id="orchard-number" hidden="hidden">
+          <input type="text" id="orchard-zipcode" hidden="hidden">
+          <input type="text" id="orchard-geometry" hidden="hidden">
 
+        </div>
+      </form>
+
+      <div class="fixed-buttons">
+        <button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Atrás</button>
+        <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" disabled="disabled">Siguiente</button>
       </div>
-    </form>
 
-    <div class="fixed-buttons">
-      <button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
-      <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" disabled="disabled">Siguiente</button>
     </div>
 
-  </div>
+    <div class="map col-xs-12 col-sm-12 col-md-7 col-lg-7">
+      <div id="map" class="map"></div>
+    </div>
 
-  <div class="map col-xs-12 col-sm-12 col-md-7 col-lg-7">
-    <div id="map" class="map"></div>
+    <div id="myModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="alert alert-danger" role="alert">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Cuidado!</strong> Parece que no has rellenado algún dato de tu huerto.
+        </div>
+      </div>
+    </div>
   </div>
-  
 
 </div>
 
@@ -42,27 +55,94 @@
 
 <script type="text/javascript">
 
+// This example displays an address form, using the autocomplete feature
+// of the Google Places API to help users fill in the information.
+
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+  autocomplete = new google.maps.places.Autocomplete(
+    /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')));
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  var marker = L.marker([place.geometry.location.lat(), place.geometry.location.lng()], {draggable: true});
+
+  prepareMarker(marker);
+
+  /*// Get each component of the address from the place details
+  // and fill the corresponding field on the form.
+  for (var i = 0; i < place.address_components.length; i++) {
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+    }
+  }*/
+}
+
+/*// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}*/
+
 $(function() {
   initMap();
 });
 
-$('form input').change(function() {
+$("form input").change(function(){
+  console.log('Validando');
+  validateForm();
+});
+
+$("form input").keyup(function(){
+  console.log('Validando');
   validateForm();
 });
 
 function validateForm() {
-    var empty = false;
-    $('form input').each(function() {
-        if ($(this).val() == '') {
-            empty = true;
-        }
-    });
-
-    if (empty) {
-        $('#btn-siguiente').attr('disabled', 'disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
-    } else {
-        $('#btn-siguiente').removeAttr('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+  var empty = false;
+  $('form input').each(function() {
+    if ($(this).val().length == 0) {
+      empty = true;
     }
+  });
+
+  if (empty) {
+    $('#btn-siguiente').attr('disabled', 'disabled');
+  } else {
+    $('#btn-siguiente').removeAttr('disabled');
+  }
 }
 
 $('#btn-siguiente').on('click', function() {
@@ -83,7 +163,6 @@ $('#btn-siguiente').on('click', function() {
     data: form,
     success: function(data) {
       $('#orchard-id').attr('value', data.id);
-      window.location.href = '/orchard/create/step?idOrchard'+data.id;
     }
   });
 
@@ -106,7 +185,7 @@ function initMap() {
   });
 
   L.control.zoom({
-    position: 'bottomright',
+    position: 'topright',
     zoomInTitle: 'Acercar',
     zoomOutTitle: 'Alejar'
   }).addTo(map);
@@ -261,15 +340,16 @@ function initDraw() {
         map.addControl(drawControl);
       }
 
-function initGeocoder() {
+      function initGeocoder() {
   //Inicializamos el plugin Geocoder y devolvemos la variable para poder utilizarla más tarde
   var options = {
     markers: {draggable :true},
+    layers: 'address',
+    'boundary.country': 'ES',
+    sources: 'oa',
     position: 'topright',
     fullWidth: false,
-    placeholder: 'Busca tu dirección',
-    place: true,
-    expanded: true
+    placeholder: 'Busca tu dirección'
   };
 
   var geocoder = L.control.geocoder('mapzen-9gW9cQ', options).addTo(map);
@@ -328,7 +408,7 @@ function setMap(crd){
   map.on('draw:edited', function (e) {
     var layers = e.layers;
     layers.eachLayer(function (layer) {
-        prepareGeometry(undefined, layer);
+      prepareGeometry(undefined, layer);
     });
   });
 
@@ -350,11 +430,11 @@ function setMap(crd){
           map.addLayer(layer);
       });
     });
-  });*/
+  });
 
   var geocoder = initGeocoder();
 
-  geocoder.on('select', function (e) {
+  /*geocoder.on('select', function (e) {
 
     $('.leaflet-pelias-control').removeClass('leaflet-pelias-expanded');
 
@@ -371,42 +451,43 @@ function setMap(crd){
 
   geocoder.on('reset', function (e) {
     clearNonEditableLayer(false);
+  });*/
+}
+
+function reverseGeocoding(marker) {
+  $.getJSON('https://search.mapzen.com/v1/reverse?api_key=mapzen-9gW9cQ&point.lat='+marker.getLatLng().lat+'&point.lon='+marker.getLatLng().lng+'&size=1&layers=address&boundary.country=ES', function(data, status, xhr) {
+    if(data.features[0] == undefined){
+      marker.bindPopup('No se han encontrado resultados.').openPopup();
+    }else{
+      marker.bindPopup(data.features[0].properties.label).openPopup();
+      if(data.features[0].properties.locality != null){
+        var circle = L.circle([marker.getLatLng().lat, marker.getLatLng().lng], data.features[0].properties.distance*1000).addTo(map);
+        nonEditableItems.addLayer(circle);
+        $('#orchard-town').attr('value', data.features[0].properties.locality).trigger('change');
+        $('#orchard-street').attr('value', data.features[0].properties.street).trigger('change');
+        $('#orchard-number').attr('value', data.features[0].properties.housenumber).trigger('change');
+        $('#orchard-zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
+        console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.locality+', CP '+data.features[0].properties.postalcode+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
+      }else{
+        var circle = L.circle([marker.getLatLng().lat, marker.getLatLng().lng], data.features[0].properties.distance*1000).addTo(map);
+        nonEditableItems.addLayer(circle);
+        $('#orchard-town').attr('value', data.features[0].properties.localadmin).trigger('change');
+        $('#orchard-street').attr('value', data.features[0].properties.street).trigger('change');
+        $('#orchard-number').attr('value', data.features[0].properties.housenumber).trigger('change');
+        $('#orchard-zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
+        console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.localadmin+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
+      }
+    }
   });
 
-  function reverseGeocoding(marker) {
-    $.getJSON('https://search.mapzen.com/v1/reverse?api_key=mapzen-9gW9cQ&point.lat='+marker.getLatLng().lat+'&point.lon='+marker.getLatLng().lng+'&size=1&layers=address&boundary.country=ES', function(data, status, xhr) {
-      if(data.features[0] == undefined){
-        marker.bindPopup('No se han encontrado resultados.').openPopup();
-      }else{
-        marker.bindPopup(data.features[0].properties.label).openPopup();
-        if(data.features[0].properties.locality != null){
-          var circle = L.circle([marker.getLatLng().lat, marker.getLatLng().lng], data.features[0].properties.distance*1000).addTo(map);
-          nonEditableItems.addLayer(circle);
-          $('#orchard-town').attr('value', data.features[0].properties.locality).trigger('change');
-          $('#orchard-street').attr('value', data.features[0].properties.street).trigger('change');
-          $('#orchard-number').attr('value', data.features[0].properties.housenumber).trigger('change');
-          $('#orchard-zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
-          console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.locality+', CP '+data.features[0].properties.postalcode+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
-        }else{
-          var circle = L.circle([marker.getLatLng().lat, marker.getLatLng().lng], data.features[0].properties.distance*1000).addTo(map);
-          nonEditableItems.addLayer(circle);
-          $('#orchard-town').attr('value', data.features[0].properties.localadmin).trigger('change');
-          $('#orchard-street').attr('value', data.features[0].properties.street).trigger('change');
-          $('#orchard-number').attr('value', data.features[0].properties.housenumber).trigger('change');
-          $('#orchard-zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
-          console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.localadmin+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
-        }
-      }
-    });
-
-    if(map.hasLayer(editableItems.getLayers()[editableItems.getLayers().length - 1])) {
-      prepareGeometry(marker, editableItems.getLayers()[editableItems.getLayers().length - 1]);
-    }else{
-      prepareGeometry(marker);
-    }
+  if(map.hasLayer(editableItems.getLayers()[editableItems.getLayers().length - 1])) {
+    prepareGeometry(marker, editableItems.getLayers()[editableItems.getLayers().length - 1]);
+  }else{
+    prepareGeometry(marker);
   }
+}
 
-  function storeGeometry(layer) {
+function storeGeometry(layer) {
     //Layer puede ser tanto un polígono como un marcador
     //Convertimos el layer a un objetivo GeoJSON y lo convertimos a string para poder guardarlo
     var geojson = layer.toGeoJSON();
@@ -463,32 +544,34 @@ function setMap(crd){
       $('#orchard-geometry').attr('value', JSON.stringify(geojsonFeature));
     }
   }
-}
 
-function clearEditableLayer(all) {
-  editableItems.eachLayer(function(layer) {
-    if(all) {
-      map.removeLayer(layer);
-    }else{
-      if(layer instanceof L.Circle) {
+  function clearEditableLayer(all) {
+    editableItems.eachLayer(function(layer) {
+      if(all) {
         map.removeLayer(layer);
+      }else{
+        if(layer instanceof L.Circle) {
+          map.removeLayer(layer);
+        }
       }
-    }
-  });
-}
+    });
+  }
 
-function clearNonEditableLayer(all) {
-  nonEditableItems.eachLayer(function(layer) {
-    if(all) {
-      map.removeLayer(layer);
-    }else{
-      if(layer instanceof L.Circle) {
+  function clearNonEditableLayer(all) {
+    nonEditableItems.eachLayer(function(layer) {
+      if(all) {
         map.removeLayer(layer);
+      }else{
+        if(layer instanceof L.Circle) {
+          map.removeLayer(layer);
+        }
       }
-    }
-  });
-}
+    });
+  }
 
 </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoEnPxI5c67EcNsgznNOqhUn7Vz2RL2Xg&signed_in=true&libraries=places&callback=initAutocomplete"
+async defer></script>
 
 {% endblock %}

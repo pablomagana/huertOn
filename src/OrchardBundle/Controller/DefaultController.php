@@ -66,6 +66,7 @@ class DefaultController extends Controller
       $orchard->setStreet($street);
       $orchard->setNumber($number);
       $orchard->setZipCode($zipCode);
+      $geometry->setGeometry($geometry);
       $orchard->setGeometry($geometry);
 
       $em = $this->getDoctrine()->getManager();
@@ -75,7 +76,6 @@ class DefaultController extends Controller
       $id = $orchard->getId();
       return new JsonResponse(array('id' => $id));
   }
-}
 
   public function checkIdOrchard($id_orchard){
     $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
