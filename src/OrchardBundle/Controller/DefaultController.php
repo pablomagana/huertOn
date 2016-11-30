@@ -75,6 +75,7 @@ class DefaultController extends Controller
       $id = $orchard->getId();
       return new JsonResponse(array('id' => $id));
   }
+}
 
   public function checkIdOrchard($id_orchard){
     $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
