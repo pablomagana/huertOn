@@ -74,7 +74,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="step", type="float")
+     * @ORM\Column(name="step", type="integer")
      *
      */
     private $step;
@@ -309,21 +309,21 @@ class Orchard
     /**
      * Set step
      *
-     * @param float $step
+     * @param integer $step
      *
      * @return Orchard
      */
     public function setStep($step)
     {
         $this->step = $step;
-    
+
         return $this;
     }
 
     /**
      * Get step
      *
-     * @return float
+     * @return integer
      */
     public function getStep()
     {
@@ -340,7 +340,7 @@ class Orchard
     public function addUser(\UserBundle\Entity\User $user)
     {
         $this->users[] = $user;
-    
+
         return $this;
     }
 }
