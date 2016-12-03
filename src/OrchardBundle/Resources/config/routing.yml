@@ -6,8 +6,8 @@ orchard_create_id:
     defaults: { _controller: OrchardBundle:Default:index,id:null }
 
 orchard_create_step:
-    path:     /create/step/{id}
-    defaults: { _controller: OrchardBundle:Default:create,id:0 }
+    path:     /step/{id}/{step}
+    defaults: { _controller: OrchardBundle:Default:create,id:0,step:11 }
 
 orchard_insert:
     path:     /insert

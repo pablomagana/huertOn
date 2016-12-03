@@ -5,7 +5,7 @@ namespace OrchardBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use OrchardBundle\Entity\Orchard;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use UserBundle\Entity\User;
 
 class DefaultController extends Controller
@@ -24,25 +24,46 @@ class DefaultController extends Controller
     }
   }
 
-  public function createAction($id)
+  public function createAction($id, $step)
   {
-    $id_orchard=$id;
-    $step=0;
-    if($id>0){
-        $step=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard)->getStep();
+    $id_orchard = $id;
+    $step_orchard = 0;
+
+    if($id > 0 && $id != null){
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:Orchard');
+
+      $step_orchard = $repository->findOneById($id_orchard)->getStep();
+
+      settype($step_orchard, 'integer');
     }
+
     switch ($step) {
       case 11:
-        return $this->render('OrchardBundle:Default:step11.html.twig');
-        break;
+        if($step <= $step_orchard) {
+          return $this->render('OrchardBundle:Default:step11.html.twig');
+          break;
+        }else{
+          return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig');
+          break;
+        }
       case 12:
-        return $this->render('OrchardBundle:Default:step2.html.twig');
+        if($step <= $step_orchard) {
+          return $this->render('OrchardBundle:Default:step12.html.twig');
+          break;
+      }else{
+        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig');
         break;
-      case 21:
-        return $this->render('OrchardBundle:Default:step3.html.twig');
+      }
+      case 13:
+      if( $step <= $step_orchard) {
+          return $this->render('OrchardBundle:Default:step13.html.twig');
+          break;
+      }else{
+        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig');
         break;
+      }
       default:
-        return $this->render('OrchardBundle:Default:step11.html.twig');
+        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig');
         break;
       }
   }

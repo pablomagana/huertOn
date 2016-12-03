@@ -74,7 +74,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="step", type="integer")
+     * @ORM\Column(name="step", type="string")
      *
      */
     private $step;
@@ -260,6 +260,31 @@ class Orchard
         return $this->users;
     }
 
+
+    /**
+     * Set step
+     *
+     * @param string $step
+     *
+     * @return Orchard
+     */
+    public function setStep($step)
+    {
+        $this->step = $step;
+
+        return $this;
+    }
+
+    /**
+     * Get step
+     *
+     * @return string
+     */
+    public function getStep()
+    {
+        return $this->step;
+    }
+
     /**
      * Get the formatted address to display
      *
@@ -304,30 +329,6 @@ class Orchard
         }
         $this->users->removeElement($user);
         $user->removeUser($this);
-    }
-
-    /**
-     * Set step
-     *
-     * @param integer $step
-     *
-     * @return Orchard
-     */
-    public function setStep($step)
-    {
-        $this->step = $step;
-
-        return $this;
-    }
-
-    /**
-     * Get step
-     *
-     * @return integer
-     */
-    public function getStep()
-    {
-        return $this->step;
     }
 
     /**
