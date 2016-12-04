@@ -46,16 +46,15 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 1</h4>
-        {% if step is defined  and step > 0 %}
+        {% if step is defined  and step > 19 %}<!--todos los pasos del 1 completados-->
           <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
-
         <p><small>Diles lo esencial (dónde está...)</small></p>
         {% if step is defined %}
           {% if step >0 %}
-            <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+            <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
           {% elseif step==0 %}
-            <a href="step"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+            <a href="/orchard/step"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
           {% endif %}
         {% endif %}
       </div>
@@ -64,12 +63,16 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 2</h4>
-        {% if step is defined  and step > 20 %}
+        {% if step is defined  and step > 29 %}<!--todos los pasos del 2 completados-->
           <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <p><small>¿Qué pueden encontrar allí? (fotos, servicios...)</small></p>
-        {% if step is defined  and step >20 %}
-          <a href="step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+        {% if step is defined  and step > 20 %}
+          {% if step > 29 %}
+            <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
+          {% else %}
+          <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+          {% endif %}
         {% endif %}
       </div>
     </div>
@@ -77,12 +80,16 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 3</h4>
-        {% if step is defined  and step > 30 %}
+        {% if step is defined  and step > 39 %}<!--todos los pasos del 3 completados-->
           <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <p><small>Cuéntanos algo más especial de tu huerto</small></p>
         {% if step is defined  and step >30 %}
+        {% if step > 39 %}
+          <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
+        {% else %}
           <a href="step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+          {% endif %}
         {% endif %}
       </div>
     </div>
