@@ -61,7 +61,8 @@
     {% block javascripts %}{% endblock %}
 
     <script type="text/javascript">
-    $("form input").focusin(function(){
+    //$("form input").focusin(function(){
+    $(".required").focusin(function(){
       var este=$(this).attr("id");
       console.log("este "+este);
       var inputs=$("form :input:not(:checkbox):not(:button)");
