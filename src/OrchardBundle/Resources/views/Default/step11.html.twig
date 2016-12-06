@@ -7,19 +7,22 @@
     <h1 class="display-3">Paso 1.1</h1>
     <form>
       <div class="form-group">
-        <label for="orchard-name">¿Cómo se llama tu huerto?</label>
-        <input type="text" class="form-control" id="orchard-name" placeholder="Nombre de tu huerto">
+        <label class="label-control" for="Name" data-toggle="tooltip" data-placement="right" title="Campo requerido">¿Cómo se llama tu huerto?</label>
+        <span style="display:none;color:red">Campo requerido</span>
+        <input type="text" class="form-control" id="Name" placeholder="Nombre de tu huerto">
       </div>
       <div class="form-group">
-        <label for="form-address">¿Dónde está tu huerto?<small id="fileHelp" class="form-text text-muted">
+        <label for="form-address" data-toggle="tooltip" data-placement="right" title="Campo requerido">¿Dónde está tu huerto?<small id="fileHelp" class="form-text text-muted">
+          <span class="label-control" style="display:none;color:red">Campo requerido</span>
           <input type="text" class="form-control" id="autocomplete" placeholder="Dirección de tu huerto">
           <i>Mueve el marcador para seleccionar la entrada a tu huerto.</i></small></label>
 
-          <input type="text" id="orchard-town" hidden="hidden">
-          <input type="text" id="orchard-street" hidden="hidden">
-          <input type="text" id="orchard-number" hidden="hidden">
-          <input type="text" id="orchard-zipcode" hidden="hidden">
-          <input type="text" id="orchard-geometry" hidden="hidden">
+          <input type="text" id="Town" hidden="hidden">
+          <input type="text" id="Street" hidden="hidden">
+          <input type="text" id="Number" hidden="hidden">
+          <input type="text" id="Zipcode" hidden="hidden">
+          <input type="text" id="Geometry" hidden="hidden">
+          <input type="text" id="Step" hidden="hidden" value="11">
 
         </div>
       </form>
@@ -28,7 +31,6 @@
         <button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Atrás</button>
         <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" disabled="disabled">Siguiente</button>
       </div>
-
     </div>
 
     <div class="map col-xs-12 col-sm-12 col-md-7 col-lg-7">
@@ -463,18 +465,18 @@ function reverseGeocoding(marker) {
       if(data.features[0].properties.locality != null){
         var circle = L.circle([marker.getLatLng().lat, marker.getLatLng().lng], data.features[0].properties.distance*1000).addTo(map);
         nonEditableItems.addLayer(circle);
-        $('#orchard-town').attr('value', data.features[0].properties.locality).trigger('change');
-        $('#orchard-street').attr('value', data.features[0].properties.street).trigger('change');
-        $('#orchard-number').attr('value', data.features[0].properties.housenumber).trigger('change');
-        $('#orchard-zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
+        $('#Town').attr('value', data.features[0].properties.locality).trigger('change');
+        $('#Street').attr('value', data.features[0].properties.street).trigger('change');
+        $('#Number').attr('value', data.features[0].properties.housenumber).trigger('change');
+        $('#Zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
         console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.locality+', CP '+data.features[0].properties.postalcode+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
       }else{
         var circle = L.circle([marker.getLatLng().lat, marker.getLatLng().lng], data.features[0].properties.distance*1000).addTo(map);
         nonEditableItems.addLayer(circle);
-        $('#orchard-town').attr('value', data.features[0].properties.localadmin).trigger('change');
-        $('#orchard-street').attr('value', data.features[0].properties.street).trigger('change');
-        $('#orchard-number').attr('value', data.features[0].properties.housenumber).trigger('change');
-        $('#orchard-zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
+        $('#Town').attr('value', data.features[0].properties.localadmin).trigger('change');
+        $('#Street').attr('value', data.features[0].properties.street).trigger('change');
+        $('#Number').attr('value', data.features[0].properties.housenumber).trigger('change');
+        $('#Zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
         console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.localadmin+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
       }
     }
@@ -536,12 +538,12 @@ function storeGeometry(layer) {
       var forma = JSON.stringify(geojson);
 
       if(marker == undefined) {
-        $('#orchard-geometry').attr('value', $('#orchard-geometry').val().slice(0, 121)+forma+']');
+        $('#Geometry').attr('value', $('#Geometry').val().slice(0, 121)+forma+']');
       }else{
-        $('#orchard-geometry').attr('value', '['+JSON.stringify(geojsonFeature)+', '+forma+']');
+        $('#Geometry').attr('value', '['+JSON.stringify(geojsonFeature)+', '+forma+']');
       }
     }else{
-      $('#orchard-geometry').attr('value', JSON.stringify(geojsonFeature));
+      $('#Geometry').attr('value', JSON.stringify(geojsonFeature));
     }
   }
 

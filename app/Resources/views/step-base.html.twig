@@ -1,59 +1,111 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>{% block title %}Welcome!{% endblock %}</title>
+  {% block stylesheets %}
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
 
-            <!-- Optional theme -->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-            <!--Fksjdahfkjlasdhflksjadhflkjsadfhflkjsdhaflkjashdf-->
-            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <!--Fksjdahfkjlasdhflksjadhflkjsadfhflkjsdhaflkjashdf-->
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-            <!-- Latest compiled and minified JavaScript -->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-            <!-- Load Leaflet from CDN -->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.css">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.js"></script>
+  <!-- Load Leaflet from CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.js"></script>
 
-            <!-- Load geocoding plugin after Leaflet -->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.7.1/leaflet-geocoder-mapzen.css">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.7.1/leaflet-geocoder-mapzen.js"></script>
+  <!-- Load geocoding plugin after Leaflet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.7.1/leaflet-geocoder-mapzen.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.7.1/leaflet-geocoder-mapzen.js"></script>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.3/leaflet.draw.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.3/leaflet.draw.js"></script>
 
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.3/leaflet.draw.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.3/leaflet.draw.css">
 
-            <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
 
 
-            <!--form rrss-->
-            <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
-            <link rel="stylesheet" type="text/css" href="{{ asset('/css/demo.css') }}" />
-            <link rel="stylesheet" type="text/css" href="{{ asset('/css/set2.css') }}" />
+  <!--form rrss-->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/demo.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/set2.css') }}" />
 
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-            <!-- Image and text -->
-            <nav class="navbar navbar-light bg-faded">
-              <a class="navbar-brand" href="#">
-                <img src="http://parcellesnostres.com/wp-content/uploads/2016/06/cropped-logo-parcelles.png" width="30" height="30" class="d-inline-block align-top" alt="">
-              </a>
-            </nav>
+  {% endblock %}
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+  <!-- Image and text -->
+  <nav class="navbar navbar-light bg-faded">
+    <a class="navbar-brand" href="#">
+      <img src="http://parcellesnostres.com/wp-content/uploads/2016/06/cropped-logo-parcelles.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    </a>
+    <ul id="btn-save-exit" class="nav navbar-nav float-lg-right">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Guardar y salir</a>
+      </li>
+    </ul>
+  </nav>
 
-            <progress class="progress" value="25" max="100" aria-describedby="example-caption-2"></progress>
+  <progress class="progress" value="25" max="100" aria-describedby="example-caption-2"></progress>
 
-            <div class="container-fluid">
-                <input type="text" id="orchard-id" hidden="hidden">
-            {% block body %}{% endblock %}
-            {% block javascripts %}{% endblock %}
-        </div>
-    </body>
+  <div class="container-fluid">
+    <input type="text" id="orchard-id" hidden="hidden">
+    {% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+
+    <script type="text/javascript">
+    $("form input").focusin(function(){
+      var este=$(this).attr("id");
+      console.log("este "+este);
+      var inputs=$("form :input:not(:checkbox):not(:button)");
+      inputs.each(function(index){
+        console.log($(this).attr("id"));
+        if(este == $(this).attr("id")){
+          console.log("ok");
+          console.log(index);
+          return false;
+        }else{
+          if($(this).val()==""){
+            //alert("rellena el campo");
+            //$(this).prev().show();
+            $(this).prev().prev().tooltip('show');
+            $(this).css("border-color","#f00");
+          }
+        }
+      });
+    });
+
+    var form =  {};
+
+    $('#btn-save-exit').on('click', function() {
+      $("form :input:not(:checkbox):not(:button)").each(function(){
+        console.log($(this).val());
+        form[$(this).attr('id')] = $(this).val();
+      });
+
+      form['id'] = $('#orchard-id').val();
+      console.log('Este és el formulario'+form);
+
+      $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '/orchard/insert',
+        data: form,
+        success: function(data) {
+          $('#orchard-id').attr('value', data.id);
+        }
+      });
+
+    });
+
+    </script>
+  </div>
+</body>
 </html>

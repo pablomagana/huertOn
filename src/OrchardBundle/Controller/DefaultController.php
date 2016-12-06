@@ -5,7 +5,7 @@ namespace OrchardBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use OrchardBundle\Entity\Orchard;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use UserBundle\Entity\User;
 
 class DefaultController extends Controller
@@ -17,7 +17,8 @@ class DefaultController extends Controller
     $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
     if($id!=null){
       //$step = checkStepOrchard($id_orchard);
-      $step=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard)->getStep();
+      $orchard = $this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
+      $step = $orchard->getStep();
       return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName() , 'idOrchard'=>$id_orchard,"step"=>$step));
     }else {
       return $this->render('OrchardBundle:Default:steps.html.twig',array('userName' => $user->getName(),"step"=>$step));
@@ -69,42 +70,32 @@ class DefaultController extends Controller
   }
 
   public function insertAction(Request $request) {
-      $id = $request->request->get('id');
-      $name = $request->request->get('name');
-      $town = $request->request->get('town');
-      $street = $request->request->get('street');
-      $number = $request->request->get('number');
-      $zipCode = $request->request->get('zipcode');
-      $geometry = $request->request->get('geometry');
-
+    // Recoje todos los valores del form
+    $params = $request->request->all();
+    // Recoje el id (problema al refrescar)
+    $id = $request->request->get('id');
+    // Crea un huerto si no encuetra id
+    if(!empty($id)) {
       $orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id);
-      if($orchard == null) {
-        $orchard = new Orchard();
+    }else {
+      $orchard = new Orchard();
+    }
+    // Recorremos el $key y $value del formulario para separar el id y su valor para añadirlo en la bd
+    if ($params != null) {
+      foreach($params as $key => $value) {
+        // Ignoramos el autocomplete y id
+        if (!empty($value) && ($key != 'autocomplete' || $key != 'id')) {
+          $setterName = 'set'.$key;
+          $orchard->$setterName($value);
+        }
       }
+    }
+    // Meter datos en la bd
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($orchard);
+    $em->flush();
 
-      $orchard->setName($name);
-      $orchard->setTown($town);
-      $orchard->setStreet($street);
-      $orchard->setNumber($number);
-      $orchard->setZipCode($zipCode);
-      $geometry->setGeometry($geometry);
-      $orchard->setGeometry($geometry);
-
-      $em = $this->getDoctrine()->getManager();
-      $em->persist($orchard);
-      $em->flush();
-
-      $id = $orchard->getId();
-      return new JsonResponse(array('id' => $id));
+    $id = $orchard->getId();
+    return new JsonResponse(array('id' => $id));
   }
-
-  public function checkIdOrchard($id_orchard){
-    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
-    return $orchard->getid();
-  }
-  public function checkStepOrchard($id_orchard){
-    $step=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard)->getStep();
-    return $step;
-  }
-
 }
