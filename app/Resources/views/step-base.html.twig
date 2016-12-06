@@ -46,6 +46,11 @@
               <a class="navbar-brand" href="#">
                 <img src="http://parcellesnostres.com/wp-content/uploads/2016/06/cropped-logo-parcelles.png" width="30" height="30" class="d-inline-block align-top" alt="">
               </a>
+              <ul id="btn-save-exit" class="nav navbar-nav float-lg-right">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Guardar y salir</a>
+                </li>
+              </ul>
             </nav>
 
             <progress class="progress" value="25" max="100" aria-describedby="example-caption-2"></progress>
@@ -54,6 +59,33 @@
                 <input type="text" id="orchard-id" hidden="hidden">
             {% block body %}{% endblock %}
             {% block javascripts %}{% endblock %}
+
+                          <script type="text/javascript">
+
+                          var form =  {};
+
+                            $('#btn-save-exit').on('click', function() {
+                              $("form :input:not(:checkbox):not(:button)").each(function(){
+                                  console.log($(this).val());
+                                  form[$(this).attr('id')] = $(this).val();
+                              });
+
+                              form['id'] = $('#orchard-id').val();
+                              console.log('Este és el formulario'+form);
+
+                              $.ajax({
+                                type: 'POST',
+                                dataType: 'json',
+                                url: '/orchard/insert',
+                                data: form,
+                                success: function(data) {
+                                  $('#orchard-id').attr('value', data.id);
+                                }
+                              });
+
+                            });
+
+                          </script>
         </div>
     </body>
 </html>
