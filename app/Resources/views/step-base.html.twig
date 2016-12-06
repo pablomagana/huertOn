@@ -62,10 +62,10 @@
 
     <script type="text/javascript">
     //$("form input").focusin(function(){
-    $(".required").focusin(function(){
+    $("form :input:not(:checkbox):not(:button)").focusin(function(){
       var este=$(this).attr("id");
       console.log("este "+este);
-      var inputs=$("form :input:not(:checkbox):not(:button)");
+      var inputs=$(".required");
       inputs.each(function(index){
         console.log($(this).attr("id"));
         if(este == $(this).attr("id")){
