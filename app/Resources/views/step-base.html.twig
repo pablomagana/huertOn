@@ -54,6 +54,31 @@
                 <input type="text" id="orchard-id" hidden="hidden">
             {% block body %}{% endblock %}
             {% block javascripts %}{% endblock %}
+
+
+
+            <script type="text/javascript">
+            $("form input").focusin(function(){
+              var este=$(this).attr("id");
+              console.log("este "+este);
+              var inputs=$("form :input:not(:checkbox):not(:button)");
+              inputs.each(function(index){
+                console.log($(this).attr("id"));
+                if(este == $(this).attr("id")){
+                  console.log("ok");
+                  console.log(index);
+                  return false;
+                }else{
+                  if($(this).val()==""){
+                    //alert("rellena el campo");
+                    //$(this).prev().show();
+                    $(this).prev().prev().tooltip('show');
+                    $(this).css("border-color","#f00");
+                  }
+                }
+              });
+            });
+            </script>
         </div>
     </body>
 </html>
