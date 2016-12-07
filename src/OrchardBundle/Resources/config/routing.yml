@@ -1,14 +1,14 @@
 orchard_create:
     path:     /create
-    defaults: { _controller: OrchardBundle:Default:index,id:null }
+    defaults: { _controller: OrchardBundle:Default:index, id_orchard:null }
 orchard_create_id:
-    path:     /create/{id}
-    defaults: { _controller: OrchardBundle:Default:index,id:null }
+    path:     /create/{id_orchard}
+    defaults: { _controller: OrchardBundle:Default:index, id_orchard:null }
 
 orchard_create_step:
-    path:     /step/{id}/{step}
-    defaults: { _controller: OrchardBundle:Default:create,id:0,step:11 }
+    path:     /step/{step}
+    defaults: { _controller: OrchardBundle:Default:create, step:11 }
 
 orchard_insert:
-    path:     /insert
-    defaults: { _controller: OrchardBundle:Default:insert }
+    path:     /insert/{step}
+    defaults: { _controller: OrchardBundle:Default:insert, step:11 }

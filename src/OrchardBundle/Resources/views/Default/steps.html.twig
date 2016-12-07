@@ -1,42 +1,6 @@
 {% extends '::step-base.html.twig' %}
-{% block body %}
 
-<script type="text/javascript">
-// $.ajax({
-//     // la URL para la petición
-//     url : '/orchard/check',
-//
-//     // la información a enviar
-//     // (también es posible utilizar una cadena de datos)
-//     data : { id : 123 },
-//
-//     // especifica si será una petición POST o GET
-//     type : 'POST',
-//
-//     // el tipo de información que se espera de respuesta
-//     dataType : 'json',
-//
-//     // código a ejecutar si la petición es satisfactoria;
-//     // la respuesta es pasada como argumento a la función
-//     success : function(json) {
-//         $('<h1/>').text(json.title).appendTo('body');
-//         $('<div class="content"/>')
-//             .html(json.html).appendTo('body');
-//     },
-//
-//     // código a ejecutar si la petición falla;
-//     // son pasados como argumentos a la función
-//     // el objeto de la petición en crudo y código de estatus de la petición
-//     error : function(xhr, status) {
-//         alert('Disculpe, existió un problema');
-//     },
-//
-//     // código a ejecutar sin importar si la petición falló o no
-//     complete : function(xhr, status) {
-//         alert('Petición realizada');
-//     }
-// });
-</script>
+{% block body %}
 
 <div class="row steps">
   <div class="col-xs-12 col-md-5 col-lg-5 steps-left">
@@ -46,14 +10,14 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 1</h4>
-        {% if step is defined  and step > 19 %}<!--todos los pasos del 1 completados-->
+        {% if step is defined and step > 19 %}<!--todos los pasos del 1 completados-->
           <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <p><small>Diles lo esencial (dónde está...)</small></p>
         {% if step is defined %}
-          {% if step >0 %}
-            <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
-          {% elseif step==0 %}
+          {% if step > 0 %}
+            <a href="/orchard/step/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
+          {% elseif step == 0 %}
             <a href="/orchard/step"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
           {% endif %}
         {% endif %}
@@ -63,11 +27,11 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 2</h4>
-        {% if step is defined  and step > 29 %}<!--todos los pasos del 2 completados-->
+        {% if step is defined and step > 29 %}<!--todos los pasos del 2 completados-->
           <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <p><small>¿Qué pueden encontrar allí? (fotos, servicios...)</small></p>
-        {% if step is defined  and step > 20 %}
+        {% if step is defined and step > 20 %}
           {% if step > 29 %}
             <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
           {% else %}
@@ -80,11 +44,11 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h4>Paso 3</h4>
-        {% if step is defined  and step > 39 %}<!--todos los pasos del 3 completados-->
+        {% if step is defined and step > 39 %}<!--todos los pasos del 3 completados-->
           <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <p><small>Cuéntanos algo más especial de tu huerto</small></p>
-        {% if step is defined  and step >30 %}
+        {% if step is defined and step >30 %}
         {% if step > 39 %}
           <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
         {% else %}

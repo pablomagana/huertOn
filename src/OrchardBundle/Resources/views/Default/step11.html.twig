@@ -147,7 +147,6 @@ function validateForm() {
 
 $('#btn-siguiente').on('click', function() {
   var form =  {
-    id: $('#orchard-id').val(),
     name: $('#orchard-name').val(),
     town: $('#orchard-town').val(),
     street: $('#orchard-street').val(),
@@ -159,10 +158,12 @@ $('#btn-siguiente').on('click', function() {
   $.ajax({
     type: 'POST',
     dataType: 'json',
-    url: '/orchard/insert',
+    url: '/orchard/insert/{step}',
     data: form,
     success: function(data) {
-      $('#orchard-id').attr('value', data.id);
+      if (data.redirect) {
+          window.location.href = data.redirect;
+      }
     }
   });
 
