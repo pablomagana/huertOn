@@ -121,6 +121,15 @@
 
     });
 
+    $('#btn-atras').on('click', function() {
+      if($('#Step').val() == '12') {
+        window.location.href = '/orchard/create'
+      }else {
+        var step = parseInt($('#Step').val())-2;
+        window.location.href = '/orchard/step/' + step.toString();
+      }
+    });
+
     </script>
   </div>
 </body>
