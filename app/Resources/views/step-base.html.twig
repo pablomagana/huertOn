@@ -110,8 +110,8 @@
         url: '/orchard/insert',
         data: form,
         success: function(data) {
-          $("#loading").fadeOut("slow", function() {
-            $("#loading-text").text("Guardado");
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
           });
           if (data.redirect) {
             window.location.href = data.redirect;
