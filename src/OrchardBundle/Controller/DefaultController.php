@@ -77,40 +77,34 @@ class DefaultController extends Controller
     }
   }
 
-  public function insertAction(Request $request, $step) {
+  public function insertAction(Request $request) {
 
     $cookies = $request->cookies;
 
     $orchard = null;
 
-    if(!$cookies->has('ID_ORCHARD')) {
-      //El huerto no está creado así que creamos el objeto
-      $orchard = new Orchard();
-      //Como lo acabamos de crear le seteamos el primer paso
-      $orchard->setStep('12');
-    }else {
+    if($cookies->has('ID_ORCHARD')) {
       //El huerto está creado así que recuperamos el objeto de BBDD
       $orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($cookies->get('ID_ORCHARD'));
-      $orchard->setStep($step+1);
+    }else {
+      //El huerto no está creado así que creamos el objeto
+      $orchard = new Orchard();
     }
 
-    //Recogemos los datos enviados desde el formulario
-    $name = $request->request->get('name');
-    $town = $request->request->get('town');
-    $street = $request->request->get('street');
-    $number = $request->request->get('number');
-    $zipCode = $request->request->get('zipcode');
-    $geometry = $request->request->get('geometry');
-
-    //Seteamos los datos del formulario en el objeto del huerto, tanto si se acaba de crear como si se recoge de BBDD
-    $orchard->setName($name);
-    $orchard->setTown($town);
-    $orchard->setStreet($street);
-    $orchard->setNumber($number);
-    $orchard->setZipCode($zipCode);
-    $orchard->setGeometry($geometry);
-    $orchard->setGeometry($geometry);
-
+    // Recoje todos los valores del form
+    $params = $request->request->all();
+    
+    // Recorremos el $key y $value del formulario para separar el id y su valor para añadirlo en la bd
+    if ($params != null) {
+      foreach($params as $key => $value) {
+        // Ignoramos el autocomplete
+        if (!empty($value) && ($key != 'autocomplete') {
+          $setterName = 'set'.$key;
+          $orchard->$setterName($value);
+        }
+      }
+    }
+    // Meter datos en la bd
     $em = $this->getDoctrine()->getManager();
     $em->persist($orchard);
     $em->flush();
