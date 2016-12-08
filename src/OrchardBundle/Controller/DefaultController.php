@@ -98,7 +98,7 @@ class DefaultController extends Controller
     if ($params != null) {
       foreach($params as $key => $value) {
         // Ignoramos el autocomplete
-        if (!empty($value) && ($key != 'autocomplete') {
+        if (!empty($value) && ($key != 'autocomplete')) {
           $setterName = 'set'.$key;
           $orchard->$setterName($value);
         }
