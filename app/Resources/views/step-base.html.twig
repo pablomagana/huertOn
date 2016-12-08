@@ -48,6 +48,14 @@
     </a>
     <ul id="btn-save-exit" class="nav navbar-nav float-lg-right">
       <li class="nav-item">
+        <div id="loading" style="display: none;" class="loading"></div>
+      </li>
+      <li class="nav-item">
+        <span id="loading-text" style="display: none;" class="navbar-text">
+          Guardando...
+        </span>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#">Guardar y salir</a>
       </li>
     </ul>
@@ -61,6 +69,7 @@
     {% block javascripts %}{% endblock %}
 
     <script type="text/javascript">
+
     //$("form input").focusin(function(){
     $("form :input:not(:checkbox):not(:button)").focusin(function(){
       var este=$(this).attr("id");
@@ -85,7 +94,8 @@
 
     var form =  {};
 
-    $('#btn-save-exit').on('click', function() {
+    $('#btn-siguiente, #btn-save-exit').on('click', function() {
+      $("#loading, #loading-text").fadeIn("slow");
       $("form :input:not(:checkbox):not(:button)").each(function(){
         console.log($(this).val());
         form[$(this).attr('id')] = $(this).val();
@@ -100,7 +110,12 @@
         url: '/orchard/insert',
         data: form,
         success: function(data) {
-          $('#orchard-id').attr('value', data.id);
+          $("#loading").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado");
+          });
+          if (data.redirect) {
+            window.location.href = data.redirect;
+          }
         }
       });
 

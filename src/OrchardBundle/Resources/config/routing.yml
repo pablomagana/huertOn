@@ -10,5 +10,5 @@ orchard_create_step:
     defaults: { _controller: OrchardBundle:Default:create, step:11 }
 
 orchard_insert:
-    path:     /insert/{step}
-    defaults: { _controller: OrchardBundle:Default:insert, step:11 }
+    path:     /insert
+    defaults: { _controller: OrchardBundle:Default:insert }

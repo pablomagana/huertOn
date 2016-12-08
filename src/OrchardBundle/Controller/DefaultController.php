@@ -116,6 +116,6 @@ class DefaultController extends Controller
     $response->headers->setCookie(new Cookie("ID_ORCHARD", $id));
     $response->sendHeaders();
 
-    return new JsonResponse(array('redirect' => 'step/'.$orchard->getStep()));
+    return new JsonResponse(array('redirect' => '/orchard/step/'.$orchard->getStep()));
   }
 }
