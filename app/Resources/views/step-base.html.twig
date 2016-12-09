@@ -46,7 +46,7 @@
     <a class="navbar-brand" href="#">
       <img src="http://parcellesnostres.com/wp-content/uploads/2016/06/cropped-logo-parcelles.png" width="30" height="30" class="d-inline-block align-top" alt="">
     </a>
-    <ul id="btn-save-exit" class="nav navbar-nav float-lg-right">
+    <ul id="btn-save-exit" class="nav navbar-nav float-xs-right float-sm-right float-md-right float-lg-right">
       <li class="nav-item">
         <div id="loading" style="display: none;" class="loading"></div>
       </li>
@@ -129,6 +129,31 @@
         window.location.href = '/orchard/step/' + step.toString();
       }
     });
+
+    $("form input").change(function(){
+      console.log('Validando');
+      validateForm();
+    });
+
+    $("form input").keyup(function(){
+      console.log('Validando');
+      validateForm();
+    });
+
+    function validateForm() {
+      var empty = false;
+      $('form input').each(function() {
+        if ($(this).val().length == 0) {
+          empty = true;
+        }
+      });
+
+      if (empty) {
+        $('#btn-siguiente').attr('disabled', 'disabled');
+      } else {
+        $('#btn-siguiente').removeAttr('disabled');
+      }
+    }
 
     </script>
   </div>
