@@ -25,22 +25,30 @@ html,body,.map,.step-1,.steps {
   font-weight: 400;
 }
 
-/*scroll left*/
 .steps-left {
   padding: 30px;
-  position: fixed;
-  overflow-y: scroll;
-  height: 70vh;
 }
 
-.steps-left::-webkit-scrollbar {
+/*scroll left*/
+.steps-left-12 {
+  padding: 30px;
+  margin-right: 50px;
+  position: fixed;
+  overflow-y: scroll;
+  height: 65%;
+}
+
+/*.steps-left-12::-webkit-scrollbar {
     display: none;
 }
 /*end scroll left*/
 
 
+
+
 .steps-right {
   height: 100%;
+  z-index: -9999;
 }
 h4 {
   display: inline;
@@ -116,3 +124,29 @@ small {
 /*+++++++++++++++++END MEDIA QUERYS+++++++++++++++++*/
 .label-control{padding-right: 20px;}
 .label-control + .tooltip > .tooltip-inner {background-color: #f00;}
+
+
+
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+.steps-left-12::-webkit-scrollbar-track {
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+.steps-left-12::-webkit-scrollbar-thumb {
+    -webkit-border-radius: .25rem;;
+    border-radius: .25rem;;
+    background: #dcdcdc;
+    /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/
+}
+.steps-left-12::-webkit-scrollbar-thumb:window-inactive {
+	background: #dcdcdc;
+}
