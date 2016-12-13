@@ -1,6 +1,6 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: 34.193.253.36
+    database_host: parcelles.ddns.net
     database_port: 3306
     database_name: parcelles
     database_user: parcelles
