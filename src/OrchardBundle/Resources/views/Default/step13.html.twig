@@ -1,0 +1,38 @@
+{% extends '::step-base.html.twig' %}
+
+{% block body %}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
+    <h1 class="display-3">Paso 1.3</h1>
+
+    <form>
+      <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
+        <label><h4>Sube alguna imagen para que conozcan un poco tu huerto</h4></label><br>
+
+
+
+
+      </div>
+
+      <div class="fixed-buttons row">
+        <button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+        <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" disabled="disabled">Siguiente</button>
+      </div>
+
+    </form>
+
+
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right">
+    <img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}
