@@ -43,6 +43,12 @@
 
 {% block javascripts %}
 
+<script type="text/javascript">
+
+  $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 50 + '%','aria-valuenow': 50}, {duration: 400, easing: 'linear'});
+
+</script>
+
 <script src="{{ asset('/js/map.js') }}"></script>
 
 <script src="{{ asset('/js/autocomplete.js') }}"></script>

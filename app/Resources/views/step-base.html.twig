@@ -61,8 +61,7 @@
     </ul>
   </nav>
 
-  <progress id="progressbar" class="progress" role="progressbar" max="100"></progress>
-
+  <progress id="progressbar" class="progress" max="100" aria-describedby="example-caption-2"></progress>
 
   <div class="container-fluid">
     <input type="text" id="orchard-id" hidden="hidden">
@@ -79,6 +78,10 @@
     {% block javascripts %}{% endblock %}
 
     <script type="text/javascript">
+
+    window.onbeforeunload = function() {
+      localStorage.setItem('lastProgress', $('#progressbar').val());
+    }
 
     //$("form input").focusin(function(){
     $("form :input:not(:checkbox):not(:button)").focusin(function(){
