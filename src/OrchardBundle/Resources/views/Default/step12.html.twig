@@ -132,4 +132,10 @@
 
 </script>
 
+<script type="text/javascript">
+
+	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
+
+</script>
+
 {% endblock %}

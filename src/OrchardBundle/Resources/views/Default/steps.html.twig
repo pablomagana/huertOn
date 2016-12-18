@@ -72,6 +72,8 @@
 {% block javascripts %}
 
 <script type="text/javascript">
+  $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 25 + '%','aria-valuenow': 25}, {duration: 400, easing: 'linear'});
+
   $("#btn-save-exit").css("display", "none");
 </script>
 
