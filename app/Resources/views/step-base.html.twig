@@ -61,11 +61,19 @@
     </ul>
   </nav>
 
-  <progress class="progress" value="25" max="100" aria-describedby="example-caption-2"></progress>
+  <progress id="progressbar" class="progress" role="progressbar" max="100"></progress>
 
   <div class="container-fluid">
     <input type="text" id="orchard-id" hidden="hidden">
     {% block body %}{% endblock %}
+
+    <script type="text/javascript">
+
+      (function() {
+        $('#progressbar').val(lastProgress);
+      })();
+
+    </script>
     {% block javascripts %}{% endblock %}
 
     <script type="text/javascript">
@@ -86,7 +94,7 @@
             //alert("rellena el campo");
             //$(this).prev().show();
             $(this).prev().prev().tooltip('show');
-            $(this).css("border-color","#f00");
+            $(this).css("border-color","#ff0000");
           }
         }
       });

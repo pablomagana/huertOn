@@ -72,6 +72,9 @@
 {% block javascripts %}
 
 <script type="text/javascript">
+
+  $('#progressbar').animate({'value': 0 + '%','aria-valuenow': 0}, {duration: 400, easing: 'linear'});
+
   $("#btn-save-exit").css("display", "none");
 </script>
 
