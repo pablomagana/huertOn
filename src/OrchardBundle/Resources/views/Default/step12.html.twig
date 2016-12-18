@@ -135,7 +135,7 @@
 
 <script type="text/javascript">
 
-	$('#progressbar').animate({'value': 0 + '%','aria-valuenow': 0}, {duration: 400, easing: 'linear'});
+	$('#progressbar').val(localStorage.getItem('progresoPasoAnterior')).animate({'value': 50 + '%','aria-valuenow': 50}, {duration: 400, easing: 'linear'});
 
 </script>
 
