@@ -70,18 +70,13 @@
     <script type="text/javascript">
 
     window.onbeforeunload = function() {
-      localStorage.setItem('progresoPasoAnterior', $('#progressbar').val());
-      // $('#lastProgress').val($('#progressbar').val());
+      localStorage.setItem('lastProgress', $('#progressbar').val());
     }
 
     </script>
     {% block javascripts %}{% endblock %}
 
     <script type="text/javascript">
-
-    window.onbeforeunload = function() {
-      localStorage.setItem('lastProgress', $('#progressbar').val());
-    }
 
     //$("form input").focusin(function(){
     $("form :input:not(:checkbox):not(:button)").focusin(function(){
