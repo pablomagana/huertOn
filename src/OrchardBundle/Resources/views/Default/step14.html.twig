@@ -10,6 +10,49 @@
 			<div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
 				<label><h4>¿Qué tipo de huerto es?</h4></label><br>
 
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					  <label><input type="checkbox" value="">Comunitario</label>
+					</div>
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<label><input type="checkbox" value="">Municipal</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					  <label><input type="checkbox" value="">Autogestionado</label>
+					</div>
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					  <label><input type="checkbox" value="">Azotea</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					  <label><input type="checkbox" value="">Parcelado</label>
+					</div>
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					  <label><input type="checkbox" value="">Alquiler</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					  <label><input type="checkbox" value="">Escolar</label>
+					</div>
+				</div>
+
+<br>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					  <label><input type="checkbox" id="cb-new-category"><i>Sugerir una nueva categoria</i></label>
+						<input type="text" id="input-new-category">
+					</div>
+				</div>
 
 			</div>
 
@@ -33,5 +76,12 @@
 
 
 {% block javascripts %}
-
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#input-new-category").hide();
+			$('#cb-new-category').click(function() {
+				$('#input-new-category')[this.checked ? "show" : "hide"]();
+			});
+		});
+	</script>
 {% endblock %}

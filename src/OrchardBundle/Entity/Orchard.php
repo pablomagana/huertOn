@@ -144,6 +144,14 @@ class Orchard
      */
     private $web;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     *
+     */
+    private $type;
+
 
 
     /**
@@ -477,7 +485,7 @@ class Orchard
     public function setMail($mail)
     {
         $this->mail = $mail;
-    
+
         return $this;
     }
 
@@ -501,7 +509,7 @@ class Orchard
     public function setPhone($phone)
     {
         $this->phone = $phone;
-    
+
         return $this;
     }
 
@@ -525,7 +533,7 @@ class Orchard
     public function setWeb($web)
     {
         $this->web = $web;
-    
+
         return $this;
     }
 
@@ -538,4 +546,33 @@ class Orchard
     {
         return $this->web;
     }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Orchard
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+
+
+
+
 }
