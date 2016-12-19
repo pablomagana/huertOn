@@ -14,7 +14,8 @@ class DefaultController extends Controller
 {
   //Método utilizado para redirigir a un paso en concreto de la creación de un huerto
   //Recibe el id del huerto que se está creando mediante el método GET (el número del paso al que se redirigirá se gestiona según este id)
-  public function indexAction($id_orchard){
+  public function indexAction($id_orchard)
+  {
     //Recogemos el usuario para mostrar el mensaje de bienvenida
     //Id de usuario a piñón hasta crear login y registro
     $id_user = 1;
@@ -103,7 +104,8 @@ class DefaultController extends Controller
 
   //Método utilizado para insertar un huerto en la BBDD
   //Recibe los campos del formulario correspondiente mediante el método POST
-  public function insertAction(Request $request) {
+  public function insertAction(Request $request)
+  {
 
     $cookies = $request->cookies;
 
@@ -142,5 +144,33 @@ class DefaultController extends Controller
     $response->sendHeaders();
 
     return new JsonResponse(array('redirect' => '/orchard/step/'.$orchard->getStep()));
+  }
+
+  public function sendAction($orchard_type)
+  {
+
+    $id_user = 1;
+    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+    $userName = '';
+
+    if($user != null) {
+      $userName = $user->getName();
+    }
+
+    $message = \Swift_Message::newInstance()
+        ->setContentType("text/html")
+        ->setSubject('Nueva sugerencia para tipos de huerto')
+        ->setFrom('parcellesflorida@gmail.com')
+        ->setTo('ab95david@gmail.com')
+        ->setBody(
+            $this->renderView(
+                'OrchardBundle:Default:email.html.twig',
+                array('orchard_type' => $orchard_type, 'userName' => $userName)
+            )
+        )
+    ;
+    $this->get('mailer')->send($message);
+
+    return new JsonResponse(array('redirect' => '/orchard/step/'));
   }
 }
