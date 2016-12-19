@@ -162,8 +162,13 @@ function initDraw() {
         		polyline: false,
         		rectangle: false,
         		polygon: {
-        			allowIntersection: false,
-        			showArea: true
+        			allowIntersection: true,
+        			showArea: true,
+							shapeOptions: {
+                    color: '#3388ff',
+										opacity: 1,
+										fillOpacity: 0.2
+              }
         		}
         	},
         	edit: {
@@ -200,6 +205,10 @@ function setMap(crd){
   map.addLayer(editableItems);
 
   map.addLayer(nonEditableItems);
+
+	if($('#Geometry').val() != '') {
+		retrieveGeometry($('#Geometry').val());
+	}
 
   initDraw();
 
@@ -246,7 +255,7 @@ function setMap(crd){
   	});
   });
 
-  
+
 }
 
 function reverseGeocoding(marker) {
@@ -296,10 +305,34 @@ function retrieveGeometry(geometry) {
     //Convertimos el string en un objeto JSON eliminando los errores y lo añadimos al mapa
     var geojsonFeature = JSON.parse(geometry.replace(/&quot;/g,'"'));
 
-    L.geoJSON(geojsonFeature).addTo(map);
+		console.log(geojsonFeature);
+
+		//Si es un array es porque contiene un punto y un polígono
+		if(Object.prototype.toString.call(geojsonFeature) === '[object Array]') {
+    	var geojsonFeaturePoint = geojsonFeature[0];
+			var geojsonFeaturePolygon = geojsonFeature[1];
+			if(geojsonFeaturePoint.geometry.type == 'Point') {
+				var marker = L.marker([geojsonFeaturePoint.geometry.coordinates[1], geojsonFeaturePoint.geometry.coordinates[0]], {draggable: true});
+				prepareMarker(marker);
+			}
+			if(geojsonFeaturePolygon.geometry.type == 'Polygon') {
+				var layer = L.geoJson(geojsonFeaturePolygon).addTo(map);
+
+				editableItems.addLayer(layer);
+			}
+		}else {
+			if(geojsonFeature.geometry.type == 'Point') {
+				var marker = L.marker([geojsonFeature.geometry.coordinates[1], geojsonFeature.geometry.coordinates[0]], {draggable: true});
+				prepareMarker(marker);
+			}
+		}
 }
 
 function prepareMarker(marker) {
+
+	//Borramos la capa no editable para evitar conflictos
+	clearNonEditableLayer(true);
+
 	marker.on('dragend', function() { reverseGeocoding(marker); });
 
 	marker.on('dragstart', function() {
@@ -311,6 +344,8 @@ function prepareMarker(marker) {
 	nonEditableItems.addLayer(marker);
 
 	reverseGeocoding(marker);
+
+	map.setView([marker.getLatLng().lat, marker.getLatLng().lng], 19);
 }
 
 function prepareGeometry(marker, polygon) {

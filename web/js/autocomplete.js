@@ -28,6 +28,8 @@ function fillInAddress() {
 
   var marker = L.marker([place.geometry.location.lat(), place.geometry.location.lng()], {draggable: true});
 
+  clearEditableLayer(true);
+
   prepareMarker(marker);
 
   /*// Get each component of the address from the place details
