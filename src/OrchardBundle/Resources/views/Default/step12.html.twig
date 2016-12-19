@@ -127,34 +127,6 @@
 	}
 })();
 
-var facebook = document.getElementById("facebook");
-var twitter = document.getElementById("twitter");
-var instagram = document.getElementById("instagram");
-
-function toggleCheckboxFacebook(element){
-	if (document.getElementById('cbfacebook').checked) {
-		facebook.setAttribute("type", "text");
-	} else {
-		facebook.setAttribute("type", "hidden");
-	}
-}
-
-function toggleCheckboxInstagram(element){
-	if (document.getElementById('cbinstagram').checked) {
-		instagram.setAttribute("type", "text");
-	} else {
-		instagram.setAttribute("type", "hidden");
-	}
-}
-
-function toggleCheckboxTwitter(element){
-	if (document.getElementById('cbtwitter').checked) {
-		twitter.setAttribute("type", "text");
-	} else {
-	
-		twitter.setAttribute("type", "hidden");
-	}
-}
 </script>
 
 {% endblock %}

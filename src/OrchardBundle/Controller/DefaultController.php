@@ -63,6 +63,14 @@ class DefaultController extends Controller
         return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig');
         break;
       }
+      case 14:
+      if( $step <= $step_orchard) {
+          return $this->render('OrchardBundle:Default:step14.html.twig');
+          break;
+      }else{
+        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig');
+        break;
+      }
       default:
         return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig');
         break;
