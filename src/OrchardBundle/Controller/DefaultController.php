@@ -173,4 +173,14 @@ class DefaultController extends Controller
 
     return new JsonResponse(array('redirect' => '/orchard/step/'));
   }
+
+  public function suggestAction($orchard_type, $accept)
+  {
+    if($accept) {
+      //Guardar en BBDD y relacionar con orchard
+      //Enviar mail de éxito al usuario
+    }else {
+      //Enviar mail de error al usuario
+    }
+  }
 }
