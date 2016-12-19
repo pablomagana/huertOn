@@ -125,9 +125,6 @@ small {
 .label-control{padding-right: 20px;}
 .label-control + .tooltip > .tooltip-inner {background-color: #f00;}
 
-
-
-
 /* Let's get this party started */
 ::-webkit-scrollbar {
     width: 12px;
@@ -149,4 +146,37 @@ small {
 }
 .steps-left-12::-webkit-scrollbar-thumb:window-inactive {
 	background: #dcdcdc;
+}
+
+/*Loader para 'Guardar y salir'*/
+
+.loading {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: 0.25rem solid #eee;
+  border-top-color: #0074d9;
+  -webkit-animation: spin 2s infinite linear;
+          animation: spin 2s infinite linear;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }

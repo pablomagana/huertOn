@@ -46,21 +46,42 @@
     <a class="navbar-brand" href="#">
       <img src="http://parcellesnostres.com/wp-content/uploads/2016/06/cropped-logo-parcelles.png" width="30" height="30" class="d-inline-block align-top" alt="">
     </a>
-    <ul id="btn-save-exit" class="nav navbar-nav float-lg-right">
+    <ul id="btn-save-exit" class="nav navbar-nav float-xs-right float-sm-right float-md-right float-lg-right">
+      <li class="nav-item">
+        <div id="loading" style="display: none;" class="loading"></div>
+      </li>
+      <li class="nav-item">
+        <span id="loading-text" style="display: none;" class="navbar-text">
+          Guardando...
+        </span>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Guardar y salir</a>
       </li>
     </ul>
   </nav>
 
-  <progress class="progress" value="25" max="100" aria-describedby="example-caption-2"></progress>
+  <progress id="progressbar" class="progress" max="100" aria-describedby="example-caption-2"></progress>
 
   <div class="container-fluid">
     <input type="text" id="orchard-id" hidden="hidden">
     {% block body %}{% endblock %}
+
+    <script type="text/javascript">
+
+    window.onbeforeunload = function() {
+      localStorage.setItem('lastProgress', $('#progressbar').val());
+    }
+
+    </script>
     {% block javascripts %}{% endblock %}
 
     <script type="text/javascript">
+
+    (function() {
+      validateForm();
+    })();
+
     //$("form input").focusin(function(){
     $("form :input:not(:checkbox):not(:button)").focusin(function(){
       var este=$(this).attr("id");
@@ -77,7 +98,7 @@
             //alert("rellena el campo");
             //$(this).prev().show();
             $(this).prev().prev().tooltip('show');
-            $(this).css("border-color","#f00");
+            $(this).css("border-color","#ff0000");
           }
         }
       });
@@ -85,7 +106,8 @@
 
     var form =  {};
 
-    $('#btn-save-exit').on('click', function() {
+    $('#btn-siguiente, #btn-save-exit').on('click', function() {
+      $("#loading, #loading-text").fadeIn("slow");
       $("form :input:not(:checkbox):not(:button)").each(function(){
         console.log($(this).val());
         form[$(this).attr('id')] = $(this).val();
@@ -100,11 +122,70 @@
         url: '/orchard/insert',
         data: form,
         success: function(data) {
-          $('#orchard-id').attr('value', data.id);
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
+          });
+          if (data.redirect) {
+            window.location.href = data.redirect;
+          }
         }
       });
 
     });
+
+    $('#btn-atras').on('click', function() {
+      $("#loading, #loading-text").fadeIn("slow");
+      $("form :input:not(:checkbox):not(:button)").each(function(){
+        console.log($(this).val());
+        form[$(this).attr('id')] = $(this).val();
+      });
+
+      form['id'] = $('#orchard-id').val();
+      console.log('Este és el formulario'+form);
+
+      $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '/orchard/insert',
+        data: form,
+        success: function() {
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
+          });
+          if($('#Step').val() == '12') {
+            window.location.href = '/orchard/create'
+          }else {
+            var step = parseInt($('#Step').val())-2;
+            window.location.href = '/orchard/step/' + step.toString();
+          }
+        }
+      });
+    });
+
+    $("form input").change(function(){
+      console.log('Validando');
+      validateForm();
+    });
+
+    $("form input").keyup(function(){
+      console.log('Validando');
+      validateForm();
+    });
+
+    function validateForm() {
+      var empty = false;
+      $('form input').each(function() {
+        if ($(this).val().length == 0) {
+          empty = true;
+        }
+      });
+
+      if (empty) {
+        $('#btn-siguiente').attr('disabled', 'disabled');
+      } else {
+        $('#btn-siguiente').removeAttr('disabled');
+      }
+    }
 
     </script>
   </div>

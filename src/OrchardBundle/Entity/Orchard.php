@@ -27,14 +27,14 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="number", type="string", length=255)
+     * @ORM\Column(name="number", type="string", length=255, nullable=true)
      *
      */
     private $number;
@@ -42,7 +42,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="street", type="string", length=255)
+     * @ORM\Column(name="street", type="string", length=255, nullable=true)
      *
      */
     private $street;
@@ -50,7 +50,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="town", type="string", length=255)
+     * @ORM\Column(name="town", type="string", length=255, nullable=true)
      *
      */
     private $town;
@@ -58,7 +58,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="zip_code", type="string", length=255)
+     * @ORM\Column(name="zip_code", type="string", length=255, nullable=true)
      *
      */
     private $zipCode;
@@ -66,7 +66,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="geometry", type="text")
+     * @ORM\Column(name="geometry", type="text", nullable=true)
      *
      */
     private $geometry;
@@ -74,7 +74,15 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="step", type="string")
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     *
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="step", type="string", nullable=true)
      *
      */
     private $step;
@@ -99,7 +107,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook", type="string", length=255)
+     * @ORM\Column(name="facebook", type="string", length=255, nullable=true)
      *
      */
     private $facebook;
@@ -107,7 +115,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="instagram", type="string", length=255)
+     * @ORM\Column(name="instagram", type="string", length=255, nullable=true)
      *
      */
     private $instagram;
@@ -115,7 +123,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="twitter", type="string", length=255)
+     * @ORM\Column(name="twitter", type="string", length=255, nullable=true)
      *
      */
     private $twitter;
@@ -123,7 +131,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="string", length=255)
+     * @ORM\Column(name="mail", type="string", length=255, nullable=true)
      *
      */
     private $mail;
@@ -131,7 +139,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      *
      */
     private $phone;
@@ -139,12 +147,10 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="web", type="string", length=255)
+     * @ORM\Column(name="web", type="string", length=255, nullable=true)
      *
      */
     private $web;
-
-
 
     /**
      * Get id
@@ -301,6 +307,30 @@ class Orchard
     }
 
     /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return Orchard
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
      * Get users
      *
      * @return string
@@ -335,21 +365,21 @@ class Orchard
         return $this->step;
     }
 
-    /**
-     * Get the formatted address to display
-     *
-     * @param $separator: the separator between fields (default: ', ')
-     * @return String
-     * @VirtualProperty
-     */
-    public function getAddress($separator = ', '){
-        if($this->getNumber() != null && $this->getStreet() != null && $this->getTown() != null && $this->getZipCode()){
-            return ucfirst(($this->getNumber()).$separator.($this->getStreet()).$separator.($this->getTown()).$separator.($this->getZipCode()));
-        }
-        else{
-            return $this->getStreet();
-        }
-    }
+    // /**
+    //  * Get the formatted address to display
+    //  *
+    //  * @param $separator: the separator between fields (default: ', ')
+    //  * @return String
+    //  * @VirtualProperty
+    //  */
+    // public function getAddress($separator = ', '){
+    //     if($this->getNumber() != null && $this->getStreet() != null && $this->getTown() != null && $this->getZipCode()){
+    //         return ucfirst(($this->getNumber()).$separator.($this->getStreet()).$separator.($this->getTown()).$separator.($this->getZipCode()));
+    //     }
+    //     else{
+    //         return $this->getStreet();
+    //     }
+    // }
 
     /**
      * Default constructor, initializes collections
@@ -477,7 +507,7 @@ class Orchard
     public function setMail($mail)
     {
         $this->mail = $mail;
-    
+
         return $this;
     }
 
@@ -501,7 +531,7 @@ class Orchard
     public function setPhone($phone)
     {
         $this->phone = $phone;
-    
+
         return $this;
     }
 
@@ -525,7 +555,7 @@ class Orchard
     public function setWeb($web)
     {
         $this->web = $web;
-    
+
         return $this;
     }
 
