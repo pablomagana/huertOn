@@ -74,6 +74,14 @@ class Orchard
     /**
      * @var string
      *
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     *
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="step", type="string", nullable=true)
      *
      */
@@ -299,6 +307,30 @@ class Orchard
     }
 
     /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return Orchard
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
      * Get users
      *
      * @return string
@@ -333,21 +365,21 @@ class Orchard
         return $this->step;
     }
 
-    /**
-     * Get the formatted address to display
-     *
-     * @param $separator: the separator between fields (default: ', ')
-     * @return String
-     * @VirtualProperty
-     */
-    public function getAddress($separator = ', '){
-        if($this->getNumber() != null && $this->getStreet() != null && $this->getTown() != null && $this->getZipCode()){
-            return ucfirst(($this->getNumber()).$separator.($this->getStreet()).$separator.($this->getTown()).$separator.($this->getZipCode()));
-        }
-        else{
-            return $this->getStreet();
-        }
-    }
+    // /**
+    //  * Get the formatted address to display
+    //  *
+    //  * @param $separator: the separator between fields (default: ', ')
+    //  * @return String
+    //  * @VirtualProperty
+    //  */
+    // public function getAddress($separator = ', '){
+    //     if($this->getNumber() != null && $this->getStreet() != null && $this->getTown() != null && $this->getZipCode()){
+    //         return ucfirst(($this->getNumber()).$separator.($this->getStreet()).$separator.($this->getTown()).$separator.($this->getZipCode()));
+    //     }
+    //     else{
+    //         return $this->getStreet();
+    //     }
+    // }
 
     /**
      * Default constructor, initializes collections

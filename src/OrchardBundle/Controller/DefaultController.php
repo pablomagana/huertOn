@@ -19,6 +19,11 @@ class DefaultController extends Controller
     //Id de usuario a piñón hasta crear login y registro
     $id_user = 1;
     $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+    $userName = '';
+
+    if($user != null) {
+      $userName = $user->getName();
+    }
 
     $step_orchard = 0;
 
@@ -26,10 +31,10 @@ class DefaultController extends Controller
     if($id_orchard != null){
       $step_orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard)->getStep();
       //Devolvemos la plantilla de pasos marcando los pasos que ya están completados con un icono (falta incluir textos en gris), y pasándole el id del usuario para mostrar el mensaje de bienvenida.
-      return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $user->getName(), 'idOrchard'=> $id_orchard, 'step' => $step_orchard));
+      return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $userName, 'idOrchard'=> $id_orchard, 'step' => $step_orchard));
     }else {
       //Si no existe id de huerto pasamos el paso 0 (si el paso es 0 se ejecuta la ruta para acceder al paso por defecto, es decir, al 11) y empezamos a crear el huerto
-      return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $user->getName(), 'step' => $step_orchard));
+      return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $userName, 'step' => $step_orchard));
     }
   }
 
@@ -106,7 +111,7 @@ class DefaultController extends Controller
 
     // Recoje todos los valores del form
     $params = $request->request->all();
-    
+
     // Recorremos el $key y $value del formulario para separar el id y su valor para añadirlo en la bd
     if ($params != null) {
       foreach($params as $key => $value) {
