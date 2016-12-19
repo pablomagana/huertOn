@@ -115,8 +115,7 @@ class DefaultController extends Controller
     // Recorremos el $key y $value del formulario para separar el id y su valor para añadirlo en la bd
     if ($params != null) {
       foreach($params as $key => $value) {
-        // Ignoramos el autocomplete
-        if (!empty($value) && ($key != 'autocomplete')) {
+        if (!empty($value)) {
           $setterName = 'set'.$key;
           $orchard->$setterName($value);
         }
