@@ -153,6 +153,15 @@ class Orchard
     private $web;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255, nullable=true)
+     *
+     */
+    private $type;
+
+
+    /**
      * Get id
      *
      * @return integer
@@ -567,5 +576,29 @@ class Orchard
     public function getWeb()
     {
         return $this->web;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Orchard
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }
