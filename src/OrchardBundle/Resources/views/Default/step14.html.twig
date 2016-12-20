@@ -12,54 +12,88 @@
 
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					  <label><input type="checkbox" value="">Comunitario</label>
+						<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">Comunitario</span>
+						</label>
 					</div>
 
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<label><input type="checkbox" value="">Municipal</label>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					  <label><input type="checkbox" value="">Autogestionado</label>
-					</div>
-
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					  <label><input type="checkbox" value="">Azotea</label>
+						<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">Municipal</span>
+						</label>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					  <label><input type="checkbox" value="">Parcelado</label>
+						<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">Autogestionado</span>
+						</label>
 					</div>
 
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					  <label><input type="checkbox" value="">Alquiler</label>
+						<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">Azotea</span>
+						</label>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-					  <label><input type="checkbox" value="">Escolar</label>
+						<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">Parcelado</span>
+						</label>
+					</div>
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">Alquiler</span>
+						</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<label class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">Escolar</span>
+						</label>
 					</div>
 				</div>
 
 <br>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					  <label><input type="checkbox" id="cb-new-category"><i>Sugerir una nueva categoria</i></label>
-						<input type="text" id="input-new-category">
+						<label class="custom-control custom-checkbox">
+						  <input id="cb-new-type" type="checkbox" class="custom-control-input">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">Sugiérenos un tipo de huerto</span>
+						</label>
+						<input type="text" class="form-control" id="Type" value="{{ orchard.type }}" placeholder="Escribe aquí el tipo de tu huerto">
 					</div>
 				</div>
 
 			</div>
 
 			<div class="fixed-buttons row">
-				<button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+				<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
 				<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
 			</div>
+
+			<input type="text" id="Step" hidden="hidden" value="15">
 
 		</form>
 
@@ -78,10 +112,16 @@
 {% block javascripts %}
 	<script type="text/javascript">
 		$(document).ready(function () {
-			$("#input-new-category").hide();
-			$('#cb-new-category').click(function() {
-				$('#input-new-category')[this.checked ? "show" : "hide"]();
+			$("#Type").hide();
+			$('#cb-new-type').click(function() {
+				$('#Type')[this.checked ? "show" : "hide"]();
 			});
 		});
+	</script>
+
+	<script type="text/javascript">
+
+		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
+
 	</script>
 {% endblock %}

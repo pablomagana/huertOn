@@ -156,6 +156,7 @@
             window.location.href = '/orchard/create'
           }else {
             var step = parseInt($('#Step').val())-2;
+            console.log('redirigiendo a '+$('#Step').val());
             window.location.href = '/orchard/step/' + step.toString();
           }
         }

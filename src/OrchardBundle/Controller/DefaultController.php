@@ -183,4 +183,8 @@ class DefaultController extends Controller
       //Enviar mail de error al usuario
     }
   }
+
+  public function mailGenerator() {
+
+  }
 }

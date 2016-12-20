@@ -26,6 +26,6 @@ orchard_send:
 
 #Ruta utilizada para aceptar una sugerencia de tipo de huerto desde un mail
 #Recibe la sugerencia y si ésta ha sido acceptada o no mediante el método GET
-orchard_send:
+orchard_suggest:
     path:     /suggest/{orchard_type}/{accept}
     defaults: { _controller: OrchardBundle:Default:suggest, accept:false }
