@@ -153,12 +153,21 @@ class Orchard
     private $web;
 
     /**
-     * @var string
+     * @var \Doctrine\Common\Collections\Collection|OrchardType[]
      *
-     * @ORM\Column(name="type", type="string", length=255, nullable=true)
-     *
+     * @ORM\ManyToMany(targetEntity="OrchardType", inversedBy="orchards")
+     * @ORM\JoinTable(
+     *  name="orchard_orchardtype",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="orchardtype_id", referencedColumnName="id")
+     *  }
+     * )
      */
-    private $type;
+    protected $type;
+
 
 
     /**
@@ -395,8 +404,10 @@ class Orchard
      */
     public function __construct()
     {
-        $this->users= new ArrayCollection();
+      $this->users= new ArrayCollection();
+      $this->type= new ArrayCollection();
     }
+
     /**
      * @param User $users
      */
@@ -408,6 +419,7 @@ class Orchard
         $this->users->add($user);
         $user->addUser($this);
     }
+
     /**
      * @param User $user
      */
@@ -578,27 +590,32 @@ class Orchard
         return $this->web;
     }
 
+
     /**
-     * Get type
-     *
-     * @return string
+     * @param OrchardType $type
      */
-    public function getType()
+    public function addOrchardType(OrchardType $type)
     {
-        return $this->type;
+        if ($this->type->contains($type)) {
+            return;
+        }
+
+        $this->type->add($type);
+        $type->addUser($this);
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Orchard
+     * @param OrchardType $type
      */
-    public function setType($type)
+    public function removeOrchardType(OrchardType $type)
     {
-        $this->type = $type;
+        if (!$this->type->contains($type)) {
+            return;
+        }
 
-        return $this;
+        $this->type->removeElement($type);
+        $type->removeOrchardType($this);
     }
+
+
 }
