@@ -90,11 +90,15 @@ class DefaultController extends Controller
         break;
       }
       case 14:
+
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
+      $orchard_types = $repository->findAll();
+
       if( $step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step14.html.twig', array('orchard' => $orchard));
+        return $this->render('OrchardBundle:Default:step14.html.twig', array('orchard' => $orchard, 'orchard_types' => $orchard_types));
         break;
       }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
+        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_types' => $orchard_types));
         break;
       }
       default:
