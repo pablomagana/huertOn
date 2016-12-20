@@ -168,6 +168,15 @@ class Orchard
      */
     protected $type;
 
+    /**
+     * Get type
+     *
+     * @return OrchardType
+     */
+    public function getType()
+    {
+      return $this->type;
+    }
 
 
     /**
@@ -601,7 +610,7 @@ class Orchard
         }
 
         $this->type->add($type);
-        $type->addUser($this);
+        $type->addOrchard($this);
     }
 
     /**

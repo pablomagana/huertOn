@@ -5,6 +5,7 @@ namespace OrchardBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use OrchardBundle\Entity\Orchard;
+use OrchardBundle\Entity\OrchardType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -174,17 +175,47 @@ class DefaultController extends Controller
     return new JsonResponse(array('redirect' => '/orchard/step/'));
   }
 
-  public function suggestAction($orchard_type, $accept)
+  public function suggestAction(Request $request, $orchard_type, $accept)
   {
+
+    $cookies = $request->cookies;
+
+    $orchard = null;
+
+    if($cookies->has('ID_ORCHARD')) {
+      //El huerto está creado así que recuperamos el objeto de BBDD
+      $orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($cookies->get('ID_ORCHARD'));
+    }
+
     if($accept) {
       //Guardar en BBDD y relacionar con orchard
       //Enviar mail de éxito al usuario
+      $orchardType = new OrchardType();
+      $orchardType->setName($orchard_type);
+      $orchard->addOrchardType($orchardType);
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($orchard);
+      $em->persist($orchardType);
+      $em->flush();
+
+      $message = \Swift_Message::newInstance()
+          ->setContentType("text/html")
+          ->setSubject('Se ha aceptado la sugerencia para tipos de huerto')
+          ->setFrom('parcellesflorida@gmail.com')
+          ->setTo('ab95david@gmail.com')
+          ->setBody(
+              $this->renderView(
+                  'OrchardBundle:Default:email.html.twig',
+                  array('orchard_type' => $orchard_type, 'userName' => $userName)
+              )
+          )
+      ;
+      $this->get('mailer')->send($message);
+
     }else {
       //Enviar mail de error al usuario
     }
-  }
 
-  public function mailGenerator() {
-
+    return new JsonResponse(array('redirect' => '/orchard/step/'));
   }
 }
