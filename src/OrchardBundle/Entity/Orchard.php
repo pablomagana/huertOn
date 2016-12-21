@@ -153,6 +153,13 @@ class Orchard
     private $web;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection|Image[]
+     * One Orchard has Many Images.
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="orchard")
+     */
+    private $images;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection|OrchardType[]
      *
      * @ORM\ManyToMany(targetEntity="OrchardType", inversedBy="orchards")
@@ -168,7 +175,6 @@ class Orchard
      */
     protected $type;
 
-
     /**
      * @var text
      *
@@ -183,10 +189,7 @@ class Orchard
      * @ORM\Column(name="governanceModel", type="text", length=65535, nullable=true)
      *
      */
-     private $governanceModel ;
-
-
-
+     private $governanceModel;
 
     /**
      * Get type
@@ -435,6 +438,7 @@ class Orchard
     {
       $this->users= new ArrayCollection();
       $this->type= new ArrayCollection();
+      $this->images = new ArrayCollection();
     }
 
     /**
