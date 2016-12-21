@@ -168,6 +168,26 @@ class Orchard
      */
     protected $type;
 
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="projectStart", type="text", length=65535, nullable=true)
+     *
+     */
+    private $projectStart;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="governanceModel", type="text", length=65535, nullable=true)
+     *
+     */
+     private $governanceModel ;
+
+
+
+
     /**
      * Get type
      *
@@ -625,6 +645,57 @@ class Orchard
         $this->type->removeElement($type);
         $type->removeOrchardType($this);
     }
+
+
+    /**
+     * Set projectStart
+     *
+     * @param text $projectStart
+     *
+     * @return Orchard
+     */
+    public function setProjectStart($projectStart)
+    {
+        $this->projectStart = $projectStart;
+
+        return $this;
+    }
+
+    /**
+     * Get projectStart
+     *
+     * @return text
+     */
+    public function getProjectStart()
+    {
+        return $this->projectStart;
+    }
+
+
+    /**
+     * Set governanceModel
+     *
+     * @param text $governanceModel
+     *
+     * @return Orchard
+     */
+    public function setGovernanceModel($governanceModel)
+    {
+        $this->governanceModel = $governanceModel;
+
+        return $this;
+    }
+
+    /**
+     * Get governanceModel
+     *
+     * @return text
+     */
+    public function getGovernanceModel()
+    {
+        return $this->governanceModel;
+    }
+
 
 
 }
