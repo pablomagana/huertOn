@@ -1,10 +1,41 @@
 <html>
 <body>
-  <h1 class="display-3">Hola administrador!<h1>
-    <label>{{ userName }} quiere añadir un nuevo tipo de huerto:</label>
-    <span>{{ orchard_type }}<span>
+  {% if accept is defined and accept == 'true' %}
+  <h1>Hola {{ userName }}!<h1>
+  <label>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir un nuevo tipo de huerto:</label>
+  <span>{{ orchard_type }}<span>
+  <label>Ya puedes añadirlo a tu huerto. Muchas gracias!</label>
+{% elseif accept is defined and accept == 'false' %}
+  <h1>Hola {{ userName }}!<h1>
+  <label>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir un nuevo tipo de huerto:</label>
 
-      <a href="http://localhost:8000/orchard/suggest/{{orchard_type}}/false"><button style="display: inline-block;
+  <span>{{ orchard_type }}<span>
+  <label>Prueba a añadir otro. Muchas gracias!</label>
+{% else %}
+<h1 class="display-3">Hola administrador!<h1>
+  <label>{{ userName }} quiere añadir un nuevo tipo de huerto:</label>
+  <span>{{ orchard_type }}<span>
+
+    <a href="http://localhost:8000/orchard/suggest/{{orchard_type}}/false"><button style="display: inline-block;
+      font-weight: 400;
+      line-height: 1.25;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: .5rem 1rem;
+      font-size: 1rem;
+      border-radius: .25rem;
+      color: #373a3c;
+      background-color: #ffffff;
+      border-color: #cccccc;" id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Rechazar</button></a>
+
+      <a href="http://localhost:8000/orchard/suggest/{{orchard_type}}/true"><button style="display: inline-block;
         font-weight: 400;
         line-height: 1.25;
         text-align: center;
@@ -19,28 +50,10 @@
         padding: .5rem 1rem;
         font-size: 1rem;
         border-radius: .25rem;
-        color: #373a3c;
-        background-color: #ffffff;
-        border-color: #cccccc;" id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Rechazar</button></a>
+        color: #ffffff;
+        background-color: #0275d8;
+        border-color: #0275d8;" id="btn-siguiente" type="submit" class="btn btn-primary">Aceptar</button></a>
 
-        <a href="http://localhost:8000/orchard/suggest/{{orchard_type}}/true"><button style="display: inline-block;
-          font-weight: 400;
-          line-height: 1.25;
-          text-align: center;
-          white-space: nowrap;
-          vertical-align: middle;
-          cursor: pointer;
-          -webkit-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-          border: 1px solid transparent;
-          padding: .5rem 1rem;
-          font-size: 1rem;
-          border-radius: .25rem;
-          color: #ffffff;
-          background-color: #0275d8;
-          border-color: #0275d8;" id="btn-siguiente" type="submit" class="btn btn-primary">Aceptar</button></a>
-
-        </body>
-        </html>
+      </body>
+      </html>
+{% endif %}

@@ -189,6 +189,14 @@ class DefaultController extends Controller
   public function suggestAction(Request $request, $orchard_type, $accept)
   {
 
+    $id_user = 1;
+    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+    $userName = '';
+
+    if($user != null) {
+      $userName = $user->getName();
+    }
+
     $cookies = $request->cookies;
 
     $orchard = null;
@@ -198,7 +206,7 @@ class DefaultController extends Controller
       $orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($cookies->get('ID_ORCHARD'));
     }
 
-    if($accept) {
+    if($accept == 'true') {
       //Guardar en BBDD y relacionar con orchard
       //Enviar mail de éxito al usuario
       $orchardType = new OrchardType();
@@ -217,7 +225,7 @@ class DefaultController extends Controller
           ->setBody(
               $this->renderView(
                   'OrchardBundle:Default:email.html.twig',
-                  array('orchard_type' => $orchard_type, 'userName' => $userName)
+                  array('orchard_type' => $orchard_type, 'userName' => $userName, 'accept' => $accept)
               )
           )
       ;
@@ -225,6 +233,19 @@ class DefaultController extends Controller
 
     }else {
       //Enviar mail de error al usuario
+      $message = \Swift_Message::newInstance()
+          ->setContentType("text/html")
+          ->setSubject('No se ha aceptado la sugerencia para tipos de huerto')
+          ->setFrom('parcellesflorida@gmail.com')
+          ->setTo('ab95david@gmail.com')
+          ->setBody(
+              $this->renderView(
+                  'OrchardBundle:Default:email.html.twig',
+                  array('orchard_type' => $orchard_type, 'userName' => $userName, 'accept' => $accept)
+              )
+          )
+      ;
+      $this->get('mailer')->send($message);
     }
 
     return new JsonResponse(array('redirect' => '/orchard/step/'));
