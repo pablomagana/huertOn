@@ -12,8 +12,8 @@
 
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<label for="start" >Cómo se inició el proyecto</label>
-						<textarea rows="4" cols="50" class="form-control" id="start"  value="{{ orchard.projectStart }}"placeholder="Cómo se inició el proyecto"></textarea>
+						<label for="start">¿Cómo se inició el proyecto?</label><span id="start-chars">500</span>
+						<textarea rows="4" cols="50" class="form-control" id="start"  value="{{ orchard.projectStart }}" placeholder="Escribe aquí cómo se inició el proyecto" maxlength="500"></textarea>
 
 					</div>
 				</div>
@@ -21,8 +21,8 @@
 
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<label for="Web" >Modelo de Gobernanza</label>
-						<textarea rows="4" cols="50" class="form-control" id="start"  value="{{ orchard.governanceModel }}"placeholder="Modelo de Gobernanza"></textarea>
+						<label for="governance">Modelo de Gobernanza</label><span id="governance-chars">500</span>
+						<textarea rows="4" cols="50" class="form-control" id="governance"  value="{{ orchard.governanceModel }}" placeholder="Aquí puedes contar tu modelo de Gobernanza" maxlength="500"></textarea>
 
 					</div>
 					<br><br><br><br>
@@ -53,5 +53,33 @@
 {% block javascripts %}
 	<script type="text/javascript">
 		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
+	</script>
+
+	<script type="text/javascript">
+		//contador de caracteres restantes
+			$( document ).ready(function() {
+				var maxLength = 500;
+				$('#start').keyup(function() {
+				  var lengthStart = $(this).val().length;
+				  var lengthStart = maxLength-lengthStart;
+				  $('#start-chars').text(lengthStart);
+					if(lengthStart == 0) {
+						$(this).addClass( "ta-maxlength" );
+					}else {
+						$(this).removeClass( "ta-maxlength" );
+					}
+				});
+
+				$('#governance').keyup(function() {
+				  var lengthGov = $(this).val().length;
+				  var lengthGov = maxLength-lengthGov;
+				  $('#governance-chars').text(lengthGov);
+					if(lengthGov == 0) {
+						$(this).addClass( "ta-maxlength" );
+					}else {
+						$(this).removeClass( "ta-maxlength" );
+					}
+				});
+			});
 	</script>
 {% endblock %}

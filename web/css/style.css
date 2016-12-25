@@ -180,3 +180,18 @@ small {
             transform: rotate(360deg);
   }
 }
+
+#start-chars, #governance-chars{
+    position:absolute;
+    right:0;
+    top:0;
+    font-size:20px;
+    font-weight:bold;
+    color:#ccc;
+}
+
+.ta-maxlength {
+    outline: none !important;
+    border:1px solid red !important;
+    box-shadow: 0 0 10px #719ECE !important;
+}

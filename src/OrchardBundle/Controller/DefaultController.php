@@ -108,6 +108,39 @@ class DefaultController extends Controller
         return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
         break;
       }
+      case 21:
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
+      $orchard_activities = $repository->findAll();
+
+      if( $step <= $step_orchard) {
+        return $this->render('OrchardBundle:Default:step21.html.twig', array('orchard' => $orchard, 'orchard_activities' => $orchard_activities));
+        break;
+      }else{
+        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_activities' => $orchard_activities));
+        break;
+      }
+      case 22:
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
+      $orchard_services = $repository->findAll();
+
+      if( $step <= $step_orchard) {
+        return $this->render('OrchardBundle:Default:step22.html.twig', array('orchard' => $orchard, 'orchard_services' => $orchard_services));
+        break;
+      }else{
+        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_services' => $orchard_services));
+        break;
+      }
+      case 23:
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
+      $orchard_participates = $repository->findAll();
+
+      if( $step <= $step_orchard) {
+        return $this->render('OrchardBundle:Default:step23.html.twig', array('orchard' => $orchard, 'orchard_participates' => $orchard_participates));
+        break;
+      }else{
+        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_participates' => $orchard_participates));
+        break;
+      }
       default:
       return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
       break;
