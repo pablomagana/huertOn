@@ -29,3 +29,9 @@ orchard_send:
 orchard_suggest:
     path:     /suggest/{orchard_type}/{accept}
     defaults: { _controller: OrchardBundle:Default:suggest, accept:false }
+
+#Ruta utilizada para guardar una imagen de huerto
+#Recibe una imagen y la guarda en BBDD mediante el método POST
+orchard_uploadImages:
+    path:     /images/upload
+    defaults: { _controller: OrchardBundle:Default:uploadImage}

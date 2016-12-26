@@ -83,7 +83,6 @@
       validateForm();
     })();
 
-    //$("form input").focusin(function(){
     $("form :input:not(:checkbox):not(:button)").focusin(function(){
       var este=$(this).attr("id");
       console.log("este "+este);
@@ -96,8 +95,6 @@
           return false;
         }else{
           if($(this).val()==""){
-            //alert("rellena el campo");
-            //$(this).prev().show();
             $(this).prev().prev().tooltip('show');
             $(this).css("border-color","#ff0000");
           }

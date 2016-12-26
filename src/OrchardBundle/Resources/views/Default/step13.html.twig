@@ -68,7 +68,6 @@
     }
 
   function previewFiles() {
-console.log('input taputamare');
     var preview = document.querySelector('#preview');
     var files   = document.querySelector('input[type=file]').files;
 
@@ -88,9 +87,16 @@ console.log('input taputamare');
         image.title = file.name;
         image.src = this.result;
         preview.appendChild( image );
-        $.post{
-          data: image.src
-        }
+        $.ajax({
+          type: "POST",
+          url:"/orchard/images/upload",
+          data: {
+            'name':image.title,
+            'src':image.src,
+            'description':'descripción vacia'
+          },
+          success: function(m){alert(m);}
+        });
       }, false);
 
       reader.readAsDataURL(file);
