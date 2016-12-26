@@ -27,14 +27,14 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="number", type="string", length=255)
+     * @ORM\Column(name="number", type="string", length=255, nullable=true)
      *
      */
     private $number;
@@ -42,7 +42,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="street", type="string", length=255)
+     * @ORM\Column(name="street", type="string", length=255, nullable=true)
      *
      */
     private $street;
@@ -50,7 +50,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="town", type="string", length=255)
+     * @ORM\Column(name="town", type="string", length=255, nullable=true)
      *
      */
     private $town;
@@ -58,7 +58,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="zip_code", type="string", length=255)
+     * @ORM\Column(name="zip_code", type="string", length=255, nullable=true)
      *
      */
     private $zipCode;
@@ -66,7 +66,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="geometry", type="text")
+     * @ORM\Column(name="geometry", type="text", nullable=true)
      *
      */
     private $geometry;
@@ -74,7 +74,15 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="step", type="string")
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     *
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="step", type="string", nullable=true)
      *
      */
     private $step;
@@ -99,7 +107,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook", type="string", length=255)
+     * @ORM\Column(name="facebook", type="string", length=255, nullable=true)
      *
      */
     private $facebook;
@@ -107,7 +115,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="instagram", type="string", length=255)
+     * @ORM\Column(name="instagram", type="string", length=255, nullable=true)
      *
      */
     private $instagram;
@@ -115,7 +123,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="twitter", type="string", length=255)
+     * @ORM\Column(name="twitter", type="string", length=255, nullable=true)
      *
      */
     private $twitter;
@@ -123,7 +131,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="string", length=255)
+     * @ORM\Column(name="mail", type="string", length=255, nullable=true)
      *
      */
     private $mail;
@@ -131,7 +139,7 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      *
      */
     private $phone;
@@ -139,11 +147,229 @@ class Orchard
     /**
      * @var string
      *
-     * @ORM\Column(name="web", type="string", length=255)
+     * @ORM\Column(name="web", type="string", length=255, nullable=true)
      *
      */
     private $web;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection|Image[]
+     * One Orchard has Many Images.
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="orchard")
+     */
+    private $images;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection|OrchardType[]
+     *
+     * @ORM\ManyToMany(targetEntity="OrchardType", inversedBy="orchards")
+     * @ORM\JoinTable(
+     *  name="orchard_orchardtype",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="orchardtype_id", referencedColumnName="id")
+     *  }
+     * )
+     */
+    protected $type;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="projectStart", type="text", length=65535, nullable=true)
+     *
+     */
+    private $projectStart;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="governanceModel", type="text", length=65535, nullable=true)
+     *
+     */
+     private $governanceModel;
+
+
+     /**
+      * @var \Doctrine\Common\Collections\Collection|OrchardActivity[]
+      *
+      * @ORM\ManyToMany(targetEntity="OrchardActivity", inversedBy="orchards")
+      * @ORM\JoinTable(
+      *  name="orchard_orchardactivity",
+      *  joinColumns={
+      *      @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
+      *  },
+      *  inverseJoinColumns={
+      *      @ORM\JoinColumn(name="orchardactivity_id", referencedColumnName="id")
+      *  }
+      * )
+      */
+     protected $activity;
+
+
+     /**
+      * @var \Doctrine\Common\Collections\Collection|OrchardParticipate[]
+      *
+      * @ORM\ManyToMany(targetEntity="OrchardParticipate", inversedBy="orchards")
+      * @ORM\JoinTable(
+      *  name="orchard_orchardparticipate",
+      *  joinColumns={
+      *      @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
+      *  },
+      *  inverseJoinColumns={
+      *      @ORM\JoinColumn(name="orchardparticipate_id", referencedColumnName="id")
+      *  }
+      * )
+      */
+     protected $participate;
+
+     /**
+      * @var \Doctrine\Common\Collections\Collection|OrchardService[]
+      *
+      * @ORM\ManyToMany(targetEntity="OrchardService", inversedBy="orchards")
+      * @ORM\JoinTable(
+      *  name="orchard_orchardservice",
+      *  joinColumns={
+      *      @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
+      *  },
+      *  inverseJoinColumns={
+      *      @ORM\JoinColumn(name="orchardservice_id", referencedColumnName="id")
+      *  }
+      * )
+      */
+     protected $service;
+
+     /**
+      * Get service
+      *
+      * @return OrchardService
+      */
+     public function getService()
+     {
+       return $this->service;
+     }
+
+     /**
+      * @param OrchardService $service
+      */
+     public function addOrchardService(OrchardService $service)
+     {
+         if ($this->service->contains($service)) {
+             return;
+         }
+
+         $this->service->add($service);
+         $service->addOrchard($this);
+     }
+
+     /**
+      * @param OrchardService $service
+      */
+     public function removeOrchardService(OrchardService $service)
+     {
+         if (!$this->service->contains($service)) {
+             return;
+         }
+
+         $this->service->removeElement($service);
+         $service->removeOrchardService($this);
+     }
+
+
+     /**
+      * Get participate
+      *
+      * @return OrchardParticipate
+      */
+     public function getParticipate()
+     {
+       return $this->participate;
+     }
+
+     /**
+      * @param OrchardParticipate $participate
+      */
+     public function addOrchardParticipate(OrchardParticipate $participate)
+     {
+         if ($this->participate->contains($participate)) {
+             return;
+         }
+
+         $this->participate->add($participate);
+         $participate->addOrchard($this);
+     }
+
+     /**
+      * @param OrchardParticipate $participate
+      */
+     public function removeOrchardParticipate(OrchardParticipate $participate)
+     {
+         if (!$this->participate->contains($participate)) {
+             return;
+         }
+
+         $this->participate->removeElement($participate);
+         $participate->removeOrchardParticipate($this);
+     }
+
+
+
+     /**
+      * Get activity
+      *
+      * @return OrchardActivity
+      */
+     public function getActivity()
+     {
+       return $this->activity;
+     }
+
+     /**
+      * @param OrchardActivity $activity
+      */
+     public function addOrchardActivity(OrchardActivity $activity)
+     {
+         if ($this->activity->contains($activity)) {
+             return;
+         }
+
+         $this->activity->add($activity);
+         $activity->addOrchard($this);
+     }
+
+     /**
+      * @param OrchardActivity $activity
+      */
+     public function removeOrchardActivity(OrchardActivity $activity)
+     {
+         if (!$this->activity->contains($activity)) {
+             return;
+         }
+
+         $this->activity->removeElement($activity);
+         $activity->removeOrchardActivity($this);
+     }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Get type
+     *
+     * @return OrchardType
+     */
+    public function getType()
+    {
+      return $this->type;
+    }
 
 
     /**
@@ -301,6 +527,30 @@ class Orchard
     }
 
     /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return Orchard
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
      * Get users
      *
      * @return string
@@ -335,29 +585,35 @@ class Orchard
         return $this->step;
     }
 
-    /**
-     * Get the formatted address to display
-     *
-     * @param $separator: the separator between fields (default: ', ')
-     * @return String
-     * @VirtualProperty
-     */
-    public function getAddress($separator = ', '){
-        if($this->getNumber() != null && $this->getStreet() != null && $this->getTown() != null && $this->getZipCode()){
-            return ucfirst(($this->getNumber()).$separator.($this->getStreet()).$separator.($this->getTown()).$separator.($this->getZipCode()));
-        }
-        else{
-            return $this->getStreet();
-        }
-    }
+    // /**
+    //  * Get the formatted address to display
+    //  *
+    //  * @param $separator: the separator between fields (default: ', ')
+    //  * @return String
+    //  * @VirtualProperty
+    //  */
+    // public function getAddress($separator = ', '){
+    //     if($this->getNumber() != null && $this->getStreet() != null && $this->getTown() != null && $this->getZipCode()){
+    //         return ucfirst(($this->getNumber()).$separator.($this->getStreet()).$separator.($this->getTown()).$separator.($this->getZipCode()));
+    //     }
+    //     else{
+    //         return $this->getStreet();
+    //     }
+    // }
 
     /**
      * Default constructor, initializes collections
      */
     public function __construct()
     {
-        $this->users= new ArrayCollection();
+      $this->users= new ArrayCollection();
+      $this->type= new ArrayCollection();
+      $this->images = new ArrayCollection();
+      $this->activity = new ArrayCollection();
+      $this->participate = new ArrayCollection();
+      $this->service = new ArrayCollection();
     }
+
     /**
      * @param User $users
      */
@@ -369,6 +625,7 @@ class Orchard
         $this->users->add($user);
         $user->addUser($this);
     }
+
     /**
      * @param User $user
      */
@@ -477,7 +734,7 @@ class Orchard
     public function setMail($mail)
     {
         $this->mail = $mail;
-    
+
         return $this;
     }
 
@@ -501,7 +758,7 @@ class Orchard
     public function setPhone($phone)
     {
         $this->phone = $phone;
-    
+
         return $this;
     }
 
@@ -525,7 +782,7 @@ class Orchard
     public function setWeb($web)
     {
         $this->web = $web;
-    
+
         return $this;
     }
 
@@ -538,4 +795,84 @@ class Orchard
     {
         return $this->web;
     }
+
+
+    /**
+     * @param OrchardType $type
+     */
+    public function addOrchardType(OrchardType $type)
+    {
+        if ($this->type->contains($type)) {
+            return;
+        }
+
+        $this->type->add($type);
+        $type->addOrchard($this);
+    }
+
+    /**
+     * @param OrchardType $type
+     */
+    public function removeOrchardType(OrchardType $type)
+    {
+        if (!$this->type->contains($type)) {
+            return;
+        }
+
+        $this->type->removeElement($type);
+        $type->removeOrchardType($this);
+    }
+
+
+    /**
+     * Set projectStart
+     *
+     * @param text $projectStart
+     *
+     * @return Orchard
+     */
+    public function setProjectStart($projectStart)
+    {
+        $this->projectStart = $projectStart;
+
+        return $this;
+    }
+
+    /**
+     * Get projectStart
+     *
+     * @return text
+     */
+    public function getProjectStart()
+    {
+        return $this->projectStart;
+    }
+
+
+    /**
+     * Set governanceModel
+     *
+     * @param text $governanceModel
+     *
+     * @return Orchard
+     */
+    public function setGovernanceModel($governanceModel)
+    {
+        $this->governanceModel = $governanceModel;
+
+        return $this;
+    }
+
+    /**
+     * Get governanceModel
+     *
+     * @return text
+     */
+    public function getGovernanceModel()
+    {
+        return $this->governanceModel;
+    }
+
+
+
 }

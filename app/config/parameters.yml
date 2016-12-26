@@ -1,12 +1,11 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: parcelles.ddns.net
+    database_host: 54.86.239.28
     database_port: 3306
     database_name: parcelles
     database_user: parcelles
     database_password: Administrador.1
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
-    secret: 83770f199ec1aae578f3a85ed02a6eb290cc6698
+    mailer_transport: gmail
+    mailer_user: parcellesflorida@gmail.com
+    mailer_password: Administrador.1
+    secret: 83770f199ec1aae578f3a85ed02a6eb290cc6698\

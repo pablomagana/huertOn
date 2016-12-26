@@ -4,7 +4,9 @@
 
 <div class="row steps">
   <div class="col-xs-12 col-md-5 col-lg-5 steps-left">
-    <h1 class="display-4">¡Hola {{userName}}!</h1>
+    {% if userName is defined and userName != '' %}
+      <h1 class="display-4">¡Hola {{ userName }}!</h1>
+    {% endif %}
     <small>Haz que más personas conozcan tu huerto</small>
 
     <div class="row">
@@ -72,6 +74,9 @@
 {% block javascripts %}
 
 <script type="text/javascript">
+
+  $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 0 + '%','aria-valuenow': 0}, {duration: 400, easing: 'linear'});
+
   $("#btn-save-exit").css("display", "none");
 </script>
 

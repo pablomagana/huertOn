@@ -1,0 +1,85 @@
+{% extends '::step-base.html.twig' %}
+
+{% block body %}
+
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
+		<h1 class="display-3">Paso 1.4</h1>
+
+		<form>
+			<div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
+				<label><h4>¿Qué tipo de huerto es?</h4></label><br>
+
+				<div class="row">
+					{% for orchard_type in orchard_types %}
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<label class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">{{ orchard_type.name }}</span>
+						</label>
+					</div>
+
+					{% endfor %}
+				</div>
+
+<br>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<label class="custom-control custom-checkbox">
+						  <input id="cb-new-type" type="checkbox" class="custom-control-input">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description">Sugiérenos un tipo de huerto</span>
+						</label>
+						<input type="text" class="form-control" id="Type" placeholder="Escribe aquí el tipo de tu huerto" hidden>
+
+<br>
+						<a id="mail-url"><button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>Enviar</button></a>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="fixed-buttons row">
+				<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+				<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
+			</div>
+
+			<input type="text" id="Step" hidden="hidden" value="15">
+
+		</form>
+
+
+	</div>
+
+	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right">
+		<img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
+	</div>
+
+</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#cb-new-type').click(function() {
+				this.checked ? $('#Type').removeAttr('hidden') : $('#Type').attr('hidden', 'hidden');
+				this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
+			});
+
+			$('#Type').keyup(function() {
+				$('#mail-url').attr('href', "http://localhost:8000/orchard/send/"+$('#Type').val());
+			});
+		});
+	</script>
+
+	<script type="text/javascript">
+
+		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 80 + '%','aria-valuenow': 80}, {duration: 400, easing: 'linear'});
+
+		$('#Type').val();
+	</script>
+{% endblock %}

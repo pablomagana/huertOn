@@ -10,15 +10,22 @@
       <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
         <label><h4>Sube alguna imagen para que conozcan un poco tu huerto</h4></label><br>
 
+        <div style="width: 550px;height: 70px;padding: 10px;border: 1px solid #aaaaaa;"id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <input id="Imagen" type="file" accept="image/*" onchange="previewFiles()" multiple>
+      </div>
 
+        <div id="preview">
 
+        </div>
 
       </div>
 
       <div class="fixed-buttons row">
-        <button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+        <button id="btn-atras"type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
         <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" disabled="disabled">Siguiente</button>
       </div>
+
+      <input type="text" id="Step" hidden="hidden" value="14">
 
     </form>
 
@@ -34,5 +41,62 @@
 {% endblock %}
 
 {% block javascripts %}
+
+<script type="text/javascript">
+
+	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 60 + '%','aria-valuenow': 60}, {duration: 400, easing: 'linear'});
+
+  function allowDrop(ev) {
+      ev.preventDefault();
+  }
+
+  function drag(ev) {
+      ev.dataTransfer.setData("text", 'preview');
+  }
+
+  function drop(ev) {
+    console.log('dropevent');
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      var files = ev.dataTransfer.files;
+      var file;
+      console.log(ev.dataTransfer.files);
+
+        if (files) {
+          [].forEach.call(files, readAndPreview);
+        }
+    }
+
+  function previewFiles() {
+console.log('input taputamare');
+    var preview = document.querySelector('#preview');
+    var files   = document.querySelector('input[type=file]').files;
+
+    if (files) {
+      [].forEach.call(files, readAndPreview);
+    }
+  }
+
+  function readAndPreview(file) {
+    // Make sure `file.name` matches our extensions criteria
+    if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
+      var reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        var image = new Image();
+        image.height = 200;
+        image.title = file.name;
+        image.src = this.result;
+        preview.appendChild( image );
+        $.post{
+          data: image.src
+        }
+      }, false);
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+</script>
 
 {% endblock %}

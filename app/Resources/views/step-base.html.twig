@@ -62,14 +62,26 @@
     </ul>
   </nav>
 
-  <progress class="progress" value="25" max="100" aria-describedby="example-caption-2"></progress>
+  <progress id="progressbar" class="progress" max="100" aria-describedby="example-caption-2"></progress>
 
   <div class="container-fluid">
     <input type="text" id="orchard-id" hidden="hidden">
     {% block body %}{% endblock %}
+
+    <script type="text/javascript">
+
+    window.onbeforeunload = function() {
+      localStorage.setItem('lastProgress', $('#progressbar').val());
+    }
+
+    </script>
     {% block javascripts %}{% endblock %}
 
     <script type="text/javascript">
+
+    (function() {
+      validateForm();
+    })();
 
     //$("form input").focusin(function(){
     $("form :input:not(:checkbox):not(:button)").focusin(function(){
@@ -87,7 +99,7 @@
             //alert("rellena el campo");
             //$(this).prev().show();
             $(this).prev().prev().tooltip('show');
-            $(this).css("border-color","#f00");
+            $(this).css("border-color","#ff0000");
           }
         }
       });
@@ -123,12 +135,33 @@
     });
 
     $('#btn-atras').on('click', function() {
-      if($('#Step').val() == '12') {
-        window.location.href = '/orchard/create'
-      }else {
-        var step = parseInt($('#Step').val())-2;
-        window.location.href = '/orchard/step/' + step.toString();
-      }
+      $("#loading, #loading-text").fadeIn("slow");
+      $("form :input:not(:checkbox):not(:button)").each(function(){
+        console.log($(this).val());
+        form[$(this).attr('id')] = $(this).val();
+      });
+
+      form['id'] = $('#orchard-id').val();
+      console.log('Este és el formulario'+form);
+
+      $.ajax({
+        type: 'POST',
+        dataType: 'json',
+        url: '/orchard/insert',
+        data: form,
+        success: function() {
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
+          });
+          if($('#Step').val() == '12') {
+            window.location.href = '/orchard/create'
+          }else {
+            var step = parseInt($('#Step').val())-2;
+            console.log('redirigiendo a '+$('#Step').val());
+            window.location.href = '/orchard/step/' + step.toString();
+          }
+        }
+      });
     });
 
     $("form input").change(function(){
