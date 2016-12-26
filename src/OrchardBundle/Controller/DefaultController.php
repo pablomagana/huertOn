@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use OrchardBundle\Entity\Orchard;
 use OrchardBundle\Entity\OrchardType;
+use OrchardBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -288,5 +289,27 @@ class DefaultController extends Controller
     }
 
     return new Response();
+  }
+
+  //Método utilizado para añadir imagenes a los huertos, recibe una imagen y la mueve a la carpeta de imagenes relacionandola con el huerto
+  //Recibe una imagen por request con su descripción por metodo POST
+
+  public function uploadImageAction(Request $request){
+    $id_orchard=$request->cookies->get('ID_ORCHARD');
+    $name=$request->get("name");
+    $src=$request->get("src");
+    $description=$request->get("description");
+
+    $imagen=new Image();
+    $imagen->setSrc($src);
+    $imagen->setDescription($description);
+    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
+    $imagen->setOrchard($orchard);
+
+    $em=$this->getDoctrine()->getManager();
+    $em->persist($imagen);
+    $em->flush();
+
+   return new JsonResponse($imagen->getId());
   }
 }
