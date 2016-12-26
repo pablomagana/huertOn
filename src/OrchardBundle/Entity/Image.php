@@ -29,6 +29,13 @@ class Image
     private $src;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * Many Images have One Orchard.
      * @ORM\ManyToOne(targetEntity="Orchard", inversedBy="images")
      * @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
@@ -67,5 +74,53 @@ class Image
     public function getSrc()
     {
         return $this->src;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Image
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set orchard
+     *
+     * @param \OrchardBundle\Entity\Orchard $orchard
+     *
+     * @return Image
+     */
+    public function setOrchard(\OrchardBundle\Entity\Orchard $orchard = null)
+    {
+        $this->orchard = $orchard;
+    
+        return $this;
+    }
+
+    /**
+     * Get orchard
+     *
+     * @return \OrchardBundle\Entity\Orchard
+     */
+    public function getOrchard()
+    {
+        return $this->orchard;
     }
 }

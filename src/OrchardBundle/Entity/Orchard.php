@@ -875,4 +875,134 @@ class Orchard
 
 
 
+
+    /**
+     * Add image
+     *
+     * @param \OrchardBundle\Entity\Image $image
+     *
+     * @return Orchard
+     */
+    public function addImage(\OrchardBundle\Entity\Image $image)
+    {
+        $this->images[] = $image;
+    
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \OrchardBundle\Entity\Image $image
+     */
+    public function removeImage(\OrchardBundle\Entity\Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * Add type
+     *
+     * @param \OrchardBundle\Entity\OrchardType $type
+     *
+     * @return Orchard
+     */
+    public function addType(\OrchardBundle\Entity\OrchardType $type)
+    {
+        $this->type[] = $type;
+    
+        return $this;
+    }
+
+    /**
+     * Remove type
+     *
+     * @param \OrchardBundle\Entity\OrchardType $type
+     */
+    public function removeType(\OrchardBundle\Entity\OrchardType $type)
+    {
+        $this->type->removeElement($type);
+    }
+
+    /**
+     * Add activity
+     *
+     * @param \OrchardBundle\Entity\OrchardActivity $activity
+     *
+     * @return Orchard
+     */
+    public function addActivity(\OrchardBundle\Entity\OrchardActivity $activity)
+    {
+        $this->activity[] = $activity;
+    
+        return $this;
+    }
+
+    /**
+     * Remove activity
+     *
+     * @param \OrchardBundle\Entity\OrchardActivity $activity
+     */
+    public function removeActivity(\OrchardBundle\Entity\OrchardActivity $activity)
+    {
+        $this->activity->removeElement($activity);
+    }
+
+    /**
+     * Add participate
+     *
+     * @param \OrchardBundle\Entity\OrchardParticipate $participate
+     *
+     * @return Orchard
+     */
+    public function addParticipate(\OrchardBundle\Entity\OrchardParticipate $participate)
+    {
+        $this->participate[] = $participate;
+    
+        return $this;
+    }
+
+    /**
+     * Remove participate
+     *
+     * @param \OrchardBundle\Entity\OrchardParticipate $participate
+     */
+    public function removeParticipate(\OrchardBundle\Entity\OrchardParticipate $participate)
+    {
+        $this->participate->removeElement($participate);
+    }
+
+    /**
+     * Add service
+     *
+     * @param \OrchardBundle\Entity\OrchardService $service
+     *
+     * @return Orchard
+     */
+    public function addService(\OrchardBundle\Entity\OrchardService $service)
+    {
+        $this->service[] = $service;
+    
+        return $this;
+    }
+
+    /**
+     * Remove service
+     *
+     * @param \OrchardBundle\Entity\OrchardService $service
+     */
+    public function removeService(\OrchardBundle\Entity\OrchardService $service)
+    {
+        $this->service->removeElement($service);
+    }
 }
