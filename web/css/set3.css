@@ -1,0 +1,46 @@
+.cuadro-subidas{
+  border-style: dashed;
+  overflow: hidden;
+}
+#gallery{
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery .thumbnail{
+    width:150px;
+    height: 150px;
+    float:left;
+    margin:15px;
+    text-align: center;
+    vertical-align: bottom;
+}
+#gallery .thumbnail img{
+    width:150px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 4px 5px 5px #888888;
+    overflow: hidden;
+}
+#gallery .thumbnail input{
+  margin-top: 5px;
+  border-radius: 10px;
+  vertical-align: bottom;
+}
+.descripcion{
+  width: 90%;
+}
+.more{
+  margin: 15px;
+  padding: 50px;
+  width: 200px;
+  height: 50px;
+  display: inline-block;
+  border-style: dashed;
+  border-radius: 15px;
+  text-align: center;
+  vertical-align: middle;
+  cursor:pointer;
+}
+.more p{
+  vertical-align: middle;
+}
