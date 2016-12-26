@@ -184,11 +184,17 @@ class DefaultController extends Controller
     $id = $orchard->getId();
 
     //Seteamos la cookie con el id del huerto acabado de crear o de actualizar (en el caso de estar actualizando el registro no haria falta pero lo dejamos para que sea un método más genérico).
-    $response = new Response();
+    $response = new JsonResponse();
     $response->headers->setCookie(new Cookie("ID_ORCHARD", $id));
     $response->sendHeaders();
 
-    return new JsonResponse(array('redirect' => '/orchard/step/'.$orchard->getStep()));
+    $response = new JsonResponse();
+    $response->setData(array(
+        'redirect' => $orchard->getStep()
+    ));
+
+    return $response;
+
   }
 
   public function sendAction($orchard_type)
@@ -216,7 +222,7 @@ class DefaultController extends Controller
     ;
     $this->get('mailer')->send($message);
 
-    return new JsonResponse(array('redirect' => '/orchard/step/'));
+    return new Response();
   }
 
   public function suggestAction(Request $request, $orchard_type, $accept)
@@ -281,6 +287,6 @@ class DefaultController extends Controller
       $this->get('mailer')->send($message);
     }
 
-    return new JsonResponse(array('redirect' => '/orchard/step/'));
+    return new Response();
   }
 }

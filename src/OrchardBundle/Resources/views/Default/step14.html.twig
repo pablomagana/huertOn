@@ -24,18 +24,18 @@
 					{% endfor %}
 				</div>
 
-<br>
+				<br>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<label class="custom-control custom-checkbox">
-						  <input id="cb-new-type" type="checkbox" class="custom-control-input">
-						  <span class="custom-control-indicator"></span>
-						  <span class="custom-control-description">Sugiérenos un tipo de huerto</span>
+							<input id="cb-new-type" type="checkbox" class="custom-control-input">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">Sugiérenos un tipo de huerto</span>
 						</label>
 						<input type="text" class="form-control" id="Type" placeholder="Escribe aquí el tipo de tu huerto" hidden>
 
-<br>
-						<a id="mail-url"><button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>Enviar</button></a>
+						<br>
+						<button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>Enviar</button>
 					</div>
 				</div>
 
@@ -50,6 +50,25 @@
 
 		</form>
 
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Muchas gracias!</h4>
+					</div>
+					<div class="modal-body">
+						<p>Cuando estudiemos tu sugerencia te enviaremos un email con el resultado. <p>&#x1f609</p></p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
 	</div>
 
@@ -63,23 +82,89 @@
 
 
 {% block javascripts %}
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$('#cb-new-type').click(function() {
-				this.checked ? $('#Type').removeAttr('hidden') : $('#Type').attr('hidden', 'hidden');
-				this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
-			});
+<script type="text/javascript">
+$(document).ready(function () {
+	$('#cb-new-type').click(function() {
+		this.checked ? $('#Type').removeAttr('hidden') : $('#Type').attr('hidden', 'hidden');
+		this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
+	});
 
-			$('#Type').keyup(function() {
-				$('#mail-url').attr('href', "http://localhost:8000/orchard/send/"+$('#Type').val());
+	$('#btn-enviar').off('click');
+	$('#btn-enviar').on('click', function() {
+		if($('#Type').val()) {
+			$.ajax({
+				type: 'POST',
+				url: '/orchard/send/'+$('#Type').val(),
+				data: form,
+				success: function(data) {
+					console.log('success');
+					$('#myModal').modal('show');
+				},
+				error: function(jqXHR, exception) {
+					if (jqXHR.status === 0) {
+								alert('Not connect.\n Verify Network.');
+						} else if (jqXHR.status == 404) {
+								alert('Requested page not found. [404]');
+						} else if (jqXHR.status == 500) {
+								alert('Internal Server Error [500].');
+						} else if (exception === 'parsererror') {
+								alert('Requested JSON parse failed.');
+						} else if (exception === 'timeout') {
+								alert('Time out error.');
+						} else if (exception === 'abort') {
+								alert('Ajax request aborted.');
+						} else {
+								alert('Uncaught Error.\n' + jqXHR.responseText);
+						}
+					console.log('error');
+				}
 			});
+		}
+		return false;
+	});
+
+	$('#Type').keyup(function() {
+		$('#btn-enviar').off('click');
+		$('#btn-enviar').on('click', function() {
+			if($('#Type').val()) {
+				$.ajax({
+	        type: 'POST',
+	        url: '/orchard/send/'+$('#Type').val(),
+	        data: form,
+	        success: function(data) {
+	          console.log('success');
+						$('#myModal').modal('show');
+	        },
+	        error: function(jqXHR, exception) {
+	          if (jqXHR.status === 0) {
+	                alert('Not connect.\n Verify Network.');
+	            } else if (jqXHR.status == 404) {
+	                alert('Requested page not found. [404]');
+	            } else if (jqXHR.status == 500) {
+	                alert('Internal Server Error [500].');
+	            } else if (exception === 'parsererror') {
+	                alert('Requested JSON parse failed.');
+	            } else if (exception === 'timeout') {
+	                alert('Time out error.');
+	            } else if (exception === 'abort') {
+	                alert('Ajax request aborted.');
+	            } else {
+	                alert('Uncaught Error.\n' + jqXHR.responseText);
+	            }
+	          console.log('error');
+	        }
+	      });
+			}
+			return false;
 		});
-	</script>
+	});
+});
+</script>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 
-		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 80 + '%','aria-valuenow': 80}, {duration: 400, easing: 'linear'});
+$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 80 + '%','aria-valuenow': 80}, {duration: 400, easing: 'linear'});
 
-		$('#Type').val();
-	</script>
+$('#Type').val();
+</script>
 {% endblock %}
