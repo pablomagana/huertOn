@@ -116,18 +116,39 @@
 
       $.ajax({
         type: 'POST',
-        dataType: 'json',
         url: '/orchard/insert',
         data: form,
         success: function(data) {
           $("#loading, #loading-text").fadeOut("slow", function() {
             $("#loading-text").text("Guardado").fadeIn('slow');
           });
-          if (data.redirect) {
-            window.location.href = data.redirect;
-          }
+          console.log('success');
+          window.location.href = '/orchard/step/'+data.redirect;
+        },
+        error: function(jqXHR, exception) {
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
+          });
+          if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+          console.log('error');
         }
       });
+
+      return false;
 
     });
 
