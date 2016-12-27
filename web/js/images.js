@@ -1,14 +1,18 @@
 //capturar imagenes subidas
 function previewImage(file) {
     var galleryId = "gallery";
-
     var gallery = document.getElementById(galleryId);
     var imageType = /image.*/;
 
     if (!file.type.match(imageType)) {
-        throw "File Type must be an image";
+        throw "El archivo debe ser una imagen";
     }
-    $.ajax({
+    //añado al fichero una nueva propiedad descripción
+    file.des="nada";
+    imagenes.push(file);
+    console.log(imagenes);
+    createImageElement(file);
+    /*$.ajax({
       type: "POST",
       url:"/orchard/images/upload",
       data: {
@@ -17,7 +21,7 @@ function previewImage(file) {
         'description':'descripción vacia'
       },
       success: function(){createImageElement(file)}
-    });
+    });*/
 
 }
 
@@ -26,11 +30,15 @@ function createImageElement(file){
   thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
 
   var img = document.createElement("img");
-  var des = document.createElement("INPUT");
+  var des = document.createElement("textarea");
+  var name = document.createElement("p");
+  name.append(document.createTextNode(file.name));
+  name.setAttribute("title",file.name);
   des.setAttribute("type","text");
   des.classList.add("descripcion");
   img.file = file;
   thumb.appendChild(img);
+  thumb.appendChild(name);
   thumb.appendChild(des);
   gallery.appendChild(thumb);
 
@@ -39,13 +47,3 @@ function createImageElement(file){
   reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
   reader.readAsDataURL(file);
 }
-var files = null;
-var uploadfiles = document.querySelector('#fileinput');
-uploadfiles.addEventListener('change', function () {
-    var files = this.files;
-    for(var i=0; i<files.length; i++){
-        previewImage(this.files[i]);
-
-    }
-
-}, false);

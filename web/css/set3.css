@@ -1,5 +1,5 @@
 .cuadro-subidas{
-  border-style: dashed;
+  border: solid 2px black;
   overflow: hidden;
 }
 #gallery{
@@ -7,12 +7,13 @@
   vertical-align: middle;
 }
 #gallery .thumbnail{
-    width:150px;
-    height: 150px;
+    max-width:150px;
+    /*height: 150px;*/
     float:left;
     margin:15px;
     text-align: center;
     vertical-align: bottom;
+    overflow:hidden;
 }
 #gallery .thumbnail img{
     width:150px;
@@ -31,16 +32,16 @@
 }
 .more{
   margin: 15px;
-  padding: 50px;
-  width: 200px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   display: inline-block;
   border-style: dashed;
   border-radius: 15px;
-  text-align: center;
-  vertical-align: middle;
   cursor:pointer;
+  display: table;
 }
 .more p{
+  text-align:center;
   vertical-align: middle;
+  display: table-cell;
 }
