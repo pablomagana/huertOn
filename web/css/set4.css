@@ -1,16 +1,25 @@
-.cuadro-subidas{
-  border: solid 2px black;
+.cuadro-subidas-pdf{
+  display: inline-block;
+  border-style: dashed;
+  border-radius: 5px;
+  padding: 50px;
+  cursor:pointer;
+  display: table;
   overflow: hidden;
 }
+
+.centrar-o{
+  margin-left: 40%;
+}
+
 #gallery{
   display: inline-block;
   vertical-align: middle;
 }
 #gallery .thumbnail{
     max-width:150px;
-    min-height: 370px;
-    /*float:left;*/
-    display:inline-table;
+    /*height: 150px;*/
+    float:left;
     margin:15px;
     text-align: center;
     vertical-align: bottom;
@@ -28,39 +37,21 @@
   border-radius: 10px;
   vertical-align: bottom;
 }
-#gallery .thumbnail div p{
-  width: 95%;
-  /*max-height: 50px;*/
-}
 .descripcion{
   width: 90%;
-  height: 120px;
 }
 .more{
   margin: 15px;
-  width: 150px;
+  width: 100px;
   height: 100px;
   display: inline-block;
   border-style: dashed;
   border-radius: 15px;
   cursor:pointer;
   display: table;
-  min-height: 370px;
 }
 .more p{
   text-align:center;
   vertical-align: middle;
   display: table-cell;
-}
-.topRight{
-  float:right;
-  vertical-align: middle;
-  font-size: 150%;
-
-}
-.deleteImage{
-  position:relative;
-  top:0px;
-  left:0px;
-  cursor:pointer;
 }
