@@ -43,7 +43,11 @@ html,body,.map,.step-1,.steps {
 }
 /*end scroll left*/
 
-
+.steps-right-pdf {
+  height: 100%;
+  padding: 10%;
+  z-index: -9999;
+}
 
 
 .steps-right {
@@ -83,6 +87,9 @@ small {
   .steps-right {
     display: none;
   }
+  .steps-right-pdf {
+    display: none;
+  }
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -95,6 +102,9 @@ small {
 	}
 
   .steps-right {
+    display: none;
+  }
+  .steps-right-pdf {
     display: none;
   }
 }

@@ -4,31 +4,32 @@
 
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
-    <h1 class="display-3">Paso 1.3</h1>
-
+    <h1 class="display-3">Paso 1.3
+      <span id="loading-images" style="display: none;" class="navbar-text">
+        Cargando imagenes...
+      </span>
+    </h1>
     <form>
       <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
         <label><h4>Sube alguna imagen para que conozcan un poco tu huerto</h4></label><br>
         <div class="cuadro-subidas" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <input type="file" id="fileinput" multiple="multiple" accept="image/*" />
-          <div id="gallery"></div>
+          <input hidden type="file" id="fileinput" multiple="multiple" accept="image/*" />
+          <div id="gallery">
+          </div>
 
           <div class="more" onclick="$('#fileinput').click();">
             <p>Añade o arrastra imagenes</p>
           </div>
         </div>
+      </div>
+      <div class="fixed-buttons row">
+        <button id="btn-atras"type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+        <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Ahora no</button>
+      </div>
 
-        <div class="fixed-buttons row">
-          <button id="btn-atras"type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
-          <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" disabled="disabled">Siguiente</button>
-        </div>
+      <input type="text" id="Step" hidden="hidden" value="14">
+    </form>
 
-        <input type="text" id="Step" hidden="hidden" value="14">
-
-      </form>
-
-
-    </div>
   </div>
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right">
     <img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
@@ -46,74 +47,23 @@ $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 60
 
 var imagenes = new Array();
 console.log(imagenes);
+//cargar imagenes con click
 var filesinput = document.querySelector('#fileinput');
 filesinput.addEventListener('change', function () {
-    console.log("detectando cambios en input");
-    for(var i=0; i<this.files.length; i++){
-        console.log("dibujando imagen"+i);
-        previewImage(this.files[i]);
-    }
-
+  console.log("detectando cambios en input");
+  $("#loading-images").fadeIn("slow");
+  for(var i=0; i<this.files.length; i++){
+    console.log("dibujando imagen"+i);
+    previewImage(this.files[i]);
+    //console.log("preparando imagen "+this.files[i].name);
+  }
+  $("#loading-images").fadeOut("slow");
 }, false);
 
-function allowDrop(ev) {
-  ev.preventDefault();
-}
+$("#description").keydown(function() {
+  $(this).val($this.val());
+});
 
-function drag(ev) {
-  console.log("dragevent");
-  ev.dataTransfer.setData("text", 'gallery');
-}
-
-function drop(ev) {
-  console.log('dropevent');
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  var f = ev.dataTransfer.files;
-  //var file;
-  console.log(ev.dataTransfer.files);
-
-  if (f) {
-    //[].forEach.call(files, readAndPreview);
-    [].forEach.call(f, previewImage);
-  }
-}
-
-// function previewFiles() {
-//   var preview = document.querySelector('#gallery');
-//   var files   = document.querySelector('input[type=file]').files;
-//
-//   if (files) {
-//     [].forEach.call(files, readAndPreview);
-//   }
-// }
-
-// function readAndPreview(file) {
-//   // Make sure `file.name` matches our extensions criteria
-//   if ( /\.(jpe?g|png|gif)$/i.test(file.name) ) {
-//     var reader = new FileReader();
-//
-//     reader.addEventListener("load", function () {
-//       var image = new Image();
-//       image.height = 200;
-//       image.title = file.name;
-//       image.src = this.result;
-//       preview.appendChild( image );
-//       $.ajax({
-//         type: "POST",
-//         url:"/orchard/images/upload",
-//         data: {
-//           'name':image.title,
-//           'src':image.src,
-//           'description':'descripción vacia'
-//         },
-//         success: function(m){alert(m);}
-//       });
-//     }, false);
-//
-//     reader.readAsDataURL(file);
-//   }
-// }
 
 </script>
 
