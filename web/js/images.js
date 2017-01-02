@@ -26,6 +26,8 @@ function previewImage(file) {
 }
 function sendAllImages() {
   for (var i = 0; i < imagenes.length; i++) {
+    imagenes[i].des=$("span[id='"+imagenes[i].id+"']").parent().children().last().val();
+    console.log(imagenes[i].des);
     sendImage(imagenes[i]);
   }
 }
