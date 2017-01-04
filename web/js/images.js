@@ -24,14 +24,17 @@ function previewImage(file) {
 
 
 }
-function sendAllImages() {
-  for (var i = 0; i < imagenes.length; i++) {
-    imagenes[i].des=$("span[id='"+imagenes[i].id+"']").parent().children().last().val();
-    console.log(imagenes[i].des);
-    sendImage(imagenes[i]);
-  }
-}
 
+function sendAllImages() {
+  $.ajax({
+    type: "POST",
+    contentType: 'application/json',
+    url:"/orchard/images/upload",
+    data: JSON.stringify(imagenes),
+     success: function(step){console.log(step);return step},
+     error: function(){alert("error al añadir imagenes. ajax sendAllImages")}
+   });
+}
 function sendImage(file){
   $.ajax({
     type: "POST",

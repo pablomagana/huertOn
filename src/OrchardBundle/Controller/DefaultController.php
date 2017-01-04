@@ -294,7 +294,7 @@ class DefaultController extends Controller
   //Método utilizado para añadir imagenes a los huertos, recibe una imagen y la mueve a la carpeta de imagenes relacionandola con el huerto
   //Recibe una imagen por request con su descripción por metodo POST
 
-  public function uploadImageAction(Request $request){
+  public function uploadImageActionOld(Request $request){
     $id_orchard=$request->cookies->get('ID_ORCHARD');
     $name=$request->get("name");
     $src=$request->get("src");
@@ -311,5 +311,44 @@ class DefaultController extends Controller
     $em->flush();
 
    return new JsonResponse($imagen->getId());
+  }
+
+  public function uploadImageAction(Request $request){
+    ini_set('memory_limit', '-1');
+    //extraer id_orchard
+    $id_orchard=$request->cookies->get('ID_ORCHARD');
+
+    //extraer json con imagenes
+    //$imagenes=$request->get("imgs");
+    $imagenes=json_decode($request->getContent());
+    //print_r($imagenes);
+    //return new JsonResponse($imagenes[0]->des);
+
+    $em=$this->getDoctrine()->getManager();
+
+    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
+if (count($imagenes)>0) {
+  foreach ($imagenes as $img) {
+      $imagen=new Image();
+      $imagen->setSrc($img->src);
+      $imagen->setDescription($img->des);
+
+      $imagen->setOrchard($orchard);
+
+      $em->persist($imagen);
+      $em->flush();
+    }
+  }
+    //update step orchard
+    if($orchard->getStep()<14){
+      $orchard->setstep(14);
+      $em->persist($orchard);
+      $em->flush();
+    }
+
+return new JsonResponse(14);
+
+
+
   }
 }

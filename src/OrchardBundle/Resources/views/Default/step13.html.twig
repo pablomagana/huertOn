@@ -27,7 +27,6 @@
         </div>
       </div>
       <div class="fixed-buttons row">
-        <button onclick="sendAllImages()" id="enviar imagenes" type="button" class="btn" >enviar provisional</button>
         <button id="btn-atras"type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
         <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Ahora no</button>
       </div>
@@ -45,9 +44,10 @@
 {% endblock %}
 
 {% block javascripts %}
+
 <script src="{{asset('js/images.js')}}" charset="utf-8"></script>
 <script type="text/javascript">
-
+$('#btn-siguiente').removeAttr('disabled');
 $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 60 + '%','aria-valuenow': 60}, {duration: 400, easing: 'linear'});
 
 var imagenes = new Array();
@@ -74,6 +74,39 @@ filesinput.addEventListener('change', function () {
 
 $("#description").keydown(function() {
   $(this).val($this.val());
+});
+
+//remove all handles
+$('#btn-siguiente , #btn-save-exit , #btn-atras').off('click');
+
+$('#btn-siguiente, #btn-save-exit').on('click', function() {
+  $("#loading, #loading-text").fadeIn("slow");
+  //send images
+    for (var i = 0; i < imagenes.length; i++) {
+      imagenes[i].des=$("span[id='"+imagenes[i].id+"']").parent().children().last().val();
+      //sendImage(imagenes[i]);
+    }
+    $.ajax({
+      type: "POST",
+      contentType: 'application/json',
+      url:"/orchard/images/upload",
+      data: JSON.stringify(imagenes),
+      success: function(step){
+        console.log(step);
+        window.location.href = '/orchard/step/'+step;
+      },
+      error: function(){
+        alert("error al añadir imagenes. ajax sendAllImages");
+        $("#loading, #loading-text").fadeOut("slow", function() {
+          $("#loading-text").text("Guardado").fadeIn('slow');
+        });
+      }
+    });
+});
+
+$('#btn-atras').on('click', function() {
+  $("#loading, #loading-text").fadeIn("slow");
+  window.location.href = '/orchard/step/12';
 });
 
 
