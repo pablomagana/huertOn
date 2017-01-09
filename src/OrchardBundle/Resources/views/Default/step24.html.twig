@@ -4,30 +4,20 @@
 
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
-		<h1 class="display-3">Paso 1.5</h1>
+		<h1 class="display-3">Paso 2.4</h1>
 
 		<form>
 			<div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
-				<label><h4>Cuenta la filosofía de tu huerto</h4></label><br>
+				<label><h4>Como inscribirse en tu huerto</h4></label><br>
 
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<label for="ProjectStart">¿Cómo se inició el proyecto?</label><span id="start-chars">500</span>
-						<textarea rows="4" cols="50" class="form-control" id="ProjectStart"  value="{{ orchard.projectStart }}" placeholder="Escribe aquí cómo se inició el proyecto" maxlength="500"></textarea>
-
+						<label for="ProjectStart">Paso <span id="inscription-step">1</span></label><span id="start-chars">200</span>
+						<textarea rows="4" cols="50" class="form-control" id="ProjectStart"  value="{{ orchard.projectStart }}" placeholder="El primer paso para inscribirte al huerto es..." maxlength="200"></textarea>
 					</div>
 				</div>
 				<br>
-
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<label for="GovernanceModel">Modelo de Gobernanza</label><span id="governance-chars">500</span>
-						<textarea rows="4" cols="50" class="form-control" id="GovernanceModel"  value="{{ orchard.governanceModel }}" placeholder="Aquí puedes contar tu modelo de Gobernanza" maxlength="500"></textarea>
-
-					</div>
-					<br><br><br><br>
-				</div>
-
+				<div class="new-step"> Añadir un nuevo paso. <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></div>
 			</div>
 
 			<div class="fixed-buttons row">
@@ -35,7 +25,7 @@
 				<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" disabled="disabled">Siguiente</button>
 			</div>
 
-			<input type="text" id="Step" hidden="hidden" value="16">
+			<input type="text" id="Step" hidden="hidden" value="25">
 
 		</form>
 
@@ -58,7 +48,7 @@
 	<script type="text/javascript">
 		//contador de caracteres restantes
 			$( document ).ready(function() {
-				var maxLength = 500;
+				var maxLength = 200;
 				$('textarea').keyup(function() {
 					var length = $(this).val().length;
 					var length = maxLength-length;
@@ -68,6 +58,15 @@
 					}else {
 							$(this).removeClass( "ta-maxlength" );
 					}
+				});
+			});
+	</script>
+
+	<script type="text/javascript">
+		//add new step on click
+			$( document ).ready(function() {
+				$('.new-step').click(function() {
+
 				});
 			});
 	</script>
