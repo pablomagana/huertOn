@@ -3,8 +3,8 @@
 #Ruta utilizada para redirigir a un paso en concreto de la creación de un huerto
 #Recibe el id del huerto que se está creando mediante el método GET (el número del paso al que se redirigirá se gestiona según este id)
 orchard_create_id:
-    path:     /create/{id_orchard}
-    defaults: { _controller: OrchardBundle:Default:index, id_orchard:null }
+    path:     /create
+    defaults: { _controller: OrchardBundle:Default:index }
 
 #Ruta utilizada para redirigir a un paso en concreto de la creación un huerto
 #Recibe el número del paso al que se quiere acceder (por defecto al primero) mediante el método GET

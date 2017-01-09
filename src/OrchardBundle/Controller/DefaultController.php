@@ -15,7 +15,7 @@ class DefaultController extends Controller
 {
   //Método utilizado para redirigir a un paso en concreto de la creación de un huerto
   //Recibe el id del huerto que se está creando mediante el método GET (el número del paso al que se redirigirá se gestiona según este id)
-  public function indexAction($id_orchard)
+  public function indexAction(Request $request)
   {
     //Recogemos el usuario para mostrar el mensaje de bienvenida
     //Id de usuario a piñón hasta crear login y registro
@@ -29,7 +29,17 @@ class DefaultController extends Controller
 
     $step_orchard = 0;
 
-    //Si existe un id de huerto en la ruta recogemos el paso por el que va
+    //Comprovar si existe la cookie del id del huerto
+    //Si existe significa que se està editando el huerto y sinó se está creando uno nuevo
+    $cookies = $request->cookies;
+
+    $id_orchard = null;
+
+    if ($cookies->has('ID_ORCHARD')) {
+      $id_orchard = $cookies->get('ID_ORCHARD');
+    }
+
+    //Si existe un id de huerto en la cookie recogemos el paso por el que va
     if($id_orchard != null){
       $step_orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard)->getStep();
       //Devolvemos la plantilla de pasos marcando los pasos que ya están completados con un icono (falta incluir textos en gris), y pasándole el id del usuario para mostrar el mensaje de bienvenida.
