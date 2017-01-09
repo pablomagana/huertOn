@@ -11,13 +11,18 @@
 				<label><h4>Como inscribirse en tu huerto</h4></label><br>
 
 				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<label for="ProjectStart">Paso <span id="inscription-step">1</span></label><span id="start-chars">200</span>
-						<textarea rows="4" cols="50" class="form-control" id="ProjectStart"  value="{{ orchard.projectStart }}" placeholder="El primer paso para inscribirte al huerto es..." maxlength="200"></textarea>
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clone-inside">
+						<div class="1">
+							<label for="ProjectStart">Paso 1</label><span id="start-chars">200</span>
+							<textarea rows="4" cols="50" class="form-control" id="ProjectStart"  value="{{ orchard.projectStart }}" placeholder="El primer paso para inscribirte al huerto es..." maxlength="200"></textarea>
+							<br>
+						</div>
 					</div>
+
 				</div>
-				<br>
-				<div class="new-step"> Añadir un nuevo paso. <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></div>
+
+
+				<div class="new-step">Añadir un nuevo paso. <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></div>
 			</div>
 
 			<div class="fixed-buttons row">
@@ -65,8 +70,11 @@
 	<script type="text/javascript">
 		//add new step on click
 			$( document ).ready(function() {
+				var inscriptionStep = 2;
 				$('.new-step').click(function() {
-
+					$( ".1" ).clone().removeClass( "1" ).addClass(""+inscriptionStep).appendTo( ".clone-inside" );
+					$( "."+inscriptionStep+" > label" ).text("Paso "+inscriptionStep);
+					inscriptionStep++;
 				});
 			});
 	</script>
