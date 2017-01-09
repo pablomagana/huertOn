@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8" />
   <title>{% block title %}Welcome!{% endblock %}</title>
-  {% block stylesheets %}
+
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
 
@@ -37,6 +37,7 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/demo.css') }}" />
   <link rel="stylesheet" type="text/css" href="{{ asset('/css/set2.css') }}" />
 
+  {% block stylesheets %}
   {% endblock %}
   <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
@@ -74,7 +75,7 @@
     }
 
     </script>
-    {% block javascripts %}{% endblock %}
+
 
     <script type="text/javascript">
 
@@ -82,7 +83,6 @@
       validateForm();
     })();
 
-    //$("form input").focusin(function(){
     $("form :input:not(:checkbox):not(:button)").focusin(function(){
       var este=$(this).attr("id");
       console.log("este "+este);
@@ -95,8 +95,6 @@
           return false;
         }else{
           if($(this).val()==""){
-            //alert("rellena el campo");
-            //$(this).prev().show();
             $(this).prev().prev().tooltip('show');
             $(this).css("border-color","#ff0000");
           }
@@ -210,6 +208,7 @@
     }
 
     </script>
+    {% block javascripts %}{% endblock %}
   </div>
 </body>
 </html>

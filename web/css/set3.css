@@ -1,0 +1,75 @@
+.cuadro-subidas{
+  border: solid 2px black;
+  overflow: hidden;
+}
+#gallery{
+  display: inline-block;
+  vertical-align: middle;
+}
+#gallery .thumbnail{
+    max-width:150px;
+    /*min-height: 370px;*/
+    /*float:left;*/
+    display:inline-table;
+    margin:15px;
+    text-align: center;
+    vertical-align: bottom;
+    overflow:hidden;
+}
+.thumbnail img{
+    width:150px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 4px 5px 5px #888888;
+    overflow: hidden;
+}
+#gallery .thumbnail input{
+  margin-top: 5px;
+  border-radius: 10px;
+  vertical-align: bottom;
+}
+#gallery .thumbnail div p{
+  width: 95%;
+  /*max-height: 50px;*/
+}
+#gallery .thumbnail span{
+  display: block;
+  text-align: right;
+  color: rgb(175, 175, 175);
+}
+.descripcion{
+  width: 90%;
+  max-height: 115px;
+  overflow: hidden;
+}
+.more{
+  margin: 10px 10% 20px 10%;
+  height: 50px;
+  width: 80%;
+  display: inline-block;
+  border-style: dashed;
+  border-radius: 15px;
+  cursor:pointer;
+  display: table;
+}
+.more p{
+  text-align:center;
+  vertical-align: middle;
+  display: table-cell;
+  margin: 0px;
+}
+.topRight{
+  float:right;
+  vertical-align: middle;
+  font-size: 150%;
+
+}
+.deleteImage{
+  position:relative;
+  top:0px;
+  left:0px;
+  cursor:pointer;
+}
+.editDes{
+  display: inline;
+}

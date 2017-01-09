@@ -106,4 +106,14 @@ class OrchardType
     {
         return $this->name;
     }
+
+    /**
+     * Get orchards
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrchards()
+    {
+        return $this->orchards;
+    }
 }

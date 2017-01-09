@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use OrchardBundle\Entity\Orchard;
 use OrchardBundle\Entity\OrchardType;
+use OrchardBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -83,7 +84,11 @@ class DefaultController extends Controller
       }
       case 13:
       if( $step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step13.html.twig', array('orchard' => $orchard));
+        //recojo todas las imagenes relacionadas con el huerto que tengo guardado en la cookie
+        $repository = $this->getDoctrine()->getRepository('OrchardBundle:Image');
+        $images = $repository->findByOrchard($orchard);
+
+        return $this->render('OrchardBundle:Default:step13.html.twig', array('orchard' => $orchard,"images" =>$images));
         break;
       }else{
         return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
@@ -288,5 +293,64 @@ class DefaultController extends Controller
     }
 
     return new Response();
+  }
+
+  //Método utilizado para añadir imagenes a los huertos, recibe una imagen y la mueve a la carpeta de imagenes relacionandola con el huerto
+  //Recibe una imagen por request con su descripción por metodo POST
+
+  public function uploadImageActionOld(Request $request){
+    $id_orchard=$request->cookies->get('ID_ORCHARD');
+    $name=$request->get("name");
+    $src=$request->get("src");
+    $description=$request->get("description");
+
+    $imagen=new Image();
+    $imagen->setSrc($src);
+    $imagen->setDescription($description);
+    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
+    $imagen->setOrchard($orchard);
+
+    $em=$this->getDoctrine()->getManager();
+    $em->persist($imagen);
+    $em->flush();
+
+   return new JsonResponse($imagen->getId());
+  }
+
+  public function uploadImageAction(Request $request){
+    ini_set('memory_limit', '-1');
+    //extraer id_orchard
+    $id_orchard=$request->cookies->get('ID_ORCHARD');
+
+    //extraer json con imagenes
+    //$imagenes=$request->get("imgs");
+    $imagenes=json_decode($request->getContent());
+    //print_r($imagenes);
+    //return new JsonResponse($imagenes[0]->des);
+
+    $em=$this->getDoctrine()->getManager();
+
+    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
+if (count($imagenes)>0) {
+  foreach ($imagenes as $img) {
+      $imagen=new Image();
+      $imagen->setSrc($img->src);
+      $imagen->setDescription($img->des);
+
+      $imagen->setOrchard($orchard);
+
+      $em->persist($imagen);
+      $em->flush();
+    }
+  }
+    //update step orchard
+    if($orchard->getStep()<14){
+      $orchard->setstep(14);
+      $em->persist($orchard);
+      $em->flush();
+    }
+
+return new JsonResponse(14);
+
   }
 }

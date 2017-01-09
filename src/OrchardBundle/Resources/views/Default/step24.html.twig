@@ -1,0 +1,70 @@
+{% extends '::step-base.html.twig' %}
+
+{% block stylesheets %}
+<!-- css step 2.4 carga pdf-->
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/set4.css') }}" />
+{% endblock %}
+{% block body %}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
+    <h1 class="display-3">Paso 2.4</h1>
+
+    <form>
+      <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
+        <p><h4>Normas del huerto</h4></p>
+        <div class="cuadro-subidas-pdf" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <input type="file" id="fileinput" multiple="multiple" />
+        </div>
+        <h3 class="centrar-o">o</h3>
+        <p>Quiero compartir el archivo</p>
+        <input type="text" class="form-control required" placeholder="Escribe el link">
+</div>
+        <div class="fixed-buttons row">
+          <button id="btn-atras"type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+          <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Ahora no</button>
+        </div>
+
+        <input type="text" id="Step" hidden="hidden" value="14">
+      </form>
+</div>
+
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right-pdf">
+    <h3 class="display-3">Sube un PDF con las normas de tu huerto</h3>
+    <h4 class="display-5">Algunos links interesantes sobre normas de huertos:</h4><br><br>
+    <h5>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</h5>
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('js/images.js')}}" charset="utf-8"></script>
+<script type="text/javascript">
+
+$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 60 + '%','aria-valuenow': 60}, {duration: 400, easing: 'linear'});
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  console.log("dragevent");
+  ev.dataTransfer.setData("text", 'gallery');
+}
+
+function drop(ev) {
+  console.log('dropevent');
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  var f = ev.dataTransfer.files;
+  //var file;
+  console.log(ev.dataTransfer.files);
+
+  if (f) {
+    //[].forEach.call(files, readAndPreview);
+    [].forEach.call(f, previewImage);
+  }
+}
+</script>
+
+{% endblock %}
