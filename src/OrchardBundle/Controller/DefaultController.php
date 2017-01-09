@@ -159,6 +159,15 @@ class DefaultController extends Controller
         return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
         break;
       }
+      case 25:
+      if( $step <= $step_orchard) {
+        return $this->render('OrchardBundle:Default:step25.html.twig', array('orchard' => $orchard));
+        break;
+      }else{
+        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
+        break;
+      }
+
 
       default:
       return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
