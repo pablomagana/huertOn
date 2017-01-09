@@ -22,7 +22,21 @@
           </div>
           <div id="gallery">
           </div>
-
+          {% if images is defined %}
+            <h1>Imagenes subidas</h1>
+            <div class="upload">
+          {% for img in images %}
+            <div class="thumbnail">
+              <span class="fa fa-times-circle topRight deleteImage" id="{{img.id}}"></span>
+              <img  src="{{img.src}}" alt="{{img.description}}">
+              <span>100</span>
+              <span class="descripcion">{{img.description}}</span>
+              <a class="editDes">editar descripción</a>
+              <textarea hidden type="text" placeholder="Describe la imagene" class="descripcion" maxlength="100" onkeyup="textAreaAdjust(this)"></textarea>
+            </div>
+          {% endfor %}
+          </div>
+        {% endif %}
 
         </div>
       </div>
@@ -95,8 +109,9 @@ $('#btn-siguiente, #btn-save-exit').on('click', function() {
         console.log(step);
         window.location.href = '/orchard/step/'+step;
       },
-      error: function(){
+      error: function(error){
         alert("error al añadir imagenes. ajax sendAllImages");
+        console.log(error);
         $("#loading, #loading-text").fadeOut("slow", function() {
           $("#loading-text").text("Guardado").fadeIn('slow');
         });

@@ -84,7 +84,11 @@ class DefaultController extends Controller
       }
       case 13:
       if( $step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step13.html.twig', array('orchard' => $orchard));
+        //recojo todas las imagenes relacionadas con el huerto que tengo guardado en la cookie
+        $repository = $this->getDoctrine()->getRepository('OrchardBundle:Image');
+        $images = $repository->findByOrchard($orchard);
+
+        return $this->render('OrchardBundle:Default:step13.html.twig', array('orchard' => $orchard,"images" =>$images));
         break;
       }else{
         return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
@@ -347,8 +351,6 @@ if (count($imagenes)>0) {
     }
 
 return new JsonResponse(14);
-
-
 
   }
 }

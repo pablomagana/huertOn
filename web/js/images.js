@@ -8,7 +8,7 @@ function previewImage(file) {
         throw "El archivo debe ser una imagen";
     }
     //añado al fichero una nueva propiedad descripción
-    file.des="nada";
+    file.des="";
     file.id=id++;
 
     var lector = new FileReader();
@@ -57,10 +57,10 @@ function createImageElement(file){
   var del = document.createElement("span");
   var contador = document.createElement("span");
   var des = document.createElement("textarea");
-  var name = document.createElement("p");
+  //var name = document.createElement("p");
 
-  name.append(document.createTextNode(file.name));
-  name.setAttribute("title",file.name);
+  //name.append(document.createTextNode(file.name));
+  //name.setAttribute("title",file.name);
 
   contador.append('100');
 
@@ -87,11 +87,11 @@ function createImageElement(file){
 
   thumb.appendChild(del);
   thumb.appendChild(img);
-  thumb.appendChild(name);
+  //thumb.appendChild(name);
   thumb.appendChild(contador);
   thumb.appendChild(des);
-
-  gallery.appendChild(thumb);
+//añade la imagen al principio del div, antes que todas las imagenes
+  gallery.prepend(thumb);
 
   // Using FileReader to display the image content
   var reader = new FileReader();

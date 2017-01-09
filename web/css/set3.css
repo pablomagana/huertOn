@@ -16,7 +16,7 @@
     vertical-align: bottom;
     overflow:hidden;
 }
-#gallery .thumbnail img{
+.thumbnail img{
     width:150px;
     height: 150px;
     border-radius: 10px;
@@ -69,4 +69,7 @@
   top:0px;
   left:0px;
   cursor:pointer;
+}
+.editDes{
+  display: inline;
 }
