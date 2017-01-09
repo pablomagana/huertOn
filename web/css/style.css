@@ -19,7 +19,9 @@ html,body,.map,.step-1,.steps {
 .display-3 {
   font-size: 2.5rem;
 }
-
+.stepNone{
+  color: rgb(175, 175, 175);
+}
 .display-4 {
   font-size: 2rem;
   font-weight: 400;
@@ -50,9 +52,10 @@ html,body,.map,.step-1,.steps {
   height: 100%;
   z-index: -9999;
 }
-h4 {
+h6 {
   display: inline;
-  margin-right: 50%;
+  margin-right: 60%;
+  color: rgb(175, 175, 175);
 }
 .fa-check{
   color: green;
@@ -64,6 +67,7 @@ h4 {
 }
 small {
   color: rgb(175, 175, 175);
+  font-size: 30px;
 }
 .btn-steps {
   margin-top: 10px;
