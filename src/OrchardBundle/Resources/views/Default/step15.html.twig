@@ -35,7 +35,7 @@
 				<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" disabled="disabled">Siguiente</button>
 			</div>
 
-			<input type="text" id="Step" hidden="hidden" value="13">
+			<input type="text" id="Step" hidden="hidden" value="16">
 
 		</form>
 
@@ -59,25 +59,14 @@
 		//contador de caracteres restantes
 			$( document ).ready(function() {
 				var maxLength = 500;
-				$('#start').keyup(function() {
-				  var lengthStart = $(this).val().length;
-				  var lengthStart = maxLength-lengthStart;
-				  $('#start-chars').text(lengthStart);
-					if(lengthStart == 0) {
-						$(this).addClass( "ta-maxlength" );
+				$('textarea').keyup(function() {
+					var length = $(this).val().length;
+					var length = maxLength-length;
+					$(this).prev().text(length);
+					if(length == 0) {
+							$(this).addClass( "ta-maxlength" );
 					}else {
-						$(this).removeClass( "ta-maxlength" );
-					}
-				});
-
-				$('#governance').keyup(function() {
-				  var lengthGov = $(this).val().length;
-				  var lengthGov = maxLength-lengthGov;
-				  $('#governance-chars').text(lengthGov);
-					if(lengthGov == 0) {
-						$(this).addClass( "ta-maxlength" );
-					}else {
-						$(this).removeClass( "ta-maxlength" );
+							$(this).removeClass( "ta-maxlength" );
 					}
 				});
 			});
