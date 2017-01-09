@@ -1,6 +1,5 @@
 {% extends '::step-base.html.twig' %}
 
-<<<<<<< HEAD
 {% block stylesheets %}
 <!-- css step 2.4 carga pdf-->
 <link rel="stylesheet" type="text/css" href="{{ asset('/css/set4.css') }}" />
@@ -35,50 +34,10 @@
     <h4 class="display-5">Algunos links interesantes sobre normas de huertos:</h4><br><br>
     <h5>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</h5>
   </div>
-=======
-{% block body %}
-
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
-		<h1 class="display-3">Paso 2.4</h1>
-
-		<form>
-			<div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
-				<label><h4>Como inscribirse en tu huerto</h4></label><br>
-
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<label for="ProjectStart">Paso <span id="inscription-step">1</span></label><span id="start-chars">200</span>
-						<textarea rows="4" cols="50" class="form-control" id="ProjectStart"  value="{{ orchard.projectStart }}" placeholder="El primer paso para inscribirte al huerto es..." maxlength="200"></textarea>
-					</div>
-				</div>
-				<br>
-				<div class="new-step"> Añadir un nuevo paso. <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></div>
-			</div>
-
-			<div class="fixed-buttons row">
-				<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
-				<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" disabled="disabled">Siguiente</button>
-			</div>
-
-			<input type="text" id="Step" hidden="hidden" value="25">
-
-		</form>
-
-
-	</div>
-
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right">
-		<img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
-	</div>
-
-</div>
->>>>>>> origin/develop
 
 {% endblock %}
 
 {% block javascripts %}
-<<<<<<< HEAD
 <script src="{{asset('js/images.js')}}" charset="utf-8"></script>
 <script type="text/javascript">
 
@@ -108,35 +67,4 @@ function drop(ev) {
 }
 </script>
 
-=======
-	<script type="text/javascript">
-		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
-	</script>
-
-	<script type="text/javascript">
-		//contador de caracteres restantes
-			$( document ).ready(function() {
-				var maxLength = 200;
-				$('textarea').keyup(function() {
-					var length = $(this).val().length;
-					var length = maxLength-length;
-					$(this).prev().text(length);
-					if(length == 0) {
-							$(this).addClass( "ta-maxlength" );
-					}else {
-							$(this).removeClass( "ta-maxlength" );
-					}
-				});
-			});
-	</script>
-
-	<script type="text/javascript">
-		//add new step on click
-			$( document ).ready(function() {
-				$('.new-step').click(function() {
-
-				});
-			});
-	</script>
->>>>>>> origin/develop
 {% endblock %}
