@@ -77,13 +77,13 @@
 
   <script type="text/javascript">
 
+  if($('.required').length === 0) {
+    $("#btn-siguiente").html('Ahora no');
+  }
+
   window.onbeforeunload = function() {
     localStorage.setItem('lastProgress', $('#progressbar').val());
   }
-
-  // $(function() {
-  //   validateForm();
-  // });
 
   $('form :input:not(:checkbox):not(:button)').focusin(function() {
     var este = $(this).attr('id');
