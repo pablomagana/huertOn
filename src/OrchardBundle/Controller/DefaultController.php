@@ -10,7 +10,6 @@ use OrchardBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
-use UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -18,15 +17,15 @@ class DefaultController extends Controller
   //Recibe el id del huerto que se está creando mediante el método GET (el número del paso al que se redirigirá se gestiona según este id)
   public function indexAction(Request $request)
   {
-    //Recogemos el usuario para mostrar el mensaje de bienvenida
-    //Id de usuario a piñón hasta crear login y registro
-    $id_user = 1;
-    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-    $userName = '';
-
-    if($user != null) {
-      $userName = $user->getName();
-    }
+    // //Recogemos el usuario para mostrar el mensaje de bienvenida
+    // //Id de usuario a piñón hasta crear login y registro
+    // $id_user = 1;
+    // $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+    $userName = 'David';
+    //
+    // if($user != null) {
+    //   $userName = $user->getName();
+    // }
 
     $step_orchard = 0;
 
@@ -233,13 +232,13 @@ class DefaultController extends Controller
   public function sendAction($orchard_type)
   {
 
-    $id_user = 1;
-    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-    $userName = '';
-
-    if($user != null) {
-      $userName = $user->getName();
-    }
+    // $id_user = 1;
+    // $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+    $userName = 'David';
+    //
+    // if($user != null) {
+    //   $userName = $user->getName();
+    // }
 
     $message = \Swift_Message::newInstance()
         ->setContentType("text/html")
@@ -261,13 +260,13 @@ class DefaultController extends Controller
   public function suggestAction(Request $request, $orchard_type, $accept)
   {
 
-    $id_user = 1;
-    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-    $userName = '';
-
-    if($user != null) {
-      $userName = $user->getName();
-    }
+    // $id_user = 1;
+    // $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+    $userName = 'David';
+    //
+    // if($user != null) {
+    //   $userName = $user->getName();
+    // }
 
     $cookies = $request->cookies;
 
