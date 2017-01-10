@@ -17,7 +17,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clone-inside">
 						<div class="1">
-							<label for="ProjectStart">Paso 1</label><span id="start-chars">200</span>
+							<label for="ProjectStart">Paso 1</label>
 							<textarea rows="4" cols="50" class="form-control" id="ProjectStart"  value="{{ orchard.projectStart }}" placeholder="El primer paso para inscribirte al huerto es..." maxlength="200"></textarea>
 							<br>
 						</div>
@@ -45,49 +45,25 @@
 		<img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
 	</div>
 
-        <input type="text" id="Step" hidden="hidden" value="14">
-      </form>
+</form>
 </div>
-
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right-pdf">
-    <h3 class="display-3">Sube un PDF con las normas de tu huerto</h3>
-    <h4 class="display-5">Algunos links interesantes sobre normas de huertos:</h4><br><br>
-    <h5>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</h5>
-  </div>
 
 {% endblock %}
 
 {% block javascripts %}
-	<script type="text/javascript">
-		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
-	</script>
+<script type="text/javascript">
+$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
+</script>
 
-	<script type="text/javascript">
-		//contador de caracteres restantes
-			$( document ).ready(function() {
-				var maxLength = 200;
-				$('textarea').keyup(function() {
-					var length = $(this).val().length;
-					var length = maxLength-length;
-					$(this).prev().text(length);
-					if(length == 0) {
-							$(this).addClass( "ta-maxlength" );
-					}else {
-							$(this).removeClass( "ta-maxlength" );
-					}
-				});
-			});
-	</script>
-
-	<script type="text/javascript">
-		//add new step on click
-			$( document ).ready(function() {
-				var inscriptionStep = 2;
-				$('.new-step').click(function() {
-					$( ".1" ).clone().removeClass( "1" ).addClass(""+inscriptionStep).appendTo( ".clone-inside" );
-					$( "."+inscriptionStep+" > label" ).text("Paso "+inscriptionStep);
-					inscriptionStep++;
-				});
-			});
-	</script>
+<script type="text/javascript">
+//add new step on click
+$( document ).ready(function() {
+	var inscriptionStep = 2;
+	$('.new-step').click(function() {
+		$( ".1" ).clone().removeClass( "1" ).addClass(""+inscriptionStep).appendTo( ".clone-inside" );
+		$( "."+inscriptionStep+" > label" ).text("Paso "+inscriptionStep);
+		inscriptionStep++;
+	});
+});
+</script>
 {% endblock %}
