@@ -224,15 +224,6 @@ class Orchard
       */
      protected $service;
 
-
-     /**
-      * One Orchard has Many inscription steps.
-      * @ORM\OneToMany(targetEntity="InscriptionStep", mappedBy="orchard_id")
-      */
-     private $inscriptionStep;
-
-
-
      /**
       * Get service
       *

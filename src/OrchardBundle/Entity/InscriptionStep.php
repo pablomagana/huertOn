@@ -36,15 +36,6 @@ class InscriptionStep
     private $text;
 
     /**
-     * Many steps have One Orchard.
-     * @ORM\ManyToOne(targetEntity="Orchard", inversedBy="inscriptionStep")
-     * @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
-     */
-    private $orchard;
-
-
-
-    /**
      * Get id
      *
      * @return integer
