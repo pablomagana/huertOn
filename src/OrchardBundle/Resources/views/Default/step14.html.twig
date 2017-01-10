@@ -12,15 +12,13 @@
 
 				<div class="row">
 					{% for orchard_type in orchard_types %}
-
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<label class="custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input">
-							<span class="custom-control-indicator"></span>
-							<span class="custom-control-description">{{ orchard_type.name }}</span>
-						</label>
-					</div>
-
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input">
+								<span class="custom-control-indicator"></span>
+								<span class="custom-control-description">{{ orchard_type.name }}</span>
+							</label>
+						</div>
 					{% endfor %}
 				</div>
 
@@ -38,6 +36,11 @@
 						<button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>Enviar</button>
 					</div>
 				</div>
+				<br><br>
+
+
+				<div class="hidden-md-up not-visible pull-right" data-toggle="modal" data-target="#modalDescripciones"><i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i></div>
+
 
 			</div>
 
@@ -63,8 +66,7 @@
 						<p>Cuando estudiemos tu sugerencia te enviaremos un email con el resultado. <p>&#x1f609</p></p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
@@ -78,6 +80,20 @@
 
 </div>
 
+
+<!--modal-->
+<div class="modal fade" id="modalDescripciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<p>Aquí irán las decripciones de cada huerto</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}
 
 
@@ -102,20 +118,20 @@ $(document).ready(function () {
 				},
 				error: function(jqXHR, exception) {
 					if (jqXHR.status === 0) {
-								alert('Not connect.\n Verify Network.');
-						} else if (jqXHR.status == 404) {
-								alert('Requested page not found. [404]');
-						} else if (jqXHR.status == 500) {
-								alert('Internal Server Error [500].');
-						} else if (exception === 'parsererror') {
-								alert('Requested JSON parse failed.');
-						} else if (exception === 'timeout') {
-								alert('Time out error.');
-						} else if (exception === 'abort') {
-								alert('Ajax request aborted.');
-						} else {
-								alert('Uncaught Error.\n' + jqXHR.responseText);
-						}
+						alert('Not connect.\n Verify Network.');
+					} else if (jqXHR.status == 404) {
+						alert('Requested page not found. [404]');
+					} else if (jqXHR.status == 500) {
+						alert('Internal Server Error [500].');
+					} else if (exception === 'parsererror') {
+						alert('Requested JSON parse failed.');
+					} else if (exception === 'timeout') {
+						alert('Time out error.');
+					} else if (exception === 'abort') {
+						alert('Ajax request aborted.');
+					} else {
+						alert('Uncaught Error.\n' + jqXHR.responseText);
+					}
 					console.log('error');
 				}
 			});
@@ -128,32 +144,32 @@ $(document).ready(function () {
 		$('#btn-enviar').on('click', function() {
 			if($('#Type').val()) {
 				$.ajax({
-	        type: 'POST',
-	        url: '/orchard/send/'+$('#Type').val(),
-	        data: form,
-	        success: function(data) {
-	          console.log('success');
+					type: 'POST',
+					url: '/orchard/send/'+$('#Type').val(),
+					data: form,
+					success: function(data) {
+						console.log('success');
 						$('#myModal').modal('show');
-	        },
-	        error: function(jqXHR, exception) {
-	          if (jqXHR.status === 0) {
-	                alert('Not connect.\n Verify Network.');
-	            } else if (jqXHR.status == 404) {
-	                alert('Requested page not found. [404]');
-	            } else if (jqXHR.status == 500) {
-	                alert('Internal Server Error [500].');
-	            } else if (exception === 'parsererror') {
-	                alert('Requested JSON parse failed.');
-	            } else if (exception === 'timeout') {
-	                alert('Time out error.');
-	            } else if (exception === 'abort') {
-	                alert('Ajax request aborted.');
-	            } else {
-	                alert('Uncaught Error.\n' + jqXHR.responseText);
-	            }
-	          console.log('error');
-	        }
-	      });
+					},
+					error: function(jqXHR, exception) {
+						if (jqXHR.status === 0) {
+							alert('Not connect.\n Verify Network.');
+						} else if (jqXHR.status == 404) {
+							alert('Requested page not found. [404]');
+						} else if (jqXHR.status == 500) {
+							alert('Internal Server Error [500].');
+						} else if (exception === 'parsererror') {
+							alert('Requested JSON parse failed.');
+						} else if (exception === 'timeout') {
+							alert('Time out error.');
+						} else if (exception === 'abort') {
+							alert('Ajax request aborted.');
+						} else {
+							alert('Uncaught Error.\n' + jqXHR.responseText);
+						}
+						console.log('error');
+					}
+				});
 			}
 			return false;
 		});
