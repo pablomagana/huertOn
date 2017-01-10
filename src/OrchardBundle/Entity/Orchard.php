@@ -241,6 +241,15 @@ class Orchard
       */
      protected $service;
 
+
+     /**
+      * One Orchard has Many inscription steps.
+      * @ORM\OneToMany(targetEntity="InscriptionStep", mappedBy="orchard_id")
+      */
+     private $inscriptionStep;
+
+
+
      /**
       * Get service
       *
@@ -612,6 +621,8 @@ class Orchard
       $this->activity = new ArrayCollection();
       $this->participate = new ArrayCollection();
       $this->service = new ArrayCollection();
+      $this->inscriptionStep = new ArrayCollection();
+
     }
 
     /**
@@ -886,7 +897,7 @@ class Orchard
     public function addImage(\OrchardBundle\Entity\Image $image)
     {
         $this->images[] = $image;
-    
+
         return $this;
     }
 
@@ -920,7 +931,7 @@ class Orchard
     public function addType(\OrchardBundle\Entity\OrchardType $type)
     {
         $this->type[] = $type;
-    
+
         return $this;
     }
 
@@ -944,7 +955,7 @@ class Orchard
     public function addActivity(\OrchardBundle\Entity\OrchardActivity $activity)
     {
         $this->activity[] = $activity;
-    
+
         return $this;
     }
 
@@ -968,7 +979,7 @@ class Orchard
     public function addParticipate(\OrchardBundle\Entity\OrchardParticipate $participate)
     {
         $this->participate[] = $participate;
-    
+
         return $this;
     }
 
@@ -992,7 +1003,7 @@ class Orchard
     public function addService(\OrchardBundle\Entity\OrchardService $service)
     {
         $this->service[] = $service;
-    
+
         return $this;
     }
 

@@ -17,8 +17,8 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clone-inside">
 						<div class="1">
-							<label for="ProjectStart">Paso 1</label>
-							<textarea rows="4" cols="50" class="form-control" id="ProjectStart"  value="{{ orchard.projectStart }}" placeholder="El primer paso para inscribirte al huerto es..." maxlength="200"></textarea>
+							<label for="inscription-step">Paso 1</label>
+							<textarea rows="4" cols="50" class="form-control" id="inscription-step" value="{{ orchard.projectStart }}" maxlength="200"></textarea>
 							<br>
 						</div>
 					</div>
@@ -27,6 +27,9 @@
 
 
 				<div class="new-step">Añadir un nuevo paso. <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></div>
+				<br><br>
+					<div class="hidden-md-up not-visible pull-right" data-toggle="modal" data-target="#myModal">¿Quieres ver un ejemplo?</div>
+
 			</div>
 
 			<div class="fixed-buttons row">
@@ -48,6 +51,26 @@
 </form>
 </div>
 
+<!--modal-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<p>Paso 1: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</p>
+				<p>Paso 2: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</p>
+				<p>Paso 3: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</p>
+				<p>Paso 4: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--modal-->
+
 {% endblock %}
 
 {% block javascripts %}
@@ -64,6 +87,7 @@ $( document ).ready(function() {
 		$( "."+inscriptionStep+" > label" ).text("Paso "+inscriptionStep);
 		inscriptionStep++;
 	});
+
 });
 </script>
 {% endblock %}
