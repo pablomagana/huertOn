@@ -86,23 +86,6 @@ class Orchard
      *
      */
     private $step;
-    /**
-     * @var \Doctrine\Common\Collections\Collection|UserBundle\Entity\User[]
-     *
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", inversedBy="orchards")
-     * @ORM\JoinTable(
-     *  name="orchard_users",
-     *  joinColumns={
-     *      @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
-     *  },
-     *  inverseJoinColumns={
-     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *  }
-     * )
-     *
-     */
-    protected $users;
-
 
     /**
      * @var string
@@ -560,17 +543,6 @@ class Orchard
     }
 
     /**
-     * Get users
-     *
-     * @return string
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
-
-    /**
      * Set step
      *
      * @param string $step
@@ -615,7 +587,6 @@ class Orchard
      */
     public function __construct()
     {
-      $this->users= new ArrayCollection();
       $this->type= new ArrayCollection();
       $this->images = new ArrayCollection();
       $this->activity = new ArrayCollection();
@@ -623,44 +594,6 @@ class Orchard
       $this->service = new ArrayCollection();
       $this->inscriptionStep = new ArrayCollection();
 
-    }
-
-    /**
-     * @param User $users
-     */
-    public function addUserGroup(User $user)
-    {
-        if ($this->users->contains($user)) {
-            return;
-        }
-        $this->users->add($user);
-        $user->addUser($this);
-    }
-
-    /**
-     * @param User $user
-     */
-    public function removeUser(User $user)
-    {
-        if (!$this->users->contains($user)) {
-            return;
-        }
-        $this->users->removeElement($user);
-        $user->removeUser($this);
-    }
-
-    /**
-     * Add user
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return Orchard
-     */
-    public function addUser(\UserBundle\Entity\User $user)
-    {
-        $this->users[] = $user;
-
-        return $this;
     }
 
     /**
