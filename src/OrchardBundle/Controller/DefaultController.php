@@ -386,7 +386,7 @@ return new JsonResponse(14);
     if($idImage!=null){
     $em=$this->getDoctrine()->getManager();
     $image=$em->getRepository("OrchardBundle:Image")->findOneById($idImage);
-    if(!image){
+    if(!$image){
       return new JsonResponse("image not found width id"+$idImage);
     }
 
