@@ -27,12 +27,17 @@
             <div class="upload">
           {% for img in images %}
             <div class="thumbnail">
-              <span class="fa fa-times-circle topRight deleteImage" id="{{img.id}}"></span>
+              <span class="fa fa-times-circle topRight deleteImage" id="{{img.id}}" onclick="deleteUpload(this)"></span>
               <img  src="{{img.src}}" alt="{{img.description}}">
-              <span>100</span>
+
               <span class="descripcion">{{img.description}}</span>
-              <a class="editDes">editar descripción</a>
-              <textarea hidden type="text" placeholder="Describe la imagene" class="descripcion" maxlength="100" onkeyup="textAreaAdjust(this)"></textarea>
+              <a class="editDes" onclick="mostrarEditor(this)">editar descripción</a>
+              <div class="edi" hidden="hidden">
+                <span>{{100 - img.description|length}}</span>
+                <textarea type="text" placeholder="Describe la imagene" class="descripcion" maxlength="100" onkeyup="textAreaAdjust(this)">{{img.description}}</textarea>
+                <a onclick="sendNewDescription($(this).prev().val(),{{img.id}})">guardar</a>
+              </div>
+
             </div>
           {% endfor %}
           </div>
@@ -105,13 +110,27 @@ $('#btn-siguiente, #btn-save-exit').on('click', function() {
         console.log(step);
         window.location.href = '/orchard/step/'+step;
       },
-      error: function(error){
-        alert("error al añadir imagenes. ajax sendAllImages");
-        console.log(error);
-        $("#loading, #loading-text").fadeOut("slow", function() {
-          $("#loading-text").text("Guardado").fadeIn('slow');
-        });
-      }
+      error: function(jqXHR, exception) {
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
+          });
+          if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+          console.log('error');
+        }
     });
 });
 

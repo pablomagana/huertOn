@@ -148,3 +148,31 @@ function removeItemWithId(array,id) {
     return obj.id !== parseInt(id);
   });
 }
+
+function mostrarEditor(element) {
+  console.log("dentro del metodo");
+  console.log($(element).parent().last());
+  $(element).parent().children().last().removeAttr("hidden");
+}
+
+function deleteUpload(element) {
+  deleteFromServer($(element).attr("id"),element);
+}
+function deleteFromServer(id,element) {
+  $.ajax({
+    type: "POST",
+    url:"/orchard/images/delete/"+id,
+     success: function(){$(element).parent().remove();console.log($(element).attr("id"));},
+     error: function(){console.log("imagen no borrada");}
+   });
+}
+
+function sendNewDescription(description,id) {
+  $.ajax({
+    type: "POST",
+    url:"/orchard/images/modify/"+id,
+    data:{description},
+     success: function(){alert("descripción modificada")},
+     error: function(){console.log("descripcion NO modificada");}
+   });
+}

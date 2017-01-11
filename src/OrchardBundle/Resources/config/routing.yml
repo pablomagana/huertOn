@@ -37,5 +37,9 @@ orchard_uploadImages:
     defaults: { _controller: OrchardBundle:Default:uploadImage}
 
 orchard_deleteImages:
-    path:     /images/delete
-    defaults: { _controller: OrchardBundle:Default:readImage}
+    path:     /images/delete/{idImage}
+    defaults: { _controller: OrchardBundle:Default:deleteImage,idImage:null}
+
+orchard_modifyImages:
+    path:     /images/modify/{idImage}
+    defaults: { _controller: OrchardBundle:Default:modifyImage,idImage:null}
