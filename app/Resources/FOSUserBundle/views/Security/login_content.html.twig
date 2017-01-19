@@ -1,0 +1,22 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    {% if csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+
+    <h4 style="text-align: center">Inicia sesión para participar en un huerto urbano o inscribirte a una de sus actividades.</h4>
+
+    <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'security.login.username'|trans }}" required="required" />
+
+    <input class="form-control" type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}"/>
+
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+    <button type="submit" id="_submit" class="btn btn-primary" name="_submit">{{ 'security.login.submit'|trans }}</button>
+</form>
