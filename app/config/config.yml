@@ -74,6 +74,7 @@ fos_user:
     user_class: UserBundle\Entity\User
     registration:
         confirmation:
+            enabled: true
             from_email:
                 address:        registration@example.com
                 sender_name:    Demo Registration
