@@ -13,34 +13,57 @@
 		<form>
 			<div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
 				<label><h4>Como inscribirse en tu huerto</h4></label><br>
-
+				<h5>Indique paso a paso el proceso que deberá realizar un urbanita para inscribirse en su huerto.</h5>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 clone-inside">
-						<div class="1">
-							<label for="inscription-step">Paso 1</label>
-							<textarea rows="4" cols="50" class="form-control" id="inscription-step" value="{{ orchard.projectStart }}" maxlength="200"></textarea>
+						<!--base para copiar-->
+						<li class="base" style="display: none;">
 							<br>
-						</div>
+							<textarea rows="4" cols="50" class="form-control" id="inscription-step" value="{{ orchard.projectStart }}" maxlength="200"></textarea>
+							<div class="text-xs-right">
+								<u class="remove">Eliminar este paso</u>
+							</div>
+							<br>
+						</li>
+						<!--base para copiar-->
+
+						<ol>
+							<li>
+								<br>
+								<textarea rows="4" cols="50" class="form-control" id="inscription-step" value="{{ orchard.projectStart }}" maxlength="200"></textarea>
+								<div class="text-xs-right">
+									<u class="remove">Eliminar este paso</u>
+								</div>
+								<br>
+							</li>
+							<!--	AQUI ABAJO SE IRÁN AÑADIENDO LOS INPUTS...-->
+
+
+						</ol>
 					</div>
-
 				</div>
-
-
-				<div class="new-step">Añadir un nuevo paso. <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></div>
+				<div class="add">Añadir un nuevo paso. <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></div>
 				<br><br>
-					<div class="hidden-md-up not-visible pull-right" data-toggle="modal" data-target="#myModal">¿Quieres ver un ejemplo?</div>
+
+				<div class="hidden-md-up not-visible pull-right" data-toggle="modal" data-target="#myModal">¿Quieres ver un ejemplo?</div>
 
 			</div>
 
 			<input type="text" id="Step" hidden="hidden" value="25">
 
 		</form>
-
-
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right">
-		<img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
+	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right" style="padding: 150px;">
+
+		<h4>Explicaselo por pasos y con la info necesaria para que lo haga lo más ágil posible</h4> <br><br>
+
+		<h5>Paso 1: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</h5><br>
+		<h5>Paso 2: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</h5><br>
+		<h5>Paso 3: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</h5><br>
+		<h5>Paso 4: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</h5>
+
+
 	</div>
 
 </form>
@@ -57,15 +80,12 @@
 				<p>Paso 4: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 			</div>
 		</div>
 	</div>
 </div>
-
 <!--modal-->
-
 {% endblock %}
 
 {% block javascripts %}
@@ -74,13 +94,19 @@ $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 10
 </script>
 
 <script type="text/javascript">
-//add new step on click
 $( document ).ready(function() {
-	var inscriptionStep = 2;
-	$('.new-step').click(function() {
-		$( ".1" ).clone().removeClass( "1" ).addClass(""+inscriptionStep).appendTo( ".clone-inside" );
-		$( "."+inscriptionStep+" > label" ).text("Paso "+inscriptionStep);
-		inscriptionStep++;
+	//NUEVO PASO
+	$('.add').click(function() {
+		$( ".base" ).clone().removeAttr( "class style" ).appendTo( "ol" );
+		$("u.remove").on( "click", function() {
+			$(this).parent().parent().remove();
+		});
+
+	});
+
+	//ELIMINAR PASO
+	$("u.remove").on( "click", function() {
+		$(this).parent().parent().remove();
 	});
 
 });

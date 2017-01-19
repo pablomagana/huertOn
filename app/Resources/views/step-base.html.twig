@@ -14,6 +14,8 @@
   <!--Fksjdahfkjlasdhflksjadhflkjsadfhflkjsdhaflkjashdf-->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+  <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
+
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
@@ -126,6 +128,8 @@
       form['id'] = $('#orchard-id').val();
       console.log('Este és el formulario'+form);
 
+
+      //FUNCION BOTON SIGUIENTE
       $.ajax({
         type: 'POST',
         url: '/orchard/insert',
@@ -165,6 +169,7 @@
 
   });
 
+  //FUNCION BOTON ATRAS
   $('#btn-atras').on('click', function() {
     $("#loading, #loading-text").fadeIn("slow");
     $("form :input:not(:checkbox):not(:button)").each(function(){
@@ -174,6 +179,7 @@
 
     form['id'] = $('#orchard-id').val();
     console.log('Este és el formulario'+form);
+
 
     $.ajax({
       type: 'POST',
