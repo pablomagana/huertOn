@@ -16,7 +16,12 @@
 							<label class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input">
 								<span class="custom-control-indicator"></span>
-								<span class="custom-control-description type-name">{{ orchard_type.name }}</span>
+
+								<div class="text-right">
+									<span class="custom-control-description type-name">{{ orchard_type.name }}</span>
+									<span class="type-description" style="display: none;">{{ orchard_type.description }}</span>
+								</div>
+
 							</label>
 						</div>
 					{% endfor %}
@@ -175,13 +180,13 @@ $(document).ready(function () {
 	//MOSTRAR TEXTO A LA DERECHA
 	$('span.type-name').hover(function() {
 		$( "#show-type" ).html($(this).text());
-		$( "#show-description" ).html("aqui irá la descripcion de "+$(this).text());
+
+		$( '#show-description' ).html($(this).next().text());
+
 	}, function(){
 			$( "#show-type" ).html("Tipo de huerto");
 			$( "#show-description" ).html("Situa el puntero sobre cualquier tipo de huerto para mostrar más información de cada uno.");
   });
-
-
 
 
 

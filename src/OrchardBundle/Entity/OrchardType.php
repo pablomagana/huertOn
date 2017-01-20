@@ -30,6 +30,14 @@ class OrchardType
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
+
+    /**
      * @var \Doctrine\Common\Collections\Collection|Orchard[]
      *
      * @ORM\ManyToMany(targetEntity="Orchard", mappedBy="type")
@@ -116,4 +124,30 @@ class OrchardType
     {
         return $this->orchards;
     }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return OrchardType
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+
 }
