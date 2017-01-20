@@ -414,4 +414,15 @@ return new JsonResponse(14);
     return new JsonResponse("ko");
   }
   }
+
+  public function uploadFileAction(Request $request)
+  {
+    try {
+      $file=$request->files->get('normas');
+    } catch (Exception $e) {
+
+    }
+    return new JsonResponse(25);
+
+  }
 }
