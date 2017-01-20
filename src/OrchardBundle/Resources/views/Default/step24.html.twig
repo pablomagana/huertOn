@@ -15,7 +15,7 @@
     <form>
       <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
         <p><h4>Normas del huerto</h4></p>
-        <div class="cuadro-subidas-pdf" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div class="cuadro-subidas-pdf col-xs-12 col-sm-12 col-md-12 col-lg-12" ondrop="drop(event)" ondragover="allowDrop(event)">
           <input type="file" id="fileinput" accept=".pdf,.docx,.txt,.doc,.odf" hidden="hidden"/>
           <div class="more" onclick="$('#fileinput').click();">
             <p>Añade o arrastra imagenes aqui</p>
@@ -76,7 +76,7 @@ $('#btn-siguiente, #btn-save-exit').on('click', function() {
     $.ajax({
       type: "POST",
       contentType: false,
-      url:"/orchard/file/upload",
+      url:"/orchard/files/upload",
       data: JSON.stringify(imagenes),
       success: function(step){
         console.log(step);
