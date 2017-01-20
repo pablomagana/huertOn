@@ -88,7 +88,16 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-body">
-				<p>Aquí irán las decripciones de cada huerto</p>
+				<!--mostrar tipos + descripciones-->
+				<ul>
+				{% for orchard_type in orchard_types %}
+						<li>
+							<b>{{ orchard_type.name }}</b>:<br>
+							<span>{{ orchard_type.description }}</span>
+						</li>
+
+				{% endfor %}
+			</ul>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
