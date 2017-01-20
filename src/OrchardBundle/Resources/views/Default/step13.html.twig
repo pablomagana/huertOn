@@ -16,13 +16,13 @@
       <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
         <label><h4>Sube alguna imagen para que conozcan un poco tu huerto</h4></label><br>
         <div class="cuadro-subidas" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <input hidden type="file" id="fileinput" multiple="multiple" accept="image/*" />
-          <div class="more" onclick="$('#fileinput').click();">
+          <input hidden type="file" id="imageinput" multiple="multiple" accept="image/*" />
+          <div class="more" onclick="$('#imageinput').click();">
             <p>Añade o arrastra imagenes aqui</p>
           </div>
           <div id="gallery">
           </div>
-          {% if images is defined %}
+          {% if images is defined and images|length > 0 %}
             <h1>Imagenes subidas</h1>
             <div class="upload">
           {% for img in images %}
@@ -70,7 +70,7 @@ var id = 0;
 var maxfiles = 10;
 console.log(imagenes);
 //cargar imagenes con click
-var filesinput = document.querySelector('#fileinput');
+var filesinput = document.querySelector('#imageinput');
 filesinput.addEventListener('change', function () {
   console.log("detectando cambios en input");
   $("#loading-images").fadeIn("slow");

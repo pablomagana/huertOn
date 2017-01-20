@@ -43,3 +43,8 @@ orchard_deleteImages:
 orchard_modifyImages:
     path:     /images/modify/{idImage}
     defaults: { _controller: OrchardBundle:Default:modifyImage,idImage:null}
+#Ruta utilizada para guardar un fichero de ormar de huerto
+#Recibe un fichero en un formato valido y lo guarda como fichero en la carpeta
+orchard_uploadFiles:
+    path:     /files/upload
+    defaults: {_controller: OrchardBundle:Default:uploadFile}

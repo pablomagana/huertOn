@@ -2,23 +2,32 @@
 
 {% block stylesheets %}
 <!-- css step 2.4 carga pdf-->
-<link rel="stylesheet" type="text/css" href="{{ asset('/css/set4.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/set5.css') }}" />
 {% endblock %}
 {% block body %}
 
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
     <h1 class="display-3">Paso 2.4</h1>
-
+    <span id="loading-file" style="display: none;" class="navbar-text">
+      Cargando Archivo...
+    </span>
     <form>
       <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
         <p><h4>Normas del huerto</h4></p>
-        <div class="cuadro-subidas-pdf" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <input type="file" id="fileinput" multiple="multiple" />
+        <div class="cuadro-subidas-pdf col-xs-12 col-sm-12 col-md-12 col-lg-12" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <input type="file" id="fileinput" accept=".pdf,.docx,.txt,.doc,.odf" hidden="hidden"/>
+          <div class="more" onclick="$('#fileinput').click();">
+            <p>Añade o arrastra imagenes aqui</p>
+          </div>
+          <div id="files">
+          </div>
         </div>
-        <h3 class="centrar-o">o</h3>
+
+        <!-- <br>
+        <h3 class="centrar-o">Ó</h3>
         <p>Quiero compartir el archivo</p>
-        <input type="text" class="form-control required" placeholder="Escribe el link">
+        <input type="text" class="form-control required" placeholder="Escribe el link"> -->
 </div>
 
         <input type="text" id="Step" hidden="hidden" value="25">
@@ -34,33 +43,73 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="{{asset('js/images.js')}}" charset="utf-8"></script>
+<script src="{{asset('js/files.js')}}" charset="utf-8"></script>
 <script type="text/javascript">
-
+$('#btn-siguiente').removeAttr('disabled');
 $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 60 + '%','aria-valuenow': 60}, {duration: 400, easing: 'linear'});
 
-function allowDrop(ev) {
-  ev.preventDefault();
-}
 
-function drag(ev) {
-  console.log("dragevent");
-  ev.dataTransfer.setData("text", 'gallery');
-}
 
-function drop(ev) {
-  console.log('dropevent');
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  var f = ev.dataTransfer.files;
-  //var file;
-  console.log(ev.dataTransfer.files);
-
-  if (f) {
-    //[].forEach.call(files, readAndPreview);
-    [].forEach.call(f, previewImage);
+var fileNormas = null;
+//cargar el file con click
+var filesinput = document.querySelector('#fileinput');
+filesinput.addEventListener('change', function () {
+  console.log("detectando cambios en input");
+  $("#loading-file").fadeIn("slow");
+  //solo se permiten 10 imagenes
+  if(fileNormas==null && this.files.length<2){
+    //console.log(this.files[0]);
+    previewImage(this.files[0]);
+  }else {
+    alert("solo se permite un maximo de 1 archivo");
   }
-}
+  $("#loading-file").fadeOut("slow");
+}, false);
+
+
+$('#btn-siguiente , #btn-save-exit , #btn-atras').off('click');
+
+$('#btn-siguiente, #btn-save-exit').on('click', function() {
+  $("#loading, #loading-text").fadeIn("slow");
+  var data = new FormData();
+  data.append("normas",fileNormas);
+    $.ajax({
+      type: "POST",
+      contentType: false,
+      url:"/orchard/files/upload",
+      data: JSON.stringify(imagenes),
+      success: function(step){
+        console.log(step);
+        window.location.href = '/orchard/step/'+step;
+      },
+      error: function(jqXHR, exception) {
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
+          });
+          if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+          console.log('error');
+        }
+    });
+});
+
+$('#btn-atras').on('click', function() {
+  $("#loading, #loading-text").fadeIn("slow");
+  window.location.href = '/orchard/step/23';
+});
 </script>
 
 {% endblock %}
