@@ -190,7 +190,7 @@
         $("#loading, #loading-text").fadeOut("slow", function() {
           $("#loading-text").text("Guardado").fadeIn('slow');
         });
-        if($('#Step').val() == '12') {
+        if($('#Step').val() == '12' || $('#Step').val() == '23') {
           window.location.href = '/orchard/create'
         }else {
           var step = parseInt($('#Step').val())-2;

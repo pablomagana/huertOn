@@ -5,7 +5,7 @@
 <div class="row steps">
   <div class="col-xs-12 col-md-5 col-lg-5 steps-left">
     {% if userName is defined and userName != '' %}
-      <h1 class="display-4">¡Hola {{ userName }}!</h1>
+      <h1 class="display-4">¡Hola {{ app.user.username }}!</h1>
     {% endif %}
     <h6>Haz que más personas conozcan tu huerto</h6>
 

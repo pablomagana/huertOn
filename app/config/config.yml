@@ -80,4 +80,4 @@ fos_user:
             enabled: true
             from_email:
                 address:        registration@example.com
-                sender_name:    Demo Registration
+                sender_name:    Confirmación de cuenta Huerton

@@ -22,29 +22,29 @@ orchard_insert:
 #Recibe la sugerencia del paso 1.4 de la creación de un huerto mediante el método GET
 orchard_send:
     path:     /send/{orchard_type}
-    defaults: { _controller: OrchardBundle:Default:send }
+    defaults: { _controller: OrchardBundle:Suggestion:send }
 
 #Ruta utilizada para aceptar una sugerencia de tipo de huerto desde un mail
 #Recibe la sugerencia y si ésta ha sido acceptada o no mediante el método GET
 orchard_suggest:
     path:     /suggest/{orchard_type}/{accept}
-    defaults: { _controller: OrchardBundle:Default:suggest, accept:false }
+    defaults: { _controller: OrchardBundle:Suggestion:suggest, accept:false }
 
 #Ruta utilizada para guardar una imagen de huerto
 #Recibe una imagen y la guarda en BBDD mediante el método POST
 orchard_uploadImages:
     path:     /images/upload
-    defaults: { _controller: OrchardBundle:Default:uploadImage}
+    defaults: { _controller: OrchardBundle:Upload:uploadImage}
 
 orchard_deleteImages:
     path:     /images/delete/{idImage}
-    defaults: { _controller: OrchardBundle:Default:deleteImage,idImage:null}
+    defaults: { _controller: OrchardBundle:Upload:deleteImage,idImage:null}
 
 orchard_modifyImages:
     path:     /images/modify/{idImage}
-    defaults: { _controller: OrchardBundle:Default:modifyImage,idImage:null}
+    defaults: { _controller: OrchardBundle:Upload:modifyImage,idImage:null}
 #Ruta utilizada para guardar un fichero de ormar de huerto
 #Recibe un fichero en un formato valido y lo guarda como fichero en la carpeta
 orchard_uploadFiles:
     path:     /files/upload
-    defaults: {_controller: OrchardBundle:Default:uploadFile}
+    defaults: {_controller: OrchardBundle:Upload:uploadFile}
