@@ -62,7 +62,7 @@ class SuggestionController extends Controller
           ->setContentType("text/html")
           ->setSubject('Se ha aceptado la sugerencia para tipos de huerto')
           ->setFrom('parcellesflorida@gmail.com')
-          ->setTo('ab95david@gmail.com')
+          ->setTo($user->getEmail())
           ->setBody(
               $this->renderView(
                   'OrchardBundle:Default:email.html.twig',
@@ -78,7 +78,7 @@ class SuggestionController extends Controller
           ->setContentType("text/html")
           ->setSubject('No se ha aceptado la sugerencia para tipos de huerto')
           ->setFrom('parcellesflorida@gmail.com')
-          ->setTo('ab95david@gmail.com')
+          ->setTo($user->getEmail())
           ->setBody(
               $this->renderView(
                   'OrchardBundle:Default:email.html.twig',
