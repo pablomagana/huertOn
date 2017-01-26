@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Añade una descripción</title>
+    <style media="screen">
+      html, body{
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+      }
+      .myDiv {
+        position: relative;
+        z-index: 1;
+      }
+      .myDiv .bg {
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: url(https://s-media-cache-ak0.pinimg.com/originals/4f/b3/24/4fb324187833fbba45fc9c2f77858613.jpg) center center;
+        opacity: .7;
+        width: 100%;
+        height: 100%;
+      }
+      textarea{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 20px;
+        font-family: sans-serif;
+        border: 3px solid lightblue;
+        border-radius: 15px;
+      }
+    </style>
+  </head>
+  <body class="myDiv">
+    <div class="bg"></div>
+    <br><br><br><br><br>
+    <textarea name="description" rows="8" cols="70" placeholder="Inserta aqui la descripcion del tipo de huerto que acabas de añadir."></textarea>
+  </body>
+</html>

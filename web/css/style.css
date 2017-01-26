@@ -1,4 +1,4 @@
-/*+++++++++++++++++MEDIA QUERYS+++++++++++++++++*/
+/*+++++++++++++++++MEDIA QUERIES+++++++++++++++++*/
 /* Extra-small (mobiles) */
 @media (max-width: 768px) {
 	.fixed-buttons {
@@ -13,6 +13,10 @@
   .steps-right-pdf {
     display: none;
   }
+
+	.legal-desktop{
+		display: none;
+	}
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -30,6 +34,11 @@
   .steps-right-pdf {
     display: none;
   }
+
+	.legal-desktop{
+		display: none;
+	}
+
 }
 
 /* Medium devices (desktops, 992px and up) */
@@ -39,6 +48,10 @@
 	    bottom: 0px;
 	    z-index: 9999 !important;
 	    width: 50%;
+	}
+
+	.legal-mobile{
+		display: none;
 	}
 
 }
@@ -52,8 +65,13 @@
 	    width: 50%;
 	}
 
+	.legal-mobile{
+		display: none;
+	}
+
+
 }
-/*+++++++++++++++++END MEDIA QUERYS+++++++++++++++++*/
+/*+++++++++++++++++END MEDIA QUERIES+++++++++++++++++*/
 
 
 html,body,.map,.step-1,.steps {

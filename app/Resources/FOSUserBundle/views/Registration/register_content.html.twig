@@ -12,7 +12,8 @@
       <label class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input">
         <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">He leído y acepto las <a href="#">Condiciones de uso</a> y la <a href="#">Política de privacidad</a>.</span>
+        <div class="custom-control-description legal-desktop">He leído y acepto las <a target="_blank" href="{{ asset('html/terms-conditions.html') }}">Condiciones de uso</a> y la <a target="_blank" href="{{ asset('html/privacy-policy.html') }}">Política de privacidad</a>.</div>
+        <div class="custom-control-description legal-mobile">He leído y acepto las <u data-toggle="modal" data-target="#modalCondicionesUso">Condiciones de uso</u> y la <u data-toggle="modal" data-target="#modalPrivacidad">Política de privacidad</u>.</div>
       </label>
 
       <div>
@@ -28,7 +29,49 @@
     {{ form_end(form) }}
   </div><!--end col-->
 
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
     <img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
   </div>
 </div><!--end row-->
+
+<div class="modal fade" id="modalCondicionesUso">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Condiciones de uso</h4>
+      </div>
+      <div class="modal-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.</p>
+        <p>In et mi metus. Integer risus est, cursus id tellus et, cursus efficitur quam. Nunc sit amet dolor nibh. Maecenas viverra leo libero, nec lobortis lacus posuere sed. Phasellus mollis vitae odio quis mollis. Nullam tempor ante a augue vulputate iaculis. Phasellus imperdiet ut enim non placerat. Duis nec justo dignissim, posuere dui vitae, rhoncus massa. In in orci id tellus sagittis egestas. Mauris non feugiat mi, dictum malesuada risus.</p>
+        <p>Mauris id nunc id ligula convallis pellentesque eu ut dui. Morbi efficitur id tortor ut venenatis. Curabitur aliquam leo id commodo mollis. Morbi sed nisi consequat, faucibus felis at, condimentum massa. Sed eu nibh purus. Fusce pellentesque gravida facilisis. Pellentesque nec diam tempus, vulputate erat ac, faucibus lectus. Aenean eros lacus, dictum vel ultrices non, tincidunt a felis.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="modalPrivacidad">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Política de privacidad</h4>
+      </div>
+      <div class="modal-body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.</p>
+        <p>In et mi metus. Integer risus est, cursus id tellus et, cursus efficitur quam. Nunc sit amet dolor nibh. Maecenas viverra leo libero, nec lobortis lacus posuere sed. Phasellus mollis vitae odio quis mollis. Nullam tempor ante a augue vulputate iaculis. Phasellus imperdiet ut enim non placerat. Duis nec justo dignissim, posuere dui vitae, rhoncus massa. In in orci id tellus sagittis egestas. Mauris non feugiat mi, dictum malesuada risus.</p>
+        <p>Mauris id nunc id ligula convallis pellentesque eu ut dui. Morbi efficitur id tortor ut venenatis. Curabitur aliquam leo id commodo mollis. Morbi sed nisi consequat, faucibus felis at, condimentum massa. Sed eu nibh purus. Fusce pellentesque gravida facilisis. Pellentesque nec diam tempus, vulputate erat ac, faucibus lectus. Aenean eros lacus, dictum vel ultrices non, tincidunt a felis.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
