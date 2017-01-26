@@ -83,6 +83,9 @@ html,body,.map,.step-1,.steps {
   font-weight: 400;
 }
 
+.steps-left{
+	padding: 30px;
+}
 
 /*scroll left*/
 .steps-left-12 {
