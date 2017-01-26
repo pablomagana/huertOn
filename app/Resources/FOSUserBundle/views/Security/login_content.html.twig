@@ -1,12 +1,18 @@
-{% trans_default_domain 'FOSUserBundle' %}
 
-{% if error %}
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/login.css') }}" />
+
+<div class="row steps-left-register">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
+  {% endif %}
 
-<form action="{{ path("fos_user_security_check") }}" method="post">
+  <form action="{{ path("fos_user_security_check") }}" method="post">
     {% if csrf_token %}
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
     {% endif %}
 
     <h4 style="text-align: center">Inicia sesión para participar en un huerto urbano o inscribirte a una de sus actividades.</h4>
@@ -17,10 +23,13 @@
 
     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
     <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-
+<br>
     <button type="submit" id="_submit" class="btn btn-primary" name="_submit">{{ 'security.login.submit'|trans }}</button>
 
-    <p>No tienes cuenta? <a href="/register">Registrate</a>
+    <p>No tienes cuenta? <a href="/register">Registrate.</a>
+<br>
+      <a href="/resetting/request">¿Has olvidado la contraseña?</a>
+    </form>
 
-    <a href="/resetting/request">Has olvidado la contraseña?</a>
-</form>
+  </div>
+</div>

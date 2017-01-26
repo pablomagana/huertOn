@@ -1,6 +1,10 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
+
+<link rel="stylesheet" href="{{ asset('/css/wink.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hideshowpassword/2.0.10/hideShowPassword.min.js" charset="utf-8"></script>
+
 <div class="row row-centered">
 <div>
   {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
