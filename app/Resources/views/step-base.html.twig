@@ -16,9 +16,7 @@
 
   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 
-  <!-- Latest compiled and minified JavaScript -->
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" charset="utf-8"></script>
   <!-- Load Leaflet from CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.js"></script>
@@ -190,7 +188,7 @@
         $("#loading, #loading-text").fadeOut("slow", function() {
           $("#loading-text").text("Guardado").fadeIn('slow');
         });
-        if($('#Step').val() == '12' || $('#Step').val() == '23') {
+        if($('#Step').val() == '12' || $('#Step').val() == '22') {
           window.location.href = '/orchard/create'
         }else {
           var step = parseInt($('#Step').val())-2;

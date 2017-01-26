@@ -50,6 +50,7 @@
 			</div>
 
 			<input type="text" id="Step" hidden="hidden" value="15">
+      <span class="required" hidden="hidden">
 
 		</form>
 
@@ -111,6 +112,12 @@
 {% block javascripts %}
 <script type="text/javascript">
 $(document).ready(function () {
+		$('#btn-siguiente').attr('data-toggle', 'popover').attr('title', 'Paso obligatorio').attr('data-content', 'Por favor, selecciona un tipo de huerto').attr('data-placement', 'top');
+		$('[data-toggle="popover"]').popover();
+
+
+
+
 	$('#cb-new-type').click(function() {
 		this.checked ? $('#Type').removeAttr('hidden') : $('#Type').attr('hidden', 'hidden');
 		this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
