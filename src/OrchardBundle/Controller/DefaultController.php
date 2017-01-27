@@ -237,15 +237,15 @@ class DefaultController extends Controller
       if ($cookies->has('ID_ORCHARD')) {
        $id_orchard = $cookies->get('ID_ORCHARD');
       }
-      // Devuelve TODAS las imagenes ¡¡¡¡ESTA MAL!!!!
-      $orchardImg= $this->getDoctrine()
+      // Devuelve TODAS las imagenes
+      $orchard= $this->getDoctrine()
       ->getRepository('OrchardBundle:Orchard')
       ->find($id_orchard);
-      $images = $orchardImg->getImages();
-
-      // Devuelve TODOS los tipos de huertos ¡¡¡¡ESTA MAL!!!!
-      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
-      $orchard_types = $repository->findAll();
+      $images = $orchard->getImages();
+      $orchard_types = $orchard->getType();
+      // // Devuelve TODOS los tipos de huertos
+      // $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
+      // $orchard_types = $repository->findAll();
 
 
       return $this->render('OrchardBundle:Default:preview.html.twig', array('userName' => $userName, 'images' =>$images, 'orchard_types' =>$orchard_types));
