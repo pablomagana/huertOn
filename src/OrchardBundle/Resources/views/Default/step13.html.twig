@@ -23,6 +23,7 @@
           <div id="gallery">
           </div>
           {% if images is defined and images|length > 0 %}
+            <input type="text" hidden="true" class="required" name="imagesuploaded" value="{{images|length}}"/>
             <h1>Imagenes subidas</h1>
             <div class="upload">
           {% for img in images %}
@@ -54,10 +55,7 @@
     <img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
   </div>
 
-
-
 {% endblock %}
-
 {% block javascripts %}
 
 <script src="{{asset('js/images.js')}}" charset="utf-8"></script>

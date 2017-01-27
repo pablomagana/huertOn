@@ -68,11 +68,12 @@
     <input type="text" id="orchard-id" hidden="hidden">
     {% block body %}{% endblock %}
 
-    <div class="fixed-buttons row">
-      <button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
-      <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
-    </div>
-
+    {% block botones %}
+      <div class="fixed-buttons row">
+        <button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+        <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
+      </div>
+    {% endblock %}
   </div>
 
   <script type="text/javascript">
