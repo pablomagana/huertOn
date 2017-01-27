@@ -1,0 +1,26 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    {{ form_widget(form) }}
+
+    {% if csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">He leído y acepto las <a href="#">Condiciones de uso</a> y la <a href="#">Política de privacidad</a>.</span>
+    </label>
+
+    <div>
+      <button type="submit" class="btn btn-primary" name="button">{{ 'registration.submit'|trans }}</button>
+    </div>
+
+    <a href="/login">Ya dispones de una cuenta?</a>	
+
+    <script type="text/javascript">
+      $('#fos_user_registration_form_plainPassword_first').hidePassword(true);
+      $('#fos_user_registration_form_plainPassword_second').hidePassword(true);
+    </script>
+{{ form_end(form) }}
