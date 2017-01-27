@@ -228,4 +228,26 @@ class DefaultController extends Controller
     return $response;
 
   }
-}
+
+    public function previewAction(Request $request)
+    {
+      $userName = 'David';
+      $cookies = $request->cookies;
+
+      if ($cookies->has('ID_ORCHARD')) {
+       $id_orchard = $cookies->get('ID_ORCHARD');
+      }
+      // Devuelve TODAS las imagenes ¡¡¡¡ESTA MAL!!!!
+      $orchardImg= $this->getDoctrine()
+      ->getRepository('OrchardBundle:Orchard')
+      ->find($id_orchard);
+      $images = $orchardImg->getImages();
+
+      // Devuelve TODOS los tipos de huertos ¡¡¡¡ESTA MAL!!!!
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
+      $orchard_types = $repository->findAll();
+
+
+      return $this->render('OrchardBundle:Default:preview.html.twig', array('userName' => $userName, 'images' =>$images, 'orchard_types' =>$orchard_types));
+    }
+ }
