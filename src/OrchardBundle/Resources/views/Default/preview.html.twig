@@ -10,9 +10,7 @@
 
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 ">
-        {% for img in images %}
-        <img class="previewImg" src="{{img.src}}" alt="{{img.description}}">
-        {% endfor %}
+        <img class="previewImg" src="{{images[0].src}}" alt="{{images[0].description}}">
 
       </div>
     </div>
@@ -28,7 +26,7 @@
 
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
-        <h6>Este huerto nace de la asociación de vecinos de</h6>
+        <h6>Este huerto nace de la asociación de vecinos de XXXX...</h6>
       </div>
     </div>
       <a href="create"><button type="button" class="btn btn-primary">Seguir completando</button></a>
