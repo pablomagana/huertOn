@@ -124,6 +124,8 @@ $(document).ready(function () {
 		this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
 	});
 
+//borramos los handlers del onclick para evitar que se clike varias veces
+//añade gestion de AJAX al boton enviar al entrar a la pagina por si el campo tipo ya estaba rellenado anteriormente
 	$('#btn-enviar').off('click');
 	$('#btn-enviar').on('click', function() {
 		if($('#Type').val()) {
@@ -158,6 +160,8 @@ $(document).ready(function () {
 		return false;
 	});
 
+	//borramos los handlers del onclick para evitar que se clike varias veces
+	//añade gestion de AJAX al boton enviar cada vez que se escriba en el campo de tipo
 	$('#Type').keyup(function() {
 		$('#btn-enviar').off('click');
 		$('#btn-enviar').on('click', function() {

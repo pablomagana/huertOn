@@ -26,9 +26,13 @@ orchard_send:
 
 #Ruta utilizada para aceptar una sugerencia de tipo de huerto desde un mail
 #Recibe la sugerencia y si ésta ha sido acceptada o no mediante el método GET
+orchard_add_description:
+    path:     /add-type-description/{orchard_type}/{accept}
+    defaults: { _controller: OrchardBundle:Suggestion:addTypeDescription, accept:false }
+
 orchard_suggest:
-    path:     /suggest/{orchard_type}/{accept}
-    defaults: { _controller: OrchardBundle:Suggestion:suggest, accept:false }
+    path:     /suggest/{orchard_type}/{type_description}
+    defaults: { _controller: OrchardBundle:Suggestion:suggest }
 
 #Ruta utilizada para guardar una imagen de huerto
 #Recibe una imagen y la guarda en BBDD mediante el método POST
