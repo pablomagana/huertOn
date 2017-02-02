@@ -10,7 +10,6 @@ use OrchardBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
-use UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -18,15 +17,15 @@ class DefaultController extends Controller
   //Recibe el id del huerto que se está creando mediante el método GET (el número del paso al que se redirigirá se gestiona según este id)
   public function indexAction(Request $request)
   {
-    //Recogemos el usuario para mostrar el mensaje de bienvenida
-    //Id de usuario a piñón hasta crear login y registro
-    $id_user = 1;
-    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-    $userName = '';
-
-    if($user != null) {
-      $userName = $user->getName();
-    }
+    // //Recogemos el usuario para mostrar el mensaje de bienvenida
+    // //Id de usuario a piñón hasta crear login y registro
+    // $id_user = 1;
+    // $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
+    $userName = 'David';
+    //
+    // if($user != null) {
+    //   $userName = $user->getName();
+    // }
 
     $step_orchard = 0;
 
@@ -230,155 +229,25 @@ class DefaultController extends Controller
 
   }
 
-  public function sendAction($orchard_type)
-  {
+    public function previewAction(Request $request)
+    {
+      $userName = 'David';
+      $cookies = $request->cookies;
 
-    $id_user = 1;
-    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-    $userName = '';
+      if ($cookies->has('ID_ORCHARD')) {
+       $id_orchard = $cookies->get('ID_ORCHARD');
+      }
+      // Devuelve TODAS las imagenes
+      $orchard= $this->getDoctrine()
+      ->getRepository('OrchardBundle:Orchard')
+      ->find($id_orchard);
+      $images = $orchard->getImages();
+      $orchard_types = $orchard->getType();
+      // // Devuelve TODOS los tipos de huertos
+      // $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
+      // $orchard_types = $repository->findAll();
 
-    if($user != null) {
-      $userName = $user->getName();
+
+      return $this->render('OrchardBundle:Default:preview.html.twig', array('userName' => $userName, 'images' =>$images, 'orchard_types' =>$orchard_types));
     }
-
-    $message = \Swift_Message::newInstance()
-        ->setContentType("text/html")
-        ->setSubject('Nueva sugerencia para tipos de huerto')
-        ->setFrom('parcellesflorida@gmail.com')
-        ->setTo('ab95david@gmail.com')
-        ->setBody(
-            $this->renderView(
-                'OrchardBundle:Default:email.html.twig',
-                array('orchard_type' => $orchard_type, 'userName' => $userName)
-            )
-        )
-    ;
-    $this->get('mailer')->send($message);
-
-    return new Response();
-  }
-
-  public function suggestAction(Request $request, $orchard_type, $accept)
-  {
-
-    $id_user = 1;
-    $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-    $userName = '';
-
-    if($user != null) {
-      $userName = $user->getName();
-    }
-
-    $cookies = $request->cookies;
-
-    $orchard = null;
-
-    if($cookies->has('ID_ORCHARD')) {
-      //El huerto está creado así que recuperamos el objeto de BBDD
-      $orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($cookies->get('ID_ORCHARD'));
-    }
-
-    if($accept == 'true') {
-      //Guardar en BBDD y relacionar con orchard
-      //Enviar mail de éxito al usuario
-      $orchardType = new OrchardType();
-      $orchardType->setName($orchard_type);
-      $orchard->addOrchardType($orchardType);
-      $em = $this->getDoctrine()->getManager();
-      $em->persist($orchard);
-      $em->persist($orchardType);
-      $em->flush();
-
-      $message = \Swift_Message::newInstance()
-          ->setContentType("text/html")
-          ->setSubject('Se ha aceptado la sugerencia para tipos de huerto')
-          ->setFrom('parcellesflorida@gmail.com')
-          ->setTo('ab95david@gmail.com')
-          ->setBody(
-              $this->renderView(
-                  'OrchardBundle:Default:email.html.twig',
-                  array('orchard_type' => $orchard_type, 'userName' => $userName, 'accept' => $accept)
-              )
-          )
-      ;
-      $this->get('mailer')->send($message);
-
-    }else {
-      //Enviar mail de error al usuario
-      $message = \Swift_Message::newInstance()
-          ->setContentType("text/html")
-          ->setSubject('No se ha aceptado la sugerencia para tipos de huerto')
-          ->setFrom('parcellesflorida@gmail.com')
-          ->setTo('ab95david@gmail.com')
-          ->setBody(
-              $this->renderView(
-                  'OrchardBundle:Default:email.html.twig',
-                  array('orchard_type' => $orchard_type, 'userName' => $userName, 'accept' => $accept)
-              )
-          )
-      ;
-      $this->get('mailer')->send($message);
-    }
-
-    return new Response();
-  }
-
-  //Método utilizado para añadir imagenes a los huertos, recibe una imagen y la mueve a la carpeta de imagenes relacionandola con el huerto
-  //Recibe una imagen por request con su descripción por metodo POST
-
-  public function uploadImageActionOld(Request $request){
-    $id_orchard=$request->cookies->get('ID_ORCHARD');
-    $name=$request->get("name");
-    $src=$request->get("src");
-    $description=$request->get("description");
-
-    $imagen=new Image();
-    $imagen->setSrc($src);
-    $imagen->setDescription($description);
-    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
-    $imagen->setOrchard($orchard);
-
-    $em=$this->getDoctrine()->getManager();
-    $em->persist($imagen);
-    $em->flush();
-
-   return new JsonResponse($imagen->getId());
-  }
-
-  public function uploadImageAction(Request $request){
-    ini_set('memory_limit', '-1');
-    //extraer id_orchard
-    $id_orchard=$request->cookies->get('ID_ORCHARD');
-
-    //extraer json con imagenes
-    //$imagenes=$request->get("imgs");
-    $imagenes=json_decode($request->getContent());
-    //print_r($imagenes);
-    //return new JsonResponse($imagenes[0]->des);
-
-    $em=$this->getDoctrine()->getManager();
-
-    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
-if (count($imagenes)>0) {
-  foreach ($imagenes as $img) {
-      $imagen=new Image();
-      $imagen->setSrc($img->src);
-      $imagen->setDescription($img->des);
-
-      $imagen->setOrchard($orchard);
-
-      $em->persist($imagen);
-      $em->flush();
-    }
-  }
-    //update step orchard
-    if($orchard->getStep()<14){
-      $orchard->setstep(14);
-      $em->persist($orchard);
-      $em->flush();
-    }
-
-return new JsonResponse(14);
-
-  }
-}
+ }

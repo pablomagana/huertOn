@@ -2,11 +2,11 @@
   border: solid 2px black;
   overflow: hidden;
 }
-#gallery{
+#gallery, #upload{
   display: inline-block;
   vertical-align: middle;
 }
-#gallery .thumbnail{
+.thumbnail{
     max-width:150px;
     /*min-height: 370px;*/
     /*float:left;*/
@@ -23,16 +23,16 @@
     box-shadow: 4px 5px 5px #888888;
     overflow: hidden;
 }
-#gallery .thumbnail input{
+.thumbnail input{
   margin-top: 5px;
   border-radius: 10px;
   vertical-align: bottom;
 }
-#gallery .thumbnail div p{
+.thumbnail div p{
   width: 95%;
   /*max-height: 50px;*/
 }
-#gallery .thumbnail span{
+.thumbnail span{
   display: block;
   text-align: right;
   color: rgb(175, 175, 175);
@@ -70,6 +70,8 @@
   left:0px;
   cursor:pointer;
 }
-.editDes{
+.editDes ,.edi a{
   display: inline;
+  text-decoration: underline!important;
+  cursor: pointer;
 }

@@ -12,15 +12,18 @@
 
 				<div class="row">
 					{% for orchard_type in orchard_types %}
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input">
+								<span class="custom-control-indicator"></span>
 
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<label class="custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input">
-							<span class="custom-control-indicator"></span>
-							<span class="custom-control-description">{{ orchard_type.name }}</span>
-						</label>
-					</div>
+								<div class="text-right">
+									<span class="custom-control-description type-name">{{ orchard_type.name }}</span>
+									<span class="type-description" style="display: none;">{{ orchard_type.description }}</span>
+								</div>
 
+							</label>
+						</div>
 					{% endfor %}
 				</div>
 
@@ -38,45 +41,71 @@
 						<button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>Enviar</button>
 					</div>
 				</div>
+				<br><br>
 
-			</div>
 
-			<div class="fixed-buttons row">
-				<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
-				<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
+				<div class="hidden-md-up not-visible pull-right" data-toggle="modal" data-target="#modalDescripciones"><i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i></div>
+
+
 			</div>
 
 			<input type="text" id="Step" hidden="hidden" value="15">
+      <span class="required" hidden="hidden">
 
 		</form>
 
-		<div class="modal fade" id="myModal">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title">Muchas gracias!</h4>
-					</div>
-					<div class="modal-body">
-						<p>Cuando estudiemos tu sugerencia te enviaremos un email con el resultado. <p>&#x1f609</p></p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-
 	</div>
 
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right">
-		<img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
+	<!--pantalla de la derecha -->
+	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right" style="padding: 150px;">
+		<h4 id="show-type">Tipo de huerto</h4> <br><br>
+		<h5 id="show-description">Situa el puntero sobre cualquier tipo de huerto para mostrar más información de cada uno.</h5><br>
 	</div>
 
 </div>
+
+
+<!--modal-->
+<div class="modal fade" id="modalDescripciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<!--mostrar tipos + descripciones-->
+				<ul>
+				{% for orchard_type in orchard_types %}
+						<li>
+							<b>{{ orchard_type.name }}</b>:<br>
+							<span>{{ orchard_type.description }}</span>
+						</li>
+
+				{% endfor %}
+			</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="myModal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">Muchas gracias!</h4>
+			</div>
+			<div class="modal-body">
+				<p>Cuando estudiemos tu sugerencia te enviaremos un email con el resultado. <p>&#x1f609</p></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 {% endblock %}
 
@@ -84,11 +113,19 @@
 {% block javascripts %}
 <script type="text/javascript">
 $(document).ready(function () {
+		$('#btn-siguiente').attr('data-toggle', 'popover').attr('title', 'Paso obligatorio').attr('data-content', 'Por favor, selecciona un tipo de huerto').attr('data-placement', 'top');
+		$('[data-toggle="popover"]').popover();
+
+
+
+
 	$('#cb-new-type').click(function() {
 		this.checked ? $('#Type').removeAttr('hidden') : $('#Type').attr('hidden', 'hidden');
 		this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
 	});
 
+//borramos los handlers del onclick para evitar que se clike varias veces
+//añade gestion de AJAX al boton enviar al entrar a la pagina por si el campo tipo ya estaba rellenado anteriormente
 	$('#btn-enviar').off('click');
 	$('#btn-enviar').on('click', function() {
 		if($('#Type').val()) {
@@ -102,20 +139,20 @@ $(document).ready(function () {
 				},
 				error: function(jqXHR, exception) {
 					if (jqXHR.status === 0) {
-								alert('Not connect.\n Verify Network.');
-						} else if (jqXHR.status == 404) {
-								alert('Requested page not found. [404]');
-						} else if (jqXHR.status == 500) {
-								alert('Internal Server Error [500].');
-						} else if (exception === 'parsererror') {
-								alert('Requested JSON parse failed.');
-						} else if (exception === 'timeout') {
-								alert('Time out error.');
-						} else if (exception === 'abort') {
-								alert('Ajax request aborted.');
-						} else {
-								alert('Uncaught Error.\n' + jqXHR.responseText);
-						}
+						alert('Not connect.\n Verify Network.');
+					} else if (jqXHR.status == 404) {
+						alert('Requested page not found. [404]');
+					} else if (jqXHR.status == 500) {
+						alert('Internal Server Error [500].');
+					} else if (exception === 'parsererror') {
+						alert('Requested JSON parse failed.');
+					} else if (exception === 'timeout') {
+						alert('Time out error.');
+					} else if (exception === 'abort') {
+						alert('Ajax request aborted.');
+					} else {
+						alert('Uncaught Error.\n' + jqXHR.responseText);
+					}
 					console.log('error');
 				}
 			});
@@ -123,48 +160,58 @@ $(document).ready(function () {
 		return false;
 	});
 
+	//borramos los handlers del onclick para evitar que se clike varias veces
+	//añade gestion de AJAX al boton enviar cada vez que se escriba en el campo de tipo
 	$('#Type').keyup(function() {
 		$('#btn-enviar').off('click');
 		$('#btn-enviar').on('click', function() {
 			if($('#Type').val()) {
 				$.ajax({
-	        type: 'POST',
-	        url: '/orchard/send/'+$('#Type').val(),
-	        data: form,
-	        success: function(data) {
-	          console.log('success');
+					type: 'POST',
+					url: '/orchard/send/'+$('#Type').val(),
+					data: form,
+					success: function(data) {
+						console.log('success');
 						$('#myModal').modal('show');
-	        },
-	        error: function(jqXHR, exception) {
-	          if (jqXHR.status === 0) {
-	                alert('Not connect.\n Verify Network.');
-	            } else if (jqXHR.status == 404) {
-	                alert('Requested page not found. [404]');
-	            } else if (jqXHR.status == 500) {
-	                alert('Internal Server Error [500].');
-	            } else if (exception === 'parsererror') {
-	                alert('Requested JSON parse failed.');
-	            } else if (exception === 'timeout') {
-	                alert('Time out error.');
-	            } else if (exception === 'abort') {
-	                alert('Ajax request aborted.');
-	            } else {
-	                alert('Uncaught Error.\n' + jqXHR.responseText);
-	            }
-	          console.log('error');
-	        }
-	      });
+					},
+					error: function(jqXHR, exception) {
+						if (jqXHR.status === 0) {
+							alert('Not connect.\n Verify Network.');
+						} else if (jqXHR.status == 404) {
+							alert('Requested page not found. [404]');
+						} else if (jqXHR.status == 500) {
+							alert('Internal Server Error [500].');
+						} else if (exception === 'parsererror') {
+							alert('Requested JSON parse failed.');
+						} else if (exception === 'timeout') {
+							alert('Time out error.');
+						} else if (exception === 'abort') {
+							alert('Ajax request aborted.');
+						} else {
+							alert('Uncaught Error.\n' + jqXHR.responseText);
+						}
+						console.log('error');
+					}
+				});
 			}
 			return false;
 		});
 	});
+
+	//MOSTRAR TEXTO A LA DERECHA
+	$('span.type-name').hover(function() {
+		$( "#show-type" ).html($(this).text());
+
+		$( '#show-description' ).html($(this).next().text());
+
+	}, function(){
+			$( "#show-type" ).html("Tipo de huerto");
+			$( "#show-description" ).html("Situa el puntero sobre cualquier tipo de huerto para mostrar más información de cada uno.");
+  });
+
+
+
+	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 80 + '%','aria-valuenow': 80}, {duration: 400, easing: 'linear'});
 });
-</script>
-
-<script type="text/javascript">
-
-$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 80 + '%','aria-valuenow': 80}, {duration: 400, easing: 'linear'});
-
-$('#Type').val();
 </script>
 {% endblock %}

@@ -1,3 +1,79 @@
+/*+++++++++++++++++MEDIA QUERIES+++++++++++++++++*/
+/* Extra-small (mobiles) */
+@media (max-width: 768px) {
+	.fixed-buttons {
+		position: fixed;
+	    bottom: 0px;
+	    z-index: 9999 !important;
+	    width: 93vw;
+	}
+  .steps-right {
+    display: none;
+  }
+  .steps-right-pdf {
+    display: none;
+  }
+
+	.legal-desktop{
+		display: none;
+	}
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 992px) {
+  .fixed-buttons {
+		position: fixed;
+	    bottom: 0px;
+	    z-index: 9999 !important;
+      width: 93vw;
+	}
+
+  .steps-right {
+    display: none;
+  }
+  .steps-right-pdf {
+    display: none;
+  }
+
+	.legal-desktop{
+		display: none;
+	}
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1200px) {
+  .fixed-buttons {
+		position: fixed;
+	    bottom: 0px;
+	    z-index: 9999 !important;
+	    width: 50%;
+	}
+
+	.legal-mobile{
+		display: none;
+	}
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .fixed-buttons {
+		position: fixed;
+	    bottom: 0px;
+	    z-index: 9999 !important;
+	    width: 50%;
+	}
+
+	.legal-mobile{
+		display: none;
+	}
+
+
+}
+/*+++++++++++++++++END MEDIA QUERIES+++++++++++++++++*/
+
+
 html,body,.map,.step-1,.steps {
     height:100%;
 }
@@ -14,8 +90,6 @@ html,body,.map,.step-1,.steps {
     z-index: 9999;
  }
 
- /*+++++++++++++++++Alex+++++++++++++++++*/
-
 .display-3 {
   font-size: 2.5rem;
 }
@@ -27,8 +101,8 @@ html,body,.map,.step-1,.steps {
   font-weight: 400;
 }
 
-.steps-left {
-  padding: 30px;
+.steps-left{
+	padding: 30px;
 }
 
 /*scroll left*/
@@ -75,6 +149,27 @@ small {
 }
 .btn-steps {
   margin-top: 10px;
+}
+
+.preview{
+  width: 100%;
+  height: 50px;
+  border:1px solid;
+}
+.previewImg{
+  width: 300px;
+  height: 250px;
+}
+
+.type_orchard{
+  width: 100px;
+  text-align: center;
+  height: auto;
+  border-radius: 5px;
+  margin: 0px;
+  display: inline-block;
+  background-color: rgb(100, 181, 195);
+  margin: 5px;
 }
   /*+++++++++++++++++EndAlex+++++++++++++++++*/
 
@@ -135,7 +230,6 @@ small {
 
 }
 
-/*+++++++++++++++++END MEDIA QUERYS+++++++++++++++++*/
 .label-control{padding-right: 20px;}
 .label-control + .tooltip > .tooltip-inner {background-color: #f00;}
 
@@ -208,4 +302,8 @@ small {
     outline: none !important;
     border:1px solid red !important;
     box-shadow: 0 0 10px #719ECE !important;
+}
+
+h4 {
+  color: #110a79;
 }

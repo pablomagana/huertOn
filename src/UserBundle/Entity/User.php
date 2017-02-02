@@ -1,113 +1,68 @@
 <?php
+// src/AppBundle/Entity/User.php
 
 namespace UserBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * User
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
  *
- * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="usernameCanonical",
+ *          column=@ORM\Column(
+ *              name     = "usernameCanonical",
+ *              type     = "string",
+ *              length   = 10,
+ *              unique   = false
+ *          )
+ *      )
+ * })
+ *
  */
-class User
+class User extends BaseUser
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(type="string", nullable=false)
      */
-    private $name;
+    private $apellidos;
 
-    /**
-     * @var \Doctrine\Common\Collections\Collection|OrchardBundle\Entity\Orchard[]
-     *
-     * @ORM\ManyToMany(targetEntity="OrchardBundle\Entity\Orchard", mappedBy="users")
-     * 
-     */
-    protected $orchards;
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function __construct()
     {
-        return $this->id;
+        parent::__construct();
+        // your own logic
     }
 
     /**
-     * Set name
+     * Set apellidos
      *
-     * @param string $name
+     * @param string $apellidos
      *
      * @return User
      */
-    public function setName($name)
+    public function setApellidos($apellidos)
     {
-        $this->name = $name;
+        $this->apellidos = $apellidos;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get apellidos
      *
      * @return string
      */
-    public function getName()
+    public function getApellidos()
     {
-        return $this->name;
-    }
-
-    /**
-     * Get orchards
-     *
-     * @return string
-     */
-    public function getOrchards()
-    {
-        return $this->orchards;
-    }
-
-    /**
-     * Default constructor, initializes collections
-     */
-    public function __construct()
-    {
-        $this->orchards = new ArrayCollection();
-    }
-    /**
-     * @param Orchard $orchard
-     */
-    public function addOrchard(Orchard $orchard)
-    {
-        if ($this->orchards->contains($orchard)) {
-            return;
-        }
-        $this->orchards->add($orchard);
-        $orchard->addOrchard($this);
-    }
-    /**
-     * @param Orchard $orchard
-     */
-    public function removeOrchard(Orchard $orchard)
-    {
-        if (!$this->orchards->contains($orchard)) {
-            return;
-        }
-        $this->orchards->removeElement($orchard);
-        $orchard->removeOrchard($this);
+        return $this->apellidos;
     }
 }
