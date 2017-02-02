@@ -111,7 +111,7 @@ return new JsonResponse(14);
     try {
       $file=$request->files->get('normas');
     } catch (Exception $e) {
-
+      return new JsonResponse("error");
     }
     return new JsonResponse(25);
 
