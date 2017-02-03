@@ -48,7 +48,7 @@
 			</div>
 
 			<input type="text" id="Step" hidden="hidden" value="15">
-      <span class="required" hidden="hidden">
+      <span id="required-hidden-input" class="required" hidden="hidden"></span>
 
 		</form>
 
@@ -120,6 +120,7 @@ $(':checkbox:not(#cb-new-type)').change(function() {
 	var checkeado = false;
     if(this.checked) {
 				$('#btn-siguiente').popover('disable')
+				$('#required-hidden-input').remove();
     }else {
 			if($(':checkbox').each(function() {
 				if(this.checked) {
@@ -128,7 +129,8 @@ $(':checkbox:not(#cb-new-type)').change(function() {
 			}));
 
 			if(!checkeado) {
-				$('#btn-siguiente').popover('enable')
+				$('#btn-siguiente').popover('enable');
+				$('<span id="required-hidden-input" class="required" hidden="hidden"></span>').appendTo('body');
 			}
 		}
 });
