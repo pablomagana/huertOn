@@ -121,7 +121,7 @@ $(function () {
 $(':checkbox:not(#cb-new-type)').change(function() {
 	var checkeado = false;
     if(this.checked) {
-				$('#btn-siguiente').removeAttr('data-toggle').removeAttr('title').removeAttr('data-content').removeAttr('data-placement');
+				$('#btn-siguiente').popover('disable')
     }else {
 			if($(':checkbox').each(function() {
 				if(this.checked) {
@@ -130,7 +130,7 @@ $(':checkbox:not(#cb-new-type)').change(function() {
 			}));
 
 			if(!checkeado) {
-				$('#btn-siguiente').attr('data-toggle', 'popover').attr('title', 'Paso obligatorio').attr('data-content', 'Por favor, selecciona un tipo de huerto').attr('data-placement', 'top');
+				$('#btn-siguiente').popover('enable')
 			}
 		}
 });
