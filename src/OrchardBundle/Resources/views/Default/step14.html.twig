@@ -112,12 +112,30 @@
 
 {% block javascripts %}
 <script type="text/javascript">
+
+$(function () {
+	$('#btn-siguiente').attr('data-toggle', 'popover').attr('title', 'Paso obligatorio').attr('data-content', 'Por favor, selecciona un tipo de huerto').attr('data-placement', 'top');
+	$('[data-toggle="popover"]').popover();
+})
+
+$(':checkbox:not(#cb-new-type)').change(function() {
+	var checkeado = false;
+    if(this.checked) {
+				$('#btn-siguiente').removeAttr('data-toggle').removeAttr('title').removeAttr('data-content').removeAttr('data-placement');
+    }else {
+			if($(':checkbox').each(function() {
+				if(this.checked) {
+					checkeado = true;
+				}
+			}));
+
+			if(!checkeado) {
+				$('#btn-siguiente').attr('data-toggle', 'popover').attr('title', 'Paso obligatorio').attr('data-content', 'Por favor, selecciona un tipo de huerto').attr('data-placement', 'top');
+			}
+		}
+});
+
 $(document).ready(function () {
-		$('#btn-siguiente').attr('data-toggle', 'popover').attr('title', 'Paso obligatorio').attr('data-content', 'Por favor, selecciona un tipo de huerto').attr('data-placement', 'top');
-		$('[data-toggle="popover"]').popover();
-
-
-
 
 	$('#cb-new-type').click(function() {
 		this.checked ? $('#Type').removeAttr('hidden') : $('#Type').attr('hidden', 'hidden');
