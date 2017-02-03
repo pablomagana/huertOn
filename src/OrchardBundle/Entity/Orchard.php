@@ -224,6 +224,16 @@ class Orchard
       */
      protected $service;
 
+
+     /**
+      * @var UserBundle\Entity\User
+      *
+      * muchos huertos a un usuario.
+      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="orchard")
+      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+      */
+     protected $user;
+
      /**
       * Get service
       *
@@ -939,5 +949,29 @@ class Orchard
     public function removeService(\OrchardBundle\Entity\OrchardService $service)
     {
         $this->service->removeElement($service);
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Orchard
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

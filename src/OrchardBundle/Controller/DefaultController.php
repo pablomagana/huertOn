@@ -15,35 +15,23 @@ class DefaultController extends Controller
 {
   //Método utilizado para redirigir a un paso en concreto de la creación de un huerto
   //Recibe el id del huerto que se está creando mediante el método GET (el número del paso al que se redirigirá se gestiona según este id)
-  public function indexAction(Request $request)
+  public function indexAction($id_orchard)
   {
     // //Recogemos el usuario para mostrar el mensaje de bienvenida
-    // //Id de usuario a piñón hasta crear login y registro
-    // $id_user = 1;
-    // $user = $this->getDoctrine()->getRepository('UserBundle:User')->findOneById($id_user);
-    $userName = 'David';
-    //
-    // if($user != null) {
-    //   $userName = $user->getName();
-    // }
-
-    $step_orchard = 0;
-
-    //Comprovar si existe la cookie del id del huerto
-    //Si existe significa que se està editando el huerto y sinó se está creando uno nuevo
-    $cookies = $request->cookies;
-
-    $id_orchard = null;
-
-    if ($cookies->has('ID_ORCHARD')) {
-      $id_orchard = $cookies->get('ID_ORCHARD');
-    }
-
-    //Si existe un id de huerto en la cookie recogemos el paso por el que va
+    $user = $this->get('security.token_storage')->getToken()->getUser();
+    $userName = $user->getUsername();
+    $userId = $user->getId();
+    $step_orchard=0;//def
     if($id_orchard != null){
-      $step_orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard)->getStep();
-      //Devolvemos la plantilla de pasos marcando los pasos que ya están completados con un icono (falta incluir textos en gris), y pasándole el id del usuario para mostrar el mensaje de bienvenida.
-      return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $userName, 'idOrchard'=> $id_orchard, 'step' => $step_orchard));
+      $orchard=$this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard);
+      if($orchard->getUser()->getId()==$userId){
+        $step_orchard = $orchard->getStep();
+        //Devolvemos la plantilla de pasos marcando los pasos que ya están completados con un icono (falta incluir textos en gris), y pasándole el id del usuario para mostrar el mensaje de bienvenida.
+        return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $userName, 'idOrchard'=> $id_orchard, 'step' => $step_orchard));
+      }else {
+        # el huerto no pertenece al usuario
+        return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $userName, 'step' => $step_orchard));
+      }
     }else {
       //Si no existe id de huerto pasamos el paso 0 (si el paso es 0 se ejecuta la ruta para acceder al paso por defecto, es decir, al 11) y empezamos a crear el huerto
       return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $userName, 'step' => $step_orchard));
@@ -52,131 +40,134 @@ class DefaultController extends Controller
 
   //Método utilizado para redirigir a un paso en concreto de la creación un huerto
   //Recibe el número del paso al que se quiere acceder (por defecto al primero) mediante el método GET
-  public function createAction(Request $request, $step)
+  public function createAction($id_orchard, $step)
   {
+    $repository = $this->getDoctrine()->getRepository('OrchardBundle:Orchard');
+    $user = $this->get('security.token_storage')->getToken()->getUser();
+    $userName = $user->getUsername();
+    $userId = $user->getId();
     //Comprovar si existe la cookie del id del huerto
     //Si existe significa que se està editando el huerto y sinó se está creando uno nuevo
-    $cookies = $request->cookies;
 
     $orchard = new Orchard();
+    $step_orchard = 11;//def
 
-    $step_orchard = 11;
+    if($id_orchard != null){
+        $orchard=$this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard);
+        if($orchard->getUser()->getId()==$userId){
+          $step_orchard = $orchard->getStep();
+          //Step pasado por parámetro que se ha definido en el href del botón en steps.html.twig o en la ruta
+          switch ($step) {
+            case 11:
+            if($step < $step_orchard) {
+              return $this->render('OrchardBundle:Default:step11.html.twig', array('orchard' => $orchard));
+              break;
+            }else{
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
+              break;
+            }
+            case 12:
+            if($step <= $step_orchard) {
+              return $this->render('OrchardBundle:Default:step12.html.twig', array('orchard' => $orchard));
+              break;
+            }else{
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
+              break;
+            }
+            case 13:
+            if( $step <= $step_orchard) {
+              //recojo todas las imagenes relacionadas con el huerto que tengo guardado en la cookie
+              $repository = $this->getDoctrine()->getRepository('OrchardBundle:Image');
+              $images = $repository->findByOrchard($orchard);
 
-    if ($cookies->has('ID_ORCHARD')) {
-      //Si se está editando (si existe la cookie) obtenemos el paso por el que se ha quedado y le cambiamos el tipo
-      $repository = $this->getDoctrine()->getRepository('OrchardBundle:Orchard');
+              return $this->render('OrchardBundle:Default:step13.html.twig', array('orchard' => $orchard,"images" =>$images));
+              break;
+            }else{
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
+              break;
+            }
+            case 14:
+            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
+            $orchard_types = $repository->findAll();
 
-      $orchard = $repository->findOneById($cookies->get('ID_ORCHARD'));
+            if( $step <= $step_orchard) {
+              return $this->render('OrchardBundle:Default:step14.html.twig', array('orchard' => $orchard, 'orchard_types' => $orchard_types));
+              break;
+            }else{
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_types' => $orchard_types));
+              break;
+            }
+            case 15:
+            if( $step <= $step_orchard) {
+              return $this->render('OrchardBundle:Default:step15.html.twig', array('orchard' => $orchard));
+              break;
+            }else{
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
+              break;
+            }
+            case 21:
+            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
+            $orchard_activities = $repository->findAll();
 
-      $step_orchard = $orchard->getStep();
+            if( $step <= $step_orchard) {
+              return $this->render('OrchardBundle:Default:step21.html.twig', array('orchard' => $orchard, 'orchard_activities' => $orchard_activities));
+              break;
+            }else{
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_activities' => $orchard_activities));
+              break;
+            }
+            case 22:
+            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
+            $orchard_services = $repository->findAll();
+
+            if( $step <= $step_orchard) {
+              return $this->render('OrchardBundle:Default:step22.html.twig', array('orchard' => $orchard, 'orchard_services' => $orchard_services));
+              break;
+            }else{
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_services' => $orchard_services));
+              break;
+            }
+            case 23:
+            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
+            $orchard_participates = $repository->findAll();
+
+            if( $step <= $step_orchard) {
+              return $this->render('OrchardBundle:Default:step23.html.twig', array('orchard' => $orchard, 'orchard_participates' => $orchard_participates));
+              break;
+            }else{
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_participates' => $orchard_participates));
+              break;
+            }
+            case 24:
+            if( $step <= $step_orchard) {
+              return $this->render('OrchardBundle:Default:step24.html.twig', array('orchard' => $orchard));
+              break;
+            }else{
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
+              break;
+            }
+            case 25:
+            if( $step <= $step_orchard) {
+              return $this->render('OrchardBundle:Default:step25.html.twig', array('orchard' => $orchard));
+              break;
+            }else{
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
+              break;
+            }
+
+
+            default:
+            return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
+            break;
+          }
+        }else {
+          return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $userName, 'step' => $step_orchard));
+        }
+    }else {
+      return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $userName, 'step' => $step_orchard));
+    }
 
       settype($step_orchard, 'integer');
-    }
-
-    //Step pasado por parámetro que se ha definido en el href del botón en steps.html.twig o en la ruta
-    switch ($step) {
-      case 11:
-      if($step < $step_orchard) {
-        return $this->render('OrchardBundle:Default:step11.html.twig', array('orchard' => $orchard));
-        break;
-      }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-        break;
-      }
-      case 12:
-      if($step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step12.html.twig', array('orchard' => $orchard));
-        break;
-      }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-        break;
-      }
-      case 13:
-      if( $step <= $step_orchard) {
-        //recojo todas las imagenes relacionadas con el huerto que tengo guardado en la cookie
-        $repository = $this->getDoctrine()->getRepository('OrchardBundle:Image');
-        $images = $repository->findByOrchard($orchard);
-
-        return $this->render('OrchardBundle:Default:step13.html.twig', array('orchard' => $orchard,"images" =>$images));
-        break;
-      }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-        break;
-      }
-      case 14:
-      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
-      $orchard_types = $repository->findAll();
-
-      if( $step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step14.html.twig', array('orchard' => $orchard, 'orchard_types' => $orchard_types));
-        break;
-      }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_types' => $orchard_types));
-        break;
-      }
-      case 15:
-      if( $step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step15.html.twig', array('orchard' => $orchard));
-        break;
-      }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-        break;
-      }
-      case 21:
-      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
-      $orchard_activities = $repository->findAll();
-
-      if( $step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step21.html.twig', array('orchard' => $orchard, 'orchard_activities' => $orchard_activities));
-        break;
-      }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_activities' => $orchard_activities));
-        break;
-      }
-      case 22:
-      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
-      $orchard_services = $repository->findAll();
-
-      if( $step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step22.html.twig', array('orchard' => $orchard, 'orchard_services' => $orchard_services));
-        break;
-      }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_services' => $orchard_services));
-        break;
-      }
-      case 23:
-      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
-      $orchard_participates = $repository->findAll();
-
-      if( $step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step23.html.twig', array('orchard' => $orchard, 'orchard_participates' => $orchard_participates));
-        break;
-      }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_participates' => $orchard_participates));
-        break;
-      }
-      case 24:
-      if( $step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step24.html.twig', array('orchard' => $orchard));
-        break;
-      }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-        break;
-      }
-      case 25:
-      if( $step <= $step_orchard) {
-        return $this->render('OrchardBundle:Default:step25.html.twig', array('orchard' => $orchard));
-        break;
-      }else{
-        return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-        break;
-      }
-
-
-      default:
-      return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-      break;
-    }
   }
 
   //Método utilizado para insertar un huerto en la BBDD
