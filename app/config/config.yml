@@ -76,8 +76,12 @@ fos_user:
     registration:
         form:
             type: UserBundle\Form\UserType
+            validation_groups:  [Default] # Here you can also add your own groups if you have extra validation
         confirmation:
             enabled: true
             from_email:
                 address:        registration@example.com
                 sender_name:    Confirmación de cuenta Huerton
+    profile:
+        form:
+            validation_groups:  [Default] # Here you can also add your own groups if you have extra validation

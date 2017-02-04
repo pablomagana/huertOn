@@ -6,5 +6,13 @@ orchard:
     resource: "@OrchardBundle/Resources/config/routing.yml"
     prefix:   /orchard
 
+orchard_upload:
+    resource: "@OrchardBundle/Resources/config/routing_upload.yml"
+    prefix:   /orchard
+
+orchard_suggest:
+    resource: "@OrchardBundle/Resources/config/routing_suggest.yml"
+    prefix:   /orchard
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

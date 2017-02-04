@@ -1,0 +1,20 @@
+#Todas las rutas en este archivo tienen como prefix /orchard
+
+#Ruta utilizada para guardar una imagen de huerto
+#Recibe una imagen y la guarda en BBDD mediante el método POST
+orchard_uploadImages:
+    path:     /images/upload
+    defaults: { _controller: OrchardBundle:Upload:uploadImage}
+
+orchard_deleteImages:
+    path:     /images/delete/{idImage}
+    defaults: { _controller: OrchardBundle:Upload:deleteImage,idImage:null}
+
+orchard_modifyImages:
+    path:     /images/modify/{idImage}
+    defaults: { _controller: OrchardBundle:Upload:modifyImage,idImage:null}
+
+#Recibe un fichero en un formato valido y lo guarda como fichero en la carpeta
+orchard_uploadFiles:
+    path:     /files/upload
+    defaults: {_controller: OrchardBundle:Upload:uploadFile}

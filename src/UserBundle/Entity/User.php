@@ -9,18 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
- *
  * @ORM\AttributeOverrides({
- *      @ORM\AttributeOverride(name="usernameCanonical",
- *          column=@ORM\Column(
- *              name     = "username_canonical",
- *              type     = "string",
- *              length   = 180,
- *              unique   = false
- *          )
- *      )
+ *      @ORM\AttributeOverride(name="username", column=@ORM\Column(type="string", name="username", length=180, unique=false, nullable=false)),
+ *      @ORM\AttributeOverride(name="usernameCanonical", column=@ORM\Column(type="string", name="username_canonical", length=180, unique=false, nullable=false))
  * })
- *
  */
 class User extends BaseUser
 {
