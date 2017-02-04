@@ -46,8 +46,6 @@ class DefaultController extends Controller
     $user = $this->get('security.token_storage')->getToken()->getUser();
     $userName = $user->getUsername();
     $userId = $user->getId();
-    //Comprovar si existe la cookie del id del huerto
-    //Si existe significa que se està editando el huerto y sinó se está creando uno nuevo
 
     $orchard = new Orchard();
     $step_orchard = 11;//def
@@ -56,109 +54,58 @@ class DefaultController extends Controller
         $orchard=$this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard);
         if($orchard->getUser()->getId()==$userId){
           $step_orchard = $orchard->getStep();
-          //Step pasado por parámetro que se ha definido en el href del botón en steps.html.twig o en la ruta
+
+          
           switch ($step) {
-            case 11:
-            if($step < $step_orchard) {
-              return $this->render('OrchardBundle:Default:step11.html.twig', array('orchard' => $orchard));
-              break;
-            }else{
-              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-              break;
-            }
-            case 12:
-            if($step <= $step_orchard) {
-              return $this->render('OrchardBundle:Default:step12.html.twig', array('orchard' => $orchard));
-              break;
-            }else{
-              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-              break;
-            }
+            case 11:case 12:case 15:case 24:case 25:
+              if($step < $step_orchard) {
+                return $this->render('OrchardBundle:Default:step'.$step.'.html.twig', array('orchard' => $orchard));
+                break;
+              }
             case 13:
-            if( $step <= $step_orchard) {
-              //recojo todas las imagenes relacionadas con el huerto que tengo guardado en la cookie
-              $repository = $this->getDoctrine()->getRepository('OrchardBundle:Image');
-              $images = $repository->findByOrchard($orchard);
+              if( $step <= $step_orchard) {
+                //recojo todas las imagenes relacionadas con el huerto que tengo guardado en la cookie
+                $repository = $this->getDoctrine()->getRepository('OrchardBundle:Image');
+                $images = $repository->findByOrchard($orchard);
 
-              return $this->render('OrchardBundle:Default:step13.html.twig', array('orchard' => $orchard,"images" =>$images));
-              break;
-            }else{
+                return $this->render('OrchardBundle:Default:step13.html.twig', array('orchard' => $orchard,"images" =>$images));
+                break;
+              }
+              case 14:
+                if( $step <= $step_orchard) {
+                  $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
+                  $orchard_types = $repository->findAll();
+                  return $this->render('OrchardBundle:Default:step14.html.twig', array('orchard' => $orchard, 'orchard_types' => $orchard_types));
+                  break;
+                }
+              case 21:
+                if( $step <= $step_orchard) {
+                  $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
+                  $orchard_activities = $repository->findAll();
+                  return $this->render('OrchardBundle:Default:step21.html.twig', array('orchard' => $orchard, 'orchard_activities' => $orchard_activities));
+                  break;
+                }
+              case 22:
+                if( $step <= $step_orchard) {
+                  $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
+                  $orchard_services = $repository->findAll();
+                  return $this->render('OrchardBundle:Default:step22.html.twig', array('orchard' => $orchard, 'orchard_services' => $orchard_services));
+                  break;
+                }
+              case 23:
+                if( $step <= $step_orchard) {
+                  $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
+                  $orchard_participates = $repository->findAll();
+                  return $this->render('OrchardBundle:Default:step23.html.twig', array('orchard' => $orchard, 'orchard_participates' => $orchard_participates));
+                  break;
+                }
+
               return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
               break;
-            }
-            case 14:
-            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
-            $orchard_types = $repository->findAll();
-
-            if( $step <= $step_orchard) {
-              return $this->render('OrchardBundle:Default:step14.html.twig', array('orchard' => $orchard, 'orchard_types' => $orchard_types));
-              break;
-            }else{
-              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_types' => $orchard_types));
-              break;
-            }
-            case 15:
-            if( $step <= $step_orchard) {
-              return $this->render('OrchardBundle:Default:step15.html.twig', array('orchard' => $orchard));
-              break;
-            }else{
-              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-              break;
-            }
-            case 21:
-            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
-            $orchard_activities = $repository->findAll();
-
-            if( $step <= $step_orchard) {
-              return $this->render('OrchardBundle:Default:step21.html.twig', array('orchard' => $orchard, 'orchard_activities' => $orchard_activities));
-              break;
-            }else{
-              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_activities' => $orchard_activities));
-              break;
-            }
-            case 22:
-            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
-            $orchard_services = $repository->findAll();
-
-            if( $step <= $step_orchard) {
-              return $this->render('OrchardBundle:Default:step22.html.twig', array('orchard' => $orchard, 'orchard_services' => $orchard_services));
-              break;
-            }else{
-              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_services' => $orchard_services));
-              break;
-            }
-            case 23:
-            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
-            $orchard_participates = $repository->findAll();
-
-            if( $step <= $step_orchard) {
-              return $this->render('OrchardBundle:Default:step23.html.twig', array('orchard' => $orchard, 'orchard_participates' => $orchard_participates));
-              break;
-            }else{
-              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard, 'orchard_participates' => $orchard_participates));
-              break;
-            }
-            case 24:
-            if( $step <= $step_orchard) {
-              return $this->render('OrchardBundle:Default:step24.html.twig', array('orchard' => $orchard));
-              break;
-            }else{
-              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-              break;
-            }
-            case 25:
-            if( $step <= $step_orchard) {
-              return $this->render('OrchardBundle:Default:step25.html.twig', array('orchard' => $orchard));
-              break;
-            }else{
-              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-              break;
-            }
-
 
             default:
-            return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-            break;
+              return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
+              break;
           }
         }else {
           return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $userName, 'step' => $step_orchard));
