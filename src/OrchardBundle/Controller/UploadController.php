@@ -16,8 +16,7 @@ class UploadController extends Controller
   //Método utilizado para añadir imagenes a los huertos, recibe una imagen y la mueve a la carpeta de imagenes relacionandola con el huerto
   //Recibe una imagen por request con su descripción por metodo POST
 
-  public function uploadImageActionOld(Request $request){
-    $id_orchard=$request->cookies->get('ID_ORCHARD');
+  public function uploadImageActionOld(Request $request,$id_orchard){
     $name=$request->get("name");
     $src=$request->get("src");
     $description=$request->get("description");
@@ -35,10 +34,9 @@ class UploadController extends Controller
    return new JsonResponse($imagen->getId());
   }
 
-  public function uploadImageAction(Request $request){
+  public function uploadImageAction(Request $request,$id_orchard){
     ini_set('memory_limit', '-1');
     //extraer id_orchard
-    $id_orchard=$request->cookies->get('ID_ORCHARD');
 
     //extraer json con imagenes
     //$imagenes=$request->get("imgs");

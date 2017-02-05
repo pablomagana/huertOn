@@ -3,8 +3,8 @@
 #Ruta utilizada para guardar una imagen de huerto
 #Recibe una imagen y la guarda en BBDD mediante el método POST
 orchard_uploadImages:
-    path:     /images/upload
-    defaults: { _controller: OrchardBundle:Upload:uploadImage}
+    path:     /images/upload/{id_orchard}
+    defaults: { _controller: OrchardBundle:Upload:uploadImage, id_orchard:null}
 
 orchard_deleteImages:
     path:     /images/delete/{idImage}

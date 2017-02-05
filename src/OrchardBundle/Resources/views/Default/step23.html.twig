@@ -65,7 +65,7 @@
 			});
 
 			$('#Type').keyup(function() {
-				$('#mail-url').attr('href', "http://localhost:8000/orchard/send/"+$('#Type').val());
+				$('#mail-url').attr('href', "http://localhost:8000/orchard/send/{{id_orchard}}/"+$('#Type').val());
 			});
 		});
 	</script>
