@@ -190,11 +190,11 @@
           $("#loading-text").text("Guardado").fadeIn('slow');
         });
         if($('#Step').val() == '12' || $('#Step').val() == '22') {
-          window.location.href = '/orchard/create'
+          window.location.href = '/orchard/create/{{id_orchard}}'
         }else {
           var step = parseInt($('#Step').val())-2;
-          console.log('redirigiendo a '+$('#Step').val());
-          window.location.href = '/orchard/step/' + step.toString();
+          console.log('/orchard/step/{{id_orchard}}/' + step.toString());
+          window.location.href = '/orchard/step/{{id_orchard}}/' + step.toString();
         }
       }
     });
