@@ -9,16 +9,16 @@ orchard_create_id:
 #Ruta utilizada para redirigir a un paso en concreto de la creación un huerto
 #Recibe el número del paso al que se quiere acceder (por defecto al primero) mediante el método GET
 orchard_create_step:
-    path:     /step/{id}/{step}
+    path:     /step/{id_orchard}/{step}
     defaults: { _controller: OrchardBundle:Default:create, id_orchard:null, step:11 }
 
 #Ruta utilizada para insertar un huerto en la BBDD
 #Recibe los campos del formulario correspondiente mediante el método POST
 orchard_insert:
-    path:     /insert
-    defaults: { _controller: OrchardBundle:Default:insert }
+    path:     /insert/{id_orchard}
+    defaults: { _controller: OrchardBundle:Default:insert, id_orchard:null }
 
 #Ruta de las preview del huerto
 orchard_preview:
-    path:     /preview
-    defaults: {_controller: OrchardBundle:Default:preview}
+    path:     /preview/{id_orchard}
+    defaults: {_controller: OrchardBundle:Default:preview, id_orchard:null}

@@ -18,11 +18,11 @@
         <h5>Diles lo esencial (dónde está...)</h5>
         {% if step is defined %}
           {% if step > 15 %}
-            <a href="/orchard/step/11"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
+            <a href="/orchard/step/{{idOrchard}}/11"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
           {% elseif step == 0 %}
-            <a href="/orchard/step/11"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+            <a href="/orchard/step/{{idOrchard}}/11"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
             {% else %}
-              <a href="/orchard/step/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Seguir</button></a>
+              <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Seguir</button></a>
           {% endif %}
         {% endif %}
       </div>
@@ -37,11 +37,11 @@
         <h5 class="stepNone" id="paso2">¿Qué pueden encontrar allí? (fotos, servicios...)</h5>
         {% if step is defined and step > 20 %}
           {% if step > 29 %}
-            <a href="/orchard/step/21"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
+            <a href="/orchard/step/{{idOrchard}}/21"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
           {% elseif step == 21 %}
-          <a href="/orchard/step/21"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+          <a href="/orchard/step/{{idOrchard}}/21"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
           {% else %}
-            <a href="/orchard/step/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Seguir</button></a>
+            <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Seguir</button></a>
           {% endif %}
         {% endif %}
       </div>
@@ -56,11 +56,11 @@
         <h5 class="stepNone" id="paso3">Cuéntanos algo más especial de tu huerto</h5>
         {% if step is defined and step > 30 %}
           {% if step > 39 %}
-            <a href="/orchard/step/31"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
+            <a href="/orchard/step/{{idOrchard}}/31"><button type="button" class="btn btn-primary btn-steps ">Cambiar</button></a>
           {% elseif step == 31 %}
-            <a href="/orchard/step/31"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
+            <a href="/orchard/step/{{idOrchard}}/31"><button type="button" class="btn btn-primary btn-steps ">Empezar</button></a>
             {% else %}
-              <a href="/orchard/step/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Seguir</button></a>
+              <a href="/orchard/step/{{idOrchard}}/{{step}}"><button type="button" class="btn btn-primary btn-steps ">Seguir</button></a>
           {% endif %}
         {% endif %}
       </div>
