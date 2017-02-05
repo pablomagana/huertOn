@@ -131,7 +131,7 @@
       //FUNCION BOTON SIGUIENTE
       $.ajax({
         type: 'POST',
-        url: '/orchard/insert',
+        url: '/orchard/insert/{{id_orchard}}',
         data: form,
         success: function(data) {
           $("#loading, #loading-text").fadeOut("slow", function() {
@@ -183,7 +183,7 @@
     $.ajax({
       type: 'POST',
       dataType: 'json',
-      url: '/orchard/insert',
+      url: '/orchard/insert/{{id_orchard}}',
       data: form,
       success: function() {
         $("#loading, #loading-text").fadeOut("slow", function() {

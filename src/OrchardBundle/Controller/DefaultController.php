@@ -124,18 +124,19 @@ class DefaultController extends Controller
   //Recibe los campos del formulario correspondiente mediante el método POST
   public function insertAction($id_orchard,Request $request)# null si todavia no se ha creado
   {
+    if($id_orchard=='null'){$id_orchard=null;}
     $user = $this->get('security.token_storage')->getToken()->getUser();
-    $orchard = null;
+    $id=$user->getId();
 
-    $orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard);
-    if($orchard!=null && $ $user->getId()) {
-      //El huerto está creado así que recuperamos el objeto de BBDD
-      $orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard);
-    }else {
+    if($id_orchard == null) {
       //El huerto no está creado así que creamos el objeto
-      $orchard = new Orchard();
+      //$orchard = new Orchard();
       $orchard->setUser($user);
+    }else {
+      $orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard);
+      $id_o=$orchard->getUser()->getId();
     }
+
 
     // Recoje todos los valores del form
     $params = $request->request->all();
