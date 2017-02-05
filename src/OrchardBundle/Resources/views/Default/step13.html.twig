@@ -10,15 +10,15 @@
 				<label><h4>¿Qué tipo de huerto es?</h4></label><br>
 
 				<div class="row">
-					{% for orchard_type in orchard_types %}
+					{% for orchardType in orchardTypes %}
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<label class="custom-control custom-checkbox">
 								<input type="checkbox" class="custom-control-input">
 								<span class="custom-control-indicator"></span>
 
 								<div class="text-right">
-									<span class="custom-control-description type-name">{{ orchard_type.name }}</span>
-									<span class="type-description" style="display: none;">{{ orchard_type.description }}</span>
+									<span class="custom-control-description type-name">{{ orchardType.name }}</span>
+									<span class="type-description" style="display: none;">{{ orchardType.description }}</span>
 								</div>
 
 							</label>
@@ -71,10 +71,10 @@
 			<div class="modal-body">
 				<!--mostrar tipos + descripciones-->
 				<ul>
-				{% for orchard_type in orchard_types %}
+				{% for orchardType in orchardTypes %}
 						<li>
-							<b>{{ orchard_type.name }}</b>:<br>
-							<span>{{ orchard_type.description }}</span>
+							<b>{{ orchardType.name }}</b>:<br>
+							<span>{{ orchardType.description }}</span>
 						</li>
 
 				{% endfor %}
@@ -219,16 +219,12 @@ $(document).ready(function () {
 
 	//MOSTRAR TEXTO A LA DERECHA
 	$('span.type-name').hover(function() {
-		$( "#show-type" ).html($(this).text());
-
-		$( '#show-description' ).html($(this).next().text());
-
+		$("#show-type").html($(this).text());
+		$('#show-description').html($(this).next().text());
 	}, function(){
-			$( "#show-type" ).html("Tipo de huerto");
-			$( "#show-description" ).html("Situa el puntero sobre cualquier tipo de huerto para mostrar más información de cada uno.");
+			$("#show-type").html("Tipo de huerto");
+			$("#show-description").html("Situa el puntero sobre cualquier tipo de huerto para mostrar más información de cada uno.");
   });
-
-
 
 	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 80 + '%','aria-valuenow': 80}, {duration: 400, easing: 'linear'});
 });

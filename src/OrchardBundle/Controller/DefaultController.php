@@ -22,102 +22,62 @@ class DefaultController extends Controller
 
     if($id_orchard == null) {
       $orchard = new Orchard();
+      $orchard->setUser($this->get('security.token_storage')->getToken()->getUser());
       $orchard->setStep('11');
       $em = $this->getDoctrine()->getManager();
       $em->persist($orchard);
       $em->flush();
       $id_orchard = $orchard->getId();
     }else {
-      $repository = $this->getDoctrine()->getRepository('OrchardBundle:Orchard');
-      $orchard = $repository->findOneById($id_orchard);
-      $user = $this->get('security.token_storage')->getToken()->getUser();
-      if($user != $orchard->getUser()) {
-        throw new AccessDeniedHttpException('Acceso denegado');
-      }
+      $this->checkOwner($id_orchard);
     }
 
     return $this->render('OrchardBundle:Default:steps.html.twig', array('idOrchard'=> $id_orchard, 'stepOrchard' => $orchard->getStep()));
 
   }
 
-  public function stepAction($step, $id_orchard)
+  public function stepAction($step_orchard, $id_orchard)
   {
-    if($id_orchard=='null'){$id_orchard=null;}
-    $repository = $this->getDoctrine()->getRepository('OrchardBundle:Orchard');
-    $user = $this->get('security.token_storage')->getToken()->getUser();
-    $userName = $user->getUsername();
-    $userId = $user->getId();
 
-    $orchard = new Orchard();
+    $this->checkOwner($id_orchard);
 
-    $step_orchard = 11;//def
+    $orchard = $this->getOrchard($id_orchard);
 
-    if($id_orchard != null){
-      $orchard=$this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard);
-      if($orchard!=null && $orchard->getUser()->getId()==$userId){
-        $step_orchard = $orchard->getStep();
-        switch ($step) {
-          case 11:case 12:case 15:case 24:case 25:
-          if($step <= $step_orchard) {
-            return $this->render('OrchardBundle:Default:step'.$step.'.html.twig', array('orchard' => $orchard));
-            break;
-          }
-          case 13:
-          if( $step <= $step_orchard) {
-            $repository = $this->getDoctrine()->getRepository('OrchardBundle:Image');
-            $images = $repository->findByOrchard($orchard);
-            return $this->render('OrchardBundle:Default:step13.html.twig', array('orchard' => $orchard,"images" =>$images));
-            break;
-          }
-          case 14:
-          if( $step <= $step_orchard) {
-            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
-            $orchard_types = $repository->findAll();
-            return $this->render('OrchardBundle:Default:step14.html.twig', array('orchard' => $orchard, 'orchard_types' => $orchard_types));
-            break;
-          }
-          case 21:
-          if( $step <= $step_orchard) {
-            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
-            $orchard_activities = $repository->findAll();
-            return $this->render('OrchardBundle:Default:step21.html.twig', array('orchard' => $orchard, 'orchard_activities' => $orchard_activities));
-            break;
-          }
-          case 22:
-          if( $step <= $step_orchard) {
-            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
-            $orchard_services = $repository->findAll();
-            return $this->render('OrchardBundle:Default:step22.html.twig', array('orchard' => $orchard, 'orchard_services' => $orchard_services));
-            break;
-          }
-          case 23:
-          if( $step <= $step_orchard) {
-            $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
-            $orchard_participates = $repository->findAll();
-            return $this->render('OrchardBundle:Default:step23.html.twig', array('orchard' => $orchard, 'orchard_participates' => $orchard_participates));
-            break;
-          }
+    $orchard_types = null;
+    $orchard_participates = null;
+    $orchard_services = null;
+    $orchard_activities = null;
 
-          return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-          break;
-
-          default:
-          return $this->render('OrchardBundle:Default:step' . $step_orchard . '.html.twig', array('orchard' => $orchard));
-          break;
-        }
-      }else {
-        return $this->render('OrchardBundle:Default:steps.html.twig', array('userName' => $userName, 'step' => $step_orchard));
-      }
-    }else {
-      # id_orchard = null
-      return $this->render('OrchardBundle:Default:step11.html.twig', array('orchard' => $orchard));
+    switch ($step_orchard) {
+      case '13':
+        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
+        $orchard_types = $repository->findAll();
+        break;
+      case '21':
+        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
+        $orchard_participates = $repository->findAll();
+        break;
+      case '32':
+        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
+        $orchard_services = $repository->findAll();
+        break;
+      case '33':
+        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
+        $orchard_activities = $repository->findAll();
+        break;
     }
 
-    settype($step_orchard, 'integer');
+    $template = null;
+
+    if($step_orchard <= $orchard->getStep()) {
+      $template = 'OrchardBundle:Default:step' . $step_orchard . '.html.twig';
+    }else {
+      $template = 'OrchardBundle:Default:step' . $orchard->getStep() . '.html.twig';
+    }
+
+    return $this->render($template, array('orchard' => $orchard, 'orchardTypes' => $orchard_types, 'orchardParticipates' => $orchard_participates, 'orchardServices' => $orchard_services, 'OrchardActivities' => $orchard_activities));
   }
 
-  //Método utilizado para insertar un huerto en la BBDD
-  //Recibe los campos del formulario correspondiente mediante el método POST
   public function insertAction($id_orchard,Request $request)# null si todavia no se ha creado
   {
     if($id_orchard=='null'){$id_orchard=null;}
@@ -156,7 +116,7 @@ class DefaultController extends Controller
     //devolvemos el id del huerto acabado de crear o de actualizar (en el caso de estar actualizando el registro no haria falta pero lo dejamos para que sea un método más genérico).
     $response = new JsonResponse();
     $response->setData(array(
-      'redirect' => $id."/".$orchard->getStep()
+      'redirect' => $orchard->getStep()
     ));
 
     return $response;
@@ -182,5 +142,27 @@ class DefaultController extends Controller
     }
 
     return $this->render('OrchardBundle:Default:preview.html.twig', array('userName' => $userName, 'images' =>$images, 'orchard_types' =>$orchard_types));
+  }
+
+  public function checkOwner($id_orchard)
+  {
+    $user = $this->get('security.token_storage')->getToken()->getUser();
+
+    $repository = $this->getDoctrine()->getRepository('OrchardBundle:Orchard');
+    $orchard = $repository->findOneById($id_orchard);
+
+    if (!$orchard) {
+        throw $this->createNotFoundException('El huerto no existe');
+    }
+
+    if($user != $orchard->getUser()) {
+      throw new AccessDeniedHttpException('Acceso denegado');
+    }
+  }
+
+  public function getOrchard($id_orchard)
+  {
+    $repository = $this->getDoctrine()->getRepository('OrchardBundle:Orchard');
+    return $repository->findOneById($id_orchard);
   }
 }

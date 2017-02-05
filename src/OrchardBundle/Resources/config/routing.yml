@@ -3,7 +3,7 @@ orchard_create_steps:
     defaults: { _controller: OrchardBundle:Default:steps, id_orchard:null }
 
 orchard_create_step:
-    path:     /create/step/{step}/{id_orchard}
+    path:     /create/step/{step_orchard}/{id_orchard}
     defaults: { _controller: OrchardBundle:Default:step, step:11, id_orchard:null }
 
 orchard_insert:

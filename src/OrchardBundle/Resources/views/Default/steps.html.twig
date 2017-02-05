@@ -1,4 +1,4 @@
-{% extends '::step-base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body %}
 
@@ -18,11 +18,11 @@
         <h5>Diles lo esencial (dónde está...)</h5>
         {% if stepOrchard is defined %}
           {% if stepOrchard >= 15 %}
-            <a href="/create/step/11/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
+            <a href="/orchard/create/step/11/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
           {% elseif stepOrchard == 11 %}
-            <a href="/create/step/11/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
+            <a href="/orchard/create/step/11/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
           {% else %}
-            <a href="/create/step/{{ stepOrchard }}/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
+            <a href="/orchard/create/step/{{ stepOrchard }}/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
           {% endif %}
         {% endif %}
       </div>
@@ -37,11 +37,11 @@
         <h5 class="stepNone" id="paso2">¿Qué pueden encontrar allí? (fotos, servicios...)</h5>
         {% if stepOrchard is defined and stepOrchard >= 21 %}
           {% if stepOrchard >= 31 %}
-            <a href="/create/step/21/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
+            <a href="/orchard/create/step/21/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
           {% elseif stepOrchard == 21 %}
-          <a href="/create/step/21/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
+          <a href="/orchard/create/step/21/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
           {% else %}
-            <a href="/create/step/{{ stepOrchard }}/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
+            <a href="/orchard/create/step/{{ stepOrchard }}/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
           {% endif %}
         {% endif %}
       </div>
@@ -56,11 +56,11 @@
         <h5 class="stepNone" id="paso3">Cuéntanos algo más especial de tu huerto</h5>
         {% if stepOrchard is defined and stepOrchard >= 31 %}
           {% if stepOrchard >= 34 %}
-            <a href="/create/step/31/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
+            <a href="/orchard/create/step/31/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
           {% elseif stepOrchard == 31 %}
-            <a href="/create/step/31/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
+            <a href="/orchard/create/step/31/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
           {% else %}
-            <a href="/create/step/{{ stepOrchard }}/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
+            <a href="/orchard/create/step/{{ stepOrchard }}/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
           {% endif %}
         {% endif %}
       </div>
@@ -84,21 +84,15 @@
 
 <script type="text/javascript">
 
-  $('.fixed-buttons').remove();
+$("#btn-save-exit").css("display", "none");
 
-  $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 0 + '%','aria-valuenow': 0}, {duration: 400, easing: 'linear'});
+var stepOrchard = {{ stepOrchard }};
 
-  $("#btn-save-exit").css("display", "none");
-
-  var stepOrchard = {{ stepOrchard }};
-
-  console.log(stepOrchard);
-
-    if (stepOrchard >= 21) {
-      $("#paso2").removeClass('stepNone');
-    }if (stepOrchard >= 31) {
-        $("#paso3").removeClass('stepNone');
-    }
+if (stepOrchard >= 21) {
+  $("#paso2").removeClass('stepNone');
+}if (stepOrchard >= 31) {
+  $("#paso3").removeClass('stepNone');
+}
 
 </script>
 

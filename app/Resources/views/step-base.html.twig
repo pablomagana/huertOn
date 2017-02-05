@@ -69,10 +69,10 @@
     {% block body %}{% endblock %}
 
     {% block botones %}
-      <div class="fixed-buttons row">
-        <button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
-        <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
-      </div>
+    <div class="fixed-buttons row">
+      <button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+      <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
+    </div>
     {% endblock %}
   </div>
 
@@ -127,38 +127,37 @@
       form['id'] = $('#orchard-id').val();
       console.log('Este és el formulario'+form);
 
-
       //FUNCION BOTON SIGUIENTE
       $.ajax({
         type: 'POST',
-        url: '/orchard/insert/{{idOrchard}}',
+        url: '/orchard/create/insert/{{ orchard.id }}',
         data: form,
         success: function(data) {
           $("#loading, #loading-text").fadeOut("slow", function() {
             $("#loading-text").text("Guardado").fadeIn('slow');
           });
           console.log('success');
-          window.location.href = '/orchard/step/'+data.redirect;
+          window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
         },
         error: function(jqXHR, exception) {
           $("#loading, #loading-text").fadeOut("slow", function() {
             $("#loading-text").text("Guardado").fadeIn('slow');
           });
           if (jqXHR.status === 0) {
-                alert('Not connect.\n Verify Network.');
-            } else if (jqXHR.status == 404) {
-                alert('Requested page not found. [404]');
-            } else if (jqXHR.status == 500) {
-                alert('Internal Server Error [500].');
-            } else if (exception === 'parsererror') {
-                alert('Requested JSON parse failed.');
-            } else if (exception === 'timeout') {
-                alert('Time out error.');
-            } else if (exception === 'abort') {
-                alert('Ajax request aborted.');
-            } else {
-                alert('Uncaught Error.\n' + jqXHR.responseText);
-            }
+            alert('Not connect.\n Verify Network.');
+          } else if (jqXHR.status == 404) {
+            alert('Requested page not found. [404]');
+          } else if (jqXHR.status == 500) {
+            alert('Internal Server Error [500].');
+          } else if (exception === 'parsererror') {
+            alert('Requested JSON parse failed.');
+          } else if (exception === 'timeout') {
+            alert('Time out error.');
+          } else if (exception === 'abort') {
+            alert('Ajax request aborted.');
+          } else {
+            alert('Uncaught Error.\n' + jqXHR.responseText);
+          }
           console.log('error');
         }
       });
@@ -179,51 +178,24 @@
     form['id'] = $('#orchard-id').val();
     console.log('Este és el formulario'+form);
 
-
     $.ajax({
       type: 'POST',
       dataType: 'json',
-      url: '/orchard/insert/{{idOrchard}}',
+      url: '/orchard/create/insert/{{ orchard.id }}',
       data: form,
       success: function() {
         $("#loading, #loading-text").fadeOut("slow", function() {
           $("#loading-text").text("Guardado").fadeIn('slow');
         });
         if($('#Step').val() == '12' || $('#Step').val() == '22') {
-          window.location.href = '/orchard/create/{{idOrchard}}'
+          window.location.href = '/orchard/create/steps'
         }else {
-          var step = parseInt($('#Step').val())-2;
-          console.log('/orchard/step/{{idOrchard}}/' + step.toString());
-          window.location.href = '/orchard/step/{{idOrchard}}/' + step.toString();
+          var step = parseInt($('#Step').val()) - 2;
+          window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
         }
       }
     });
   });
-
-  // $("form input").change(function(){
-  //   console.log('Validando');
-  //   validateForm();
-  // });
-  //
-  // $("form input").keyup(function(){
-  //   console.log('Validando');
-  //   validateForm();
-  // });
-  //
-  // function validateForm() {
-  //   var empty = false;
-  //   $('form input').each(function() {
-  //     if ($(this).val().length == 0) {
-  //       empty = true;
-  //     }
-  //   });
-  //
-  //   if (empty) {
-  //     $('#btn-siguiente').attr('disabled', 'disabled');
-  //   } else {
-  //     $('#btn-siguiente').removeAttr('disabled');
-  //   }
-  // }
 
   </script>
 
