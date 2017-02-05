@@ -56,9 +56,11 @@
           Guardando...
         </span>
       </li>
+      {% if orchard.step >= 14 %}
       <li class="nav-item">
         <a class="nav-link" href="#">Guardar y salir</a>
       </li>
+      {% endif %}
     </ul>
   </nav>
 
@@ -188,7 +190,7 @@
           $("#loading-text").text("Guardado").fadeIn('slow');
         });
         if($('#Step').val() == '12' || $('#Step').val() == '22') {
-          window.location.href = '/orchard/create/steps'
+          window.location.href = '/orchard/create/steps/{{ orchard.id }}'
         }else {
           var step = parseInt($('#Step').val()) - 2;
           window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
