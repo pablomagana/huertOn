@@ -30,6 +30,7 @@ class DefaultController extends Controller
       $id_orchard = $orchard->getId();
     }else {
       $this->checkOwner($id_orchard);
+      $orchard = $this->getOrchard($id_orchard);
     }
 
     return $this->render('OrchardBundle:Default:steps.html.twig', array('idOrchard'=> $id_orchard, 'stepOrchard' => $orchard->getStep()));
@@ -48,7 +49,15 @@ class DefaultController extends Controller
     $orchard_services = null;
     $orchard_activities = null;
 
-    switch ($step_orchard) {
+    $template = null;
+
+    if($step_orchard <= $orchard->getStep()) {
+      $template = 'OrchardBundle:Default:step' . $step_orchard . '.html.twig';
+    }else {
+      $template = 'OrchardBundle:Default:step' . $orchard->getStep() . '.html.twig';
+    }
+
+    switch ($orchard->getStep()) {
       case '13':
         $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
         $orchard_types = $repository->findAll();
@@ -67,32 +76,13 @@ class DefaultController extends Controller
         break;
     }
 
-    $template = null;
-
-    if($step_orchard <= $orchard->getStep()) {
-      $template = 'OrchardBundle:Default:step' . $step_orchard . '.html.twig';
-    }else {
-      $template = 'OrchardBundle:Default:step' . $orchard->getStep() . '.html.twig';
-    }
-
     return $this->render($template, array('orchard' => $orchard, 'orchardTypes' => $orchard_types, 'orchardParticipates' => $orchard_participates, 'orchardServices' => $orchard_services, 'OrchardActivities' => $orchard_activities));
   }
 
-  public function insertAction($id_orchard,Request $request)# null si todavia no se ha creado
+  public function insertAction($id_orchard, Request $request)
   {
-    if($id_orchard=='null'){$id_orchard=null;}
-    $user = $this->get('security.token_storage')->getToken()->getUser();
-    $id=$user->getId();
 
-    if($id_orchard == null) {
-      //El huerto no está creado así que creamos el objeto
-      //$orchard = new Orchard();
-      $orchard->setUser($user);
-    }else {
-      $orchard = $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->findOneById($id_orchard);
-      $id_o=$orchard->getUser()->getId();
-    }
-
+    $orchard = $this->getOrchard($id_orchard);
 
     // Recoje todos los valores del form
     $params = $request->request->all();
@@ -123,7 +113,7 @@ class DefaultController extends Controller
 
   }
 
-  public function previewAction($id_orchard,Request $request)
+  public function previewAction($id_orchard, Request $request)
   {
     $user = $this->get('security.token_storage')->getToken()->getUser();
     $userName = $user->getUsername();
@@ -164,5 +154,22 @@ class DefaultController extends Controller
   {
     $repository = $this->getDoctrine()->getRepository('OrchardBundle:Orchard');
     return $repository->findOneById($id_orchard);
+  }
+
+  public function getStep($id_orchard)
+  {
+    $orchard = $this->getOrchard($id_orchard);
+
+    if($orchard->getName() != null && $orchard->get)
+
+    switch (variable) {
+      case 'value':
+        # code...
+        break;
+
+      default:
+        # code...
+        break;
+    }
   }
 }
