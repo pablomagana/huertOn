@@ -42,6 +42,7 @@ class UserType extends BaseRegistrationFormType {
     {
         $resolver->setDefaults(array(
             'data_class' => 'UserBundle\Entity\User',
+            'csrf_protection' => false
         ));
     }
 }
