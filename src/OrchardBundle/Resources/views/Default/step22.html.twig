@@ -1,79 +1,115 @@
 {% set id_orchard=orchard.id %}
 {% extends '::step-base.html.twig' %}
 
+{% block stylesheets %}
+<!-- css step 2.4 carga pdf-->
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/set5.css') }}" />
+{% endblock %}
 {% block body %}
 
 <div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
-		<form>
-			<div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
-				<label><h4>¿Qué servicios ofreces?</h4></label><br>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
+    <span id="loading-file" style="display: none;" class="navbar-text">
+      Cargando Archivo...
+    </span>
+    <form>
+      <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
+        <p><h4>Normas del huerto</h4></p>
+        <div class="cuadro-subidas-pdf col-xs-12 col-sm-12 col-md-12 col-lg-12" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <input type="file" id="fileinput" accept=".pdf,.docx,.txt,.doc,.odf" hidden="hidden"/>
+          <div class="more" onclick="$('#fileinput').click();">
+            <p>Añade o arrastra imagenes aqui</p>
+          </div>
+          <div id="files">
+          </div>
+        </div>
 
-				<div class="row">
-					{% for orchard_service in orchard_services %}
-
-					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-						<label class="custom-control custom-checkbox">
-							<input type="checkbox" class="custom-control-input">
-							<span class="custom-control-indicator"></span>
-							<span class="custom-control-description">{{ orchard_service.name }}</span>
-						</label>
-					</div>
-
-					{% endfor %}
-				</div>
-
-<br>
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<label class="custom-control custom-checkbox">
-						  <input id="cb-new-type" type="checkbox" class="custom-control-input">
-						  <span class="custom-control-indicator"></span>
-						  <span class="custom-control-description">Sugiérenos un servicio</span>
-						</label>
-						<input type="text" class="form-control" id="Type" placeholder="Escribe aquí el tipo de tu huerto" hidden>
-
-<br>
-						<a id="mail-url"><button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>Enviar</button></a>
-					</div>
-				</div>
-
-			</div>
-
-			<input type="text" id="Step" hidden="hidden" value="23">
-
-		</form>
-
-
-	</div>
-
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right">
-		<img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
-	</div>
-
+        <!-- <br>
+        <h3 class="centrar-o">Ó</h3>
+        <p>Quiero compartir el archivo</p>
+        <input type="text" class="form-control required" placeholder="Escribe el link"> -->
 </div>
+
+        <input type="text" id="Step" hidden="hidden" value="23">
+      </form>
+</div>
+
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right-pdf">
+    <h3 class="display-3">Sube un PDF con las normas de tu huerto</h3>
+    <h4 class="display-5">Algunos links interesantes sobre normas de huertos:</h4><br><br>
+    <h5>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</h5>
+  </div>
 
 {% endblock %}
 
-
 {% block javascripts %}
-	<script type="text/javascript">
-		$(document).ready(function () {
-			$('#cb-new-type').click(function() {
-				this.checked ? $('#Type').removeAttr('hidden') : $('#Type').attr('hidden', 'hidden');
-				this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
-			});
+<script src="{{asset('js/files.js')}}" charset="utf-8"></script>
+<script type="text/javascript">
+$('#btn-siguiente').removeAttr('disabled');
+$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 80 + '%','aria-valuenow': 80}, {duration: 400, easing: 'linear'});
 
-			$('#Type').keyup(function() {
-				$('#mail-url').attr('href', "http://localhost:8000/orchard/send/{{id_orchard}}/"+$('#Type').val());
-			});
-		});
-	</script>
 
-	<script type="text/javascript">
 
-		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 40 + '%','aria-valuenow': 40}, {duration: 400, easing: 'linear'});
+var fileNormas = null;
+//cargar el file con click
+var filesinput = document.querySelector('#fileinput');
+filesinput.addEventListener('change', function () {
+  console.log("detectando cambios en input");
+  $("#loading-file").fadeIn("slow");
+  //solo se permiten 10 imagenes
+  if(fileNormas==null && this.files.length<2){
+    //console.log(this.files[0]);
+    previewImage(this.files[0]);
+  }else {
+    alert("solo se permite un maximo de 1 archivo");
+  }
+  $("#loading-file").fadeOut("slow");
+}, false);
 
-		$('#Type').val();
-	</script>
+
+$('#btn-siguiente , #btn-save-exit , #btn-atras').off('click');
+
+$('#btn-siguiente, #btn-save-exit').on('click', function() {
+  $("#loading, #loading-text").fadeIn("slow");
+  var data = new FormData();
+  data.append("normas",fileNormas);
+    $.ajax({
+      type: "POST",
+      contentType: false,
+      url:"/orchard/files/upload",
+      data: JSON.stringify(imagenes),
+      success: function(step){
+        console.log(step);
+        window.location.href = '/orchard/step/'+step;
+      },
+      error: function(jqXHR, exception) {
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
+          });
+          if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+          console.log('error');
+        }
+    });
+});
+
+$('#btn-atras').on('click', function() {
+  $("#loading, #loading-text").fadeIn("slow");
+  window.location.href = '/orchard/step/23';
+});
+</script>
+
 {% endblock %}

@@ -1,13 +1,7 @@
-#Todas las rutas en este archivo tienen como prefix /orchard
-
-#Ruta utilizada para enviar un mail de sugerencia al administrador
-#Recibe la sugerencia del paso 1.4 de la creación de un huerto mediante el método GET
 orchard_send:
     path:     /send/{orchard_type}
     defaults: { _controller: OrchardBundle:Suggestion:send }
-
-#Ruta utilizada para aceptar una sugerencia de tipo de huerto desde un mail
-#Recibe la sugerencia y si ésta ha sido acceptada o no mediante el método GET
+    
 orchard_add_description:
     path:     /add-type-description/{id_orchard}/{orchard_type}/{accept}
     defaults: { _controller: OrchardBundle:Suggestion:addTypeDescription, accept:false }
