@@ -2,8 +2,8 @@ user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /user
 
-orchard:
-    resource: "@OrchardBundle/Resources/config/routing.yml"
+orchard_create:
+    resource: "@OrchardBundle/Resources/config/routing_create.yml"
     prefix:   /orchard
 
 orchard_upload:

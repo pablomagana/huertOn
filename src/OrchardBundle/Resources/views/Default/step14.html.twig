@@ -61,7 +61,6 @@
 
 <script src="{{asset('js/images.js')}}" charset="utf-8"></script>
 <script type="text/javascript">
-$('#btn-siguiente').removeAttr('disabled');
 $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
 
 var imagenes = new Array();
@@ -103,7 +102,7 @@ $('#btn-siguiente, #btn-save-exit').on('click', function() {
     $.ajax({
       type: "POST",
       contentType: 'application/json',
-      url:"/orchard/images/upload",
+      url:"/orchard/images/upload/{{ orchard.id }}",
       data: JSON.stringify(imagenes),
       success: function(step){
         console.log(step);

@@ -66,7 +66,7 @@
       </div>
     </div>
     {% if stepOrchard is defined and stepOrchard >= 21 %}
-      <a href="/orchard/preview"><button type="button" class="btn btn-primary preview">Mira cómo ha quedado</button></a>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orchardPreviewModal">Mira cómo ha quedado</button>
     {% endif %}
   </div>
 
@@ -75,6 +75,27 @@
     <h2 class="display-3">Muchos urbanitas sólo conocen 1 o 2 huertos en tu ciudad y alrededores</h2>
     <h1 class="display-4">¡Descúbreles el tuyo!</h1>
   </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="orchardPreviewModal" tabindex="-1" role="dialog" aria-labelledby="orchardPreviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="orchardPreviewModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
 </div>
 
