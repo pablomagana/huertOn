@@ -4,15 +4,15 @@ user:
 
 orchard_create:
     resource: "@OrchardBundle/Resources/config/routing_create.yml"
-    prefix:   /orchard/create
+    prefix:   /orchard
 
 orchard_upload:
     resource: "@OrchardBundle/Resources/config/routing_upload.yml"
-    prefix:   /orchard/upload
+    prefix:   /orchard
 
 orchard_suggest:
     resource: "@OrchardBundle/Resources/config/routing_suggest.yml"
-    prefix:   /orchard/suggest
+    prefix:   /orchard
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

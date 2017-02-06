@@ -1,15 +1,15 @@
 orchard_create_steps:
-    path:     /draft
+    path:     /create/draft
     defaults: { _controller: OrchardBundle:Create:draft }
 
 orchard_create_steps:
-    path:     /steps/{id_orchard}
+    path:     /create/steps/{id_orchard}
     defaults: { _controller: OrchardBundle:Create:steps, id_orchard:null }
 
 orchard_create_step:
-    path:     /step/{step_orchard}/{id_orchard}
+    path:     /create/step/{step_orchard}/{id_orchard}
     defaults: { _controller: OrchardBundle:Create:step, step:11, id_orchard:null }
 
 orchard_insert:
-    path:     /insert/{id_orchard}
+    path:     /create/insert/{id_orchard}
     defaults: { _controller: OrchardBundle:Create:insert, id_orchard:null }

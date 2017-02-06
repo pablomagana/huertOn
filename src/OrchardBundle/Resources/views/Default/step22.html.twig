@@ -73,7 +73,7 @@ $('#btn-siguiente').on('click', function() {
     $.ajax({
       type: "POST",
       contentType: false,
-      url: "/orchard/upload/files/upload",
+      url: "/orchard/files/upload",
       data: JSON.stringify(imagenes),
       success: function(step){
         console.log(step);

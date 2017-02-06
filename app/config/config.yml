@@ -69,9 +69,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-vich_uploader:
-    db_driver: orm # or mongodb or propel or phpcr
-
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main

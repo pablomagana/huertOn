@@ -102,7 +102,7 @@ $('#btn-siguiente, #btn-save-exit').on('click', function() {
     $.ajax({
       type: "POST",
       contentType: 'application/json',
-      url:"/orchard/upload/images/upload/{{ orchard.id }}",
+      url:"/orchard/images/upload/{{ orchard.id }}",
       data: JSON.stringify(imagenes),
       success: function(step){
         console.log(step);

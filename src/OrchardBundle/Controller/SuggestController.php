@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
 
-class SuggestionController extends Controller
+class SuggestController extends Controller
 {
 
-  public function sendAction($id_orchard,$orchard_type)
+  public function sendAction($id_orchard, $orchard_type)
   {
 
     $message = \Swift_Message::newInstance()
@@ -24,7 +24,7 @@ class SuggestionController extends Controller
     ->setBody(
       $this->renderView(
         'OrchardBundle:Default:email.html.twig',
-        array('id_orchard' => $id_orchard,'orchard_type' => $orchard_type)
+        array('id_orchard' => $id_orchard, 'orchard_type' => $orchard_type)
         )
         )
         ;
