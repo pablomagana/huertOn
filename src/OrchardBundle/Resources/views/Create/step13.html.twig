@@ -12,7 +12,7 @@
 					{% for orchardType in orchardTypes %}
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<label class="custom-control custom-checkbox">
-								<input id="{{ orchardType.id }}" type="checkbox" class="custom-control-input" {% if orchardType in orchard.type %}  checked {% endif %}>
+								<input id="{{ orchardType.id }}" type="checkbox" class="custom-control-input" {% if orchardType in orchard.type %} checked {% endif %}>
 								<span class="custom-control-indicator"></span>
 
 								<div class="text-right">
@@ -130,12 +130,12 @@ $(function() {
 
 			$.ajax({
 				type: 'POST',
-				url: '/orchard/create/insert/checkbox-type/{{ orchard.id }}',
+				url: '/orchard/create/insert/checkbox/{{ orchard.id }}',
 				data: { 'orchardTypes': orchard_types },
 				success: function(data) {
 					saveAnimation();
 					console.log('success');
-					window.location.href = '/orchard/create/step/14/{{ orchard.id }}';
+					window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}/OrchardType';
 				},
 				error: function(jqXHR, exception) {
 					saveAnimation();

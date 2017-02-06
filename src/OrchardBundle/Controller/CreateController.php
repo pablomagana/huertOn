@@ -104,30 +104,58 @@ class CreateController extends Controller
 
   }
 
-  public function typeAction($id_orchard, Request $request)
+  public function checkboxAction(Request $request, $id_orchard, $entity)
   {
 
-    $orchard_types = $request->request->get('orchardTypes');
+    $getterName = 'get' . $entity;
+    $setterName = 'set' . $entity;
+
+    $params = $request->request->get($entity);
 
     $em = $this->getDoctrine()->getManager();
 
     $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
-    $orchard->setStep('14');
 
-    $orchardTypesArray = array();
+    $orchardEntityArray = array();
 
-    foreach ($orchard_types as $orchard_type) {
-      $orchardType = $this->container->get("orchard_service")->getOrchardType($orchard_type);
-      $orchardType->addOrchard($orchard);
-      array_push($orchardTypesArray, $orchardType);
+    foreach ($params as $param) {
+      $orchardEntity = $this->container->get("orchard_service")->$getterName($param);
+      $orchardEntity->addOrchard($orchard);
+      array_push($orchardEntityArray, $orchardEntity);
     }
 
-    $orchard->setType($orchardTypesArray);
+    $orchard->$setterName($orchardEntityArray);
+
+    $redirect = null;
+
+    switch ($entity) {
+      case 'OrchardType':
+        $orchard->setStep('14');
+        $redirect = '14';
+        break;
+      case 'OrchardParticipate':
+        $orchard->setStep('22');
+        $redirect = '22';
+        break;
+      case 'OrchardActivity':
+        $orchard->setStep('34');
+        $redirect = '34';
+        break;
+      case 'OrchardService':
+        $orchard->setStep('33');
+        $redirect = '33';
+        break;
+    }
 
     $em->persist($orchard);
     $em->flush();
 
-    return new Response();
+    $response = new JsonResponse();
+    $response->setData(array(
+      'redirect' => $redirect
+    ));
+
+    return $response;
 
   }
 

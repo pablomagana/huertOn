@@ -1,0 +1,237 @@
+<?php
+
+namespace OrchardBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * Orchard
+ *
+ * @ORM\Table(name="orchard")
+ * @ORM\Entity(repositoryClass="OrchardBundle\Repository\OrchardRepository")
+ *
+ *
+ */
+class Orchard
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="number", type="string", length=255, nullable=true)
+     *
+     */
+    private $number;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="street", type="string", length=255, nullable=true)
+     *
+     */
+    private $street;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="town", type="string", length=255, nullable=true)
+     *
+     */
+    private $town;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="zip_code", type="string", length=255, nullable=true)
+     *
+     */
+    private $zipCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="geometry", type="text", nullable=true)
+     *
+     */
+    private $geometry;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     *
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="step", type="string", nullable=true)
+     *
+     */
+    private $step;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebook", type="string", length=255, nullable=true)
+     *
+     */
+    private $facebook;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="instagram", type="string", length=255, nullable=true)
+     *
+     */
+    private $instagram;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="twitter", type="string", length=255, nullable=true)
+     *
+     */
+    private $twitter;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mail", type="string", length=255, nullable=true)
+     *
+     */
+    private $mail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
+     *
+     */
+    private $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="web", type="string", length=255, nullable=true)
+     *
+     */
+    private $web;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection|Image[]
+     * One Orchard has Many Images.
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="orchard", fetch="EAGER")
+     */
+    private $images;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection|OrchardType[]
+     *
+     * @ORM\ManyToMany(targetEntity="OrchardType", inversedBy="orchards", fetch="EAGER")
+     * @ORM\JoinTable(
+     *  name="orchard_orchardtype",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="orchardtype_id", referencedColumnName="id")
+     *  }
+     * )
+     */
+    protected $orchardType;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="projectStart", type="text", length=65535, nullable=true)
+     *
+     */
+    private $projectStart;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="governanceModel", type="text", length=65535, nullable=true)
+     *
+     */
+     private $governanceModel;
+
+
+     /**
+      * @var \Doctrine\Common\Collections\Collection|OrchardActivity[]
+      *
+      * @ORM\ManyToMany(targetEntity="OrchardActivity", inversedBy="orchards")
+      * @ORM\JoinTable(
+      *  name="orchard_orchardactivity",
+      *  joinColumns={
+      *      @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
+      *  },
+      *  inverseJoinColumns={
+      *      @ORM\JoinColumn(name="orchardactivity_id", referencedColumnName="id")
+      *  }
+      * )
+      */
+     protected $orchardActivity;
+
+
+     /**
+      * @var \Doctrine\Common\Collections\Collection|OrchardParticipate[]
+      *
+      * @ORM\ManyToMany(targetEntity="OrchardParticipate", inversedBy="orchards", fetch="EAGER")
+      * @ORM\JoinTable(
+      *  name="orchard_orchardparticipate",
+      *  joinColumns={
+      *      @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
+      *  },
+      *  inverseJoinColumns={
+      *      @ORM\JoinColumn(name="orchardparticipate_id", referencedColumnName="id")
+      *  }
+      * )
+      */
+     protected $orchardParticipate;
+
+     /**
+      * @var \Doctrine\Common\Collections\Collection|OrchardService[]
+      *
+      * @ORM\ManyToMany(targetEntity="OrchardService", inversedBy="orchards")
+      * @ORM\JoinTable(
+      *  name="orchard_orchardservice",
+      *  joinColumns={
+      *      @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
+      *  },
+      *  inverseJoinColumns={
+      *      @ORM\JoinColumn(name="orchardservice_id", referencedColumnName="id")
+      *  }
+      * )
+      */
+     protected $orchardService;
+
+
+     /**
+      * @var UserBundle\Entity\User
+      *
+      * muchos huertos a un usuario.
+      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="orchard")
+      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+      */
+     protected $user;
+
+}
