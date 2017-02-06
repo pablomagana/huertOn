@@ -52,6 +52,11 @@
 
 		</form>
 
+		<div class="fixed-buttons">
+			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
+		</div>
+
 	</div>
 
 	<!--pantalla de la derecha -->
@@ -111,76 +116,54 @@
 {% block javascripts %}
 <script type="text/javascript">
 
-$(function () {
+$(function() {
+
+	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 75 + '%','aria-valuenow': 75}, {duration: 400, easing: 'linear'});
+
 	$('#btn-siguiente').attr('data-toggle', 'popover').attr('title', 'Paso obligatorio').attr('data-content', 'Por favor, selecciona un tipo de huerto').attr('data-placement', 'top');
 	$('[data-toggle="popover"]').popover();
-})
 
-$(':checkbox:not(#cb-new-type)').change(function() {
-	var checkeado = false;
-    if(this.checked) {
-				$('#btn-siguiente').popover('disable')
-				$('#required-hidden-input').remove();
-    }else {
-			if($(':checkbox').each(function() {
-				if(this.checked) {
-					checkeado = true;
-				}
-			}));
-
-			if(!checkeado) {
-				$('#btn-siguiente').popover('enable');
-				$('<span id="required-hidden-input" class="required" hidden="hidden"></span>').appendTo('body');
-			}
-		}
-});
-
-$(document).ready(function () {
-
-	$('#cb-new-type').click(function() {
-		this.checked ? $('#Type').removeAttr('hidden') : $('#Type').attr('hidden', 'hidden');
-		this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
-	});
-
-//borramos los handlers del onclick para evitar que se clike varias veces
-//añade gestion de AJAX al boton enviar al entrar a la pagina por si el campo tipo ya estaba rellenado anteriormente
-	$('#btn-enviar').off('click');
-	$('#btn-enviar').on('click', function() {
-		if($('#Type').val()) {
-			$.ajax({
-				type: 'POST',
-				url: '/orchard/suggest/send/'+$('#Type').val(),
-				data: form,
-				success: function(data) {
-					console.log('success');
-					$('#myModal').modal('show');
-				},
-				error: function(jqXHR, exception) {
-					if (jqXHR.status === 0) {
-						alert('Not connect.\n Verify Network.');
-					} else if (jqXHR.status == 404) {
-						alert('Requested page not found. [404]');
-					} else if (jqXHR.status == 500) {
-						alert('Internal Server Error [500].');
-					} else if (exception === 'parsererror') {
-						alert('Requested JSON parse failed.');
-					} else if (exception === 'timeout') {
-						alert('Time out error.');
-					} else if (exception === 'abort') {
-						alert('Ajax request aborted.');
-					} else {
-						alert('Uncaught Error.\n' + jqXHR.responseText);
+	//FUNCIÓN QUE COMPRUEBA SI SE INSERTAN REGISTROS
+	$(':checkbox:not(#cb-new-type)').change(function() {
+		var checkeado = false;
+	    if(this.checked) {
+					$('#btn-siguiente').popover('disable')
+					$('#required-hidden-input').remove();
+	    }else {
+				if($(':checkbox').each(function() {
+					if(this.checked) {
+						checkeado = true;
 					}
-					console.log('error');
+				}));
+
+				if(!checkeado) {
+					$('#btn-siguiente').popover('enable');
+					$('<span id="required-hidden-input" class="required" hidden="hidden"></span>').appendTo('body');
 				}
-			});
-		}
-		return false;
+			}
 	});
 
-	//borramos los handlers del onclick para evitar que se clike varias veces
-	//añade gestion de AJAX al boton enviar cada vez que se escriba en el campo de tipo
-	$('#Type').keyup(function() {
+	initSuggest();
+
+	function initSuggest() {
+		//FUNCION PARA MOSTRAR/OCULTAR INPUT SUGERENCIA
+		$('#cb-new-type').click(function() {
+			this.checked ? $('#Type').removeAttr('hidden') : $('#Type').attr('hidden', 'hidden');
+			this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
+		});
+
+		//borramos los handlers del onclick para evitar que se clike varias veces
+		//añade gestion de AJAX al boton enviar al entrar a la pagina por si el campo tipo ya estaba rellenado anteriormente
+		prepareSend();
+
+		//borramos los handlers del onclick para evitar que se clike varias veces
+		//añade gestion de AJAX al boton enviar cada vez que se escriba en el campo de tipo
+		$('#Type').keyup(function() {
+			prepareSend();
+		});
+	}
+
+	function prepareSend() {
 		$('#btn-enviar').off('click');
 		$('#btn-enviar').on('click', function() {
 			if($('#Type').val()) {
@@ -214,7 +197,7 @@ $(document).ready(function () {
 			}
 			return false;
 		});
-	});
+	}
 
 	//MOSTRAR TEXTO A LA DERECHA
 	$('span.type-name').hover(function() {
@@ -225,7 +208,6 @@ $(document).ready(function () {
 			$("#show-description").html("Situa el puntero sobre cualquier tipo de huerto para mostrar más información de cada uno.");
   });
 
-	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 75 + '%','aria-valuenow': 75}, {duration: 400, easing: 'linear'});
 });
 </script>
 {% endblock %}

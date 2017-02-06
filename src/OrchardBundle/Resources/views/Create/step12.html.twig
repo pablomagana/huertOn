@@ -12,20 +12,20 @@
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 						<label for="Mail" class="label-control" data-toogle="tooltip" data-placement="right" title="Campo requerido">Mail</label>
 						<span style="display: none;">Campo requerido</span>
-						<input type="text" class="form-control required" id="Mail" value="{{ orchard.mail }}" placeholder="Escribe aquí tu email"><br>
+						<input type="email" class="form-control required" id="Mail" value="{{ orchard.mail }}" placeholder="Escribe aquí tu email"><br>
 					</div>
 
 					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 						<label for="Phone" class="label-control" data-toogle="tooltip" data-placement="right" title="Campo requerido">Teléfono</label>
 						<span style="display: none;">Campo requerido</span>
-						<input type="text" class="form-control required" id="Phone" value="{{ orchard.phone }}" placeholder="Escribe aquí tu teléfono"><br>
+						<input type="tel" class="form-control required" id="Phone" value="{{ orchard.phone }}" placeholder="Escribe aquí tu teléfono"><br>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<label for="Web" >Web / Blog</label>
-						<input type="text" class="form-control" id="Web"  value="{{ orchard.web }}"placeholder="Escribe aquí tu Web / Blog">
+						<input type="url" class="form-control" id="Web"  value="{{ orchard.web }}"placeholder="Escribe aquí tu Web / Blog">
 					</div>
 					<br><br><br><br>
 				</div>
@@ -73,6 +73,10 @@
 
 		</form>
 
+		<div class="fixed-buttons">
+			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
+		</div>
 
 	</div>
 
@@ -82,15 +86,14 @@
 
 </div>
 
-{% endblock %}
-
-{% block javascripts %}
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/classie/1.0.1/classie.js"></script>
 
 <script type="text/javascript">
 
 (function() {
+
+	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 50 + '%','aria-valuenow': 50}, {duration: 400, easing: 'linear'});
+
 	// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
 	if (!String.prototype.trim) {
 		(function() {
@@ -124,10 +127,6 @@
 	}
 })();
 
-</script>
-
-<script type="text/javascript">
-  $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 50 + '%','aria-valuenow': 50}, {duration: 400, easing: 'linear'});
 </script>
 
 {% endblock %}
