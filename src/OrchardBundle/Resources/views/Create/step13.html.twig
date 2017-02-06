@@ -175,8 +175,8 @@ $(function() {
 		$.ajax({
 			type: 'POST',
 			dataType: 'json',
-			url: '/orchard/create/insert/checkbox-type/{{ orchard.id }}',
-			data: { 'orchardTypes': orchard_types },
+			url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardType',
+			data: { 'OrchardType': orchard_types },
 			success: function() {
 				saveAnimation();
 				if($('#Step').val() == '12' || $('#Step').val() == '22') {
@@ -205,8 +205,8 @@ $(function() {
 
 			$.ajax({
 				type: 'POST',
-				url: '/orchard/create/insert/checkbox-type/{{ orchard.id }}',
-				data: { 'orchardTypes': orchard_types },
+				url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardType',
+				data: { 'OrchardType': orchard_types },
 				success: function(data) {
 					saveAnimation();
 					console.log('success');
