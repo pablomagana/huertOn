@@ -14,6 +14,6 @@ orchard_create_insert:
     path:     /insert/{id_orchard}
     defaults: { _controller: OrchardBundle:Create:insert, id_orchard:null }
 
-orchard_create_insert_type:
+orchard_create_insert_checkbox:
     path:     /insert/checkbox/{id_orchard}/{entity}
     defaults: { _controller: OrchardBundle:Create:checkbox, id_orchard:null }

@@ -671,7 +671,7 @@ class Orchard
      *
      * @return Orchard
      */
-    public function setImages(\Doctrine\Common\Collections\Collection $images)
+    public function setImages($images)
     {
         $this->images = $images;
 
@@ -719,7 +719,7 @@ class Orchard
      *
      * @return Orchard
      */
-    public function setOrchardType(\Doctrine\Common\Collections\Collection $orchardType)
+    public function setOrchardType($orchardType)
     {
         $this->orchardType = $orchardType;
 
@@ -767,7 +767,7 @@ class Orchard
      *
      * @return Orchard
      */
-    public function setOrchardActivity(\Doctrine\Common\Collections\Collection $orchardActivity)
+    public function setOrchardActivity($orchardActivity)
     {
         $this->orchardActivity = $orchardActivity;
 
@@ -815,7 +815,7 @@ class Orchard
      *
      * @return Orchard
      */
-    public function setOrchardParticipate(\Doctrine\Common\Collections\Collection $orchardParticipate)
+    public function setOrchardParticipate($orchardParticipate)
     {
         $this->orchardParticipate = $orchardParticipate;
 
@@ -863,7 +863,7 @@ class Orchard
      *
      * @return Orchard
      */
-    public function setOrchardService(\Doctrine\Common\Collections\Collection $orchardService)
+    public function setOrchardService($orchardService)
     {
         $this->orchardService = $orchardService;
 

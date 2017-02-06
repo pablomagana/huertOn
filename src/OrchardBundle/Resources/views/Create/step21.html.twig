@@ -13,7 +13,7 @@
 
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						<label class="custom-control custom-checkbox">
-							<input id="{{ orchardParticipate.id }}" type="checkbox" class="custom-control-input" {% if orchardParticipate in orchard.participate %} checked {% endif %}>
+							<input id="{{ orchardParticipate.id }}" type="checkbox" class="custom-control-input" {% if orchardParticipate in orchard.orchardParticipate %} checked {% endif %}>
 							<span class="custom-control-indicator"></span>
 							<span class="custom-control-description">{{ orchardParticipate.name }}</span>
 						</label>
