@@ -1,4 +1,3 @@
-{% set id_orchard=orchard.id %}
 {% extends '::step-base.html.twig' %}
 
 {% block body %}
@@ -150,7 +149,7 @@ $(document).ready(function () {
 		if($('#Type').val()) {
 			$.ajax({
 				type: 'POST',
-				url: '/orchard/send/{{ orchard.id }}/'+$('#Type').val(),
+				url: '/orchard/suggest/send/'+$('#Type').val(),
 				data: form,
 				success: function(data) {
 					console.log('success');
@@ -187,7 +186,7 @@ $(document).ready(function () {
 			if($('#Type').val()) {
 				$.ajax({
 					type: 'POST',
-					url: '/orchard/send/{{ orchard.id }}/'+$('#Type').val(),
+					url: '/orchard/suggest/send/'+$('#Type').val(),
 					data: form,
 					success: function(data) {
 						console.log('success');

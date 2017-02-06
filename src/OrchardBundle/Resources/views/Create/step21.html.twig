@@ -1,4 +1,3 @@
-{% set id_orchard=orchard.id %}
 {% extends '::step-base.html.twig' %}
 
 {% block body %}
@@ -7,16 +6,16 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
 		<form>
 			<div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
-				<label><h4>¿Qué actividades soleis hacer en el huerto?</h4></label><br>
+				<label><h4>¿Qué formas de participar ofreces?</h4></label><br>
 
 				<div class="row">
-					{% for orchardActivity in orchardActivities %}
+					{% for orchardParticipate in orchardParticipates %}
 
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						<label class="custom-control custom-checkbox">
 							<input type="checkbox" class="custom-control-input">
 							<span class="custom-control-indicator"></span>
-							<span class="custom-control-description">{{ orchardActivity.name }}</span>
+							<span class="custom-control-description">{{ orchardParticipate.name }}</span>
 						</label>
 					</div>
 
@@ -29,7 +28,7 @@
 						<label class="custom-control custom-checkbox">
 						  <input id="cb-new-type" type="checkbox" class="custom-control-input">
 						  <span class="custom-control-indicator"></span>
-						  <span class="custom-control-description">Sugiérenos una actividad</span>
+						  <span class="custom-control-description">Sugiérenos un tipo de huerto</span>
 						</label>
 						<input type="text" class="form-control" id="Type" placeholder="Escribe aquí el tipo de tu huerto" hidden>
 
@@ -40,7 +39,7 @@
 
 			</div>
 
-			<input type="text" id="Step" hidden="hidden" value="34">
+			<input type="text" id="Step" hidden="hidden" value="22">
 
 		</form>
 
@@ -65,14 +64,14 @@
 			});
 
 			$('#Type').keyup(function() {
-				$('#mail-url').attr('href', "http://localhost:8000/orchard/send/{{id_orchard}}/"+$('#Type').val());
+				$('#mail-url').attr('href', "http://localhost:8000/orchard/suggest/send/{{ id_orchard }}/"+$('#Type').val());
 			});
 		});
 	</script>
 
 	<script type="text/javascript">
 
-		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 20 + '%','aria-valuenow': 20}, {duration: 400, easing: 'linear'});
+		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 33 + '%','aria-valuenow': 33}, {duration: 400, easing: 'linear'});
 
 		$('#Type').val();
 	</script>

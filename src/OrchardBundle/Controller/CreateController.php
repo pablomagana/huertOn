@@ -9,7 +9,6 @@ use OrchardBundle\Entity\OrchardType;
 use OrchardBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use OrchardBundle\Util\Util;
 
 class CreateController extends Controller
 {
@@ -31,7 +30,7 @@ class CreateController extends Controller
       $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
     }
 
-    return $this->render('OrchardBundle:Default:steps.html.twig', array('orchard'=> $orchard));
+    return $this->render('OrchardBundle:Create:steps.html.twig', array('orchard'=> $orchard));
 
   }
 
@@ -50,9 +49,9 @@ class CreateController extends Controller
     $template = null;
 
     if($step_orchard <= $orchard->getStep()) {
-      $template = 'OrchardBundle:Default:step' . $step_orchard . '.html.twig';
+      $template = 'OrchardBundle:Create:step' . $step_orchard . '.html.twig';
     }else {
-      $template = 'OrchardBundle:Default:step' . $orchard->getStep() . '.html.twig';
+      $template = 'OrchardBundle:Create:step' . $orchard->getStep() . '.html.twig';
     }
 
     switch ($orchard->getStep()) {
@@ -105,8 +104,10 @@ class CreateController extends Controller
     return $response;
 
   }
+
   public function draftAction()
   {
-    return $this->render('OrchardBundle:Default:draft.html.twig');
+    return $this->render('OrchardBundle:Create:draft.html.twig');
   }
+  
 }
