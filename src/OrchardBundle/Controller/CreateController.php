@@ -54,26 +54,25 @@ class CreateController extends Controller
       $template = 'OrchardBundle:Create:step' . $orchard->getStep() . '.html.twig';
     }
 
-    switch ($orchard->getStep()) {
-      case '13':
-        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
-        $orchard_types = $repository->findAll();
-        break;
-      case '21':
-        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
-        $orchard_participates = $repository->findAll();
-        break;
-      case '32':
-        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
-        $orchard_services = $repository->findAll();
-        break;
-      case '33':
-        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
-        $orchard_activities = $repository->findAll();
-        break;
+    if($orchard->getStep() == '13' || $step_orchard == '13') {
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
+      $orchard_types = $repository->findAll();
+    }
+    if($orchard->getStep() == '21' || $step_orchard == '21') {
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
+      $orchard_participates = $repository->findAll();
+    }
+    if($orchard->getStep() == '32' || $step_orchard == '32') {
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
+      $orchard_services = $repository->findAll();
+    }
+    if($orchard->getStep() == '33' || $step_orchard == '33') {
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
+      $orchard_activities = $repository->findAll();
     }
 
     return $this->render($template, array('orchard' => $orchard, 'orchardTypes' => $orchard_types, 'orchardParticipates' => $orchard_participates, 'orchardServices' => $orchard_services, 'OrchardActivities' => $orchard_activities));
+
   }
 
   public function insertAction($id_orchard, Request $request)
@@ -102,6 +101,33 @@ class CreateController extends Controller
     ));
 
     return $response;
+
+  }
+
+  public function typeAction($id_orchard, Request $request)
+  {
+
+    $orchard_types = $request->request->get('orchardTypes');
+
+    $em = $this->getDoctrine()->getManager();
+
+    $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+    $orchard->setStep('14');
+
+    $orchardTypesArray = array();
+
+    foreach ($orchard_types as $orchard_type) {
+      $orchardType = $this->container->get("orchard_service")->getOrchardType($orchard_type);
+      $orchardType->addOrchard($orchard);
+      array_push($orchardTypesArray, $orchardType);
+    }
+
+    $orchard->setType($orchardTypesArray);
+
+    $em->persist($orchard);
+    $em->flush();
+
+    return new Response();
 
   }
 

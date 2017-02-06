@@ -42,6 +42,12 @@ class OrchardService
     return $repository->findOneById($id_orchard);
   }
 
+  public function getOrchardType($id_orchard_type)
+  {
+    $repository = $this->em->getRepository('OrchardBundle:OrchardType');
+    return $repository->findOneById($id_orchard_type);
+  }
+
   public function getUser()
   {
     return $this->tokenStorage->getToken()->getUser();

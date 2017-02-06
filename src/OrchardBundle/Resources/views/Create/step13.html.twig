@@ -12,7 +12,7 @@
 					{% for orchardType in orchardTypes %}
 						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 							<label class="custom-control custom-checkbox">
-								<input type="checkbox" class="custom-control-input">
+								<input id="{{ orchardType.id }}" type="checkbox" class="custom-control-input" {% if orchardType in orchard.type %}  checked {% endif %}>
 								<span class="custom-control-indicator"></span>
 
 								<div class="text-right">
@@ -112,13 +112,146 @@
 
 {% endblock %}
 
-
 {% block javascripts %}
+
 <script type="text/javascript">
 
 $(function() {
 
 	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 75 + '%','aria-valuenow': 75}, {duration: 400, easing: 'linear'});
+
+	//FUNCION BOTON SIGUIENTE
+	$('#btn-siguiente').on('click', function() {
+
+		if (!$('#required-hidden-input').length) {
+
+			var orchard_types = [];
+			initSave(orchard_types);
+
+			$.ajax({
+				type: 'POST',
+				url: '/orchard/create/insert/checkbox-type/{{ orchard.id }}',
+				data: { 'orchardTypes': orchard_types },
+				success: function(data) {
+					saveAnimation();
+					console.log('success');
+					window.location.href = '/orchard/create/step/14/{{ orchard.id }}';
+				},
+				error: function(jqXHR, exception) {
+					saveAnimation();
+					if (jqXHR.status === 0) {
+						alert('Not connect.\n Verify Network.');
+					} else if (jqXHR.status == 404) {
+						alert('Requested page not found. [404]');
+					} else if (jqXHR.status == 500) {
+						alert('Internal Server Error [500].');
+					} else if (exception === 'parsererror') {
+						alert('Requested JSON parse failed.');
+					} else if (exception === 'timeout') {
+						alert('Time out error.');
+					} else if (exception === 'abort') {
+						alert('Ajax request aborted.');
+					} else {
+						alert('Uncaught Error.\n' + jqXHR.responseText);
+					}
+					console.log('error');
+				}
+			});
+
+			return false;
+
+		}
+
+	});
+
+	//FUNCION BOTON ATRAS
+	$('#btn-atras').on('click', function() {
+
+		if (!$('#required-hidden-input').length) {
+
+		var orchard_types = [];
+		initSave(orchard_types);
+
+		$.ajax({
+			type: 'POST',
+			dataType: 'json',
+			url: '/orchard/create/insert/checkbox-type/{{ orchard.id }}',
+			data: { 'orchardTypes': orchard_types },
+			success: function() {
+				saveAnimation();
+				if($('#Step').val() == '12' || $('#Step').val() == '22') {
+					window.location.href = '/orchard/create/steps/{{ orchard.id }}'
+				}else if ($('#Step').val() == '21' || $('#Step').val() == '31') {
+					var step = parseInt($('#Step').val()) - 8;
+					window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
+				}else {
+					var step = parseInt($('#Step').val()) - 2;
+					window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
+				}
+			}
+		});
+
+	}
+
+	});
+
+	//FUNCION BOTON GUARDAR Y SALIR
+	$('#btn-save-exit').on('click', function() {
+
+		if (!$('#required-hidden-input').length) {
+
+			var orchard_types = [];
+			initSave(orchard_types);
+
+			$.ajax({
+				type: 'POST',
+				url: '/orchard/create/insert/checkbox-type/{{ orchard.id }}',
+				data: { 'orchardTypes': orchard_types },
+				success: function(data) {
+					saveAnimation();
+					console.log('success');
+					window.location.href = '/orchard/create/steps/{{ orchard.id }}';
+				},
+				error: function(jqXHR, exception) {
+					saveAnimation();
+					if (jqXHR.status === 0) {
+						alert('Not connect.\n Verify Network.');
+					} else if (jqXHR.status == 404) {
+						alert('Requested page not found. [404]');
+					} else if (jqXHR.status == 500) {
+						alert('Internal Server Error [500].');
+					} else if (exception === 'parsererror') {
+						alert('Requested JSON parse failed.');
+					} else if (exception === 'timeout') {
+						alert('Time out error.');
+					} else if (exception === 'abort') {
+						alert('Ajax request aborted.');
+					} else {
+						alert('Uncaught Error.\n' + jqXHR.responseText);
+					}
+					console.log('error');
+				}
+			});
+
+			return false;
+
+		}
+
+	});
+
+	function initSave(orchard_types) {
+		$("#loading, #loading-text").fadeIn("slow");
+		$(':checkbox:not(#cb-new-type):checked').each(function(){
+			console.log($(this).attr('id'));
+			orchard_types.push($(this).attr('id'));
+		});
+	}
+
+	function saveAnimation() {
+		$("#loading, #loading-text").fadeOut("slow", function() {
+			$("#loading-text").text("Guardado").fadeIn('slow');
+		});
+	}
 
 	$('#btn-siguiente').attr('data-toggle', 'popover').attr('title', 'Paso obligatorio').attr('data-content', 'Por favor, selecciona un tipo de huerto').attr('data-placement', 'top');
 	$('[data-toggle="popover"]').popover();
@@ -141,6 +274,14 @@ $(function() {
 					$('<span id="required-hidden-input" class="required" hidden="hidden"></span>').appendTo('body');
 				}
 			}
+	});
+
+	$(':checkbox:not(#cb-new-type)').each(function() {
+		if(this.checked) {
+			console.log('checkeado');
+				$('#btn-siguiente').popover('disable')
+				$('#required-hidden-input').remove();
+		}
 	});
 
 	initSuggest();
@@ -170,7 +311,6 @@ $(function() {
 				$.ajax({
 					type: 'POST',
 					url: '/orchard/suggest/send/'+$('#Type').val(),
-					data: form,
 					success: function(data) {
 						console.log('success');
 						$('#myModal').modal('show');

@@ -145,7 +145,7 @@ class Orchard
     /**
      * @var \Doctrine\Common\Collections\Collection|OrchardType[]
      *
-     * @ORM\ManyToMany(targetEntity="OrchardType", inversedBy="orchards")
+     * @ORM\ManyToMany(targetEntity="OrchardType", inversedBy="orchards", fetch="EAGER")
      * @ORM\JoinTable(
      *  name="orchard_orchardtype",
      *  joinColumns={
@@ -347,7 +347,19 @@ class Orchard
 
 
 
+     /**
+      * Set type
+      *
+      * @param array $type
+      *
+      * @return Orchard
+      */
+     public function setType($type)
+     {
+         $this->type = $type;
 
+         return $this;
+     }
 
 
 
