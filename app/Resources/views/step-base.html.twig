@@ -251,6 +251,9 @@
         });
         if($('#Step').val() == '12' || $('#Step').val() == '22') {
           window.location.href = '/orchard/create/steps/{{ orchard.id }}'
+        }else if ($('#Step').val() == '21' || $('#Step').val() == '31') {
+          var step = parseInt($('#Step').val()) - 8;
+          window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
         }else {
           var step = parseInt($('#Step').val()) - 2;
           window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';

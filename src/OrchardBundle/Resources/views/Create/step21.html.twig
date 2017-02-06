@@ -28,9 +28,9 @@
 						<label class="custom-control custom-checkbox">
 						  <input id="cb-new-type" type="checkbox" class="custom-control-input">
 						  <span class="custom-control-indicator"></span>
-						  <span class="custom-control-description">Sugiérenos un tipo de huerto</span>
+						  <span class="custom-control-description">Sugiérenos una manera de participar</span>
 						</label>
-						<input type="text" class="form-control" id="Type" placeholder="Escribe aquí el tipo de tu huerto" hidden>
+						<input type="text" class="form-control" id="Type" placeholder="Escribe aquí la manera de participar" hidden>
 
 <br>
 						<a id="mail-url"><button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>Enviar</button></a>
@@ -64,7 +64,7 @@
 			});
 
 			$('#Type').keyup(function() {
-				$('#mail-url').attr('href', "http://localhost:8000/orchard/suggest/send/{{ id_orchard }}/"+$('#Type').val());
+				$('#mail-url').attr('href', "http://localhost:8000/orchard/suggest/send/"+$('#Type').val());
 			});
 		});
 	</script>

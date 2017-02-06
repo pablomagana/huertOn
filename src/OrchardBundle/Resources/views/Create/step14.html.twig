@@ -56,6 +56,7 @@
   </div>
 
 {% endblock %}
+
 {% block javascripts %}
 
 <script src="{{asset('js/images.js')}}" charset="utf-8"></script>
@@ -101,7 +102,7 @@ $('#btn-siguiente, #btn-save-exit').on('click', function() {
     $.ajax({
       type: "POST",
       contentType: 'application/json',
-      url:"/orchard/images/upload/{{ orchard.id }}",
+      url:"/orchard/upload/images/upload/{{ orchard.id }}",
       data: JSON.stringify(imagenes),
       success: function(step){
         console.log(step);
