@@ -124,7 +124,9 @@ html,body,.map,.step-1,.steps {
   padding: 10%;
   z-index: -9999;
 }
-
+.centrar {
+	margin: 50px;
+}
 
 .steps-right {
   height: 100%;
@@ -171,8 +173,6 @@ small {
   background-color: rgb(100, 181, 195);
   margin: 5px;
 }
-  /*+++++++++++++++++EndAlex+++++++++++++++++*/
-
 
 /*+++++++++++++++++MEDIA QUERYS+++++++++++++++++*/
 /* Extra-small (mobiles) */

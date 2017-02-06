@@ -1,4 +1,8 @@
 orchard_create_steps:
+    path:     /create/draft
+    defaults: { _controller: OrchardBundle:Create:draft }
+
+orchard_create_steps:
     path:     /create/steps/{id_orchard}
     defaults: { _controller: OrchardBundle:Create:steps, id_orchard:null }
 
