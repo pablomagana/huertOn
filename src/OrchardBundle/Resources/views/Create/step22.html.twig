@@ -31,6 +31,12 @@
 
         <input type="text" id="Step" hidden="hidden" value="23">
       </form>
+
+      <div class="fixed-buttons">
+  			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+  			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
+  		</div>
+
 </div>
 
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right-pdf">
@@ -45,7 +51,7 @@
 <script src="{{asset('js/files.js')}}" charset="utf-8"></script>
 <script type="text/javascript">
 
-$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 80 + '%','aria-valuenow': 80}, {duration: 400, easing: 'linear'});
+$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 66 + '%','aria-valuenow': 66}, {duration: 400, easing: 'linear'});
 
 var fileNormas = null;
 //cargar el file con click
@@ -73,7 +79,7 @@ $('#btn-siguiente').on('click', function() {
     $.ajax({
       type: "POST",
       contentType: false,
-      url: "/orchard/files/upload",
+      url: "/orchard/upload/files/upload",
       data: JSON.stringify(imagenes),
       success: function(step){
         console.log(step);

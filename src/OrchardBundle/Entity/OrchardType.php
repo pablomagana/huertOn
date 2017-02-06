@@ -40,7 +40,7 @@ class OrchardType
     /**
      * @var \Doctrine\Common\Collections\Collection|Orchard[]
      *
-     * @ORM\ManyToMany(targetEntity="Orchard", mappedBy="type")
+     * @ORM\ManyToMany(targetEntity="Orchard", mappedBy="orchardType")
      */
     private $orchards;
 

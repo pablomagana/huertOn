@@ -42,6 +42,30 @@ class OrchardService
     return $repository->findOneById($id_orchard);
   }
 
+  public function getOrchardType($param)
+  {
+    $repository = $this->em->getRepository('OrchardBundle:OrchardType');
+    return $repository->findOneById($param);
+  }
+
+  public function getOrchardParticipate($param)
+  {
+    $repository = $this->em->getRepository('OrchardBundle:OrchardParticipate');
+    return $repository->findOneById($param);
+  }
+
+  public function getOrchardActivity($param)
+  {
+    $repository = $this->em->getRepository('OrchardBundle:OrchardActivity');
+    return $repository->findOneById($param);
+  }
+
+  public function getOrchardService($param)
+  {
+    $repository = $this->em->getRepository('OrchardBundle:OrchardService');
+    return $repository->findOneById($param);
+  }
+
   public function getUser()
   {
     return $this->tokenStorage->getToken()->getUser();

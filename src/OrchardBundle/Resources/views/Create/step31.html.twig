@@ -1,4 +1,3 @@
-{% set id_orchard=orchard.id %}
 {% extends '::step-base.html.twig' %}
 
 {% block body %}
@@ -33,6 +32,10 @@
 
 		</form>
 
+		<div class="fixed-buttons">
+			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
+		</div>
 
 	</div>
 
@@ -46,7 +49,7 @@
 
 {% block javascripts %}
 	<script type="text/javascript">
-		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
+		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 33 + '%','aria-valuenow': 33}, {duration: 400, easing: 'linear'});
 	</script>
 
 	<script type="text/javascript">
