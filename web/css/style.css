@@ -124,11 +124,6 @@ html,body,.map,.step-1,.steps {
   padding: 10%;
   z-index: -9999;
 }
-.asdf{
-	background-color: black;
-	width: 100px;
-	height: 100%;
-}
 .centrar {
 	margin: 50px;
 }
@@ -178,8 +173,6 @@ small {
   background-color: rgb(100, 181, 195);
   margin: 5px;
 }
-  /*+++++++++++++++++EndAlex+++++++++++++++++*/
-
 
 /*+++++++++++++++++MEDIA QUERYS+++++++++++++++++*/
 /* Extra-small (mobiles) */

@@ -105,5 +105,8 @@ class CreateController extends Controller
     return $response;
 
   }
-
+  public function draftAction()
+  {
+    return $this->render('OrchardBundle:Default:draft.html.twig');
+  }
 }
