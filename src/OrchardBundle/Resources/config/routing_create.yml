@@ -9,7 +9,3 @@ orchard_create_step:
 orchard_insert:
     path:     /create/insert/{id_orchard}
     defaults: { _controller: OrchardBundle:Create:insert, id_orchard:null }
-
-orchard_preview:
-    path:     /create/preview/{id_orchard}
-    defaults: {_controller: OrchardBundle:Create:preview, id_orchard:null}

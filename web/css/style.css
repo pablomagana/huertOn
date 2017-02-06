@@ -162,7 +162,7 @@ small {
 }
 
 .type_orchard{
-  width: 100px;
+	padding: 8px;
   text-align: center;
   height: auto;
   border-radius: 5px;

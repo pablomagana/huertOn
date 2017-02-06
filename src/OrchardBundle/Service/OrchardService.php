@@ -6,6 +6,7 @@ use OrchardBundle\Entity\Orchard;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrchardService
 {
@@ -26,7 +27,7 @@ class OrchardService
     $orchard = $repository->findOneById($id_orchard);
 
     if (!$orchard) {
-      throw $this->createNotFoundException('El huerto no existe');
+      throw new NotFoundHttpException('El huerto no existe');
     }
 
     if($this->getUser() != $orchard->getUser()) {

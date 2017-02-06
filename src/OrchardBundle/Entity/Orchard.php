@@ -138,7 +138,7 @@ class Orchard
     /**
      * @var \Doctrine\Common\Collections\Collection|Image[]
      * One Orchard has Many Images.
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="orchard")
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="orchard", fetch="EAGER")
      */
     private $images;
 

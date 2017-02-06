@@ -5,25 +5,25 @@
 <div class="row steps">
   <div class="col-xs-12 col-md-5 col-lg-5 steps-left">
     {% if app.user != null %}
-      <h1 class="display-4">¡Hola {{ app.user.username }}!</h1>
+    <h1 class="display-4">¡Hola {{ app.user.username }}!</h1>
     {% endif %}
     <h6>Haz que más personas conozcan tu huerto</h6>
 
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h6>Paso 1</h6>
-        {% if stepOrchard is defined and stepOrchard >= 21 %}<!--todos los pasos del 1 completados-->
-          <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+        {% if orchard.step is defined and orchard.step >= 21 %}<!--todos los pasos del 1 completados-->
+        <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <h5>Diles lo esencial (dónde está...)</h5>
-        {% if stepOrchard is defined %}
-          {% if stepOrchard >= 15 %}
-            <a href="/orchard/create/step/11/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
-          {% elseif stepOrchard == 11 %}
-            <a href="/orchard/create/step/11/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
-          {% else %}
-            <a href="/orchard/create/step/{{ stepOrchard }}/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
-          {% endif %}
+        {% if orchard.step is defined %}
+        {% if orchard.step >= 15 %}
+        <a href="/orchard/create/step/11/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
+        {% elseif orchard.step == 11 %}
+        <a href="/orchard/create/step/11/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
+        {% else %}
+        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
+        {% endif %}
         {% endif %}
       </div>
     </div>
@@ -31,18 +31,18 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h6>Paso 2</h6>
-        {% if stepOrchard is defined and stepOrchard >= 31 %}<!--todos los pasos del 2 completados-->
-          <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+        {% if orchard.step is defined and orchard.step >= 31 %}<!--todos los pasos del 2 completados-->
+        <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <h5 class="stepNone" id="paso2">¿Qué pueden encontrar allí? (fotos, servicios...)</h5>
-        {% if stepOrchard is defined and stepOrchard >= 21 %}
-          {% if stepOrchard >= 31 %}
-            <a href="/orchard/create/step/21/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
-          {% elseif stepOrchard == 21 %}
-          <a href="/orchard/create/step/21/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
-          {% else %}
-            <a href="/orchard/create/step/{{ stepOrchard }}/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
-          {% endif %}
+        {% if orchard.step is defined and orchard.step >= 21 %}
+        {% if orchard.step >= 31 %}
+        <a href="/orchard/create/step/21/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
+        {% elseif orchard.step == 21 %}
+        <a href="/orchard/create/step/21/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
+        {% else %}
+        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
+        {% endif %}
         {% endif %}
       </div>
     </div>
@@ -50,50 +50,81 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
         <h6>Paso 3</h6>
-        {% if stepOrchard is defined and stepOrchard >= 34 %}<!--todos los pasos del 3 completados-->
-          <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+        {% if orchard.step is defined and orchard.step >= 34 %}<!--todos los pasos del 3 completados-->
+        <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <h5 class="stepNone" id="paso3">Cuéntanos algo más especial de tu huerto</h5>
-        {% if stepOrchard is defined and stepOrchard >= 31 %}
-          {% if stepOrchard >= 34 %}
-            <a href="/orchard/create/step/31/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
-          {% elseif stepOrchard == 31 %}
-            <a href="/orchard/create/step/31/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
-          {% else %}
-            <a href="/orchard/create/step/{{ stepOrchard }}/{{ idOrchard }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
-          {% endif %}
+        {% if orchard.step is defined and orchard.step >= 31 %}
+        {% if orchard.step >= 34 %}
+        <a href="/orchard/create/step/31/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">Cambiar</button></a>
+        {% elseif orchard.step == 31 %}
+        <a href="/orchard/create/step/31/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">Empezar</button></a>
+        {% else %}
+        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">Seguir</button></a>
+        {% endif %}
         {% endif %}
       </div>
     </div>
-    {% if stepOrchard is defined and stepOrchard >= 21 %}
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orchardPreviewModal">Mira cómo ha quedado</button>
+    {% if orchard.step >= 14 %}
+    <div class="row">
+      <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Mira cómo ha quedado</button>
+      </div>
+    </div>
     {% endif %}
   </div>
 
   <div class="steps-right col-md-7 col-lg-7">
     <div class="steps-right-text">
-    <h2 class="display-3">Muchos urbanitas sólo conocen 1 o 2 huertos en tu ciudad y alrededores</h2>
-    <h1 class="display-4">¡Descúbreles el tuyo!</h1>
-  </div>
+      <h2 class="display-3">Muchos urbanitas sólo conocen 1 o 2 huertos en tu ciudad y alrededores</h2>
+      <h1 class="display-4">¡Descúbreles el tuyo!</h1>
+    </div>
   </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="orchardPreviewModal" tabindex="-1" role="dialog" aria-labelledby="orchardPreviewModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="orchardPreviewModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
       <div class="modal-body">
-        
+        <div class="row steps">
+          <div class="col-xs-12 col-md-12 col-lg-12">
+            {% if app.user != null %}
+              <h1 class="display-4">Huerto de {{ app.user.username }}</h1>
+            {% endif %}
+
+            <div class="row">
+              <div class="col-xs-12 col-md-12 col-lg-12 ">
+                <img class="previewImg" src="{{orchard.images[0].src}}" alt="{{orchard.images[0].description}}">
+              </div>
+            </div>
+
+            <br>
+
+            <h6>Este huerto es:</h6>
+
+            <div class="row">
+              <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
+                	{% for orchardType in orchard.type %}
+                  <div class="type_orchard">{{ orchardType.name }}</div>
+                {% endfor %}
+              </div>
+            </div>
+
+            <h6>{{ orchard.projectStart }}</h6>
+
+          </div>
+
+          <div class="steps-right col-md-7 col-lg-7">
+            <div class="steps-right-text">
+              <h2 class="display-3">Esta es un avanze de tu huerto</h2>
+          </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Seguir completando</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Publicar</button>
       </div>
     </div>
   </div>
@@ -107,11 +138,11 @@
 
 $("#btn-save-exit").css("display", "none");
 
-var stepOrchard = {{ stepOrchard }};
+var step = {{ orchard.step }};
 
-if (stepOrchard >= 21) {
+if (step >= 21) {
   $("#paso2").removeClass('stepNone');
-}if (stepOrchard >= 31) {
+}if (step >= 31) {
   $("#paso3").removeClass('stepNone');
 }
 

@@ -18,7 +18,6 @@ class CreateController extends Controller
   {
 
     $orchard = null;
-    $step_orchard = null;
 
     if($id_orchard == null) {
       $orchard = new Orchard();
@@ -27,13 +26,12 @@ class CreateController extends Controller
       $em = $this->getDoctrine()->getManager();
       $em->persist($orchard);
       $em->flush();
-      $id_orchard = $orchard->getId();
     }else {
       $this->container->get("orchard_service")->checkOwner($id_orchard);
       $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
     }
 
-    return $this->render('OrchardBundle:Default:steps.html.twig', array('idOrchard'=> $id_orchard, 'stepOrchard' => $orchard->getStep()));
+    return $this->render('OrchardBundle:Default:steps.html.twig', array('orchard'=> $orchard));
 
   }
 
@@ -106,28 +104,6 @@ class CreateController extends Controller
 
     return $response;
 
-  }
-
-  public function previewAction($id_orchard, Request $request)
-  {
-
-    $user = $this->get('security.token_storage')->getToken()->getUser();
-    $userName = $user->getUsername();
-    $userId = $user->getId();
-
-    #recuperar el huerto
-    $orchard= $this->getDoctrine()->getRepository('OrchardBundle:Orchard')->find($id_orchard);
-
-    if($id_orchard!=null){
-      # Devuelve TODAS las imagenes
-      $images = $orchard->getImages();
-      $orchard_types = $orchard->getType();
-      # Devuelve TODOS los tipos de huertos
-      # $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
-      # $orchard_types = $repository->findAll();
-    }
-
-    return $this->render('OrchardBundle:Default:preview.html.twig', array('userName' => $userName, 'images' =>$images, 'orchard_types' =>$orchard_types));
   }
 
 }
