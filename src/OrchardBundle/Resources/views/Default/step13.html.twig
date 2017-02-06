@@ -150,7 +150,7 @@ $(document).ready(function () {
 		if($('#Type').val()) {
 			$.ajax({
 				type: 'POST',
-				url: '/orchard/send/{{id_orchard}}/'+$('#Type').val(),
+				url: '/orchard/suggest/send/{{id_orchard}}/'+$('#Type').val(),
 				data: form,
 				success: function(data) {
 					console.log('success');
@@ -187,7 +187,7 @@ $(document).ready(function () {
 			if($('#Type').val()) {
 				$.ajax({
 					type: 'POST',
-					url: '/orchard/send/'+$('#Type').val(),
+					url: '/orchard/suggest/send/'+$('#Type').val(),
 					data: form,
 					success: function(data) {
 						console.log('success');

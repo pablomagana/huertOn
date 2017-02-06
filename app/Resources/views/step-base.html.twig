@@ -109,7 +109,7 @@
 
   var form =  {};
 
-  $('#btn-siguiente, #btn-save-exit').on('click', function() {
+  $('#btn-siguiente').on('click', function() {
     var valid = true;
     $('.required').each(function() {
       if($(this).val() == '') {
@@ -140,6 +140,66 @@
           });
           console.log('success');
           window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
+        },
+        error: function(jqXHR, exception) {
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
+          });
+          if (jqXHR.status === 0) {
+            alert('Not connect.\n Verify Network.');
+          } else if (jqXHR.status == 404) {
+            alert('Requested page not found. [404]');
+          } else if (jqXHR.status == 500) {
+            alert('Internal Server Error [500].');
+          } else if (exception === 'parsererror') {
+            alert('Requested JSON parse failed.');
+          } else if (exception === 'timeout') {
+            alert('Time out error.');
+          } else if (exception === 'abort') {
+            alert('Ajax request aborted.');
+          } else {
+            alert('Uncaught Error.\n' + jqXHR.responseText);
+          }
+          console.log('error');
+        }
+      });
+
+      return false;
+    }
+
+  });
+
+  $('#btn-save-exit').on('click', function() {
+    var valid = true;
+    $('.required').each(function() {
+      if($(this).val() == '') {
+        $(this).prev().prev().tooltip('show');
+        $(this).css('border-color', '#ff0000');
+        valid = false;
+      }
+    });
+
+    if(valid) {
+      $("#loading, #loading-text").fadeIn("slow");
+      $("form :input:not(:checkbox):not(:button)").each(function(){
+        console.log($(this).val());
+        form[$(this).attr('id')] = $(this).val();
+      });
+
+      form['id'] = $('#orchard-id').val();
+      console.log('Este és el formulario'+form);
+
+      //FUNCION BOTON SIGUIENTE
+      $.ajax({
+        type: 'POST',
+        url: '/orchard/create/insert/{{ orchard.id }}',
+        data: form,
+        success: function(data) {
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
+          });
+          console.log('success');
+          window.location.href = '/orchard/create/steps/{{ orchard.id }}';
         },
         error: function(jqXHR, exception) {
           $("#loading, #loading-text").fadeOut("slow", function() {
