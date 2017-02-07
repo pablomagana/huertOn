@@ -1,0 +1,7 @@
+home_homepage:
+    path:     /
+    defaults: { _controller: HomeBundle:Default:index }
+
+home_find:
+    path:     /find/{param}/{user_latitude}/{user_longitude}
+    defaults: { _controller: HomeBundle:Default:find }
