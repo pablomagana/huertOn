@@ -72,6 +72,25 @@
 
   </div>
 
+  <div class="modal fade" id="myModal">
+  	<div class="modal-dialog" role="document">
+  		<div class="modal-content">
+  			<div class="modal-header">
+  				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  					<span aria-hidden="true">&times;</span>
+  				</button>
+  				<h4 class="modal-title">Muchas gracias!</h4>
+  			</div>
+  			<div class="modal-body">
+  				<p>Cuando estudiemos tu sugerencia te enviaremos un email con el resultado. <p>&#x1f609</p></p>
+  			</div>
+  			<div class="modal-footer">
+  				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+  			</div>
+  		</div><!-- /.modal-content -->
+  	</div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
   <script type="text/javascript">
 
   if($('.required').length === 0) {
@@ -156,9 +175,9 @@
       data: form,
       success: function() {
         saveAnimation();
-        if($('#Step').val() == '12' || $('#Step').val() == '22') {
+        if($('#Step').val() == '12') {
           window.location.href = '/orchard/create/steps/{{ orchard.id }}'
-        }else if ($('#Step').val() == '21' || $('#Step').val() == '31') {
+        }else if ($('#Step').val() == '22' || $('#Step').val() == '32') {
           var step = parseInt($('#Step').val()) - 8;
           window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
         }else {
