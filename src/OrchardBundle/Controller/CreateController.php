@@ -164,4 +164,20 @@ class CreateController extends Controller
     return $this->render('OrchardBundle:Create:draft.html.twig');
   }
 
+  public function publishAction($id_orchard, $publish)
+  {
+    $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+    if($publish == 'true') {
+      $orchard->setPublished(true);
+    }else {
+      $orchard->setPublished(false);
+    }
+
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($orchard);
+    $em->flush();
+
+    return $this->redirect($this->generateUrl('orchard_create_draft'));
+
+  }
 }

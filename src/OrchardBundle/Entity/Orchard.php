@@ -967,7 +967,7 @@ class Orchard
      *
      * @return Orchard
      */
-    public function setPublished(boolean $published)
+    public function setPublished($published)
     {
         $this->published = $published;
 

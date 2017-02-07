@@ -37,8 +37,6 @@
 	    z-index: 9999 !important;
 	    width: 50%;
 	}
-
-
 	.draft-lg{
 		display: none;
 	}
@@ -111,11 +109,13 @@ html,body,.map,.step-1,.steps {
 	background-color: transparent;
 	margin-bottom: 0px;
 }
-.img-draft{
-	width: 100%;
- 	height: auto;
+.botones{
+	margin: 10px 0 50px 0;
 }
-
+.botones-xs{
+	margin: 10px 0 50px 0;
+	text-align: center;
+}
 .steps-right {
   height: 100%;
   z-index: -9999;
@@ -336,4 +336,14 @@ nav li a{
 	border: 2px solid #f2f2f2;
 	padding: 40px;
 	margin-left: 10px;
+}
+
+.draft{
+	margin: 10px;
+}
+.draft-xs{
+	margin-left: 5px;
+}
+.draft-lg{
+	margin-left: 5px;
 }
