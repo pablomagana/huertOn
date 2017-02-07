@@ -8,13 +8,21 @@ use OrchardBundle\Entity\Orchard;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/")
-     */
-    public function indexAction()
-    {
-        return $this->render('HomeBundle:Default:index.html.twig');
-    }
+  /**
+   * @Route("/")
+   */
+  public function indexAction()
+  {
+      return $this->render('HomeBundle:Default:index.html.twig');
+  }
+
+  /**
+   * @Route("/find")
+   */
+  public function findViewAction()
+  {
+      return $this->render('HomeBundle:Default:find.html.twig');
+  }
 
     /**
     * @Route("/find/{param}")

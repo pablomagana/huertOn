@@ -20,6 +20,12 @@
 		display: none;
 	}
 
+	#philosophy{
+		background-color: #0b0146;
+		color: white;
+		padding: 20px 5px;
+	}
+
 }
 
 
@@ -39,6 +45,13 @@
 	.legal-mobile{
 		display: none;
 	}
+
+	#philosophy{
+		background-color: #0b0146;
+		color: white;
+		padding: 50px 150px;
+	}
+
 
 }
 /*+++++++++++++++++MEDIA QUERIES+++++++++++++++++*/
@@ -109,8 +122,8 @@ html,body,.map,.step-1,.steps {
 }
 h6 {
   display: inline;
-  margin-right: 60%;
-  color: rgb(175, 175, 175);
+  /*margin-right: 60%;*/
+  color: black;
 }
 .fa-check{
   color: green;
@@ -306,4 +319,21 @@ nav li a{
 #register-button:hover{
 	color: white!important;
 	background-color: #0b0146!important;
+}
+
+.hr-orchard-profile{
+	width: 100px;
+	background-color: #00ff1f;
+	height: 3px;
+
+}
+
+.spacing{
+	margin: 50px 0;
+}
+
+.border{
+	border: 2px solid #f2f2f2;
+	padding: 40px;
+	margin-left: 10px;
 }
