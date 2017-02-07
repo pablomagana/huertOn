@@ -1,38 +1,70 @@
 {% extends '::base.html.twig' %}
 
-{% block guardarYsalir %}
-<!--  -->
-{% endblock %}
-
 {% block body %}
 
   <div class="row">
     <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-      <h2>Huertos que has creado</h2>
-      <button type="button" class="btn btn-success">Añade un nuevo huerto</button>
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-3">Huertos que has creado</h1>
+          <a href="/orchard/create/steps"><button type="button" class="btn btn-success draft-lg">Añade un nuevo huerto</button></a>
+        </div>
+      </div>
     </div>
   </div>
-<div class="row">
-  <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
-    <img src="http://www.ecologiaverde.com/wp-content/2015/12/Consejos-iniciar-huerto-bio.jpg" alt="">
-  </div>
-  <div class="col-lg-8 col-md-8 col-xs-6 col-sm-6">
-    <h6>Título</h6>
+{% for orchard in app.user.orchard %}
+  {% if orchard.step >= 14 %}
+  {% if orchard.images != null and orchard.images is not empty %}
+    <div class="row">
+      <div class="col-lg-5 col-md-5 col-xs-6 col-sm-6">
+        <img class="img-draft" src="{{ orchard.images[0].src }}" alt="{{ orchard.images[0].description }}">
+      </div>
+  {% endif %}
+      <div class="col-lg-7 col-md-7 col-xs-6 col-sm-6">
+        <p><h3> {{ orchard.name }} </h3></p>
+        {% if orchard.published == 1 %}
+        <p><i>Publicado</i></p>
+        {% else %}
+        <p><i>Borrador</i></p>
+        {% endif %}
+        <p><i> {{ orchard.createdAt|date("d/M/Y h:m")}}</i></p>
 
-    <i>Borrador</i>
+      <div class="botones">
+        {% if orchard.step >= 14 %}
+        <button type="button" class="btn btn-secondary draft-lg">Publica</button>
+        <button type="button" class="btn btn-secondary draft-lg" data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Completa</button>
 
-    <i>Fecha</i>
+        {% elseif orchard.published == 1 %}
+        <button type="button" class="btn btn-secondary draft-lg">Despublica</button>
+        <button type="button" class="btn btn-secondary draft-lg" data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Modifica</button>
+
+        {% endif %}
+
+        <button type="button" class="btn btn-secondary draft-lg">Elimina</button>
+
+
+
+      </div>
+    </div>
+    </div>
     <div class="botones">
-      <button type="button" class="btn btn-secondary">Publica</button>
-      <button type="button" class="btn btn-secondary">Completa</button>
-      
-      <button type="button" class="btn btn-secondary">Despublica</button>
-      <button type="button" class="btn btn-secondary">Modifica</button>
+      <button type="button" class="btn btn-secondary draft-xs">Publica</button>
+      <button type="button" class="btn btn-secondary draft-xs">Completa</button>
 
-      <button type="button" class="btn btn-secondary">Elimina</button>
+      <button type="button" class="btn btn-secondary draft-xs">Despublica</button>
+      <button type="button" class="btn btn-secondary draft-xs">Modifica</button>
+
+      <button type="button" class="btn btn-secondary draft-xs">Elimina</button>
 
     </div>
-  </div>
-</div>
+    <a href="/orchard/create/steps"><button type="button" class="btn btn-success draft-xs">Añade un nuevo huerto</button></a>
+  {% endif %}
+  {% endfor %}
+
+  <script type="text/javascript">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  })
+  </script>
 
 {% endblock %}
