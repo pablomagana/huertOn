@@ -11,7 +11,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<label for="ProjectStart">¿Cómo se inició el proyecto?</label><span id="start-chars">500</span>
-						<textarea rows="4" cols="50" class="form-control" id="ProjectStart"  value="{{ orchard.projectStart }}" placeholder="Escribe aquí cómo se inició el proyecto" maxlength="500"></textarea>
+						<textarea rows="4" cols="50" class="form-control" id="ProjectStart" placeholder="Escribe aquí cómo se inició el proyecto" maxlength="500">{{ orchard.projectStart }}</textarea>
 
 					</div>
 				</div>
@@ -20,7 +20,7 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<label for="GovernanceModel">Modelo de Gobernanza</label><span id="governance-chars">500</span>
-						<textarea rows="4" cols="50" class="form-control" id="GovernanceModel"  value="{{ orchard.governanceModel }}" placeholder="Aquí puedes contar tu modelo de Gobernanza" maxlength="500"></textarea>
+						<textarea rows="4" cols="50" class="form-control" id="GovernanceModel" placeholder="Aquí puedes contar tu modelo de Gobernanza" maxlength="500">{{ orchard.governanceModel }}</textarea>
 
 					</div>
 					<br><br><br><br>
@@ -49,6 +49,15 @@
 $( document ).ready(function() {
 
 	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 33 + '%','aria-valuenow': 33}, {duration: 400, easing: 'linear'});
+
+	$('textarea').each(function() {
+		var length = $(this).val().length;
+		if(length) {
+			$('#btn-siguiente').html('Siguiente');
+		}else if(checkEmpty()) {
+			$('#btn-siguiente').html('Ahora no');
+		}
+	});
 
 	function checkEmpty() {
 		var empty = true;

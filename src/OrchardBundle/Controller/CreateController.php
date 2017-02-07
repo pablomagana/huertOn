@@ -118,10 +118,14 @@ class CreateController extends Controller
 
     $orchardEntityArray = array();
 
-    foreach ($params as $param) {
-      $orchardEntity = $this->container->get("orchard_service")->$getterName($param);
-      $orchardEntity->addOrchard($orchard);
-      array_push($orchardEntityArray, $orchardEntity);
+    if (!empty($params)) {
+      
+      foreach ($params as $param) {
+        $orchardEntity = $this->container->get("orchard_service")->$getterName($param);
+        $orchardEntity->addOrchard($orchard);
+        array_push($orchardEntityArray, $orchardEntity);
+      }
+
     }
 
     $orchard->$setterName($orchardEntityArray);

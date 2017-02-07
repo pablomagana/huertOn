@@ -72,8 +72,6 @@ $(function() {
 			var orchard_participates = [];
 			initSave(orchard_participates);
 
-			if(orchard_participates.length != 0) {
-
 			$.ajax({
 				type: 'POST',
 				url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardParticipate',
@@ -106,10 +104,6 @@ $(function() {
 
 			return false;
 
-		}else {
-			window.location.href = '/orchard/create/step/22/{{ orchard.id }}';
-		}
-
 	});
 
 	//FUNCION BOTON ATRAS
@@ -117,8 +111,6 @@ $(function() {
 
 			var orchard_participates = [];
 			initSave(orchard_participates);
-
-			if(orchard_participates.length != 0) {
 
 			$.ajax({
 				type: 'POST',
@@ -131,10 +123,6 @@ $(function() {
 				}
 			});
 
-		}else {
-			window.location.href = '/orchard/create/step/14/{{ orchard.id }}';
-		}
-
 	});
 
 	//FUNCION BOTON GUARDAR Y SALIR
@@ -142,8 +130,6 @@ $(function() {
 
 			var orchard_participates = [];
 			initSave(orchard_participates);
-
-			if(orchard_participates.length != 0) {
 
 			$.ajax({
 				type: 'POST',
@@ -176,8 +162,6 @@ $(function() {
 			});
 
 			return false;
-
-		}
 
 	});
 
