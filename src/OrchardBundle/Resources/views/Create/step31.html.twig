@@ -45,27 +45,39 @@
 
 </div>
 
-{% endblock %}
+<script type="text/javascript">
+$( document ).ready(function() {
 
-{% block javascripts %}
-	<script type="text/javascript">
-		$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 33 + '%','aria-valuenow': 33}, {duration: 400, easing: 'linear'});
-	</script>
+	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 33 + '%','aria-valuenow': 33}, {duration: 400, easing: 'linear'});
 
-	<script type="text/javascript">
-		//contador de caracteres restantes
-			$( document ).ready(function() {
-				var maxLength = 500;
-				$('textarea').keyup(function() {
-					var length = $(this).val().length;
-					var length = maxLength-length;
-					$(this).prev().text(length);
-					if(length == 0) {
-							$(this).addClass( "ta-maxlength" );
-					}else {
-							$(this).removeClass( "ta-maxlength" );
-					}
-				});
-			});
-	</script>
+	function checkEmpty() {
+		var empty = true;
+		$('textarea').each(function(){
+			if (this.value != "") {
+				empty = false;
+			}
+		})
+		return empty;
+	}
+
+	//contador de caracteres restantes
+	var maxLength = 500;
+	$('textarea').keyup(function() {
+		var length = $(this).val().length;
+		if(length) {
+			$('#btn-siguiente').html('Siguiente');
+		}else if(checkEmpty()) {
+			$('#btn-siguiente').html('Ahora no');
+		}
+		var length = maxLength-length;
+		$(this).prev().text(length);
+		if(length == 0) {
+			$(this).addClass( "ta-maxlength" );
+		}else {
+			$(this).removeClass( "ta-maxlength" );
+		}
+	});
+});
+</script>
+
 {% endblock %}
