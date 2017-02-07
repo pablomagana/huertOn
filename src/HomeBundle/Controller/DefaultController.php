@@ -27,7 +27,7 @@ class DefaultController extends Controller
                     '+ sin( radians(' . $user_latitude . ') )' .
                     '* sin( radians( o.latitude ) ) ) ) as distance')
           ->where("o.town LIKE :param OR o.zipCode LIKE :param OR o.name LIKE :name")
-          ->setParameter('param', $param)
+          ->setParameter('param','%'.$param.'%')
           ->setParameter('name','%'.$param.'%')
           ->orderBy('distance', 'ASC')
           ->getQuery();
