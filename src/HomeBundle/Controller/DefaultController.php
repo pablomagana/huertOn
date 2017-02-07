@@ -35,6 +35,10 @@ class DefaultController extends Controller
       if (!$orchards) {
         echo "vacio";
       }
+      $coordenadas=json_decode($orchards[0]->getGeometry())->geometry->coordinates;
+      print_r ($coordenadas);
+      print_r("<br/>");
+      print_r($this->getDistance($coordenadas[1],$coordenadas[0],39.468536, -0.377441)." Km");
       return $this->render('HomeBundle:Default:index.html.twig',array('orchards' => $orchards ));
     }
 
@@ -42,20 +46,24 @@ class DefaultController extends Controller
     public function getDistance($latorchard, $longonrchard, $latUser, $longUser)
     {
         $earth_radius = 6371;
-        $dLat = deg2rad($latUser - $latContenedor);
-        $dLon = deg2rad($longUser - $longCont1);
-        $a = sin($dLat / 2) * sin($dLat / 2) + cos(deg2rad($latContenedor)) * cos(deg2rad($latUser)) * sin($dLon / 2) * sin($dLon / 2);
+        $dLat = deg2rad($latUser - $latorchard);
+        $dLon = deg2rad($longUser - $longonrchard);
+        $a = sin($dLat / 2) * sin($dLat / 2) + cos(deg2rad($latorchard)) * cos(deg2rad($latUser)) * sin($dLon / 2) * sin($dLon / 2);
         $c = 2 * asin(sqrt($a));
         $d = $earth_radius * $c;
-        return $d * 1000;
+        #return $d * 1000;
+        return round($d,2);
     }
 
-    public function filterOrchard($coordenates){
-        ini_set('max_execution_time', 3000);
-        if(in_array($coordenates,$this->coordenatesContenedores)) {
-            return false;
+    public function orderOrchardByDistance($orchards,$cUser){
+
+      for ($i=0; $i < count($orchads); $i++) {
+        $orchard=$orchards[i];
+        if (getDistance($coord[1],$coord[0],$cUser[0],$cUser[0],$cUser[1])) {
+          
         }
-        array_push($this->coordenatesContenedores,$coordenates);
-        return true;
+      }
+
+      return $orchards;
     }
 }
