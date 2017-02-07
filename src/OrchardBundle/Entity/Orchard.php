@@ -145,7 +145,7 @@ class Orchard
     /**
      * @var \Doctrine\Common\Collections\Collection|OrchardType[]
      *
-     * @ORM\ManyToMany(targetEntity="OrchardType", inversedBy="orchards")
+     * @ORM\ManyToMany(targetEntity="OrchardType", inversedBy="orchards", fetch="EAGER")
      * @ORM\JoinTable(
      *  name="orchard_orchardtype",
      *  joinColumns={
@@ -156,7 +156,7 @@ class Orchard
      *  }
      * )
      */
-    protected $type;
+    protected $orchardType;
 
     /**
      * @var text
@@ -189,13 +189,13 @@ class Orchard
       *  }
       * )
       */
-     protected $activity;
+     protected $orchardActivity;
 
 
      /**
       * @var \Doctrine\Common\Collections\Collection|OrchardParticipate[]
       *
-      * @ORM\ManyToMany(targetEntity="OrchardParticipate", inversedBy="orchards")
+      * @ORM\ManyToMany(targetEntity="OrchardParticipate", inversedBy="orchards", fetch="EAGER")
       * @ORM\JoinTable(
       *  name="orchard_orchardparticipate",
       *  joinColumns={
@@ -206,7 +206,7 @@ class Orchard
       *  }
       * )
       */
-     protected $participate;
+     protected $orchardParticipate;
 
      /**
       * @var \Doctrine\Common\Collections\Collection|OrchardService[]
@@ -222,7 +222,7 @@ class Orchard
       *  }
       * )
       */
-     protected $service;
+     protected $orchardService;
 
 
      /**
@@ -234,136 +234,17 @@ class Orchard
       */
      protected $user;
 
-     /**
-      * Get service
-      *
-      * @return OrchardService
-      */
-     public function getService()
-     {
-       return $this->service;
-     }
-
-     /**
-      * @param OrchardService $service
-      */
-     public function addOrchardService(OrchardService $service)
-     {
-         if ($this->service->contains($service)) {
-             return;
-         }
-
-         $this->service->add($service);
-         $service->addOrchard($this);
-     }
-
-     /**
-      * @param OrchardService $service
-      */
-     public function removeOrchardService(OrchardService $service)
-     {
-         if (!$this->service->contains($service)) {
-             return;
-         }
-
-         $this->service->removeElement($service);
-         $service->removeOrchardService($this);
-     }
-
-
-     /**
-      * Get participate
-      *
-      * @return OrchardParticipate
-      */
-     public function getParticipate()
-     {
-       return $this->participate;
-     }
-
-     /**
-      * @param OrchardParticipate $participate
-      */
-     public function addOrchardParticipate(OrchardParticipate $participate)
-     {
-         if ($this->participate->contains($participate)) {
-             return;
-         }
-
-         $this->participate->add($participate);
-         $participate->addOrchard($this);
-     }
-
-     /**
-      * @param OrchardParticipate $participate
-      */
-     public function removeOrchardParticipate(OrchardParticipate $participate)
-     {
-         if (!$this->participate->contains($participate)) {
-             return;
-         }
-
-         $this->participate->removeElement($participate);
-         $participate->removeOrchardParticipate($this);
-     }
-
-
-
-     /**
-      * Get activity
-      *
-      * @return OrchardActivity
-      */
-     public function getActivity()
-     {
-       return $this->activity;
-     }
-
-     /**
-      * @param OrchardActivity $activity
-      */
-     public function addOrchardActivity(OrchardActivity $activity)
-     {
-         if ($this->activity->contains($activity)) {
-             return;
-         }
-
-         $this->activity->add($activity);
-         $activity->addOrchard($this);
-     }
-
-     /**
-      * @param OrchardActivity $activity
-      */
-     public function removeOrchardActivity(OrchardActivity $activity)
-     {
-         if (!$this->activity->contains($activity)) {
-             return;
-         }
-
-         $this->activity->removeElement($activity);
-         $activity->removeOrchardActivity($this);
-     }
-
-
-
-
-
-
-
-
-
-
     /**
-     * Get type
-     *
-     * @return OrchardType
+     * Constructor
      */
-    public function getType()
+    public function __construct()
     {
-      return $this->type;
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orchardType = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orchardActivity = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orchardParticipate = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orchardService = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -567,36 +448,6 @@ class Orchard
         return $this->step;
     }
 
-    // /**
-    //  * Get the formatted address to display
-    //  *
-    //  * @param $separator: the separator between fields (default: ', ')
-    //  * @return String
-    //  * @VirtualProperty
-    //  */
-    // public function getAddress($separator = ', '){
-    //     if($this->getNumber() != null && $this->getStreet() != null && $this->getTown() != null && $this->getZipCode()){
-    //         return ucfirst(($this->getNumber()).$separator.($this->getStreet()).$separator.($this->getTown()).$separator.($this->getZipCode()));
-    //     }
-    //     else{
-    //         return $this->getStreet();
-    //     }
-    // }
-
-    /**
-     * Default constructor, initializes collections
-     */
-    public function __construct()
-    {
-      $this->type= new ArrayCollection();
-      $this->images = new ArrayCollection();
-      $this->activity = new ArrayCollection();
-      $this->participate = new ArrayCollection();
-      $this->service = new ArrayCollection();
-      $this->inscriptionStep = new ArrayCollection();
-
-    }
-
     /**
      * Set facebook
      *
@@ -741,38 +592,10 @@ class Orchard
         return $this->web;
     }
 
-
-    /**
-     * @param OrchardType $type
-     */
-    public function addOrchardType(OrchardType $type)
-    {
-        if ($this->type->contains($type)) {
-            return;
-        }
-
-        $this->type->add($type);
-        $type->addOrchard($this);
-    }
-
-    /**
-     * @param OrchardType $type
-     */
-    public function removeOrchardType(OrchardType $type)
-    {
-        if (!$this->type->contains($type)) {
-            return;
-        }
-
-        $this->type->removeElement($type);
-        $type->removeOrchardType($this);
-    }
-
-
     /**
      * Set projectStart
      *
-     * @param text $projectStart
+     * @param string $projectStart
      *
      * @return Orchard
      */
@@ -786,18 +609,17 @@ class Orchard
     /**
      * Get projectStart
      *
-     * @return text
+     * @return string
      */
     public function getProjectStart()
     {
         return $this->projectStart;
     }
 
-
     /**
      * Set governanceModel
      *
-     * @param text $governanceModel
+     * @param string $governanceModel
      *
      * @return Orchard
      */
@@ -811,15 +633,12 @@ class Orchard
     /**
      * Get governanceModel
      *
-     * @return text
+     * @return string
      */
     public function getGovernanceModel()
     {
         return $this->governanceModel;
     }
-
-
-
 
     /**
      * Add image
@@ -846,6 +665,20 @@ class Orchard
     }
 
     /**
+     * Set images
+     *
+     * @param \Doctrine\Common\Collections\Collection $images
+     *
+     * @return Orchard
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+    /**
      * Get images
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -856,99 +689,195 @@ class Orchard
     }
 
     /**
-     * Add type
+     * Add orchardType
      *
-     * @param \OrchardBundle\Entity\OrchardType $type
+     * @param \OrchardBundle\Entity\OrchardType $orchardType
      *
      * @return Orchard
      */
-    public function addType(\OrchardBundle\Entity\OrchardType $type)
+    public function addOrchardType(\OrchardBundle\Entity\OrchardType $orchardType)
     {
-        $this->type[] = $type;
+        $this->orchardType[] = $orchardType;
 
         return $this;
     }
 
     /**
-     * Remove type
+     * Remove orchardType
      *
-     * @param \OrchardBundle\Entity\OrchardType $type
+     * @param \OrchardBundle\Entity\OrchardType $orchardType
      */
-    public function removeType(\OrchardBundle\Entity\OrchardType $type)
+    public function removeOrchardType(\OrchardBundle\Entity\OrchardType $orchardType)
     {
-        $this->type->removeElement($type);
+        $this->orchardType->removeElement($orchardType);
     }
 
     /**
-     * Add activity
+     * Set orchardType
      *
-     * @param \OrchardBundle\Entity\OrchardActivity $activity
+     * @param \Doctrine\Common\Collections\Collection $orchardType
      *
      * @return Orchard
      */
-    public function addActivity(\OrchardBundle\Entity\OrchardActivity $activity)
+    public function setOrchardType($orchardType)
     {
-        $this->activity[] = $activity;
+        $this->orchardType = $orchardType;
 
         return $this;
     }
 
     /**
-     * Remove activity
+     * Get orchardType
      *
-     * @param \OrchardBundle\Entity\OrchardActivity $activity
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function removeActivity(\OrchardBundle\Entity\OrchardActivity $activity)
+    public function getOrchardType()
     {
-        $this->activity->removeElement($activity);
+        return $this->orchardType;
     }
 
     /**
-     * Add participate
+     * Add orchardActivity
      *
-     * @param \OrchardBundle\Entity\OrchardParticipate $participate
+     * @param \OrchardBundle\Entity\OrchardActivity $orchardActivity
      *
      * @return Orchard
      */
-    public function addParticipate(\OrchardBundle\Entity\OrchardParticipate $participate)
+    public function addOrchardActivity(\OrchardBundle\Entity\OrchardActivity $orchardActivity)
     {
-        $this->participate[] = $participate;
+        $this->orchardActivity[] = $orchardActivity;
 
         return $this;
     }
 
     /**
-     * Remove participate
+     * Remove orchardActivity
      *
-     * @param \OrchardBundle\Entity\OrchardParticipate $participate
+     * @param \OrchardBundle\Entity\OrchardActivity $orchardActivity
      */
-    public function removeParticipate(\OrchardBundle\Entity\OrchardParticipate $participate)
+    public function removeOrchardActivity(\OrchardBundle\Entity\OrchardActivity $orchardActivity)
     {
-        $this->participate->removeElement($participate);
+        $this->orchardActivity->removeElement($orchardActivity);
     }
 
     /**
-     * Add service
+     * Set orchardActivity
      *
-     * @param \OrchardBundle\Entity\OrchardService $service
+     * @param \Doctrine\Common\Collections\Collection $orchardType
      *
      * @return Orchard
      */
-    public function addService(\OrchardBundle\Entity\OrchardService $service)
+    public function setOrchardActivity($orchardActivity)
     {
-        $this->service[] = $service;
+        $this->orchardActivity = $orchardActivity;
 
         return $this;
     }
 
     /**
-     * Remove service
+     * Get orchardActivity
      *
-     * @param \OrchardBundle\Entity\OrchardService $service
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function removeService(\OrchardBundle\Entity\OrchardService $service)
+    public function getOrchardActivity()
     {
-        $this->service->removeElement($service);
+        return $this->orchardActivity;
+    }
+
+    /**
+     * Add orchardParticipate
+     *
+     * @param \OrchardBundle\Entity\OrchardParticipate $orchardParticipate
+     *
+     * @return Orchard
+     */
+    public function addOrchardParticipate(\OrchardBundle\Entity\OrchardParticipate $orchardParticipate)
+    {
+        $this->orchardParticipate[] = $orchardParticipate;
+
+        return $this;
+    }
+
+    /**
+     * Remove orchardParticipate
+     *
+     * @param \OrchardBundle\Entity\OrchardParticipate $orchardParticipate
+     */
+    public function removeOrchardParticipate(\OrchardBundle\Entity\OrchardParticipate $orchardParticipate)
+    {
+        $this->orchardParticipate->removeElement($orchardParticipate);
+    }
+
+    /**
+     * Set orchardParticipate
+     *
+     * @param \Doctrine\Common\Collections\Collection $orchardType
+     *
+     * @return Orchard
+     */
+    public function setOrchardParticipate($orchardParticipate)
+    {
+        $this->orchardParticipate = $orchardParticipate;
+
+        return $this;
+    }
+
+    /**
+     * Get orchardParticipate
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrchardParticipate()
+    {
+        return $this->orchardParticipate;
+    }
+
+    /**
+     * Add orchardService
+     *
+     * @param \OrchardBundle\Entity\OrchardService $orchardService
+     *
+     * @return Orchard
+     */
+    public function addOrchardService(\OrchardBundle\Entity\OrchardService $orchardService)
+    {
+        $this->orchardService[] = $orchardService;
+
+        return $this;
+    }
+
+    /**
+     * Remove orchardService
+     *
+     * @param \OrchardBundle\Entity\OrchardService $orchardService
+     */
+    public function removeOrchardService(\OrchardBundle\Entity\OrchardService $orchardService)
+    {
+        $this->orchardService->removeElement($orchardService);
+    }
+
+    /**
+     * Set orchardService
+     *
+     * @param \Doctrine\Common\Collections\Collection $orchardService
+     *
+     * @return Orchard
+     */
+    public function setOrchardService($orchardService)
+    {
+        $this->orchardService = $orchardService;
+
+        return $this;
+    }
+
+    /**
+     * Get orchardService
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrchardService()
+    {
+        return $this->orchardService;
     }
 
     /**
