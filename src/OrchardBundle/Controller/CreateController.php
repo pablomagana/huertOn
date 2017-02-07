@@ -71,7 +71,7 @@ class CreateController extends Controller
       $orchard_activities = $repository->findAll();
     }
 
-    return $this->render($template, array('orchard' => $orchard, 'orchardTypes' => $orchard_types, 'orchardParticipates' => $orchard_participates, 'orchardServices' => $orchard_services, 'OrchardActivities' => $orchard_activities));
+    return $this->render($template, array('orchard' => $orchard, 'orchardTypes' => $orchard_types, 'orchardParticipates' => $orchard_participates, 'orchardServices' => $orchard_services, 'orchardActivities' => $orchard_activities));
 
   }
 
@@ -119,7 +119,7 @@ class CreateController extends Controller
     $orchardEntityArray = array();
 
     if (!empty($params)) {
-      
+
       foreach ($params as $param) {
         $orchardEntity = $this->container->get("orchard_service")->$getterName($param);
         $orchardEntity->addOrchard($orchard);
