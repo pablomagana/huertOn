@@ -153,10 +153,6 @@ small {
 .label-control + .tooltip > .tooltip-inner {background-color: #f00;}
 
 /* Let's get this party started */
-::-webkit-scrollbar {
-    width: 12px;
-}
-
 /* Track */
 .steps-left-12::-webkit-scrollbar-track {
     /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
