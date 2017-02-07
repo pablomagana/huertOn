@@ -1,6 +1,5 @@
 home:
-    resource: "@HomeBundle/Controller/"
-    type:     annotation
+    resource: "@HomeBundle/Resources/config/routing.yml"
     prefix:   /
 
 user:

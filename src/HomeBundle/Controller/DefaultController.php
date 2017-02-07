@@ -20,7 +20,7 @@ class DefaultController extends Controller
 
       $query = $repository->createQueryBuilder('o')
           ->addSelect(
-                '( 3959 * acos(cos(radians(' . $user_latitude . '))' .
+                'o.name, o.zipCode, o.town, ( 3959 * acos(cos(radians(' . $user_latitude . '))' .
                     '* cos( radians( o.latitude ) )' .
                     '* cos( radians( o.longitude )' .
                     '- radians(' . $user_longitude . ') )' .
