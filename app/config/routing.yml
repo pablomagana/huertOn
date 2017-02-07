@@ -1,3 +1,8 @@
+home:
+    resource: "@HomeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /user
