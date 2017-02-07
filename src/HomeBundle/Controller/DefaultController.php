@@ -8,12 +8,11 @@ use OrchardBundle\Entity\Orchard;
 
 class DefaultController extends Controller
 {
-  
-  public function findViewAction()
+
+  public function orchardProfileAction()
   {
-      return $this->render('HomeBundle:Default:find.html.twig');
+      return $this->render('HomeBundle:Default:orchard-profile.html.twig');
   }
-=======
 
     public function indexAction()
     {
