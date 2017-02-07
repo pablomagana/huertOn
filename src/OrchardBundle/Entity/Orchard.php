@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(name="orchard")
  * @ORM\Entity(repositoryClass="OrchardBundle\Repository\OrchardRepository")
- *
+ * @ORM\HasLifecycleCallbacks
  *
  */
 class Orchard
@@ -234,6 +234,30 @@ class Orchard
       */
      protected $user;
 
+     /**
+      * @var boolean
+      *
+      * @ORM\Column(name="published", type="boolean")
+      *
+      */
+      protected $published;
+
+      /**
+       * @var datetime
+       *
+       * @ORM\Column(name="created_at", type="datetime")
+       *
+       */
+       protected $createdAt;
+
+       /**
+        * @var datetime
+        *
+        * @ORM\Column(name="updated_at", type="datetime")
+        *
+        */
+        protected $updatedAt;
+
     /**
      * Constructor
      */
@@ -244,7 +268,23 @@ class Orchard
         $this->orchardActivity = new \Doctrine\Common\Collections\ArrayCollection();
         $this->orchardParticipate = new \Doctrine\Common\Collections\ArrayCollection();
         $this->orchardService = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->published = false;
+        $this->setCreatedAt(new \DateTime());
     }
+
+    /**
+      *
+      * @ORM\PrePersist
+      * @ORM\PreUpdate
+      */
+      public function updatedTimestamps()
+      {
+         $this->setUpdatedAt(new \DateTime('now'));
+
+         if ($this->getCreatedAt() == null) {
+             $this->setCreatedAt(new \DateTime('now'));
+         }
+      }
 
     /**
      * Get id
@@ -902,5 +942,77 @@ class Orchard
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set published
+     *
+     * @param boolean $published
+     *
+     * @return Orchard
+     */
+    public function setPublished(boolean $published)
+    {
+        $this->published = $published;
+
+        return $this;
+    }
+
+    /**
+     * Get published
+     *
+     * @return boolean
+     */
+    public function getPublished()
+    {
+        return $this->published;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Orchard
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Orchard
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
