@@ -41,11 +41,11 @@
   {% endblock %}
   <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
-<body>
+<body class="add_margin">
 
   <!-- NAV BAR DESKTOP -->
   <nav id="nav-desktop" class="navbar navbar-light bg-faded navbar-fixed-top" style="padding-left: 80px; padding-right: 80px;">
-    <ul id="btn-save-exit" class="nav navbar-nav">
+    <ul class="nav navbar-nav">
       <div class="row">
         <div class="col-lg-5">
           <li class="nav-item float-lg-left float-xl-left">
@@ -69,25 +69,8 @@
           <li class="nav-item float-lg-right float-xl-right">
             <a class="nav-link" href="/login">Iniciar Sesión</a>
           </li>
-          <li class="nav-item float-lg-right float-xl-right">
-            <div id="loading" style="display: none;" class="loading"></div>
-          </li>
         </div>
       </div>
-      <!--   Futura implementación de hamburger icon
-      <li class="nav-item">
-        <div id="loading" style="display: none;" class="loading"></div>
-      </li>
-
-      <li class="nav-item">
-        <span id="loading-text" style="display: none;" class="navbar-text">
-          Guardando...
-        </span>
-      </li>
-
-      <li class="nav-item">
-      <a class="nav-link" href="#">Guardar y salir</a>
-    </li> -->
     </ul>
   </nav>
 
@@ -147,11 +130,10 @@
       </div>
     </div>
   </nav>
-  <!--=============================END NAV BAR MOBILE=============================-->
+  <!- =============================END NAV BAR MOBILE=============================-->
 
 
   <div class="container-fluid">
-    <input type="text" id="orchard-id" hidden="hidden">
     {% block body %}{% endblock %}
   </div>
 
