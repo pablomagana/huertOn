@@ -76,6 +76,7 @@
 
 html,body,.map,.step-1,.steps {
     height:100%;
+		margin-top: 60px;
 }
 
 .container-fluid {
@@ -174,25 +175,9 @@ small {
   /*+++++++++++++++++EndAlex+++++++++++++++++*/
 
 
-/*+++++++++++++++++MEDIA QUERYS+++++++++++++++++*/
-/* Extra-small (mobiles) */
-@media (max-width: 768px) {
-	.fixed-buttons {
-		position: fixed;
-	    bottom: 0px;
-	    z-index: 9999 !important;
-	    width: 93vw;
-	}
-  .steps-right {
-    display: none;
-  }
-  .steps-right-pdf {
-    display: none;
-  }
-}
-
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 992px) {
+/*+++++++++++++++++MEDIA QUERIES+++++++++++++++++*/
+/* Small devices (tablets, and mobiles 768px and less) */
+@media (max-width: 992px) {
   .fixed-buttons {
 		position: fixed;
 	    bottom: 0px;
@@ -206,10 +191,15 @@ small {
   .steps-right-pdf {
     display: none;
   }
+
+	#nav-desktop{
+		display: none;
+	}
+
 }
 
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) and (max-width: 1200px) {
+/* Medium devices and large (desktops, 992px and up) */
+@media (min-width: 992px){
   .fixed-buttons {
 		position: fixed;
 	    bottom: 0px;
@@ -217,17 +207,10 @@ small {
 	    width: 50%;
 	}
 
-}
 
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .fixed-buttons {
-		position: fixed;
-	    bottom: 0px;
-	    z-index: 9999 !important;
-	    width: 50%;
+	#nav-mobile{
+		display: none;
 	}
-
 }
 
 .label-control{padding-right: 20px;}
@@ -306,4 +289,89 @@ small {
 
 h4 {
   color: #110a79;
+}
+
+
+/*=========================home parallax=========================*/
+/* background setup */
+.background {
+    background-repeat:no-repeat;
+    /* custom background-position */
+    background-position:50% 50%;
+    /* ie8- graceful degradation */
+    background-position:50% 50%\9 !important;
+}
+
+.fullscreen,
+.content-a {
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.fullscreen.overflow,
+.fullscreen.overflow .content-a {
+    height:auto;
+    min-height:100%;
+}
+
+/* content centering styles */
+.content-a {
+    display:table;
+}
+.content-b {
+	display:table-cell;
+    position:relative;
+	vertical-align:middle;
+	text-align:center;
+}
+/*=========================home parallax=========================*/
+
+span#title-home_search {
+    color: white;
+    font-size: 6vw;
+    font-weight: bold;
+    margin-bottom: 300px;
+}
+
+button#btn-home_search {
+    background-color: rgb(11, 1, 70);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 14px 40px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 0px 10px 10px 0px;
+}
+
+input#input-home_search {
+    width: 50vw;
+    box-sizing: border-box;
+    color: black;
+    padding: 12px 20px;
+    margin: 8px 0px;
+}
+
+nav li{
+	margin:0 40px;
+}
+
+nav li a{
+	color: black!important;
+}
+
+#register-button{
+	border-color: #0b0146!important;
+	color: #0b0146!important;
+}
+
+#register-button:hover{
+	color: white!important;
+	background-color: #0b0146!important;
 }
