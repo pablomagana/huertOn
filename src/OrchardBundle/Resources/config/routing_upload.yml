@@ -1,15 +1,15 @@
-orchard_uploadImages:
+orchard_upload_images_upload:
     path:     /images/upload/{id_orchard}
     defaults: { _controller: OrchardBundle:Upload:uploadImage, id_orchard:null}
 
-orchard_deleteImages:
+orchard_upload_images_delete:
     path:     /images/delete/{idImage}
-    defaults: { _controller: OrchardBundle:Upload:deleteImage,idImage:null}
+    defaults: { _controller: OrchardBundle:Upload:deleteImage, idImage:null}
 
-orchard_modifyImages:
+orchard_upload_images_modify:
     path:     /images/modify/{idImage}
-    defaults: { _controller: OrchardBundle:Upload:modifyImage,idImage:null}
+    defaults: { _controller: OrchardBundle:Upload:modifyImage, idImage:null}
 
-orchard_uploadFiles:
+orchard_upload_files_upload:
     path:     /files/upload
     defaults: {_controller: OrchardBundle:Upload:uploadFile}

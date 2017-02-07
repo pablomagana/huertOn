@@ -31,7 +31,7 @@ class OrchardActivity
     /**
      * @var \Doctrine\Common\Collections\Collection|Orchard[]
      *
-     * @ORM\ManyToMany(targetEntity="Orchard", mappedBy="activity")
+     * @ORM\ManyToMany(targetEntity="Orchard", mappedBy="orchardActivity")
      */
     private $orchards;
 

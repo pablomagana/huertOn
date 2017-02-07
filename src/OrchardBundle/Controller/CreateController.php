@@ -9,7 +9,6 @@ use OrchardBundle\Entity\OrchardType;
 use OrchardBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use OrchardBundle\Util\Util;
 
 class CreateController extends Controller
 {
@@ -31,7 +30,7 @@ class CreateController extends Controller
       $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
     }
 
-    return $this->render('OrchardBundle:Default:steps.html.twig', array('orchard'=> $orchard));
+    return $this->render('OrchardBundle:Create:steps.html.twig', array('orchard'=> $orchard));
 
   }
 
@@ -50,31 +49,30 @@ class CreateController extends Controller
     $template = null;
 
     if($step_orchard <= $orchard->getStep()) {
-      $template = 'OrchardBundle:Default:step' . $step_orchard . '.html.twig';
+      $template = 'OrchardBundle:Create:step' . $step_orchard . '.html.twig';
     }else {
-      $template = 'OrchardBundle:Default:step' . $orchard->getStep() . '.html.twig';
+      $template = 'OrchardBundle:Create:step' . $orchard->getStep() . '.html.twig';
     }
 
-    switch ($orchard->getStep()) {
-      case '13':
-        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
-        $orchard_types = $repository->findAll();
-        break;
-      case '21':
-        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
-        $orchard_participates = $repository->findAll();
-        break;
-      case '32':
-        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
-        $orchard_services = $repository->findAll();
-        break;
-      case '33':
-        $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
-        $orchard_activities = $repository->findAll();
-        break;
+    if($orchard->getStep() == '13' || $step_orchard == '13') {
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardType');
+      $orchard_types = $repository->findAll();
+    }
+    if($orchard->getStep() == '21' || $step_orchard == '21') {
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardParticipate');
+      $orchard_participates = $repository->findAll();
+    }
+    if($orchard->getStep() == '32' || $step_orchard == '32') {
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardService');
+      $orchard_services = $repository->findAll();
+    }
+    if($orchard->getStep() == '33' || $step_orchard == '33') {
+      $repository = $this->getDoctrine()->getRepository('OrchardBundle:OrchardActivity');
+      $orchard_activities = $repository->findAll();
     }
 
     return $this->render($template, array('orchard' => $orchard, 'orchardTypes' => $orchard_types, 'orchardParticipates' => $orchard_participates, 'orchardServices' => $orchard_services, 'OrchardActivities' => $orchard_activities));
+
   }
 
   public function insertAction($id_orchard, Request $request)
@@ -104,6 +102,66 @@ class CreateController extends Controller
 
     return $response;
 
+  }
+
+  public function checkboxAction(Request $request, $id_orchard, $entity)
+  {
+
+    $getterName = 'get' . $entity;
+    $setterName = 'set' . $entity;
+
+    $params = $request->request->get($entity);
+
+    $em = $this->getDoctrine()->getManager();
+
+    $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+
+    $orchardEntityArray = array();
+
+    foreach ($params as $param) {
+      $orchardEntity = $this->container->get("orchard_service")->$getterName($param);
+      $orchardEntity->addOrchard($orchard);
+      array_push($orchardEntityArray, $orchardEntity);
+    }
+
+    $orchard->$setterName($orchardEntityArray);
+
+    $redirect = null;
+
+    switch ($entity) {
+      case 'OrchardType':
+        $orchard->setStep('14');
+        $redirect = '14';
+        break;
+      case 'OrchardParticipate':
+        $orchard->setStep('22');
+        $redirect = '22';
+        break;
+      case 'OrchardActivity':
+        $orchard->setStep('34');
+        $redirect = '34';
+        break;
+      case 'OrchardService':
+        $orchard->setStep('33');
+        $redirect = '33';
+        break;
+    }
+
+    $em->persist($orchard);
+    $em->flush();
+
+    $response = new JsonResponse();
+    $response->setData(array(
+      'redirect' => $redirect
+    ));
+
+    return $response;
+
+  }
+
+  public function draftAction()
+  {
+    return $this->render('OrchardBundle:Create:draft.html.twig');
   }
 
 }
