@@ -18,10 +18,9 @@ function initMap() {
   }).addTo(map);
 
   L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
- 
+
   setMap();
 
-  };
 }
 
 function setMap(){
@@ -69,7 +68,7 @@ function retrieveGeometry(geometry) {
     	var geojsonFeaturePoint = geojsonFeature[0];
 			var geojsonFeaturePolygon = geojsonFeature[1];
 			if(geojsonFeaturePoint.geometry.type == 'Point') {
-				var marker = L.marker([geojsonFeaturePoint.geometry.coordinates[1], geojsonFeaturePoint.geometry.coordinates[0]], {draggable: true});
+				var marker = L.marker([geojsonFeaturePoint.geometry.coordinates[1], geojsonFeaturePoint.geometry.coordinates[0]], {draggable: false});
 				prepareMarker(marker);
 			}
 			if(geojsonFeaturePolygon.geometry.type == 'Polygon') {
@@ -77,7 +76,7 @@ function retrieveGeometry(geometry) {
 			}
 		}else {
 			if(geojsonFeature.geometry.type == 'Point') {
-				var marker = L.marker([geojsonFeature.geometry.coordinates[1], geojsonFeature.geometry.coordinates[0]], {draggable: true});
+				var marker = L.marker([geojsonFeature.geometry.coordinates[1], geojsonFeature.geometry.coordinates[0]], {draggable: false});
 				prepareMarker(marker);
 			}
 		}

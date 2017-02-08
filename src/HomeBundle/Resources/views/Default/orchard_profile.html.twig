@@ -3,34 +3,20 @@
 {% block body %}
 <div class="row" id="orchard-img">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-    <div style="width: 100%; height: 300px; background: url({{ orchard.images[0].src }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-
-
-    <div class="fullscreen background parallax" style="background-image: url('{{ orchard.images[0].src }}'); background-attachment: fixed;" data-img-width="1600" data-img-height="1064" data-diff="100">
-      <div class="content-a">
-        <div class="content-b">
-          <span id="title-home_search">Busca un huerto para ti</span><br><br><br><br>
-          <input type="text" id="input-home_search" placeholder="Pon tu ciudad, CP o nombre del huerto"><button id="btn-home_search" class="button" type="button">Buscar</button>
-        </div>
-      </div>
-    </div>
-
-
-
-
+    <div class="fullscreen background parallax" style="padding:200px; background-image: url('{{ orchard.images[0].src }}'); background-attachment: fixed;"  data-diff="100"></div>
   </div>
 </div>
-<div class="spacing"></div>
 
 
 
-<div class="row container" id="location-contact">
-  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-
+<div class="row" id="location-contact">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 container">
+    <h3>{{ orchard.name }}</h3>
+    <a href="#location">{{ orchard.street }}</a>
   </div>
 
-  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 container">
+    <a href="#contact"><button type="button" name="button" id="btn-contact">CONTACTA</button></a>
   </div>
 </div>
 <div class="spacing"></div>
@@ -46,7 +32,8 @@
   {% else %}
   {% for orchardActivity in orchard.orchardActivity %}
   <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-    <h1>{{ orchardActivity.name }}</h1>
+
+    <h5>{{ orchardActivity.name }}</h5>
   </div>
   {% endfor %}
   {% endif %}
@@ -58,9 +45,7 @@
 
 <div class="row container" id="philosophy">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-    " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc in nulla arcu.
-    Curabitur consequat convallis nulla nec pharetra. Proin accumsan dui non dictum tristique.
-    Interdum et malesuada fames ac ante ipsum primis in faucibus. "
+    " {{ orchard.governanceModel }} "
   </div>
 </div>
 <div class="spacing"></div>
@@ -75,12 +60,24 @@
   <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 border">
     <h6>Tipo de huerto</h6>
     <br>
+    <br>
+    <ul>
+      {% for orchardType in orchard.orchardType %}
+      <li>{{ orchardType.name }}</li>
+      {% endfor %}
+    </ul>
   </div>
 
   <!-- EQUIPAMIENTO -->
   <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 border">
     <h6>Equipamiento</h6>
     <br>
+    <br>
+    <ul>
+      {% for orchardService in orchard.orchardService %}
+      <li>{{ orchardService.name }}</li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
 <div class="spacing"></div>
@@ -95,18 +92,27 @@
     <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 border">
       <h6>Modalidades</h6>
       <br>
+      <br>
+      <ul>
+        {% for orchardParticipate in orchard.orchardParticipate %}
+        <li>{{ orchardParticipate.name }}</li>
+        {% endfor %}
+      </ul>
+
     </div>
 
     <!-- NORMAS DE HUERTO -->
     <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 border">
       <h6>Antes es importante que sepas</h6>
       <br>
+      <br>
+      Mira <a href="/webs/orchards/files/XXXX">AQUÍ</a> las normas del huerto.
     </div>
 
     <div class="spacing"></div>
     <!-- PASOS PARA INSCRIBIRTE -->
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top:40px">
-      <h6>Qué necesitas para inscribirte</h6>
+      <h6>¿Qué necesitas para inscribirte?</h6>
       <br>
     </div>
 </div>
@@ -128,9 +134,20 @@
 
 <div class="row container" id="contact">
   <!-- TIENES ALGUNA PREGUNTA -->
-    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="background-color:#f2f2f2; border-radius: 15px; padding: 40px;">
       <h3>¿Tienes alguna pregunta?</h3>
       <hr class="hr-orchard-profile">
+      <br>
+      <br>
+
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+
+      </div>
+
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+
+      </div>
+
     </div>
 
     <!-- FORMULARIO DE CONTACTO -->
@@ -140,6 +157,5 @@
 </div>
 <div class="spacing"></div>
 
-
-
+<script src="{{ asset('/js/map_show.js')}}" charset="utf-8"></script>
 {% endblock %}
