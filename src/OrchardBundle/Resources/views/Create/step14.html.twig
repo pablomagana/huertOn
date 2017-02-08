@@ -22,11 +22,11 @@
           </div>
           <div id="gallery">
           </div>
-          {% if images is defined and images|length > 0 %}
-            <input type="text" hidden="true" class="required" name="imagesuploaded" value="{{images|length}}"/>
+          {% if orchard.images is defined and orchard.images|length > 0 %}
+            <input type="text" hidden="true" class="required" name="imagesuploaded" value="{{orchard.images|length}}"/>
             <h1>Imagenes subidas</h1>
             <div class="upload">
-          {% for img in images %}
+          {% for img in orchard.images %}
             <div class="thumbnail">
               <span class="fa fa-times-circle topRight deleteImage" id="{{img.id}}" onclick="deleteUpload(this)"></span>
               <img  src="{{img.src}}" alt="{{img.description}}">

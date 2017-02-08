@@ -13,52 +13,67 @@
     </div>
   </div>
   {% for orchard in app.user.orchard %}
-  {% if orchard.step >= 12 %}
+  {% if orchard.step > 11 %}
+  <!-- No pinta la imagen si no la tiene -->
   {% if orchard.images != null and orchard.images is not empty %}
-  <div class="row">
-    <div class="col-lg-5 col-md-5 col-xs-6 col-sm-6">
-      <div style="width: 100%; height: 300px; background: url({{ orchard.images[0].src }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-    </div>
-    {% endif %}
+    <div class="row">
+      <div class="col-lg-5 col-md-5 col-xs-6 col-sm-6">
+        <div style="width: 100%; height: 300px; background: url({{ orchard.images[0].src }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+      </div>
+  {% endif %}
     <div class="col-lg-7 col-md-7 col-xs-6 col-sm-6">
       <p><h3> {{ orchard.name }} </h3></p>
       {% if orchard.published == 1 %}
-      <p><i>Publicado</i></p>
+        <p><i>Publicado</i></p>
       {% else %}
-      <p><i>Borrador</i></p>
+        <p><i>Borrador</i></p>
       {% endif %}
-      <p><i> {{ orchard.createdAt|date("d/M/Y h:m")}}</i></p>
+        <p><i>Fecha de creación: {{ orchard.createdAt|date("d/M/Y h:m")}}</i></p>
+        <p><i>Última fecha de modificación: {{ orchard.updatedAt|date("d/M/Y h:m")}}</i></p>
 
       <div class="botones">
-        {% if orchard.step >= 12 and orchard.published == 0 %}
-        {% if orchard.step != 12 %}
-        <a href="/orchard/create/publish/{{ orchard.id }}/true"><button id="btn-publish" type="button" class="btn btn-secondary draft-xs">Publica</button></a>
+        {% if orchard.step > 13 %}
+          {% if orchard.published == 0 %}
+            <a href="/orchard/create/publish/{{ orchard.id }}/true"><button id="btn-publish" type="button" class="btn btn-secondary draft-xs">Publica</button></a>
+          {% endif %}
+          {% if orchard.published == 1 %}
+            <a href="/orchard/create/publish/{{ orchard.id }}/false"><button id="btn-unpublish" type="button" class="btn btn-secondary draft-xs">Despublica</button></a>
+          {% endif %}
+          {% else %}
+            <a href="/orchard/create/publish/{{ orchard.id }}/true"><button id="btn-publish" type="button" class="btn btn-secondary draft-xs" disabled>Publica</button></a>
         {% endif %}
-        <button type="button" class="btn btn-secondary draft-xs" data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Completa</button>
-
-        {% elseif orchard.published == 1 %}
-        <a href="/orchard/create/publish/{{ orchard.id }}/false"><button id="btn-unpublish" type="button" class="btn btn-secondary draft-xs">Despublica</button></a>
-        <button type="button" class="btn btn-secondary draft-xs" data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Modifica</button>
-
-        {% endif %}
+      {% if orchard.step < 34 %}
+        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-secondary draft-xs" data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Completa</button></a>
+      {% endif %}
+      {% if orchard.step > 33 %}
+        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-secondary draft-xs" data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Modifica</button></a>
+      {% endif %}
         <button type="button" class="btn btn-secondary draft-xs">Elimina</button>
-
       </div>
     </div>
   </div>
+
+
   <div class="botones-xs">
-    {% if orchard.step >= 12 and orchard.published == 0 %}
-    <a href="/orchard/create/publish/{{ orchard.id }}/true"><button id="btn-publish" type="button" class="btn btn-secondary draft-lg">Publica</button></a>
-    <button type="button" class="btn btn-secondary draft-lg" data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Completa</button>
-
-    {% elseif orchard.published == 1 %}
-    <a href="/orchard/create/publish/{{ orchard.id }}/false"><button id="btn-unpublish" type="button" class="btn btn-secondary draft-lg">Despublica</button></a>
-    <button type="button" class="btn btn-secondary draft-lg" data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Modifica</button>
-
+    {% if orchard.step > 13 %}
+      {% if orchard.published == 0 %}
+        <a href="/orchard/create/publish/{{ orchard.id }}/true"><button id="btn-publish" type="button" class="btn btn-secondary draft-lg">Publica</button></a>
+      {% endif %}
+      {% if orchard.published == 1 %}
+        <a href="/orchard/create/publish/{{ orchard.id }}/false"><button id="btn-unpublish" type="button" class="btn btn-secondary draft-lg">Despublica</button></a>
+      {% endif %}
+      {% else %}
+        <a href="/orchard/create/publish/{{ orchard.id }}/true"><button id="btn-publish" type="button" class="btn btn-secondary draft-lg" disabled>Publica</button></a>
     {% endif %}
-
+  {% if orchard.step < 34 %}
+    <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-secondary draft-lg" data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Completa</button></a>
+  {% endif %}
+  {% if orchard.step > 33 %}
+    <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-secondary draft-lg" data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Modifica</button></a>
+  {% endif %}
     <button type="button" class="btn btn-secondary draft-lg">Elimina</button>
   </div>
+  
   <br>
   {% endif %}
 
