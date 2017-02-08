@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use OrchardBundle\Entity\Orchard;
 use OrchardBundle\Entity\OrchardType;
+use OrchardBundle\Entity\OrchardInscriptionStep;
 use OrchardBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -161,6 +162,44 @@ class CreateController extends Controller
 
     return $response;
 
+  }
+
+  public function customAction(Request $request, $id_orchard)
+  {
+    $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+
+    $em = $this->getDoctrine()->getManager();
+
+    $params = $request->request->get('OrchardInscriptionStep');
+
+    $orchardInscriptionStepsArray = array();
+
+    if (!empty($params)) {
+
+      foreach ($params as $param) {
+        $orchardInscriptionStep = new OrchardInscriptionStep();
+        $orchardInscriptionStep->setText($param);
+        $orchardInscriptionStep->setOrchard($orchard);
+        array_push($orchardInscriptionStepsArray, $orchardInscriptionStep);
+
+        $em->persist($orchardInscriptionStep);
+      }
+
+    }
+
+    $orchard->setOrchardInscriptionStep($orchardInscriptionStepsArray);
+
+    $orchard->setStep('32');
+
+    $em->persist($orchard);
+    $em->flush();
+
+    $response = new JsonResponse();
+    $response->setData(array(
+      'redirect' => '31'
+    ));
+
+    return $response;
   }
 
   public function draftAction()

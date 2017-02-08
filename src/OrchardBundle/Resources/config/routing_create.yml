@@ -18,6 +18,10 @@ orchard_create_insert_checkbox:
     path:     /insert/checkbox/{id_orchard}/{entity}
     defaults: { _controller: OrchardBundle:Create:checkbox, id_orchard:null }
 
+orchard_create_insert_custom:
+    path:     /insert/custom/{id_orchard}
+    defaults: { _controller: OrchardBundle:Create:custom, id_orchard:null }
+
 orchard_create_publish:
     path:     /publish/{id_orchard}/{publish}
     defaults: { _controller: OrchardBundle:Create:publish, id_orchard:null, publish:false }

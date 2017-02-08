@@ -177,8 +177,11 @@
         saveAnimation();
         if($('#Step').val() == '12') {
           window.location.href = '/orchard/create/steps/{{ orchard.id }}'
-        }else if ($('#Step').val() == '22' || $('#Step').val() == '32') {
-          var step = parseInt($('#Step').val()) - 8;
+        }else if ($('#Step').val() == '22') {
+          var step = parseInt($('#Step').val()) - 7;
+          window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
+        }else if ($('#Step').val() == '32') {
+          var step = parseInt($('#Step').val()) - 9;
           window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
         }else {
           var step = parseInt($('#Step').val()) - 2;

@@ -240,6 +240,12 @@ class Orchard
       */
      protected $orchardService;
 
+     /**
+      * @var \Doctrine\Common\Collections\Collection|OrchardInscriptionStep[]
+      * One Orchard has Many OrchardInscriptionSteps.
+      * @ORM\OneToMany(targetEntity="OrchardInscriptionStep", mappedBy="orchard", fetch="EAGER")
+      */
+     protected $orchardInscriptionStep;
 
      /**
       * @var UserBundle\Entity\User
@@ -284,6 +290,7 @@ class Orchard
         $this->orchardActivity = new \Doctrine\Common\Collections\ArrayCollection();
         $this->orchardParticipate = new \Doctrine\Common\Collections\ArrayCollection();
         $this->orchardService = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orchardInscriptionStep = new \Doctrine\Common\Collections\ArrayCollection();
         $this->published = false;
         $this->setCreatedAt(new \DateTime());
     }
@@ -1078,5 +1085,53 @@ class Orchard
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * Add orchardInscriptionStep
+     *
+     * @param \OrchardBundle\Entity\OrchardInscriptionStep $orchardInscriptionStep
+     *
+     * @return Orchard
+     */
+    public function addOrchardInscriptionStep(\OrchardBundle\Entity\OrchardInscriptionStep $orchardInscriptionStep)
+    {
+        $this->orchardInscriptionStep[] = $orchardInscriptionStep;
+
+        return $this;
+    }
+
+    /**
+     * Remove orchardInscriptionStep
+     *
+     * @param \OrchardBundle\Entity\OrchardInscriptionStep $orchardInscriptionStep
+     */
+    public function removeOrchardInscriptionStep(\OrchardBundle\Entity\OrchardInscriptionStep $orchardInscriptionStep)
+    {
+        $this->orchardInscriptionStep->removeElement($orchardInscriptionStep);
+    }
+
+    /**
+     * Get orchardInscriptionStep
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrchardInscriptionStep()
+    {
+        return $this->orchardInscriptionStep;
+    }
+
+    /**
+     * Set orchardInscriptionStep
+     *
+     * @param \Doctrine\Common\Collections\Collection $orchardInscriptionStep
+     *
+     * @return Orchard
+     */
+    public function setOrchardInscriptionStep($orchardInscriptionStep)
+    {
+        $this->orchardInscriptionStep = $orchardInscriptionStep;
+
+        return $this;
     }
 }

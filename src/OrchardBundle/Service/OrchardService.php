@@ -66,6 +66,12 @@ class OrchardService
     return $repository->findOneById($param);
   }
 
+  public function getOrchardInscriptionStep($param)
+  {
+    $repository = $this->em->getRepository('OrchardBundle:OrchardInscriptionStep');
+    return $repository->findOneById($param);
+  }
+
   public function getUser()
   {
     return $this->tokenStorage->getToken()->getUser();

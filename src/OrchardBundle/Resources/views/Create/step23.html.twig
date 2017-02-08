@@ -17,7 +17,7 @@
 						<!--base para copiar-->
 						<li class="base" style="display: none;">
 							<br>
-							<textarea rows="4" cols="50" class="form-control" id="inscription-step" value="{{ orchard.projectStart }}" maxlength="200"></textarea>
+							<textarea rows="4" cols="50" class="form-control" id="inscription-step" maxlength="200"></textarea>
 							<div class="text-xs-right">
 								<u class="remove">Eliminar este paso</u>
 							</div>
@@ -25,10 +25,12 @@
 						</li>
 						<!--base para copiar-->
 
-						<ol>
+						{% if orchard.orchardInscriptionStep is not empty %}
+						{% for inscriptionStep in orchard.orchardInscriptionStep %}
+						<ol class="inscription_steps">
 							<li>
 								<br>
-								<textarea rows="4" cols="50" class="form-control" id="inscription-step" value="{{ orchard.projectStart }}" maxlength="200"></textarea>
+								<textarea rows="4" cols="50" class="form-control" id="{{ inscriptionStep.id }}" maxlength="200">{{ inscriptionStep.text }}</textarea>
 								<div class="text-xs-right">
 									<u class="remove">Eliminar este paso</u>
 								</div>
@@ -38,6 +40,13 @@
 
 
 						</ol>
+						{% endfor %}
+						{% else %}
+						<ol class="inscription_steps">
+
+						</ol>
+						{% endif %}
+
 					</div>
 				</div>
 				<div class="add">Añadir un nuevo paso. <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></div>
@@ -93,23 +102,141 @@
 {% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript">
-$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
-</script>
 
 <script type="text/javascript">
-$( document ).ready(function() {
+
+$(function() {
+
+	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
+
 	//NUEVO PASO
 	$('.add').click(function() {
-		$( ".base" ).clone().removeAttr( "class style" ).appendTo( "ol" );
+		$( ".base" ).clone().removeAttr( "class style" ).appendTo( ".inscription_steps" );
 		$("u.remove").on( "click", function() {
 			$(this).parent().parent().remove();
 		});
 	});
+
 	//ELIMINAR PASO
 	$("u.remove").on( "click", function() {
 		$(this).parent().parent().remove();
 	});
+
+	//FUNCION BOTON SIGUIENTE
+	$('#btn-siguiente').on('click', function() {
+
+			var inscription_steps = [];
+			initSave(inscription_steps);
+
+			$.ajax({
+				type: 'POST',
+				url: '/orchard/create/insert/custom/{{ orchard.id }}',
+				data: { 'OrchardInscriptionStep': inscription_steps },
+				success: function(data) {
+					saveAnimation();
+					console.log('success');
+					window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
+				},
+				error: function(jqXHR, exception) {
+					saveAnimation();
+					if (jqXHR.status === 0) {
+						alert('Not connect.\n Verify Network.');
+					} else if (jqXHR.status == 404) {
+						alert('Requested page not found. [404]');
+					} else if (jqXHR.status == 500) {
+						alert('Internal Server Error [500].');
+					} else if (exception === 'parsererror') {
+						alert('Requested JSON parse failed.');
+					} else if (exception === 'timeout') {
+						alert('Time out error.');
+					} else if (exception === 'abort') {
+						alert('Ajax request aborted.');
+					} else {
+						alert('Uncaught Error.\n' + jqXHR.responseText);
+					}
+					console.log('error');
+				}
+			});
+
+			return false;
+
+	});
+
+	//FUNCION BOTON ATRAS
+	$('#btn-atras').on('click', function() {
+
+			var inscription_steps = [];
+			initSave(inscription_steps);
+
+			$.ajax({
+				type: 'POST',
+				dataType: 'json',
+				url: '/orchard/create/insert/custom/{{ orchard.id }}',
+				data: { 'OrchardInscriptionStep': inscription_steps },
+				success: function() {
+					saveAnimation();
+					window.location.href = '/orchard/create/step/22/{{ orchard.id }}';
+				}
+			});
+
+	});
+
+	//FUNCION BOTON GUARDAR Y SALIR
+	$('#btn-save-exit').on('click', function() {
+
+			var inscription_steps = [];
+			initSave(inscription_steps);
+
+			$.ajax({
+				type: 'POST',
+				url: '/orchard/create/insert/custom/{{ orchard.id }}',
+				data: { 'OrchardInscriptionStep': inscription_steps },
+				success: function(data) {
+					saveAnimation();
+					console.log('success');
+					window.location.href = '/orchard/create/steps/{{ orchard.id }}';
+				},
+				error: function(jqXHR, exception) {
+					saveAnimation();
+					if (jqXHR.status === 0) {
+						alert('Not connect.\n Verify Network.');
+					} else if (jqXHR.status == 404) {
+						alert('Requested page not found. [404]');
+					} else if (jqXHR.status == 500) {
+						alert('Internal Server Error [500].');
+					} else if (exception === 'parsererror') {
+						alert('Requested JSON parse failed.');
+					} else if (exception === 'timeout') {
+						alert('Time out error.');
+					} else if (exception === 'abort') {
+						alert('Ajax request aborted.');
+					} else {
+						alert('Uncaught Error.\n' + jqXHR.responseText);
+					}
+					console.log('error');
+				}
+			});
+
+			return false;
+
+	});
+
+	function initSave(inscription_steps) {
+		$("#loading, #loading-text").fadeIn("slow");
+		$('textarea').each(function(){
+			console.log($(this).val());
+			if($(this).val()) {
+				inscription_steps.push($(this).val());
+			}
+		});
+		console.log('inscription_steps', inscription_steps);
+	}
+
+	function saveAnimation() {
+		$("#loading, #loading-text").fadeOut("slow", function() {
+			$("#loading-text").text("Guardado").fadeIn('slow');
+		});
+	}
 
 });
 </script>
