@@ -41,8 +41,11 @@ class DefaultController extends Controller
       return $this->render('HomeBundle:Default:index.html.twig', array('orchards' => $orchards));
     }
 
-    public function showAction()
+    public function showAction($id_orchard)
     {
-      return $this->render('HomeBundle:Default:orchard_profile.html.twig');
+
+      $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+
+      return $this->render('HomeBundle:Default:orchard_profile.html.twig', array('orchard' => $orchard));
     }
   }

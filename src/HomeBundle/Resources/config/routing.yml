@@ -7,5 +7,5 @@ home_find:
     defaults: { _controller: HomeBundle:Default:find }
 
 home_orchard_profile:
-    path:     /orchard/show
-    defaults: { _controller: HomeBundle:Default:show }
+    path:     /orchard/show/{id_orchard}
+    defaults: { _controller: HomeBundle:Default:show, id_orchard:null }

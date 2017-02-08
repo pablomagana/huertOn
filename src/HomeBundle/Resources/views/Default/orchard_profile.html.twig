@@ -3,6 +3,20 @@
 {% block body %}
 <div class="row" id="orchard-img">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+    <div style="width: 100%; height: 300px; background: url({{ orchard.images[0].src }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+
+
+    <div class="fullscreen background parallax" style="background-image: url('{{ orchard.images[0].src }}'); background-attachment: fixed;" data-img-width="1600" data-img-height="1064" data-diff="100">
+      <div class="content-a">
+        <div class="content-b">
+          <span id="title-home_search">Busca un huerto para ti</span><br><br><br><br>
+          <input type="text" id="input-home_search" placeholder="Pon tu ciudad, CP o nombre del huerto"><button id="btn-home_search" class="button" type="button">Buscar</button>
+        </div>
+      </div>
+    </div>
+
+
+
 
   </div>
 </div>
@@ -27,9 +41,16 @@
   <!-- MOSTRAR LAS PRÓXIMAS ACTIVIDADES DE CADA HUERTO (3 COLUMNAS) -->
   <h5>PRÓXIMAS ACTIVIDADES</h5>
   <hr class="hr-orchard-profile">
+  {% if orchard.orchardActivity is empty %}
+  <h1>Este huerto no tiene actividades</h1>
+  {% else %}
+  {% for orchardActivity in orchard.orchardActivity %}
   <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-
+    <h1>{{ orchardActivity.name }}</h1>
   </div>
+  {% endfor %}
+  {% endif %}
+
 </div>
 <div class="spacing"></div>
 
@@ -97,7 +118,8 @@
   <h5>DÓNDE SE ENCUENTRA</h5>
   <hr class="hr-orchard-profile">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-
+    <div id="map-show" style="height:400px; width:100%;"></div>
+    <input type="text" id="Geometry" value="{{orchard.geometry}}" hidden="hidden">
   </div>
 </div>
 <div class="spacing"></div>

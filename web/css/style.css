@@ -347,3 +347,11 @@ nav li a{
 .draft-lg{
 	margin-left: 5px;
 }
+
+.parallax {
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

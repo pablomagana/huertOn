@@ -194,7 +194,7 @@ class Orchard
      /**
       * @var \Doctrine\Common\Collections\Collection|OrchardActivity[]
       *
-      * @ORM\ManyToMany(targetEntity="OrchardActivity", inversedBy="orchards")
+      * @ORM\ManyToMany(targetEntity="OrchardActivity", inversedBy="orchards", fetch="EAGER")
       * @ORM\JoinTable(
       *  name="orchard_orchardactivity",
       *  joinColumns={
@@ -227,7 +227,7 @@ class Orchard
      /**
       * @var \Doctrine\Common\Collections\Collection|OrchardService[]
       *
-      * @ORM\ManyToMany(targetEntity="OrchardService", inversedBy="orchards")
+      * @ORM\ManyToMany(targetEntity="OrchardService", inversedBy="orchards", fetch="EAGER")
       * @ORM\JoinTable(
       *  name="orchard_orchardservice",
       *  joinColumns={
