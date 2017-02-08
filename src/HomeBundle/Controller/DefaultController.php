@@ -48,4 +48,8 @@ class DefaultController extends Controller
 
       return $this->render('HomeBundle:Default:orchard_profile.html.twig', array('orchard' => $orchard));
     }
+    public function searchAction()
+    {
+      return $this->render('HomeBundle:Default:search.html.twig');
+    }
   }

@@ -1,6 +1,6 @@
-orchard_create_draft:
-    path:     /draft
-    defaults: { _controller: OrchardBundle:Create:draft }
+orchard_create_list:
+    path:     /list
+    defaults: { _controller: OrchardBundle:Create:list }
 
 orchard_create_steps:
     path:     /steps/{id_orchard}
@@ -25,3 +25,7 @@ orchard_create_insert_custom:
 orchard_create_publish:
     path:     /publish/{id_orchard}/{publish}
     defaults: { _controller: OrchardBundle:Create:publish, id_orchard:null, publish:false }
+
+orchard_create_delete:
+    path:     /delete/{id_orchard}
+    defaults: { _controller: OrchardBundle:Create:delete, id_orchard:null}

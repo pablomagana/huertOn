@@ -13,9 +13,6 @@
   .steps-right-pdf {
     display: none;
   }
-	.draft-xs{
-		display: none;
-	}
 	.legal-desktop{
 		display: none;
 	}
@@ -25,7 +22,9 @@
 		color: white;
 		padding: 20px 5px;
 	}
-
+	.btn-draft-lg{
+		display: none;
+	}
 }
 
 
@@ -37,9 +36,6 @@
 	    z-index: 9999 !important;
 	    width: 50%;
 	}
-	.draft-lg{
-		display: none;
-	}
 	.legal-mobile{
 		display: none;
 	}
@@ -49,8 +45,9 @@
 		color: white;
 		padding: 50px 150px;
 	}
-
-
+	.btn-draft-xs{
+		display: none;
+	}
 }
 /*+++++++++++++++++MEDIA QUERIES+++++++++++++++++*/
 
@@ -113,7 +110,7 @@ html,body,.map,.step-1,.steps {
 	margin: 10px 0 50px 0;
 }
 .botones-xs{
-	margin: 10px 0 50px 0;
+	margin-bottom: 50px;
 	text-align: center;
 }
 .steps-right {

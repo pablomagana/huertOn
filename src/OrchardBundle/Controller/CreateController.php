@@ -201,10 +201,10 @@ class CreateController extends Controller
 
     return $response;
   }
-
-  public function draftAction()
+  
+  public function listAction()
   {
-    return $this->render('OrchardBundle:Create:draft.html.twig');
+    return $this->render('OrchardBundle:Create:list.html.twig');
   }
 
   public function publishAction($id_orchard, $publish)
@@ -220,7 +220,16 @@ class CreateController extends Controller
     $em->persist($orchard);
     $em->flush();
 
-    return $this->redirect($this->generateUrl('orchard_create_draft'));
-
+    return $this->redirect($this->generateUrl('orchard_create_list'));
+  }
+  public function deleteAction($id_orchard)
+  {
+    $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+    if ($orchard != null) {
+      $em = $this->getDoctrine()->getManager();
+      $em->remove($orchard);
+      $em->flush();
+    }
+    return $this->redirect($this->generateUrl('orchard_create_list'));
   }
 }
