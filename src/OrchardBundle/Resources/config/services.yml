@@ -1,7 +1,4 @@
 services:
-#    orchard.example:
-#        class: OrchardBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
      orchard_service:
          class: OrchardBundle\Service\OrchardService
          arguments: [ "@doctrine.orm.entity_manager", "@security.token_storage" ]

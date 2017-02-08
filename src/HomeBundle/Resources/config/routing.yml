@@ -8,4 +8,4 @@ home_find:
 
 home_orchard_profile:
     path:     /orchard/show
-    defaults: { _controller: HomeBundle:Default:orchardProfile }
+    defaults: { _controller: HomeBundle:Default:show }
