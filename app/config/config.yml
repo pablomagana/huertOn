@@ -4,6 +4,7 @@ imports:
     - { resource: services.yml }
     - { resource: "@OrchardBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }
+    - { resource: "@HomeBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -61,6 +62,31 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+            numeric_functions:
+                 acos: DoctrineExtensions\Query\Mysql\Acos
+                 asin: DoctrineExtensions\Query\Mysql\Asin
+                 atan2: DoctrineExtensions\Query\Mysql\Atan2
+                 atan: DoctrineExtensions\Query\Mysql\Atan
+                 bit_count: DoctrineExtensions\Query\Mysql\BitCount
+                 bit_xor: DoctrineExtensions\Query\Mysql\BitXor
+                 ceil: DoctrineExtensions\Query\Mysql\Ceil
+                 cos: DoctrineExtensions\Query\Mysql\Cos
+                 cot: DoctrineExtensions\Query\Mysql\Cot
+                 degrees: DoctrineExtensions\Query\Mysql\Degrees
+                 floor: DoctrineExtensions\Query\Mysql\Floor
+                 log10: DoctrineExtensions\Query\Mysql\Log10
+                 pi: DoctrineExtensions\Query\Mysql\Pi
+                 power: DoctrineExtensions\Query\Mysql\Power
+                 quarter: DoctrineExtensions\Query\Mysql\Quarter
+                 radians: DoctrineExtensions\Query\Mysql\Radians
+                 rand: DoctrineExtensions\Query\Mysql\Rand
+                 round: DoctrineExtensions\Query\Mysql\Round
+                 stddev: DoctrineExtensions\Query\Mysql\StdDev
+                 sin: DoctrineExtensions\Query\Mysql\Sin
+                 std: DoctrineExtensions\Query\Mysql\Std
+                 tan: DoctrineExtensions\Query\Mysql\Tan
+                 variance: DoctrineExtensions\Query\Mysql\Variance
 
 # Swiftmailer Configuration
 swiftmailer:

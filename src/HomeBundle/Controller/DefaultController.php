@@ -1,0 +1,55 @@
+<?php
+
+namespace HomeBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use OrchardBundle\Entity\Orchard;
+
+class DefaultController extends Controller
+{
+
+  public function indexAction()
+  {
+    return $this->render('HomeBundle:Default:index.html.twig');
+  }
+
+  public function findAction($param, $user_latitude, $user_longitude)
+  {
+    $repository = $this->getDoctrine()->getRepository('OrchardBundle:Orchard');
+
+    $query = $repository->createQueryBuilder('o')
+    ->addSelect(
+      'o.name, o.zipCode, o.town, ( 3959 * acos(cos(radians(' . $user_latitude . '))' .
+      '* cos( radians( o.latitude ) )' .
+      '* cos( radians( o.longitude )' .
+      '- radians(' . $user_longitude . ') )' .
+      '+ sin( radians(' . $user_latitude . ') )' .
+      '* sin( radians( o.latitude ) ) ) ) as distance')
+      ->where("o.town LIKE :param OR o.zipCode LIKE :param OR o.name LIKE :name")
+      ->setParameter('param','%'.$param.'%')
+      ->setParameter('name','%'.$param.'%')
+      ->orderBy('distance', 'ASC')
+      ->getQuery();
+
+      $orchards = $query->getResult();
+
+      if (!$orchards) {
+        echo "vacio";
+      }
+
+      return $this->render('HomeBundle:Default:index.html.twig', array('orchards' => $orchards));
+    }
+
+    public function showAction($id_orchard)
+    {
+
+      $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+
+      return $this->render('HomeBundle:Default:orchard_profile.html.twig', array('orchard' => $orchard));
+    }
+    public function searchAction()
+    {
+      return $this->render('HomeBundle:Default:search.html.twig');
+    }
+  }

@@ -44,8 +44,8 @@
 <body>
   <!-- Image and text -->
   <nav class="navbar navbar-light bg-faded">
-    <a class="navbar-brand" href="#">
-      <img src="http://parcellesnostres.com/wp-content/uploads/2016/06/cropped-logo-parcelles.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    <a class="navbar-brand" href="/orchard/create/list">
+      <img src="{{ asset('/img/logo.png')}}" height="30" class="d-inline-block align-top" alt="">
     </a>
     <ul id="btn-save-exit" class="nav navbar-nav float-xs-right float-sm-right float-md-right float-lg-right">
       <li class="nav-item">
@@ -67,16 +67,29 @@
   <progress id="progressbar" class="progress" max="100" aria-describedby="example-caption-2"></progress>
 
   <div class="container-fluid">
-    <input type="text" id="orchard-id" hidden="hidden">
+
     {% block body %}{% endblock %}
 
-    {% block botones %}
-    <div class="fixed-buttons row">
-      <button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
-      <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
-    </div>
-    {% endblock %}
   </div>
+
+  <div class="modal fade" id="myModal">
+  	<div class="modal-dialog" role="document">
+  		<div class="modal-content">
+  			<div class="modal-header">
+  				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  					<span aria-hidden="true">&times;</span>
+  				</button>
+  				<h4 class="modal-title">Muchas gracias!</h4>
+  			</div>
+  			<div class="modal-body">
+  				<p>Cuando estudiemos tu sugerencia te enviaremos un email con el resultado. <p>&#x1f609</p></p>
+  			</div>
+  			<div class="modal-footer">
+  				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+  			</div>
+  		</div><!-- /.modal-content -->
+  	</div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
   <script type="text/javascript">
 
@@ -90,13 +103,9 @@
 
   $('form :input:not(:checkbox):not(:button)').focusin(function() {
     var este = $(this).attr('id');
-    console.log('este '+este);
     var inputs = $('.required');
     inputs.each(function(index) {
-      console.log($(this).attr('id'));
       if(este == $(this).attr('id')) {
-        console.log('ok');
-        console.log(index);
         return false;
       }else {
         if($(this).val() == '') {
@@ -107,44 +116,29 @@
     });
   });
 
-  var form =  {};
+  </script>
 
-  $('#btn-siguiente, #btn-save-exit').on('click', function() {
-    var valid = true;
-    $('.required').each(function() {
-      if($(this).val() == '') {
-        $(this).prev().prev().tooltip('show');
-        $(this).css('border-color', '#ff0000');
-        valid = false;
-      }
-    });
+  {% block javascripts %}
 
-    if(valid) {
-      $("#loading, #loading-text").fadeIn("slow");
-      $("form :input:not(:checkbox):not(:button)").each(function(){
-        console.log($(this).val());
-        form[$(this).attr('id')] = $(this).val();
-      });
+  <script type="text/javascript">
+  //FUNCION BOTON SIGUIENTE
+  $('#btn-siguiente').on('click', function() {
 
-      form['id'] = $('#orchard-id').val();
-      console.log('Este és el formulario'+form);
+    if(validateForm()) {
+      var form =  {};
+      initSave(form);
 
-      //FUNCION BOTON SIGUIENTE
       $.ajax({
         type: 'POST',
         url: '/orchard/create/insert/{{ orchard.id }}',
         data: form,
         success: function(data) {
-          $("#loading, #loading-text").fadeOut("slow", function() {
-            $("#loading-text").text("Guardado").fadeIn('slow');
-          });
+          saveAnimation();
           console.log('success');
           window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
         },
         error: function(jqXHR, exception) {
-          $("#loading, #loading-text").fadeOut("slow", function() {
-            $("#loading-text").text("Guardado").fadeIn('slow');
-          });
+          saveAnimation();
           if (jqXHR.status === 0) {
             alert('Not connect.\n Verify Network.');
           } else if (jqXHR.status == 404) {
@@ -171,14 +165,8 @@
 
   //FUNCION BOTON ATRAS
   $('#btn-atras').on('click', function() {
-    $("#loading, #loading-text").fadeIn("slow");
-    $("form :input:not(:checkbox):not(:button)").each(function(){
-      console.log($(this).val());
-      form[$(this).attr('id')] = $(this).val();
-    });
-
-    form['id'] = $('#orchard-id').val();
-    console.log('Este és el formulario'+form);
+    var form =  {};
+    initSave(form);
 
     $.ajax({
       type: 'POST',
@@ -186,11 +174,15 @@
       url: '/orchard/create/insert/{{ orchard.id }}',
       data: form,
       success: function() {
-        $("#loading, #loading-text").fadeOut("slow", function() {
-          $("#loading-text").text("Guardado").fadeIn('slow');
-        });
-        if($('#Step').val() == '12' || $('#Step').val() == '22') {
+        saveAnimation();
+        if($('#Step').val() == '12') {
           window.location.href = '/orchard/create/steps/{{ orchard.id }}'
+        }else if ($('#Step').val() == '22') {
+          var step = parseInt($('#Step').val()) - 7;
+          window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
+        }else if ($('#Step').val() == '32') {
+          var step = parseInt($('#Step').val()) - 9;
+          window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
         }else {
           var step = parseInt($('#Step').val()) - 2;
           window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
@@ -199,9 +191,77 @@
     });
   });
 
+  //FUNCION BOTON GUARDAR Y SALIR
+  $('#btn-save-exit').on('click', function() {
+
+    if(validateForm()) {
+      var form =  {};
+      initSave(form);
+
+      $.ajax({
+        type: 'POST',
+        url: '/orchard/create/insert/{{ orchard.id }}',
+        data: form,
+        success: function(data) {
+          saveAnimation();
+          console.log('success');
+          window.location.href = '/orchard/create/steps/{{ orchard.id }}';
+        },
+        error: function(jqXHR, exception) {
+          saveAnimation();
+          if (jqXHR.status === 0) {
+            alert('Not connect.\n Verify Network.');
+          } else if (jqXHR.status == 404) {
+            alert('Requested page not found. [404]');
+          } else if (jqXHR.status == 500) {
+            alert('Internal Server Error [500].');
+          } else if (exception === 'parsererror') {
+            alert('Requested JSON parse failed.');
+          } else if (exception === 'timeout') {
+            alert('Time out error.');
+          } else if (exception === 'abort') {
+            alert('Ajax request aborted.');
+          } else {
+            alert('Uncaught Error.\n' + jqXHR.responseText);
+          }
+          console.log('error');
+        }
+      });
+
+      return false;
+    }
+
+  });
+
+  function validateForm() {
+    var valid = true;
+    $('.required').each(function() {
+      if($(this).val() == '') {
+        $(this).prev().prev().tooltip('show');
+        $(this).css('border-color', '#ff0000');
+        valid = false;
+      }
+    });
+
+    return valid;
+  }
+
+  function initSave(form) {
+    $("#loading, #loading-text").fadeIn("slow");
+    $("form :input:not(:checkbox):not(:button)").each(function(){
+      form[$(this).attr('id')] = $(this).val();
+    });
+  }
+
+  function saveAnimation() {
+    $("#loading, #loading-text").fadeOut("slow", function() {
+      $("#loading-text").text("Guardado").fadeIn('slow');
+    });
+  }
+
   </script>
 
-  {% block javascripts %}{% endblock %}
+{% endblock %}
 
 </body>
 </html>

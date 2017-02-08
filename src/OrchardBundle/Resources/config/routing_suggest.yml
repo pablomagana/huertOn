@@ -1,11 +1,15 @@
-orchard_send:
-    path:     /send/{orchard_type}
-    defaults: { _controller: OrchardBundle:Suggestion:send }
-    
-orchard_add_description:
-    path:     /add-type-description/{id_orchard}/{orchard_type}/{accept}
-    defaults: { _controller: OrchardBundle:Suggestion:addTypeDescription, accept:false }
+orchard_suggest_send:
+    path:     /send/{entity}/{param}
+    defaults: { _controller: OrchardBundle:Suggest:send }
 
-orchard_suggest:
-    path:     /suggest/{id_orchard}/{orchard_type}/{type_description}
-    defaults: { _controller: OrchardBundle:Suggestion:suggest, id_orchard:null }
+orchard_suggest_description:
+    path:     /description/{orchard_type}/{accept}
+    defaults: { _controller: OrchardBundle:Suggest:description, accept:false }
+
+orchard_suggest_insert:
+    path:     /insert/{orchard_type}/{description}
+    defaults: { _controller: OrchardBundle:Suggest:insert, description:null }
+
+orchard_suggest_checkbox:
+    path:     /insert/checkbox/{entity}/{param}/{accept}
+    defaults: { _controller: OrchardBundle:Suggest:checkbox, accept:false }

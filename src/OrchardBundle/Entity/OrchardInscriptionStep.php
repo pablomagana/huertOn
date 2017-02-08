@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * InscriptionStep
  *
- * @ORM\Table(name="inscription_steps")
+ * @ORM\Table(name="orchard_inscriptionstep")
  * @ORM\Entity(repositoryClass="OrchardBundle\Repository\InscriptionStepRepository")
  */
-class InscriptionStep
+class OrchardInscriptionStep
 {
     /**
      * @var int
@@ -34,6 +34,13 @@ class InscriptionStep
      * @ORM\Column(name="text", type="string", length=255, nullable=true)
      */
     private $text;
+
+    /**
+     * Many orchardInscriptionSteps have One Orchard.
+     * @ORM\ManyToOne(targetEntity="Orchard", inversedBy="orchardInscriptionStep")
+     * @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
+     */
+    private $orchard;
 
     /**
      * Get id
@@ -91,5 +98,29 @@ class InscriptionStep
     public function getText()
     {
         return $this->text;
+    }
+
+    /**
+     * Set orchard
+     *
+     * @param \OrchardBundle\Entity\Orchard $orchard
+     *
+     * @return OrchardInscriptionStep
+     */
+    public function setOrchard(\OrchardBundle\Entity\Orchard $orchard = null)
+    {
+        $this->orchard = $orchard;
+
+        return $this;
+    }
+
+    /**
+     * Get orchard
+     *
+     * @return \OrchardBundle\Entity\Orchard
+     */
+    public function getOrchard()
+    {
+        return $this->orchard;
     }
 }

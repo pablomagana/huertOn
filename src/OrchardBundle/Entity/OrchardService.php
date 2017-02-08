@@ -3,6 +3,7 @@
 namespace OrchardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * OrchardService
@@ -31,7 +32,7 @@ class OrchardService
     /**
      * @var \Doctrine\Common\Collections\Collection|Orchard[]
      *
-     * @ORM\ManyToMany(targetEntity="Orchard", mappedBy="service")
+     * @ORM\ManyToMany(targetEntity="Orchard", mappedBy="orchardService")
      */
     private $orchards;
 

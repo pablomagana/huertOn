@@ -1,0 +1,15 @@
+home_homepage:
+    path:     /
+    defaults: { _controller: HomeBundle:Default:index }
+
+home_find:
+    path:     /find/{param}/{user_latitude}/{user_longitude}
+    defaults: { _controller: HomeBundle:Default:find }
+
+home_orchard_profile:
+    path:     /orchard/show/{id_orchard}
+    defaults: { _controller: HomeBundle:Default:show, id_orchard:null }
+
+home_search:
+    path:     /search
+    defaults: { _controller: HomeBundle:Default:search}
