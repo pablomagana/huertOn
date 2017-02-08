@@ -30,7 +30,7 @@
 							<span class="custom-control-indicator"></span>
 							<span class="custom-control-description">Sugiérenos una actividad</span>
 						</label>
-						<input type="text" class="form-control" id="Activity" placeholder="Escribe aquí el tipo de tu huerto" hidden>
+						<input type="text" class="form-control" id="Activity" placeholder="Escribe aquí la actividad" hidden>
 
 						<br>
 						<button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>Enviar</button>
@@ -210,7 +210,7 @@ $(function() {
 	function initSuggest() {
 		//FUNCION PARA MOSTRAR/OCULTAR INPUT SUGERENCIA
 		$('#cb-new-activity').click(function() {
-			this.checked ? $('#Service').removeAttr('hidden') : $('#Service').attr('hidden', 'hidden');
+			this.checked ? $('#Activity').removeAttr('hidden') : $('#Activity').attr('hidden', 'hidden');
 			this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
 		});
 
@@ -228,10 +228,10 @@ $(function() {
 	function prepareSend() {
 		$('#btn-enviar').off('click');
 		$('#btn-enviar').on('click', function() {
-			if($('#Type').val()) {
+			if($('#Activity').val()) {
 				$.ajax({
 					type: 'POST',
-					url: '/orchard/suggest/send/'+$('#Type').val(),
+					url: '/orchard/suggest/send/orchard_activity/'+$('#Activity').val(),
 					success: function(data) {
 						console.log('success');
 						$('#myModal').modal('show');

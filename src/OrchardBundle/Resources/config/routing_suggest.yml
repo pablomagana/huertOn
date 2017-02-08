@@ -1,5 +1,5 @@
 orchard_suggest_send:
-    path:     /send/{orchard_type}
+    path:     /send/{entity}/{param}
     defaults: { _controller: OrchardBundle:Suggest:send }
 
 orchard_suggest_description:
@@ -8,4 +8,8 @@ orchard_suggest_description:
 
 orchard_suggest_insert:
     path:     /insert/{orchard_type}/{description}
-    defaults: { _controller: OrchardBundle:Suggest:insert }
+    defaults: { _controller: OrchardBundle:Suggest:insert, description:null }
+
+orchard_suggest_checkbox:
+    path:     /insert/checkbox/{entity}/{param}/{accept}
+    defaults: { _controller: OrchardBundle:Suggest:checkbox, accept:false }

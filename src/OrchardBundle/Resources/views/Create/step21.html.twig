@@ -227,10 +227,10 @@ $(function() {
 	function prepareSend() {
 		$('#btn-enviar').off('click');
 		$('#btn-enviar').on('click', function() {
-			if($('#Type').val()) {
+			if($('#Participate').val()) {
 				$.ajax({
 					type: 'POST',
-					url: '/orchard/suggest/send/'+$('#Type').val(),
+					url: '/orchard/suggest/send/orchard_participate/'+$('#Participate').val(),
 					success: function(data) {
 						console.log('success');
 						$('#myModal').modal('show');
