@@ -20,11 +20,10 @@ function previewImage(file) {
 function sendFile(file){
   $.ajax({
     type: "POST",
-    url:"/orchard/images/upload",
+    url:"/orchard/file/upload",
     data: {
       'name':file.name,
-      'src':file.src,
-      'description':file.des
+      'fileNormas':file,
     },
      success: function(id){alert("imagen "+file.name+" enviada con id "+id);},
      error: function(){alert("Error al subir la imagen "+file.name);}

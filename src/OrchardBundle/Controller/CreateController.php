@@ -45,6 +45,7 @@ class CreateController extends Controller
     $orchard_participates = null;
     $orchard_services = null;
     $orchard_activities = null;
+    $images = null;
 
     $template = null;
 
