@@ -6,7 +6,12 @@
   <div class="content-a">
     <div class="content-b">
       <span id="title-home_search">Busca un huerto para ti</span><br><br><br><br>
-      <input type="text" id="input-home_search" placeholder="Pon tu ciudad, CP o nombre del huerto"><button id="btn-home_search" class="button" type="button">Buscar</button>
+      <form id="form-home_search" action="/find" method="post">
+        <input id="input-home_search" type="text" placeholder="Pon tu ciudad, CP o nombre del huerto"><button id="btn-home_search" class="button" type="submit">Buscar</button>
+        <input id="param" name="param" type="text" hidden="hidden">
+        <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
+        <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
+      </form>
     </div>
   </div>
 </div>
@@ -116,6 +121,44 @@ if(!$("html").hasClass("touch")){
   $(window).scroll(parallaxPosition);
   parallaxPosition();
 }
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+  var crd = pos.coords;
+
+  var user_latitude = crd.latitude;
+  var user_longitude = crd.latitude;
+
+  console.log('Your current position is:');
+  console.log('Latitude : ' + crd.latitude);
+  console.log('Longitude: ' + crd.longitude);
+  console.log('More or less ' + crd.accuracy + ' meters.');
+
+  $('#input-home_search').keyup(function() {
+    $('#param').val($(this).val());
+    $('#user_latitude').val(user_latitude);
+    $('#user_longitude').val(user_longitude);
+  });
+
+};
+
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+};
+
+$('#input-home_search').keyup(function() {
+  $('#param').val($(this).val());
+  $('#user_latitude').val(user_latitude);
+  $('#user_longitude').val(user_longitude);
+});
+
 </script>
 
 {% endblock %}

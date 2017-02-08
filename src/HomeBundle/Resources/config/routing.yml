@@ -3,7 +3,7 @@ home_homepage:
     defaults: { _controller: HomeBundle:Default:index }
 
 home_find:
-    path:     /find/{param}/{user_latitude}/{user_longitude}
+    path:     /find
     defaults: { _controller: HomeBundle:Default:find }
 
 home_orchard_profile:
