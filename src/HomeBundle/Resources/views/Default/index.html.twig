@@ -5,9 +5,9 @@
 <div class="fullscreen background parallax" style="background-image: url('https://source.unsplash.com/rHbob_bEsSs/1600x900&quot'); background-attachment: fixed;" data-img-width="1600" data-img-height="1064" data-diff="100">
   <div class="content-a">
     <div class="content-b">
-      <span id="title-home_search">Busca un huerto para ti</span><br><br><br><br>
+      <span id="title-home_search">{{ 'home.title'|trans }}</span><br><br><br><br>
       <form id="form-home_search" action="/find" method="post">
-        <input id="input-home_search" type="text" placeholder="Pon tu ciudad, CP o nombre del huerto"><button id="btn-home_search" class="button" type="submit">Buscar</button>
+        <input id="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}"><button id="btn-home_search" class="button" type="submit">Buscar</button>
         <input id="param" name="param" type="text" hidden="hidden">
         <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
         <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
@@ -18,11 +18,20 @@
 <br>
 <div class="container">
 
-  <h1 class="text-sm-center text-md-center text-lg-center text-xl-center">Actividades</h1>
+  <h1 class="text-sm-center text-md-center text-lg-center text-xl-center">{{ 'home.activities'|trans }}</h1>
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi elementum velit eget velit hendrerit, eu malesuada lacus posuere. Nam vel dapibus erat. Donec ex risus, tincidunt eu molestie quis, pellentesque et neque. Nulla et eros vitae eros molestie facilisis. Nulla aliquet augue et dui congue dignissim. Vivamus rutrum nisl eu ex posuere, at ornare dolor tincidunt. Donec tellus tortor, lobortis sed egestas sed, vulputate ac est. Duis ut lacus non ex rutrum rhoncus. Proin lobortis nisi ligula, eget elementum urna egestas eget. Duis risus diam, fermentum quis efficitur a, posuere eu erat. Vivamus in commodo sem, id luctus nisi. Sed ullamcorper, nisl imperdiet tincidunt auctor, turpis est sagittis metus, vitae tempor ligula elit id metus. Ut rutrum posuere ante, sed condimentum nibh.</p>
   <p>Nam vel dapibus erat. Donec ex risus, tincidunt eu molestie quis, pellentesque et neque. Nulla et eros vitae eros molestie facilisis. Nulla aliquet augue et dui congue dignissim. Vivamus rutrum nisl eu ex posuere, at ornare dolor tincidunt. Donec tellus tortor, lobortis sed egestas sed, vulputate ac est. Duis ut lacus non ex rutrum rhoncus. Proin lobortis nisi ligula, eget elementum urna egestas eget. Duis risus diam, fermentum quis efficitur a, posuere eu erat. Vivamus in commodo sem, id luctus nisi. Sed ullamcorper, nisl imperdiet tincidunt auctor, turpis est sagittis metus, vitae tempor ligula elit id metus. Ut rutrum posuere ante, sed condimentum nibh.</p>
 </div>
 <script type="text/javascript">
+
+$(function() {
+$('#input-home_search').keyup(function() {
+  $('#param').val($(this).val());
+  $('#user_latitude').val(user_latitude);
+  $('#user_longitude').val(user_longitude);
+});
+});
+
 /* detect touch */
 if("ontouchstart" in window){
   document.documentElement.className = document.documentElement.className + " touch";
@@ -152,12 +161,6 @@ function success(pos) {
 function error(err) {
   console.warn('ERROR(' + err.code + '): ' + err.message);
 };
-
-$('#input-home_search').keyup(function() {
-  $('#param').val($(this).val());
-  $('#user_latitude').val(user_latitude);
-  $('#user_longitude').val(user_longitude);
-});
 
 </script>
 

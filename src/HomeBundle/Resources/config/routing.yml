@@ -1,6 +1,8 @@
 home_homepage:
-    path:     /
-    defaults: { _controller: HomeBundle:Default:index }
+    path:     /{_locale}
+    defaults: { _controller: HomeBundle:Default:index, _locale: es }
+    requirements:
+        _locale: en|es
 
 home_find:
     path:     /find
