@@ -172,6 +172,12 @@ class CreateController extends Controller
 
     $params = $request->request->get('OrchardInscriptionStep');
 
+    $orchardInscriptionSteps = $orchard->getOrchardInscriptionStep();
+
+    foreach ($orchardInscriptionSteps as $orchardInscriptionStep) {
+      $em->remove($orchardInscriptionStep);
+    }
+
     $orchardInscriptionStepsArray = array();
 
     if (!empty($params)) {
@@ -201,7 +207,7 @@ class CreateController extends Controller
 
     return $response;
   }
-  
+
   public function listAction()
   {
     return $this->render('OrchardBundle:Create:list.html.twig');
