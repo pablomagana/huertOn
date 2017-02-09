@@ -22,7 +22,7 @@
         <div style="width: 100%; height: 300px; background: url({{ orchard.images[0].src }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
       </div>
   {% endif %}
-    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
+    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12 container">
       <p><h3> {{ orchard.name }} </h3></p>
       {% if orchard.published == 1 %}
         <p><i>Publicado</i></p>
@@ -49,7 +49,7 @@
       {% if orchard.step > 33 %}
         <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-secondary " data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">Modifica</button></a>
       {% endif %}
-        <a href="/orchard/create/delete/{{ orchard.id}}"><button type="button" class="btn btn-secondary ">Elimina</button></a>
+        <button type="button" class="btn btn-secondary show-modal{{ orchard.id }}">Elimina</button>
       </div>
     </div>
   </div>
@@ -57,15 +57,48 @@
   <br>
   {% endif %}
 
+  <script type="text/javascript">
+  $(function() {
+    $('.show-modal{{ orchard.id }}').click(function(){
+      $('#btn-delete-modal').attr("href", "/orchard/create/delete/{{ orchard.id}}")
+      $('#btn-unpublish-modal').attr("href", "/orchard/create/publish/{{ orchard.id }}/false")
+      $('#myModal').modal('show');
+    });
+  });
+  </script>
+
   {% endfor %}
-  <div style="text-align: center; margin-bottom:80px;" class="draft-lg">
+  <div style="text-align: center; margin-bottom:10px;" class="draft-xs fixed-buttons">
     <a href="/orchard/create/steps"><button type="button" class="btn btn-success btn-draft-xs">Añade un nuevo huerto</button></a>
   </div>
 </div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">¿Estás seguro que quieres eliminar?</h4>
+      </div>
+      <div class="modal-body">
+        <p>No podrás recuperar estos datos.<p></p>
+      </div>
+      <div class="modal-footer">
+        <a id="btn-delete-modal" href=""><button type="button" class="btn btn-secondary ">Si, elimina</button></a>
+        <a id="btn-unpublish-modal" href=""><button id="btn-unpublish" type="button" class="btn btn-secondary ">Mejor despublicar</button></a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
   <script type="text/javascript">
   $(function () {
     $('[data-toggle="tooltip"]').tooltip();
   });
   </script>
+
+
 
 {% endblock %}
