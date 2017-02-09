@@ -347,7 +347,7 @@ nav li a{
 	width: 100px;
 	background-color: #00ff1f;
 	height: 3px;
-
+	margin: auto;
 }
 
 .spacing{
@@ -357,7 +357,7 @@ nav li a{
 .border{
 	border: 2px solid #f2f2f2;
 	padding: 40px;
-	margin-left: 10px;
+	margin:20px;
 }
 
 .draft{
@@ -389,4 +389,17 @@ nav li a{
 
 .submenu-items a{
 	color: black;
+}
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:center;
+    /* inline-block space fix */
+    margin-right:-4px;
 }
