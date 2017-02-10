@@ -5,62 +5,79 @@
   <div class="row row-centered">
     <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 col-centered">
       <div class="find-title"><a id="bt-huertos">HUERTOS</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a id="bt-eventos">EVENTOS</a></div>
-      <input type="text" id="input-home_search" value="{{ param }}" placeholder="Pon tu ciudad, CP o nombre del huerto"><button id="btn-home_search" class="button" type="button">Buscar</button>
-      <p>Se han econtrado X resultados</p>
+      <form id="form-home_search" action="/find" method="post">
+        <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}" required="true"><button id="btn-home_search" class="button" type="submit">Buscar</button>
+        <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
+        <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
+      </form>
+      <p>Se han econtrado {{ orchards|length }} resultados</p>
     </div>
   </div>
   <div class="spacing"></div>
 </div>
 
+<input id="type" type="text" value="find" hidden="hidden">
+
+{% if orchards is not empty %}
+
+<div class="map col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div id="map-show" class="map-show" style="height: 400px; width: 100%;">
+  </div>
+</div>
+
+{% endif %}
+
 <div id="orchard-cards" class="row container-fluid">
-  <a href="/orchard/show/1">
-    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
-      <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
-        <!-- Imagen -->
-        <div class="find-result" style="background: url(http://www.slowfoodsevillaysur.es/wp-content/uploads/2011/09/huerto-septiembre-1.bmp);"></div>
-      </div>
-      <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-        <!-- Texto -->
-        <h3>Nombre del huerto</h3>
-        <p><i>Dirección huerto lorem ipsum dolor sit amet</i></p>
-      </div>
+  {% for orchard in orchards %}
+  {% if type == 'distance' %}
+  <a href="/orchard/show/{{ orchard.0.id }}"></a>
+  <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
+    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
+      <!-- Imagen -->
+      <div class="find-result" style="background: url({{ orchard.0.images[0].src }});"></div>
     </div>
-  </a>
+    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+      <!-- Texto -->
+      <h3>{{ orchard.0.name }}</h3>
+      <p><i>{{ orchard.0.address }}</i></p>
+    </div>
+  </div>
+  <input type="text" class="geometry" value="{{ orchard.0.geometry }}" hidden="hidden">
+  {% else %}
+  <a href="/orchard/show/{{ orchard.id }}"></a>
+  <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
+    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
+      <!-- Imagen -->
+      <div class="find-result" style="background: url({{ orchard.images[0].src }});"></div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+      <!-- Texto -->
+      <h3>{{ orchard.name }}</h3>
+      <p><i>{{ orchard.address }}</i></p>
+    </div>
+  </div>
+  <input type="text" class="geometry" value="{{ orchard.geometry }}" hidden="hidden">
+  {% endif %}
+  {% endfor %}
 </div>
 
-
-<div id="events-cards" class="row container-fluid" hidden="hidden">
-  <a href="/orchard/show/1">
-    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
-      <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
-        <!-- Imagen -->
-        <div class="find-result" style="background: url(http://technext.github.io/Evento/images/demo/bg-slide-01.jpg);"></div>
-      </div>
-      <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-        <!-- Texto -->
-        <h3>Nombre del evento</h3>
-        <p><i>Dirección  del evento lorem ipsum dolor sit amet</i></p>
-      </div>
-    </div>
-  </a>
-</div>
-
+<script src="{{ asset('/js/map_show.js') }}"></script>
 
 <script type="text/javascript">
 
-  $( document ).ready(function() {
+$( document ).ready(function() {
 
-    $( "#bt-eventos" ).on('click', function() {
-      $( "#events-cards" ).removeAttr( "hidden" );
-      $( "#orchard-cards" ).attr( "hidden", "hidden" );
-    });
-
-    $( "#bt-huertos" ).on('click', function() {
-      $( "#orchard-cards" ).removeAttr( "hidden" );
-      $( "#events-cards" ).attr( "hidden", "hidden" );
-    });
-
+  $( "#bt-eventos" ).on('click', function() {
+    $( "#events-cards" ).removeAttr( "hidden" );
+    $( "#orchard-cards" ).attr( "hidden", "hidden" );
   });
+
+  $( "#bt-huertos" ).on('click', function() {
+    $( "#orchard-cards" ).removeAttr( "hidden" );
+    $( "#events-cards" ).attr( "hidden", "hidden" );
+  });
+
+});
 
 </script>
 {% endblock %}

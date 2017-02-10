@@ -8,7 +8,8 @@ function initMap() {
   //Inicializamos el mapa y sus controles (es necesário tener un div de id="map") y lo centramos en Valencia por defecto
   //Pedimos la geolocalización al usuario, si la acepta centramos el mapa en su ubicación, sinó mostramos el error por consola
   map = L.map('map-show', {
-  	zoomControl: false
+  	zoomControl: false,
+		scrollWheelZoom: false
   });
 
   L.control.zoom({
@@ -25,9 +26,11 @@ function initMap() {
 
 function setMap(){
 
-	if($('#Geometry').val() != '') {
-		retrieveGeometry($('#Geometry').val());
-	}
+	$('.geometry').each(function() {
+		if($(this).val() != '') {
+			retrieveGeometry($(this).val());
+		}
+	});
 
 }
 
@@ -88,5 +91,9 @@ function prepareMarker(marker) {
 
 	reverseGeocoding(marker);
 
-	map.setView([marker.getLatLng().lat, marker.getLatLng().lng], 19);
+	if ($('#type').val() == 'profile') {
+		map.setView([marker.getLatLng().lat, marker.getLatLng().lng], 19);
+	}else {
+		map.setView([39.4077013, -0.5015955], 10);
+	}
 }
