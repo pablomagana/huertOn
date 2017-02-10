@@ -1,132 +1,66 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-
-    <div class="content-a">
-      <div class="content-b">
-        <span id="title-home_search">Busca un huerto para ti</span><br><br><br><br>
-        <input type="text" id="input-home_search" value="{{ param }}" placeholder="Pon tu ciudad, CP o nombre del huerto"><button id="btn-home_search" class="button" type="button">Buscar</button>
-      </div>
-    </div>
-  <br>
-  <div class="container-fluid">
-
-    <div class="row">
-      {% for orchard in orchards %}
-      <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
-        <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
-          <div style="width: 100%; height: 300px; background: url({{ orchard.0.images[0].src }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-        <h6>{{ orchard.0.name }}</h6>
-        </div>
-        <p><i>{{ orchard.0.address }}</i></p>
-      </div>
-      {% endfor %}
+<div class="container">
+  <div class="row row-centered">
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 col-centered">
+      <div class="find-title"><a id="bt-huertos">HUERTOS</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a id="bt-eventos">EVENTOS</a></div>
+      <input type="text" id="input-home_search" value="{{ param }}" placeholder="Pon tu ciudad, CP o nombre del huerto"><button id="btn-home_search" class="button" type="button">Buscar</button>
+      <p>Se han econtrado X resultados</p>
     </div>
   </div>
+  <div class="spacing"></div>
+</div>
+
+<div id="orchard-cards" class="row container-fluid">
+  <a href="/orchard/show/1">
+    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
+      <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
+        <!-- Imagen -->
+        <div class="find-result" style="background: url(http://www.slowfoodsevillaysur.es/wp-content/uploads/2011/09/huerto-septiembre-1.bmp);"></div>
+      </div>
+      <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+        <!-- Texto -->
+        <h3>Nombre del huerto</h3>
+        <p><i>Dirección huerto lorem ipsum dolor sit amet</i></p>
+      </div>
+    </div>
+  </a>
+</div>
 
 
-  </div>
-  <script type="text/javascript">
-  /* detect touch */
-if("ontouchstart" in window){
-  document.documentElement.className = document.documentElement.className + " touch";
-}
-if(!$("html").hasClass("touch")){
-  /* background fix */
-  $(".parallax").css("background-attachment", "fixed");
-}
+<div id="events-cards" class="row container-fluid" hidden="hidden">
+  <a href="/orchard/show/1">
+    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
+      <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
+        <!-- Imagen -->
+        <div class="find-result" style="background: url(http://technext.github.io/Evento/images/demo/bg-slide-01.jpg);"></div>
+      </div>
+      <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+        <!-- Texto -->
+        <h3>Nombre del evento</h3>
+        <p><i>Dirección  del evento lorem ipsum dolor sit amet</i></p>
+      </div>
+    </div>
+  </a>
+</div>
 
-/* fix vertical when not overflow
-call fullscreenFix() if .fullscreen content changes */
-function fullscreenFix(){
-  var h = $('body').height();
-  // set .fullscreen height
-  $(".content-b").each(function(i){
-      if($(this).innerHeight() > h){ $(this).closest(".fullscreen").addClass("overflow");
-      }
+
+<script type="text/javascript">
+
+  $( document ).ready(function() {
+
+    $( "#bt-eventos" ).on('click', function() {
+      $( "#events-cards" ).removeAttr( "hidden" );
+      $( "#orchard-cards" ).attr( "hidden", "hidden" );
+    });
+
+    $( "#bt-huertos" ).on('click', function() {
+      $( "#orchard-cards" ).removeAttr( "hidden" );
+      $( "#events-cards" ).attr( "hidden", "hidden" );
+    });
+
   });
-}
-$(window).resize(fullscreenFix);
-fullscreenFix();
 
-/* resize background images */
-function backgroundResize(){
-  var windowH = $(window).height();
-  $(".background").each(function(i){
-      var path = $(this);
-      // variables
-      var contW = path.width();
-      var contH = path.height();
-      var imgW = path.attr("data-img-width");
-      var imgH = path.attr("data-img-height");
-      var ratio = imgW / imgH;
-      // overflowing difference
-      var diff = parseFloat(path.attr("data-diff"));
-      diff = diff ? diff : 0;
-      // remaining height to have fullscreen image only on parallax
-      var remainingH = 0;
-      if(path.hasClass("parallax") && !$("html").hasClass("touch")){
-          var maxH = contH > windowH ? contH : windowH;
-          remainingH = windowH - contH;
-      }
-      // set img values depending on cont
-      imgH = contH + remainingH + diff;
-      imgW = imgH * ratio;
-      // fix when too large
-      if(contW > imgW){
-          imgW = contW;
-          imgH = imgW / ratio;
-      }
-      //
-      path.data("resized-imgW", imgW);
-      path.data("resized-imgH", imgH);
-      path.css("background-size", imgW + "px " + imgH + "px");
-  });
-}
-$(window).resize(backgroundResize);
-$(window).focus(backgroundResize);
-backgroundResize();
-
-/* set parallax background-position */
-function parallaxPosition(e){
-  var heightWindow = $(window).height();
-  var topWindow = $(window).scrollTop();
-  var bottomWindow = topWindow + heightWindow;
-  var currentWindow = (topWindow + bottomWindow) / 2;
-  $(".parallax").each(function(i){
-      var path = $(this);
-      var height = path.height();
-      var top = path.offset().top;
-      var bottom = top + height;
-      // only when in range
-      if(bottomWindow > top && topWindow < bottom){
-          var imgW = path.data("resized-imgW");
-          var imgH = path.data("resized-imgH");
-          // min when image touch top of window
-          var min = 0;
-          // max when image touch bottom of window
-          var max = - imgH + heightWindow;
-          // overflow changes parallax
-          var overflowH = height < heightWindow ? imgH - height : imgH - heightWindow; // fix height on overflow
-          top = top - overflowH;
-          bottom = bottom + overflowH;
-          // value with linear interpolation
-          var value = min + (max - min) * (currentWindow - top) / (bottom - top);
-          // set background-position
-          var orizontalPosition = path.attr("data-oriz-pos");
-          orizontalPosition = orizontalPosition ? orizontalPosition : "50%";
-          $(this).css("background-position", orizontalPosition + " " + value + "px");
-      }
-  });
-}
-if(!$("html").hasClass("touch")){
-  $(window).resize(parallaxPosition);
-  //$(window).focus(parallaxPosition);
-  $(window).scroll(parallaxPosition);
-  parallaxPosition();
-}
-  </script>
-
+</script>
 {% endblock %}

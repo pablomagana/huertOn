@@ -403,3 +403,31 @@ nav li a{
     /* inline-block space fix */
     margin-right:-4px;
 }
+
+.find-title{
+	font-size: 150%!important;
+	margin-top: 10vh;
+}
+
+/* selected link */
+.find-title > a:active {
+		border: 1px solid #0b0146;
+		border-radius: 5px;
+		padding: 4px;
+}
+
+.find-title > a {
+	text-decoration: none;
+}
+
+.find-result{
+	width: 100%;
+	height: 300px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+a{
+	color: #0b0146!important;
+}
