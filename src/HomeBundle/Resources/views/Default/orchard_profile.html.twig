@@ -20,7 +20,7 @@
   </div>
 
   <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 container">
-    <a href="#contact"><button type="button" name="button" id="btn-contact">CONTACTA</button></a>
+    <a href="#contact"><button type="button" name="button" id="btn-contact">{{ 'orchard.profile.contact'|trans }}</button></a>
   </div>
 </div>
 <div class="spacing"></div>
@@ -29,10 +29,10 @@
 
 <div class="row container" id="next-activities">
   <!-- MOSTRAR LAS PRÓXIMAS ACTIVIDADES DE CADA HUERTO (3 COLUMNAS) -->
-  <h5>PRÓXIMAS ACTIVIDADES</h5>
+  <h5>{{ 'orchard.profile.activities'|trans }}</h5>
   <hr class="hr-orchard-profile" align="center">
   {% if orchard.orchardActivity is empty %}
-  <h1>Este huerto no tiene actividades</h1>
+  <h1>{{ 'orchard.profile.noActivities'|trans }}</h1>
   {% else %}
   {% for orchardActivity in orchard.orchardActivity %}
   <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
@@ -60,14 +60,14 @@
 
 <div class="container">
   <div class="row row-centered" id="how-is-it">
-    <h5>CÓMO ES</h5>
+    <h5>{{ 'orchard.profile.howIsIt'|trans }}</h5>
     <hr class="hr-orchard-profile">
     <!-- TIPO DE HUERTO -->
     {% if orchard.orchardType is empty %}
     {% else %}
     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
       <div class="border">
-        <h6>Tipo de huerto</h6>
+        <h6>{{ 'orchard.profile.type'|trans }}</h6>
         <br>
         <br>
         <ul>
@@ -85,7 +85,7 @@
     {% else %}
     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
       <div class="border">
-        <h6>Equipamiento</h6>
+        <h6>{{ 'orchard.profile.equipment'|trans }}</h6>
         <br>
         <br>
         <ul>
@@ -103,14 +103,14 @@
 
 <div class="container">
   <div class="row row-centered" id="how-to-join">
-    <h5>CÓMO UNIRTE</h5>
+    <h5>{{ 'orchard.profile.join'|trans }}</h5>
     <hr class="hr-orchard-profile">
     <!-- MODALIDADES -->
     {% if orchard.orchardParticipate is empty %}
     {% else %}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
         <div class="border">
-          <h6>Modalidades</h6>
+          <h6>{{ 'orchard.profile.modal'|trans }}</h6>
           <br>
           <br>
           <ul>
@@ -128,10 +128,10 @@
       {% else %}#}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
         <div class="border">
-          <h6>Antes es importante que sepas</h6>
+          <h6>{{ 'orchard.profile.important'|trans }}</h6>
           <br>
           <br>
-          Mira <a href="/webs/orchards/files/XXXX">AQUÍ</a> las normas del huerto.
+          {{ 'orchard.profile.rules-1'|trans }} <a href="/webs/orchards/files/XXXX">{{ 'orchard.profile.rules-2'|trans }}</a> {{ 'orchard.profile.rules-3'|trans }}
         </div>
       </div>
       <div class="spacing"></div>
@@ -142,7 +142,7 @@
       {% if orchard.orchardInscriptionStep is empty %}
       {% else %}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered" style="margin-top:40px">
-        <h6>¿Qué necesitas para inscribirte?</h6>
+        <h6>{{ 'orchard.profile.inscribe'|trans }}</h6>
         <br>
       </div>
       <div class="spacing"></div>
@@ -154,7 +154,7 @@
 
 <div class="container">
   <div class="row row-centered" id="location">
-    <h5>DÓNDE SE ENCUENTRA</h5>
+    <h5>{{ 'orchard.profile.where'|trans }}</h5>
     <hr class="hr-orchard-profile">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
       <div id="map-show" style="height:400px; width:100%;"></div>
@@ -170,7 +170,7 @@
 <div class="row container" id="contact">
   <!-- TIENES ALGUNA PREGUNTA -->
     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="background-color:#f2f2f2; border-radius: 15px; padding: 40px;">
-      <h3>¿Tienes alguna pregunta?</h3>
+      <h3>{{ 'orchard.profile.question'|trans }}</h3>
       <hr class="hr-orchard-profile">
       <br>
       <br>

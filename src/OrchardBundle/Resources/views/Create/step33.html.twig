@@ -6,7 +6,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
 		<form>
 			<div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
-				<label><h4>¿Qué actividades soleis hacer en el huerto?</h4></label><br>
+				<label><h4>{{ 'orchard.step33.title'|trans }}</h4></label><br>
 
 				<div class="row">
 					{% for orchardActivity in orchardActivities %}
@@ -28,12 +28,12 @@
 						<label class="custom-control custom-checkbox">
 							<input id="cb-new-activity" type="checkbox" class="custom-control-input">
 							<span class="custom-control-indicator"></span>
-							<span class="custom-control-description">Sugiérenos una actividad</span>
+							<span class="custom-control-description">{{ 'orchard.step33.title-2'|trans }}</span>
 						</label>
-						<input type="text" class="form-control" id="Activity" placeholder="Escribe aquí la actividad" hidden>
+						<input type="text" class="form-control" id="Activity" placeholder="{{ 'orchard.step32.title-3'|trans }}" hidden>
 
 						<br>
-						<button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>Enviar</button>
+						<button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>{{ 'orchard.step13.send'|trans }}</button>
 					</div>
 				</div>
 
@@ -44,8 +44,8 @@
 		</form>
 
 		<div class="fixed-buttons">
-			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
-			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
+			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.back'|trans }}</button>
+			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.next'|trans }}</button>
 		</div>
 
 	</div>
@@ -184,7 +184,7 @@ $(function() {
 	$(':checkbox:not(#cb-new-activity)').change(function() {
 		var checkeado = false;
 		if(this.checked) {
-			$('#btn-siguiente').html('Siguiente')
+			$('#btn-siguiente').html('{{ 'orchard.step11.next'|trans }}')
 		}else {
 			if($(':checkbox').each(function() {
 				if(this.checked) {
@@ -193,7 +193,7 @@ $(function() {
 			}));
 
 			if(!checkeado) {
-				$('#btn-siguiente').html('Ahora no');
+				$('#btn-siguiente').html('{{ 'orchard.step21.nowNo'|trans }}');
 			}
 		}
 	});
@@ -201,7 +201,7 @@ $(function() {
 	$(':checkbox:not(#cb-new-activity)').each(function() {
 		if(this.checked) {
 			console.log('checkeado');
-			$('#btn-siguiente').html('Siguiente')
+			$('#btn-siguiente').html('{{ 'orchard.step11.next'|trans }}')
  		}
 	});
 

@@ -11,7 +11,7 @@
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-  <!--Fksjdahfkjlasdhflksjadhflkjsadfhflkjsdhaflkjashdf-->
+  <!-- Awesome font -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
@@ -53,12 +53,12 @@
       </li>
       <li class="nav-item">
         <span id="loading-text" style="display: none;" class="navbar-text">
-          Guardando...
+          {{ 'stepBase.loading'|trans }}
         </span>
       </li>
       {% if orchard.step >= 14 %}
       <li class="nav-item">
-        <a class="nav-link" href="#">Guardar y salir</a>
+        <a class="nav-link" href="#">{{ 'stepBase.saveExit'|trans }}</a>
       </li>
       {% endif %}
     </ul>
@@ -79,13 +79,13 @@
   				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
   					<span aria-hidden="true">&times;</span>
   				</button>
-  				<h4 class="modal-title">Muchas gracias!</h4>
+  				<h4 class="modal-title">{{ 'stepBase.email-1'|trans }}</h4>
   			</div>
   			<div class="modal-body">
-  				<p>Cuando estudiemos tu sugerencia te enviaremos un email con el resultado. <p>&#x1f609</p></p>
+  				<p>{{ 'stepBase.email-2'|trans }}<p>&#x1f609</p></p>
   			</div>
   			<div class="modal-footer">
-  				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+  				<button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'stepBase.close'|trans }}</button>
   			</div>
   		</div><!-- /.modal-content -->
   	</div><!-- /.modal-dialog -->

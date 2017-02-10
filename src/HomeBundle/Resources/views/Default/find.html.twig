@@ -4,13 +4,13 @@
 <div class="container">
   <div class="row row-centered">
     <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 col-centered">
-      <div class="find-title"><a id="bt-huertos">HUERTOS</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a id="bt-eventos">EVENTOS</a></div>
+      <div class="find-title"><a id="bt-huertos">{{ 'find.orchard'|trans }}</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a id="bt-eventos">{{ 'find.events'|trans }}</a></div>
       <form id="form-home_search" action="/find" method="post">
-        <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}" required="true"><button id="btn-home_search" class="button" type="submit">Buscar</button>
+        <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}" required="true"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
         <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
         <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
       </form>
-      <p>Se han econtrado {{ orchards|length }} resultados</p>
+      <p>{{ 'find.results-1'|trans }}{{ orchards|length }} {{ 'find.results-2'|trans }}</p>
     </div>
   </div>
   <div class="spacing"></div>

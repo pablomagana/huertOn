@@ -50,10 +50,10 @@
       <div class="row">
         <div class="col-lg-5">
           <li class="nav-item float-lg-left float-xl-left">
-            <a class="nav-link" href="/orchard/create/steps">Publica tu huerto</a>
+            <a class="nav-link" href="/orchard/create/steps">{{ 'base.li-1'|trans }}</a>
           </li>
           <li class="nav-item float-lg-left float-xl-left">
-            <a class="nav-link" href="#">Busca actividades</a>
+            <a class="nav-link" href="#">{{ 'base.li-2'|trans }}</a>
           </li>
         </div>
         <div class="col-lg-2">
@@ -67,20 +67,20 @@
           {% if app.user %}
           <li class="nav-item dropdown float-lg-right float-xl-right">
             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Identificado como {{ app.user.username }}
+              {{ 'base.li-3'|trans }} {{ app.user.username }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Mi Perfil</a>
-              <a class="dropdown-item" href="/orchard/create/list">Lista de huertos</a>
-              <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+              <a class="dropdown-item" href="#">{{ 'base.li-4'|trans }}</a>
+              <a class="dropdown-item" href="/orchard/create/list">{{ 'base.li-5'|trans }}</a>
+              <a class="dropdown-item" href="/logout">{{ 'base.li-6'|trans }}</a>
             </div>
           </li>
           {% else %}
           <li class="nav-item float-lg-right float-xl-right">
-            <a href="/register"><button id="register-button" type="button" class="btn btn-outline-primary">Regístrate</button></a>
+            <a href="/register"><button id="register-button" type="button" class="btn btn-outline-primary">{{ 'base.li-7'|trans }}</button></a>
           </li>
           <li class="nav-item float-lg-right float-xl-right">
-            <a class="nav-link" href="/login">Inicia Sesión</a>
+            <a class="nav-link" href="/login">{{ 'base.li-8'|trans }}</a>
           </li>
           {% endif %}
         </div>
@@ -102,31 +102,31 @@
           {% if app.user %}
           <div class="nav-item dropdown float-lg-right float-xl-right">
             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Identificado como {{ app.user.username }}
+              {{ 'base.li-3'|trans }} {{ app.user.username }}
             </a>
             <div class="dropdown-menu col-xs-12 col-sm-12" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Mi Perfil</a>
-              <a class="dropdown-item" href="/orchard/create/list">Lista de huertos</a>
-              <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+              <a class="dropdown-item" href="#">{{ 'base.li-4'|trans }}</a>
+              <a class="dropdown-item" href="/orchard/create/list">{{ 'base.li-5'|trans }}</a>
+              <a class="dropdown-item" href="/logout">{{ 'base.li-6'|trans }}</a>
             </div>
           </div>
           {% else %}
           <div class="nav-item float-xs-right float-sm-right">
-            <a class="nav-link" href="/login" style="margin-bottom:10px; align:right; color:black;">Inicia Sesión</a>
-            <a href="/register"><button id="register-button" type="button" class="btn btn-outline-primary">Regístrate</button></a>
+            <a class="nav-link" href="/login" style="margin-bottom:10px; align:right; color:black;">{{ 'base.li-8'|trans }}</a>
+            <a href="/register"><button id="register-button" type="button" class="btn btn-outline-primary">{{ 'base.li-7'|trans }}</button></a>
           </div>
           {% endif %}
         </div>
       </div>
       <div class="collapse navbar-collapse row" id="myNavbar">
         <div class="submenu-items">
-          <a href="/">Inicio</a>
+          <a href="/">{{ 'base.li-9'|trans }}</a>
         </div>
         <div class="submenu-items">
-          <a href="/orchard/create/steps">Publica tu huerto</a>
+          <a href="/orchard/create/steps">{{ 'base.li-1'|trans }}</a>
         </div>
         <div class="submenu-items">
-          <a href="#">Busca actividades</a>
+          <a href="#">{{ 'base.li-2'|trans }}</a>
         </div>
 
       </div>
