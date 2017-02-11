@@ -34,7 +34,11 @@
   <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
     <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
       <!-- Imagen -->
-      <div class="find-result" style="background: url({{ orchard.0.images[0].src }});"></div>
+      {% if orchard.0.images is not empty %}
+        <div class="find-result" style="background: url({{ orchard.0.images[0].src }});"></div>
+      {% else %}
+        <div class="find-result" style="background: url(http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png);"></div>
+      {% endif %}
     </div>
     <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
       <!-- Texto -->
@@ -48,7 +52,11 @@
   <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
     <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
       <!-- Imagen -->
+      {% if orchard.images is not empty %}
       <div class="find-result" style="background: url({{ orchard.images[0].src }});"></div>
+      {% else %}
+      <div class="find-result" style="background: url(http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png);"></div>
+      {% endif %}
     </div>
     <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
       <!-- Texto -->

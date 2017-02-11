@@ -151,45 +151,50 @@
   </div>
 </div>
 
-
-<div class="container">
+<!--DÓNDE SE ENCUENTRA-->
   <div class="row row-centered" id="location">
     <h5>{{ 'orchard.profile.where'|trans }}</h5>
-    <hr class="hr-orchard-profile">
+    <hr class="hr-orchard-profile"><br>
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
       <div id="map-show" style="height:400px; width:100%;"></div>
       <input type="text" class="geometry" value="{{orchard.geometry}}" hidden="hidden">
       <input type="text" id="type" class="geometry" value="profile" hidden="hidden">
     </div>
   </div>
-  </div>
 <div class="spacing"></div>
 
 
 
-<div class="row container" id="contact">
-  <!-- TIENES ALGUNA PREGUNTA -->
+<div class="container">
+  <div class="row row-centered" id="contact">
     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="background-color:#f2f2f2; border-radius: 15px; padding: 40px;">
+      <!-- TIENES ALGUNA PREGUNTA -->
       <h3>{{ 'orchard.profile.question'|trans }}</h3>
       <hr class="hr-orchard-profile">
       <br>
       <br>
-
       <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-
+        <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="" class="circular-image" width="200px" height="200px">
       </div>
 
       <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-
+        <h5>Contacta con {{orchard.user.username}}, coordinador/a de este huerto.</h5><br>
+        <div class="text-lg-left">
+          <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>
+          <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.phone}}<br>
+          {% if orchard.web is empty %}{% else %}<i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.web}}{% endif %}<br>
+          {% if orchard.facebook is empty %}{% else %}<i class="fa fa-facebook-official" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.facebook}}{% endif %}<br>
+          {% if orchard.instagram is empty %}{% else %}<i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.instagram}}{% endif %}<br>
+        </div>
       </div>
-
     </div>
-
     <!-- FORMULARIO DE CONTACTO -->
     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 
     </div>
+  </div>
 </div>
+
 <div class="spacing"></div>
 
 <script src="{{ asset('/js/map_show.js')}}" charset="utf-8"></script>
