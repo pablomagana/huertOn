@@ -3,12 +3,14 @@
 namespace OrchardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * Image
+ * ImageFile
  *
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="OrchardBundle\Repository\ImageRepository")
+ * @Vich\Uploadable
  */
 class Image
 {
@@ -22,11 +24,18 @@ class Image
     private $id;
 
     /**
+     * @var File
+     *
+     * @Vich\UploadableField(mapping="orchard_image", fileNameProperty="nameImage")
+     */
+    private $Image;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="src", type="text", nullable=true)
+     * @ORM\Column(name="nameImage", type="string", length=255, unique=true)
      */
-    private $src;
+    private $nameImage;
 
     /**
      * @var string
@@ -34,6 +43,15 @@ class Image
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="updateAt")
+     *
+     * @var \DateTime
+     */
+    private $updateAt;
 
     /**
      * Many Images have One Orchard.
@@ -51,29 +69,52 @@ class Image
     {
         return $this->id;
     }
-
     /**
-     * Set src
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
      *
-     * @param string $src
-     *
-     * @return Image
+     * @return ImageFile
      */
-    public function setSrc($src)
+    public function setFile(File $file = null)
     {
-        $this->src = $src;
+        $this->Image = $file;
+
+        if ($file) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+    /**
+     * @return File|null
+     */
+    public function getFile()
+    {
+        return $this->Image;
+    }
+    /**
+     * Set nameImage
+     *
+     * @param string $nameImage
+     *
+     * @return ImageFile
+     */
+    public function setNameFile($nameImage)
+    {
+        $this->nameImage = $nameImage;
 
         return $this;
     }
 
     /**
-     * Get src
+     * Get nameImage
      *
      * @return string
      */
-    public function getSrc()
+    public function getNameFile()
     {
-        return $this->src;
+        return $this->nameImage;
     }
 
     /**
@@ -86,7 +127,7 @@ class Image
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -101,6 +142,30 @@ class Image
     }
 
     /**
+     * Set updateAt
+     *
+     * @param string $updateAt
+     *
+     * @return RuleFile
+     */
+    public function setUpdateAt($updateAt)
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updateAt
+     *
+     * @return string
+     */
+    public function getUpdateAt()
+    {
+        return $this->updateAt;
+    }
+
+    /**
      * Set orchard
      *
      * @param \OrchardBundle\Entity\Orchard $orchard
@@ -110,7 +175,7 @@ class Image
     public function setOrchard(\OrchardBundle\Entity\Orchard $orchard = null)
     {
         $this->orchard = $orchard;
-    
+
         return $this;
     }
 

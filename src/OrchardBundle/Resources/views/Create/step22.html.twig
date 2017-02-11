@@ -11,13 +11,13 @@
     <span id="loading-file" style="display: none;" class="navbar-text">
       Cargando Archivo...
     </span>
-    <form>
+    <form id="formFiles">
       <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
         <p><h4>Normas del huerto</h4></p>
         <div class="cuadro-subidas-pdf col-xs-12 col-sm-12 col-md-12 col-lg-12" ondrop="drop(event)" ondragover="allowDrop(event)">
           <input type="file" id="fileinput" accept=".pdf,.docx,.txt,.doc,.odf" hidden="hidden"/>
           <div class="more" onclick="$('#fileinput').click();">
-            <p>Añade o arrastra imagenes aqui</p>
+            <p>Añade o arrastra el fichero aqui</p>
           </div>
           <div id="files">
           </div>
@@ -27,17 +27,17 @@
         <h3 class="centrar-o">Ó</h3>
         <p>Quiero compartir el archivo</p>
         <input type="text" class="form-control required" placeholder="Escribe el link"> -->
-</div>
+      </div>
 
-        <input type="text" id="Step" hidden="hidden" value="23">
-      </form>
+      <input type="text" id="Step" hidden="hidden" value="23">
+    </form>
 
-      <div class="fixed-buttons">
-  			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
-  			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
-  		</div>
+    <div class="fixed-buttons">
+      <button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
+      <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
+    </div>
 
-</div>
+  </div>
 
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right-pdf">
     <h3 class="display-3">Sube un PDF con las normas de tu huerto</h3>
@@ -70,43 +70,47 @@ filesinput.addEventListener('change', function () {
 }, false);
 
 
-$('#btn-siguiente').off('click');
-
 $('#btn-siguiente').on('click', function() {
-  $("#loading, #loading-text").fadeIn("slow");
-  var data = new FormData();
-  data.append("normas", fileNormas);
-    $.ajax({
-      type: "POST",
-      contentType: false,
-      url: "/orchard/upload/files/upload",
-      data: JSON.stringify(imagenes),
-      success: function(step){
-        console.log(step);
-        window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
-      },
-      error: function(jqXHR, exception) {
-          $("#loading, #loading-text").fadeOut("slow", function() {
-            $("#loading-text").text("Guardado").fadeIn('slow');
-          });
-          if (jqXHR.status === 0) {
-                alert('Not connect.\n Verify Network.');
-            } else if (jqXHR.status == 404) {
-                alert('Requested page not found. [404]');
-            } else if (jqXHR.status == 500) {
-                alert('Internal Server Error [500].');
-            } else if (exception === 'parsererror') {
-                alert('Requested JSON parse failed.');
-            } else if (exception === 'timeout') {
-                alert('Time out error.');
-            } else if (exception === 'abort') {
-                alert('Ajax request aborted.');
-            } else {
-                alert('Uncaught Error.\n' + jqXHR.responseText);
-            }
-          console.log('error');
+
+  var formData = new FormData();
+  // jQuery.each(jQuery('#fileinput')[0].files, function(i, file) {
+  //   formData.append('file-'+i, file);
+  // });
+  formData.append('fileNormas', fileNormas);
+  $.ajax({
+    type: 'POST',
+    url: '/orchard/upload/files/upload/{{orchard.id}}',
+    type: "post",
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(data) {
+      console.log('success ' + data.redirect);
+      //window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
+    },
+    error: function(jqXHR, exception) {
+        if (jqXHR.status === 0) {
+          alert('Not connect.\n Verify Network.');
+        } else if (jqXHR.status == 404) {
+          alert('Requested page not found. [404]');
+        } else if (jqXHR.status == 500) {
+          alert('Internal Server Error [500].');
+        } else if (exception === 'parsererror') {
+          alert('Requested JSON parse failed.');
+        } else if (exception === 'timeout') {
+          alert('Time out error.');
+        } else if (exception === 'abort') {
+          alert('Ajax request aborted.');
+        } else {
+          alert('Uncaught Error.\n' + jqXHR.responseText);
         }
-    });
+        console.log('error');
+      }
+  });
+
+  return false;
+
 });
 
 </script>

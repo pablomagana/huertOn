@@ -6,9 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use OrchardBundle\Entity\Orchard;
 use OrchardBundle\Entity\Image;
+use OrchardBundle\Entity\RuleFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadController extends Controller
 {
@@ -105,14 +106,23 @@ class UploadController extends Controller
     }
   }
 
-  public function uploadFileAction(Request $request)
+  public function uploadFileAction(Request $request,$id_orchard)
   {
-    try {
-      $file=$request->files->get('normas');
-    } catch (Exception $e) {
+    if($id_orchard!=null){
+      $data=$request->files->get("fileNormas");
 
+      $normas = new RuleFile();
+      $normas->setFile($data);
+      $date = new \DateTime('now');
+      $date = $date->format('Y-m-d H:i:s');
+      $normas->setUpdateAt($date);
+      $normas->setOrchard($this->container->get("orchard_service")->getOrchard($id_orchard));
+      $em=$this->getDoctrine()->getManager();
+      $em->persist($normas);
+      $em->flush();
+      return new JsonResponse(23);
+    }else {
+      throw new NotFoundHttpException('id_orchard no efpecificado');
     }
-    return new JsonResponse(25);
-
   }
 }

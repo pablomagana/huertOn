@@ -159,6 +159,13 @@ class Orchard
     private $images;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection|RuleFile[]
+     * One Orchard has One rulefile.
+     * @ORM\OneToOne(targetEntity="RuleFile", mappedBy="orchard", fetch="EAGER")
+     */
+    private $ruleFile;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection|OrchardType[]
      *
      * @ORM\ManyToMany(targetEntity="OrchardType", inversedBy="orchards", fetch="EAGER")
@@ -1078,5 +1085,29 @@ class Orchard
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * Set ruleFile
+     *
+     * @param \OrchardBundle\Entity\ruleFile $ruleFile
+     *
+     * @return Orchard
+     */
+    public function setRuleFile(\OrchardBundle\Entity\ruleFile $ruleFile = null)
+    {
+        $this->ruleFile = $ruleFile;
+
+        return $this;
+    }
+
+    /**
+     * Get ruleFile
+     *
+     * @return \OrchardBundle\Entity\ruleFile
+     */
+    public function getRuleFile()
+    {
+        return $this->ruleFile;
     }
 }

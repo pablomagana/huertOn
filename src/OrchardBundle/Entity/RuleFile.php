@@ -7,10 +7,10 @@ use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * RuleFile
  *
- * @ORM\Table(name="rule_file")
+ * @ORM\Table(name="ruleFile")
  * @ORM\Entity(repositoryClass="OrchardBundle\Repository\RuleFileRepository")
+ * @Vich\Uploadable
  */
 class RuleFile
 {
@@ -24,18 +24,28 @@ class RuleFile
     private $id;
 
     /**
+     * @var File
+     *
+     * @Vich\UploadableField(mapping="orchard_file", fileNameProperty="nameFile")
+     */
+    private $File;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="nameFile", type="string", length=255, unique=true)
      */
     private $nameFile;
 
+
     /**
-     * @var File
-     *
-     * @Vich\UploadableField(mapping="orchard_file", fileNameProperty="fileName")
+     * one rulefiles have One Orchard.
+     * @ORM\OneToOne(targetEntity="Orchard", inversedBy="ruleFile")
+     * @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
      */
-    private $File;
+    private $orchard;
+
+
 
     /**
      * @var string
@@ -66,7 +76,7 @@ class RuleFile
      *
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
      *
-     * @return Product
+     * @return RuleFile
      */
     public function setFile(File $file = null)
     {
@@ -137,5 +147,29 @@ class RuleFile
     public function getUpdateAt()
     {
         return $this->updateAt;
+    }
+
+    /**
+     * Set orchard
+     *
+     * @param \OrchardBundle\Entity\Orchard $orchard
+     *
+     * @return RuleFile
+     */
+    public function setOrchard(\OrchardBundle\Entity\Orchard $orchard = null)
+    {
+        $this->orchard = $orchard;
+
+        return $this;
+    }
+
+    /**
+     * Get orchard
+     *
+     * @return \OrchardBundle\Entity\Orchard
+     */
+    public function getOrchard()
+    {
+        return $this->orchard;
     }
 }

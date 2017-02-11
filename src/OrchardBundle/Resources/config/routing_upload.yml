@@ -11,5 +11,5 @@ orchard_upload_images_modify:
     defaults: { _controller: OrchardBundle:Upload:modifyImage, idImage:null}
 
 orchard_upload_files_upload:
-    path:     /files/upload
-    defaults: {_controller: OrchardBundle:Upload:uploadFile}
+    path:     /files/upload/{id_orchard}
+    defaults: {_controller: OrchardBundle:Upload:uploadFile, id_orchard:null}
