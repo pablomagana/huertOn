@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>home.title</source>
+                <target>Find an orchard for you</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>home.activities</source>
+                <target>Activities</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>home.find.placeholder</source>
+                <target>Search by city, zip code or orchard name</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

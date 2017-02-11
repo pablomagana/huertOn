@@ -1,0 +1,224 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<!--SLIDER-->
+<div class="row" id="orchard-img">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    {% for orchardImage in orchard.images %}
+    <div class="fullscreen background parallax mySlides" style="padding:250px; background-image: url('{{orchardImage.src}}'); background-attachment: fixed;"  data-diff="100"></div>
+    {% endfor %}
+    <a class="w3-btn-floating w3-display-left" onclick="plusDivs(-1)" style="margin-left:20px;">&#10094;</a>
+    <a class="w3-btn-floating w3-display-right" onclick="plusDivs(1)" style="margin-right:20px;">&#10095;</a>
+  </div>
+</div>
+
+
+<div class="row" id="location-contact">
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 container">
+    <h3>{{ orchard.name }}</h3>
+    <a href="#location">{{ orchard.street }}</a>
+  </div>
+
+  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 container">
+    <a href="#contact"><button type="button" name="button" id="btn-contact">{{ 'orchard.profile.contact'|trans }}</button></a>
+  </div>
+</div>
+<div class="spacing"></div>
+
+
+
+<div class="row container" id="next-activities">
+  <!-- MOSTRAR LAS PRÓXIMAS ACTIVIDADES DE CADA HUERTO (3 COLUMNAS) -->
+  <h5>{{ 'orchard.profile.activities'|trans }}</h5>
+  <hr class="hr-orchard-profile" align="center">
+  {% if orchard.orchardActivity is empty %}
+  <h1>{{ 'orchard.profile.noActivities'|trans }}</h1>
+  {% else %}
+  {% for orchardActivity in orchard.orchardActivity %}
+  <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+    <h5>{{ orchardActivity.name }}</h5>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+</div>
+<div class="spacing"></div>
+
+
+{% if orchard.governanceModel is empty %}
+{% else %}
+<div class="container">
+  <div class="row" id="philosophy">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-centered text-xs-center text-sm-center text-md-center text-lg-center text-xl-center">
+      " {{ orchard.governanceModel }} "
+    </div>
+  </div>
+</div>
+<div class="spacing"></div>
+{% endif %}
+
+
+<div class="container">
+  <div class="row row-centered" id="how-is-it">
+    <h5>{{ 'orchard.profile.howIsIt'|trans }}</h5>
+    <hr class="hr-orchard-profile">
+    <!-- TIPO DE HUERTO -->
+    {% if orchard.orchardType is empty %}
+    {% else %}
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
+      <div class="border">
+        <h6>{{ 'orchard.profile.type'|trans }}</h6>
+        <br>
+        <br>
+        <ul>
+          {% for orchardType in orchard.orchardType %}
+          <li data-toggle="tooltip" data-placement="bottom" title="{{orchardType.description}}">{{ orchardType.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+
+    <!-- EQUIPAMIENTO -->
+    {% if orchard.orchardService is empty %}
+    {% else %}
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
+      <div class="border">
+        <h6>{{ 'orchard.profile.equipment'|trans }}</h6>
+        <br>
+        <br>
+        <ul>
+          {% for orchardService in orchard.orchardService %}
+          <li>{{ orchardService.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+  </div>
+</div>
+<div class="spacing"></div>
+
+
+<div class="container">
+  <div class="row row-centered" id="how-to-join">
+    <h5>{{ 'orchard.profile.join'|trans }}</h5>
+    <hr class="hr-orchard-profile">
+    <!-- MODALIDADES -->
+    {% if orchard.orchardParticipate is empty %}
+    {% else %}
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
+        <div class="border">
+          <h6>{{ 'orchard.profile.modal'|trans }}</h6>
+          <br>
+          <br>
+          <ul>
+            {% for orchardParticipate in orchard.orchardParticipate %}
+            <li>{{ orchardParticipate.name }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+
+
+      <!-- NORMAS DE HUERTO -->
+      {#{% if orchard.rule_file is empty %}
+      {% else %}#}
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
+        <div class="border">
+          <h6>{{ 'orchard.profile.important'|trans }}</h6>
+          <br>
+          <br>
+          {{ 'orchard.profile.rules-1'|trans }} <a href="/webs/orchards/files/XXXX">{{ 'orchard.profile.rules-2'|trans }}</a> {{ 'orchard.profile.rules-3'|trans }}
+        </div>
+      </div>
+      <div class="spacing"></div>
+      {#{% endif %}#}
+
+
+      <!-- PASOS PARA INSCRIBIRTE -->
+      {% if orchard.orchardInscriptionStep is empty %}
+      {% else %}
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered" style="margin-top:40px">
+        <h6>{{ 'orchard.profile.inscribe'|trans }}</h6>
+        <br>
+      </div>
+      <div class="spacing"></div>
+      {% endif %}
+
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row row-centered" id="location">
+    <h5>{{ 'orchard.profile.where'|trans }}</h5>
+    <hr class="hr-orchard-profile">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <div id="map-show" style="height:400px; width:100%;"></div>
+      <input type="text" class="geometry" value="{{orchard.geometry}}" hidden="hidden">
+      <input type="text" id="type" class="geometry" value="profile" hidden="hidden">
+    </div>
+  </div>
+  </div>
+<div class="spacing"></div>
+
+
+
+<div class="row container" id="contact">
+  <!-- TIENES ALGUNA PREGUNTA -->
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="background-color:#f2f2f2; border-radius: 15px; padding: 40px;">
+      <h3>{{ 'orchard.profile.question'|trans }}</h3>
+      <hr class="hr-orchard-profile">
+      <br>
+      <br>
+
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+
+      </div>
+
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+
+      </div>
+
+    </div>
+
+    <!-- FORMULARIO DE CONTACTO -->
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+
+    </div>
+</div>
+<div class="spacing"></div>
+
+<script src="{{ asset('/js/map_show.js')}}" charset="utf-8"></script>
+
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
+
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+
+</script>
+
+
+{% endblock %}

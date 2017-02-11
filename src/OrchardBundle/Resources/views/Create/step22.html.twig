@@ -1,4 +1,4 @@
-{% extends '::step-base.html.twig' %}
+{% extends '::step_base.html.twig' %}
 
 {% block stylesheets %}
 <!-- css step 2.4 carga pdf-->
@@ -9,15 +9,15 @@
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
     <span id="loading-file" style="display: none;" class="navbar-text">
-      Cargando Archivo...
+      {{ 'orchard.step14.loading'|trans }}
     </span>
     <form id="formFiles">
       <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
-        <p><h4>Normas del huerto</h4></p>
+        <p><h4>{{ 'orchard.step22.title'|trans }}</h4></p>
         <div class="cuadro-subidas-pdf col-xs-12 col-sm-12 col-md-12 col-lg-12" ondrop="drop(event)" ondragover="allowDrop(event)">
           <input type="file" id="fileinput" accept=".pdf,.docx,.txt,.doc,.odf" hidden="hidden"/>
           <div class="more" onclick="$('#fileinput').click();">
-            <p>Añade o arrastra el fichero aqui</p>
+            <p>{{ 'orchard.step14.add'|trans }}</p>
           </div>
           <div id="files">
           </div>
@@ -32,17 +32,17 @@
       <input type="text" id="Step" hidden="hidden" value="23">
     </form>
 
-    <div class="fixed-buttons">
-      <button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">Atrás</button>
-      <button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">Siguiente</button>
-    </div>
+     <div class="fixed-buttons">
+  			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.back'|trans }}</button>
+  			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.next'|trans }}</button>
+  		</div>
 
   </div>
 
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right-pdf">
-    <h3 class="display-3">Sube un PDF con las normas de tu huerto</h3>
-    <h4 class="display-5">Algunos links interesantes sobre normas de huertos:</h4><br><br>
-    <h5>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</h5>
+    <h3 class="display-3">{{ 'orchard.step22.title-right'|trans }}</h3>
+    <h4 class="display-5">{{ 'orchard.step22.title-right-2'|trans }}</h4><br><br>
+    <h5>{{ 'orchard.step22.title-right-3'|trans }}</h5>
   </div>
 
 {% endblock %}

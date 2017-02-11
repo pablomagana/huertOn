@@ -1,0 +1,83 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div class="container">
+  <div class="row row-centered">
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 col-centered">
+      <div class="find-title"><a id="bt-huertos">{{ 'find.orchard'|trans }}</a> &nbsp;&nbsp; / &nbsp;&nbsp; <a id="bt-eventos">{{ 'find.events'|trans }}</a></div>
+      <form id="form-home_search" action="/find" method="post">
+        <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}" required="true"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
+        <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
+        <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
+      </form>
+      <p>{{ 'find.results-1'|trans }}{{ orchards|length }} {{ 'find.results-2'|trans }}</p>
+    </div>
+  </div>
+  <div class="spacing"></div>
+</div>
+
+<input id="type" type="text" value="find" hidden="hidden">
+
+{% if orchards is not empty %}
+
+<div class="map col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div id="map-show" class="map-show" style="height: 400px; width: 100%;">
+  </div>
+</div>
+
+{% endif %}
+
+<div id="orchard-cards" class="row container-fluid">
+  {% for orchard in orchards %}
+  {% if type == 'distance' %}
+  <a href="/orchard/show/{{ orchard.0.id }}"></a>
+  <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
+    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
+      <!-- Imagen -->
+      <div class="find-result" style="background: url({{ orchard.0.images[0].src }});"></div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+      <!-- Texto -->
+      <h3>{{ orchard.0.name }}</h3>
+      <p><i>{{ orchard.0.address }}</i></p>
+    </div>
+  </div>
+  <input type="text" class="geometry" value="{{ orchard.0.geometry }}" hidden="hidden">
+  {% else %}
+  <a href="/orchard/show/{{ orchard.id }}"></a>
+  <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
+    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
+      <!-- Imagen -->
+      <div class="find-result" style="background: url({{ orchard.images[0].src }});"></div>
+    </div>
+    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+      <!-- Texto -->
+      <h3>{{ orchard.name }}</h3>
+      <p><i>{{ orchard.address }}</i></p>
+    </div>
+  </div>
+  <input type="text" class="geometry" value="{{ orchard.geometry }}" hidden="hidden">
+  {% endif %}
+  {% endfor %}
+</div>
+
+<script src="{{ asset('/js/map_show.js') }}"></script>
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+  $( "#bt-eventos" ).on('click', function() {
+    $( "#events-cards" ).removeAttr( "hidden" );
+    $( "#orchard-cards" ).attr( "hidden", "hidden" );
+  });
+
+  $( "#bt-huertos" ).on('click', function() {
+    $( "#orchard-cards" ).removeAttr( "hidden" );
+    $( "#events-cards" ).attr( "hidden", "hidden" );
+  });
+
+});
+
+</script>
+{% endblock %}

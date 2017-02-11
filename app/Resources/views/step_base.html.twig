@@ -3,7 +3,7 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8" />
-  <title>{% block title %}Parcelles{% endblock %}</title>
+  <title>{% block title %}huertOn{% endblock %}</title>
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
@@ -11,7 +11,7 @@
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-  <!--Fksjdahfkjlasdhflksjadhflkjsadfhflkjsdhaflkjashdf-->
+  <!-- Awesome font -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
@@ -44,7 +44,7 @@
 <body>
   <!-- Image and text -->
   <nav class="navbar navbar-light bg-faded">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/orchard/create/list">
       <img src="{{ asset('/img/logo.png')}}" height="30" class="d-inline-block align-top" alt="">
     </a>
     <ul id="btn-save-exit" class="nav navbar-nav float-xs-right float-sm-right float-md-right float-lg-right">
@@ -53,12 +53,12 @@
       </li>
       <li class="nav-item">
         <span id="loading-text" style="display: none;" class="navbar-text">
-          Guardando...
+          {{ 'stepBase.loading'|trans }}
         </span>
       </li>
       {% if orchard.step >= 14 %}
       <li class="nav-item">
-        <a class="nav-link" href="#">Guardar y salir</a>
+        <a class="nav-link" href="#">{{ 'stepBase.saveExit'|trans }}</a>
       </li>
       {% endif %}
     </ul>
@@ -71,6 +71,25 @@
     {% block body %}{% endblock %}
 
   </div>
+
+  <div class="modal fade" id="myModal">
+  	<div class="modal-dialog" role="document">
+  		<div class="modal-content">
+  			<div class="modal-header">
+  				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  					<span aria-hidden="true">&times;</span>
+  				</button>
+  				<h4 class="modal-title">{{ 'stepBase.email-1'|trans }}</h4>
+  			</div>
+  			<div class="modal-body">
+  				<p>{{ 'stepBase.email-2'|trans }}<p>&#x1f609</p></p>
+  			</div>
+  			<div class="modal-footer">
+  				<button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'stepBase.close'|trans }}</button>
+  			</div>
+  		</div><!-- /.modal-content -->
+  	</div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
   <script type="text/javascript">
 
@@ -156,10 +175,13 @@
       data: form,
       success: function() {
         saveAnimation();
-        if($('#Step').val() == '12' || $('#Step').val() == '22') {
+        if($('#Step').val() == '12') {
           window.location.href = '/orchard/create/steps/{{ orchard.id }}'
-        }else if ($('#Step').val() == '21' || $('#Step').val() == '31') {
-          var step = parseInt($('#Step').val()) - 8;
+        }else if ($('#Step').val() == '22') {
+          var step = parseInt($('#Step').val()) - 7;
+          window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
+        }else if ($('#Step').val() == '32') {
+          var step = parseInt($('#Step').val()) - 9;
           window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
         }else {
           var step = parseInt($('#Step').val()) - 2;

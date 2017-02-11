@@ -3,7 +3,8 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8" />
-  <title>{% block title %}Parcelles{% endblock %}</title>
+  <title>{% block title %}huertOn{% endblock %}</title>
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
@@ -11,7 +12,7 @@
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-  <!--Fksjdahfkjlasdhflksjadhflkjsadfhflkjsdhaflkjashdf-->
+  <!-- Awesome font -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
@@ -49,15 +50,15 @@
       <div class="row">
         <div class="col-lg-5">
           <li class="nav-item float-lg-left float-xl-left">
-            <a class="nav-link" href="/orchard/create/steps">Publica tu huerto</a>
+            <a class="nav-link" href="/orchard/create/steps">{{ 'base.li-1'|trans }}</a>
           </li>
           <li class="nav-item float-lg-left float-xl-left">
-            <a class="nav-link" href="#">Busca actividades</a>
+            <a class="nav-link" href="#">{{ 'base.li-2'|trans }}</a>
           </li>
         </div>
         <div class="col-lg-2">
           <li class="nav-item float-lg-left float-xl-left">
-            <a href="/">
+            <a href="/en">
               <img src="{{ asset('/img/logo.png') }}" height="30" class="d-inline-block align-top" alt="" style="margin-top:10px;">
             </a>
           </li>
@@ -65,21 +66,21 @@
         <div class="col-lg-5">
           {% if app.user %}
           <li class="nav-item dropdown float-lg-right float-xl-right">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Identificado como {{ app.user.username }}
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ 'base.li-3'|trans }} {{ app.user.username }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Mi Perfil</a>
-              <a class="dropdown-item" href="/orchard/create/draft">Lista de huertos</a>
-              <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+              <a class="dropdown-item" href="#">{{ 'base.li-4'|trans }}</a>
+              <a class="dropdown-item" href="/orchard/create/list">{{ 'base.li-5'|trans }}</a>
+              <a class="dropdown-item" href="/logout">{{ 'base.li-6'|trans }}</a>
             </div>
           </li>
           {% else %}
           <li class="nav-item float-lg-right float-xl-right">
-            <a href="/register"><button id="register-button" type="button" class="btn btn-outline-primary">Regístrate</button></a>
+            <a href="/register"><button id="register-button" type="button" class="btn btn-outline-primary">{{ 'base.li-7'|trans }}</button></a>
           </li>
           <li class="nav-item float-lg-right float-xl-right">
-            <a class="nav-link" href="/login">Iniciar Sesión</a>
+            <a class="nav-link" href="/login">{{ 'base.li-8'|trans }}</a>
           </li>
           {% endif %}
         </div>
@@ -88,67 +89,51 @@
   </nav>
 
 
+  <!-- NAV BAR MOBILE -->
+  <nav id="nav-mobile" class="navbar navbar-light bg-faded navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header row">
+        <div class="col-xs-6 col-sm-6 navbar-toggle" style="margin-top: 10px;" aria-hidden="true" data-toggle="collapse" data-target="#myNavbar">
+          <a class="navbar-brand" href=""><img src="{{asset('/img/logo2.png')}}" alt="" height="50px;"></a>
+          <i class="fa fa-angle-down fa-2x"></i>
+        </div>
 
-  <!--=============================NAV BAR MOBILE=============================
-  <nav id="nav-mobile">
-  <div class="container-fluid">
-  <div class="navbar-header">
-  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-  <span class="sr-only">Toggle navigation</span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-  <span class="icon-bar"></span>
-</button>
-<a class="navbar-brand" href="#">Brand</a>
-</div>
+        <div class="col-xs-6 col-sm-6 pull-right">
+          {% if app.user %}
+          <div class="nav-item dropdown float-lg-right float-xl-right">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ 'base.li-3'|trans }} {{ app.user.username }}
+            </a>
+            <div class="dropdown-menu col-xs-12 col-sm-12" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">{{ 'base.li-4'|trans }}</a>
+              <a class="dropdown-item" href="/orchard/create/list">{{ 'base.li-5'|trans }}</a>
+              <a class="dropdown-item" href="/logout">{{ 'base.li-6'|trans }}</a>
+            </div>
+          </div>
+          {% else %}
+          <div class="nav-item float-xs-right float-sm-right">
+            <a class="nav-link" href="/login" style="margin-bottom:10px; align:right; color:black;">{{ 'base.li-8'|trans }}</a>
+            <a href="/register"><button id="register-button" type="button" class="btn btn-outline-primary">{{ 'base.li-7'|trans }}</button></a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="collapse navbar-collapse row" id="myNavbar">
+        <div class="submenu-items">
+          <a href="/">{{ 'base.li-9'|trans }}</a>
+        </div>
+        <div class="submenu-items">
+          <a href="/orchard/create/steps">{{ 'base.li-1'|trans }}</a>
+        </div>
+        <div class="submenu-items">
+          <a href="#">{{ 'base.li-2'|trans }}</a>
+        </div>
 
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-<ul class="nav navbar-nav">
-<li class="active"><a href="#">Link</a></li>
-<li><a href="#">Link</a></li>
-<li><a href="#">Link</a></li>
-<li><a href="#">Link</a></li>
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-<ul class="dropdown-menu">
-<li><a href="#">Action</a></li>
-<li><a href="#">Another action</a></li>
-<li><a href="#">Something else here</a></li>
-<li class="divider"></li>
-<li><a href="#">Separated link</a></li>
-<li class="divider"></li>
-<li><a href="#">One more separated link</a></li>
-</ul>
-</li>
-</ul>
-<form class="navbar-form navbar-left" role="search">
-<div class="form-group">
-<input type="text" class="form-control" placeholder="Search">
-</div>
-<button type="submit" class="btn btn-default">Submit</button>
-</form>
-<ul class="nav navbar-nav navbar-right">
-<li><a href="#">Link</a></li>
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-<ul class="dropdown-menu">
-<li><a href="#">Action</a></li>
-<li><a href="#">Another action</a></li>
-<li><a href="#">Something else here</a></li>
-<li class="divider"></li>
-<li><a href="#">Separated link</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-</nav>
-<!- =============================END NAV BAR MOBILE=============================-->
+      </div>
+    </div>
+  </nav>
 
-
-<div class="container-fluid">
   {% block body %}{% endblock %}
-</div>
 
 {% block javascripts %}{% endblock %}
 

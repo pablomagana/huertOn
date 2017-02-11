@@ -1,0 +1,104 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+<div class="row">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-3">{{ 'orchard.list.title'|trans }}</h1>
+          <a href="/orchard/create/steps"><button type="button" class="btn btn-success btn-draft-lg">{{ 'orchard.list.add-btn'|trans }}</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% for orchard in app.user.orchard %}
+  {% if orchard.step > 11 %}
+  <!-- No pinta la imagen si no la tiene -->
+  {% if orchard.images != null and orchard.images is not empty %}
+    <div class="row">
+      <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+        <div style="width: 100%; height: 300px; background: url({{ orchard.images[0].src }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+      </div>
+  {% endif %}
+    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12 container">
+      <p><h3> {{ orchard.name }} </h3></p>
+      {% if orchard.published == 1 %}
+        <p><i>{{ 'orchard.list.published'|trans }}</i></p>
+      {% else %}
+        <p><i>{{ 'orchard.list.draft'|trans }}</i></p>
+      {% endif %}
+        <p><i>{{ 'orchard.list.date'|trans }}{{ orchard.createdAt|date("d/M/Y h:m")}}</i></p>
+        <p><i>{{ 'orchard.list.lastDate'|trans }}{{ orchard.updatedAt|date("d/M/Y h:m")}}</i></p>
+
+      <div class="botones">
+        {% if orchard.step > 13 %}
+          {% if orchard.published == 0 %}
+            <a href="/orchard/create/publish/{{ orchard.id }}/true"><button id="btn-publish" type="button" class="btn btn-secondary ">{{ 'orchard.list.publish'|trans }}</button></a>
+          {% endif %}
+          {% if orchard.published == 1 %}
+            <a href="/orchard/create/publish/{{ orchard.id }}/false"><button id="btn-unpublish" type="button" class="btn btn-secondary ">{{ 'orchard.list.unPublish'|trans }}</button></a>
+          {% endif %}
+          {% else %}
+            <a href="/orchard/create/publish/{{ orchard.id }}/true"><button id="btn-publish" type="button" class="btn btn-secondary " disabled>{{ 'orchard.list.publish'|trans }}</button></a>
+        {% endif %}
+      {% if orchard.step < 34 %}
+        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-secondary " data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">{{ 'orchard.list.complete'|trans }}</button></a>
+      {% endif %}
+      {% if orchard.step > 33 %}
+        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-secondary " data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">{{ 'orchard.list.modify'|trans }}</button></a>
+      {% endif %}
+        <button type="button" class="btn btn-secondary show-modal{{ orchard.id }}">{{ 'orchard.list.delete'|trans }}</button>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  {% endif %}
+
+  <script type="text/javascript">
+  $(function() {
+    $('.show-modal{{ orchard.id }}').click(function(){
+      $('#btn-delete-modal').attr("href", "/orchard/create/delete/{{ orchard.id}}")
+      $('#btn-unpublish-modal').attr("href", "/orchard/create/publish/{{ orchard.id }}/false")
+      $('#myModal').modal('show');
+    });
+  });
+  </script>
+
+  {% endfor %}
+  <div style="text-align: center; margin-bottom:10px;" class="draft-xs fixed-buttons">
+    <a href="/orchard/create/steps"><button type="button" class="btn btn-success btn-draft-xs">{{ 'orchard.list.add-btn'|trans }}</button></a>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{ 'orchard.list.sure'|trans }}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{ 'orchard.list.sure-2'|trans }}<p></p>
+      </div>
+      <div class="modal-footer">
+        <a id="btn-delete-modal" href=""><button type="button" class="btn btn-secondary ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
+        <a id="btn-unpublish-modal" href=""><button id="btn-unpublish" type="button" class="btn btn-secondary ">{{ 'orchard.list.yesUnpublish'|trans }}</button></a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+  <script type="text/javascript">
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
+  </script>
+
+
+
+{% endblock %}

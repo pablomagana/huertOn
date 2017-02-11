@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use OrchardBundle\Entity\Orchard;
 use OrchardBundle\Entity\OrchardType;
+use OrchardBundle\Entity\OrchardInscriptionStep;
 use OrchardBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,7 +73,7 @@ class CreateController extends Controller
       $orchard_activities = $repository->findAll();
     }
 
-    return $this->render($template, array('orchard' => $orchard, 'orchardTypes' => $orchard_types, 'orchardParticipates' => $orchard_participates, 'orchardServices' => $orchard_services, 'OrchardActivities' => $orchard_activities));
+    return $this->render($template, array('orchard' => $orchard, 'orchardTypes' => $orchard_types, 'orchardParticipates' => $orchard_participates, 'orchardServices' => $orchard_services, 'orchardActivities' => $orchard_activities));
 
   }
 
@@ -119,10 +120,14 @@ class CreateController extends Controller
 
     $orchardEntityArray = array();
 
-    foreach ($params as $param) {
-      $orchardEntity = $this->container->get("orchard_service")->$getterName($param);
-      $orchardEntity->addOrchard($orchard);
-      array_push($orchardEntityArray, $orchardEntity);
+    if (!empty($params)) {
+
+      foreach ($params as $param) {
+        $orchardEntity = $this->container->get("orchard_service")->$getterName($param);
+        $orchardEntity->addOrchard($orchard);
+        array_push($orchardEntityArray, $orchardEntity);
+      }
+
     }
 
     $orchard->$setterName($orchardEntityArray);
@@ -160,9 +165,78 @@ class CreateController extends Controller
 
   }
 
-  public function draftAction()
+  public function customAction(Request $request, $id_orchard)
   {
-    return $this->render('OrchardBundle:Create:draft.html.twig');
+    $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+
+    $em = $this->getDoctrine()->getManager();
+
+    $params = $request->request->get('OrchardInscriptionStep');
+
+    $orchardInscriptionSteps = $orchard->getOrchardInscriptionStep();
+
+    foreach ($orchardInscriptionSteps as $orchardInscriptionStep) {
+      $em->remove($orchardInscriptionStep);
+    }
+
+    $orchardInscriptionStepsArray = array();
+
+    if (!empty($params)) {
+
+      foreach ($params as $param) {
+        $orchardInscriptionStep = new OrchardInscriptionStep();
+        $orchardInscriptionStep->setText($param);
+        $orchardInscriptionStep->setOrchard($orchard);
+        array_push($orchardInscriptionStepsArray, $orchardInscriptionStep);
+
+        $em->persist($orchardInscriptionStep);
+      }
+
+    }
+
+    $orchard->setOrchardInscriptionStep($orchardInscriptionStepsArray);
+
+    $orchard->setStep('32');
+
+    $em->persist($orchard);
+    $em->flush();
+
+    $response = new JsonResponse();
+    $response->setData(array(
+      'redirect' => '31'
+    ));
+
+    return $response;
   }
 
+  public function listAction()
+  {
+    return $this->render('OrchardBundle:Create:list.html.twig');
+  }
+
+  public function publishAction($id_orchard, $publish)
+  {
+    $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+    if($publish == 'true') {
+      $orchard->setPublished(true);
+    }else {
+      $orchard->setPublished(false);
+    }
+
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($orchard);
+    $em->flush();
+
+    return $this->redirect($this->generateUrl('orchard_create_list'));
+  }
+  public function deleteAction($id_orchard)
+  {
+    $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+    if ($orchard != null) {
+      $em = $this->getDoctrine()->getManager();
+      $em->remove($orchard);
+      $em->flush();
+    }
+    return $this->redirect($this->generateUrl('orchard_create_list'));
+  }
 }

@@ -1,13 +1,17 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('/css/register.css') }}" />
 
-<div class="row steps-left-register">
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+<div class="spacing"></div>
+
+<div class="col-md-2 col-lg-2"></div>
+
+<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
     <h4>Registrate para participar en un huerto urbano o inscribirte a una de sus actividades</h4>
 
     {% trans_default_domain 'FOSUserBundle' %}
     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 
     {{ form_widget(form) }}
+
     {{ form_rest(form) }}
       <label class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input">
@@ -20,18 +24,16 @@
         <button type="submit" class="btn btn-primary" name="button">{{ 'registration.submit'|trans }}</button>
       </div>
 
-      <a href="/login">¿Ya dispones de una cuenta?</a>
-
-      <script type="text/javascript">
-      $('#fos_user_registration_form_plainPassword_first').hidePassword(true);
-      $('#fos_user_registration_form_plainPassword_second').hidePassword(true);
-      </script>
     {{ form_end(form) }}
+
+<a href="/login">¿Ya dispones de una cuenta?</a>
+<script type="text/javascript">
+    $('#fos_user_registration_form_plainPassword_first').hidePassword(true);
+    $('#fos_user_registration_form_plainPassword_second').hidePassword(true);
+    </script>
+
   </div><!--end col-->
 
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
-    <img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
-  </div>
 </div><!--end row-->
 
 <div class="modal fade" id="modalCondicionesUso">
