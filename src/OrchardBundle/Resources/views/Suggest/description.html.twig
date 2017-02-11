@@ -6,11 +6,11 @@
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form>
       <div class="form-group">
-        <label for="exampleTextarea">Introduce la descripción para {{ orchardType }}</label>
+        <label for="exampleTextarea">{{ 'orchard.suggest.description.title'|trans }} {{ orchardType }}</label>
         <textarea class="form-control" id="description" rows="8" cols="70" placeholder="Descripción"></textarea>
       </div>
 
-      <button id="btn-description" type="submit" class="btn btn-primary">Enviar</button>
+      <button id="btn-description" type="submit" class="btn btn-primary">{{ 'orchard.step13.send'|trans }}</button>
 
       <input id="Type" type="text" hidden="hidden" name="" value="{{ orchardType }}">
 
@@ -33,7 +33,7 @@ $('#description').keyup(function() {
         url: '/orchard/suggest/insert/'+$('#Type').val()+'/'+$('#description').val(),
         success: function(data) {
           console.log('success');
-          window.location.href = '/orchard/create/draft';
+          window.location.href = '/orchard/create/list';
         },
         error: function(jqXHR, exception) {
           if (jqXHR.status === 0) {

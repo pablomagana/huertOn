@@ -1,16 +1,16 @@
 <html>
 <body>
   {% if accept is defined and accept == 'true' %}
-  <h1>Hola {{ app.user.username }}!<h1>
-  <label>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir una nueva manera de participar:</label>
+  <h1>{{ 'orchard.suggest.activity_email.hello'|trans }} {{ app.user.username }}!<h1>
+  <label>{{ 'orchard.suggest.participate_email.title'|trans }}</label>
   <span>{{ orchard_participate }}<span>
-  <label>Ya puedes añadirla a tu huerto. Muchas gracias!</label>
+  <label>{{ 'orchard.suggest.participate_email.title-2'|trans }}</label>
 {% elseif accept is defined and accept == 'false' %}
-  <h1>Hola {{ app.user.username }}!<h1>
-  <label>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir una nueva manera de participar:</label>
+  <h1>{{ 'orchard.suggest.activity_email.hello'|trans }} {{ app.user.username }}!<h1>
+  <label>{{ 'orchard.suggest.participate_email.title-3'|trans }}</label>
 
   <span>{{ orchard_participate }}<span>
-  <label>Prueba a añadir otra. Muchas gracias!</label>
+  <label>{{ 'orchard.suggest.participate_email.title-4'|trans }}</label>
 {% else %}
 <h1 class="display-3">Hola administrador!<h1>
   <label>{{ app.user.username }} quiere añadir una nueva manera de participar:</label>
