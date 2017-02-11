@@ -2,7 +2,7 @@ home_homepage:
     path:     /{_locale}
     defaults: { _controller: HomeBundle:Default:index, _locale: es }
     requirements:
-        _locale: en|es
+        _locale: en|es|ca
 
 home_find:
     path:     /find

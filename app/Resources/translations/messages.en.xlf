@@ -71,7 +71,7 @@
             <!-- index.html -->
               <trans-unit id="15">
                   <source>home.title</source>
-                  <target>Busca un huerto para ti</target>
+                  <target>Find an orchard for you</target>
               </trans-unit>
               <trans-unit id="16">
                   <source>home.find.placeholder</source>
