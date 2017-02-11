@@ -280,6 +280,13 @@ class Orchard
         */
         protected $updatedAt;
 
+        /**
+         * @var \Doctrine\Common\Collections\Collection|EventBundle\Entity\Event[]
+         * One Orchard has Many Events.
+         * @ORM\OneToMany(targetEntity="EventBundle\Entity\Event", mappedBy="orchard", fetch="EAGER")
+         */
+        protected $events;
+
     /**
      * Constructor
      */
@@ -1133,5 +1140,39 @@ class Orchard
         $this->orchardInscriptionStep = $orchardInscriptionStep;
 
         return $this;
+    }
+
+    /**
+     * Add event
+     *
+     * @param \EventBundle\Entity\Event $event
+     *
+     * @return Orchard
+     */
+    public function addEvent(\EventBundle\Entity\Event $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event
+     *
+     * @param \EventBundle\Entity\Event $event
+     */
+    public function removeEvent(\EventBundle\Entity\Event $event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

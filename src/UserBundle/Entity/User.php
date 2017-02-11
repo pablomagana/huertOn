@@ -39,6 +39,13 @@ class User extends BaseUser
     */
     private $orchard;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection|EventBundle\Entity\Event[]
+     *
+     * @ORM\ManyToMany(targetEntity="EventBundle\Entity\Event", mappedBy="users")
+     */
+    private $events;
+
     public function __construct()
     {
         parent::__construct();
