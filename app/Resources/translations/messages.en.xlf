@@ -30,7 +30,7 @@
               </trans-unit>
               <trans-unit id="7">
                   <source>base.li-7</source>
-                  <target>Sing up</target>
+                  <target>Sign up</target>
               </trans-unit>
               <trans-unit id="8">
                   <source>base.li-8</source>
@@ -49,7 +49,7 @@
               </trans-unit>
               <trans-unit id="11">
                   <source>stepBase.saveExit</source>
-                  <target>Save and log off </target>
+                  <target>Save and log out </target>
               </trans-unit>
               <trans-unit id="12">
                   <source>stepBase.email-1</source>
@@ -75,7 +75,7 @@
               </trans-unit>
               <trans-unit id="16">
                   <source>home.find.placeholder</source>
-                  <target> City, post code or the orchards' name</target>
+                  <target>Search by city, postal code or orchard name</target>
               </trans-unit>
               <trans-unit id="17">
                   <source>home.btn.search</source>
@@ -90,7 +90,7 @@
             <!-- find.html -->
               <trans-unit id="19">
                   <source>find.orchard</source>
-                  <target>ORCHARD</target>
+                  <target>ORCHARDS</target>
               </trans-unit>
               <trans-unit id="20">
                   <source>find.events</source>
@@ -157,7 +157,7 @@
                 </trans-unit>
                 <trans-unit id="34">
                     <source>orchard.list.sure</source>
-                    <target>¿Are you sure you want to delet it?</target>
+                    <target>¿Are you sure you want to delete it?</target>
                 </trans-unit>
                 <trans-unit id="35">
                     <source>orchard.list.sure-2</source>
@@ -192,7 +192,7 @@
                 </trans-unit>
                 <trans-unit id="40-2">
                     <source>orchard.step11.where-2</source>
-                    <target>Orchards' address</target>
+                    <target>Orchard's address</target>
                 </trans-unit>
                 <trans-unit id="41">
                     <source>orchard.step11.marker</source>
@@ -258,7 +258,7 @@
               </trans-unit>
               <trans-unit id="55">
                   <source>orchard.step13.title-right-2</source>
-                  <target>Point the pointer on the type of orchard in order to show more information about each one.</target>
+                  <target>Point the pointer on the type of orchard to show more information about it.</target>
               </trans-unit>
               <trans-unit id="56">
                   <source>orchard.step13.required</source>
@@ -339,11 +339,11 @@
                 </trans-unit>
                 <trans-unit id="73">
                     <source>orchard.step22.title-right</source>
-                    <target>Upload PDF with your orchards' rules</target>
+                    <target>Upload PDF with your orchard rules</target>
                 </trans-unit>
                 <trans-unit id="74">
                     <source>orchard.step22.title-right-2</source>
-                    <target>Some interesting link with orchards' rules:</target>
+                    <target>Some interesting links with orchard rules:</target>
                 </trans-unit>
                 <trans-unit id="75">
                     <source>orchard.step22.title-right-3</source>
@@ -354,11 +354,11 @@
               <!--  step23.html.twig -->
                 <trans-unit id="76">
                     <source>orchard.step23.title</source>
-                    <target>How to sing up in your orchard</target>
+                    <target>How to sign up in your orchard</target>
                 </trans-unit>
                 <trans-unit id="77">
                     <source>orchard.step23.title-2</source>
-                    <target> Describe step by step the process to be followed in order to sing up in your orchard.</target>
+                    <target> Describe step by step the process to be followed in order to sign up to your orchard.</target>
                 </trans-unit>
                 <trans-unit id="78">
                     <source>orchard.step23.delete</source>
@@ -381,30 +381,30 @@
               <!--  step31.html.twig -->
                 <trans-unit id="82">
                     <source>orchard.step31.title</source>
-                    <target> Explain your orchards' philosophy</target>
+                    <target> Explain your orchard philosophy</target>
                 </trans-unit>
                 <trans-unit id="83">
                     <source>orchard.step31.title-2</source>
-                    <target>¿How the project started?</target>
+                    <target>¿How did the project start?</target>
                 </trans-unit>
                 <trans-unit id="84">
                     <source>orchard.step31.title-3</source>
-                    <target>Ruler Model</target>
+                    <target>Governance Model</target>
                 </trans-unit>
                 <trans-unit id="85">
                     <source>orchard.step31.title-2-1</source>
-                    <target>Type here how the project started</target>
+                    <target>Type here how did the project start</target>
                 </trans-unit>
                 <trans-unit id="86">
                     <source>orchard.step31.title-3-1</source>
-                    <target> Here you can find your Ruler Model</target>
+                    <target>Type here your governace model</target>
                 </trans-unit>
               <!-- End step31.html.twig -->
 
               <!--  step32.html.twig -->
                 <trans-unit id="87">
                     <source>orchard.step32.title</source>
-                    <target>¿Which kind of services you offer?</target>
+                    <target>¿Which kind of services do you offer?</target>
                 </trans-unit>
                 <trans-unit id="88">
                     <source>orchard.step32.title-2</source>
@@ -419,7 +419,7 @@
               <!--  step33.html.twig -->
                 <trans-unit id="90">
                     <source>orchard.step33.title</source>
-                    <target>¿ Which kind of activities do you use to do in the orchard?</target>
+                    <target>¿Which kind of activities do you use to do in the orchard?</target>
                 </trans-unit>
                 <trans-unit id="91">
                     <source>orchard.step33.title-2</source>
@@ -504,25 +504,25 @@
               <!-- description.html.twig -->
                 <trans-unit id="800">
                     <source>orchard.suggest.description.title</source>
-                    <target>Add the description for%</target>
+                    <target>Add the description for</target>
                 </trans-unit>
               <!-- End description.html.twig -->
               <!-- orchard_activity_email.html.twig -->
                 <trans-unit id="801">
                     <source>orchard.suggest.activity_email.hello</source>
-                    <target>Hello%</target>
+                    <target>Hello</target>
                 </trans-unit>
                 <trans-unit id="802">
                     <source>orchard.suggest.activity_email.title</source>
-                    <target>Congratulations! :) Your  activity suggestion has been accepted:%</target>
+                    <target>Congratulations! :) Your  activity suggestion has been accepted:</target>
                 </trans-unit>
                 <trans-unit id="803">
                     <source>orchard.suggest.activity_email.title-2</source>
-                    <target> You can add it now to your orchard!Than you!</target>
+                    <target> You can add it now to your orchard! Thank you!</target>
                 </trans-unit>
                 <trans-unit id="804">
                     <source>orchard.suggest.activity_email.title-3</source>
-                    <target>Sorry! :( Your  activity suggestion has been rejected:</target>
+                    <target>Sorry! :( Your activity suggestion has been rejected:</target>
                 </trans-unit>
                 <trans-unit id="805">
                     <source>orchard.suggest.activity_email.title-4</source>
@@ -532,11 +532,11 @@
               <!-- orchard_participate_email.html.twig -->
                 <trans-unit id="806">
                     <source>orchard.suggest.participate_email.title</source>
-                    <target>Congratulations! :) Your suggestion about a new way to join has been accepted::</target>
+                    <target>Congratulations! :) Your suggestion about a new way to join has been accepted:</target>
                 </trans-unit>
                 <trans-unit id="807">
                     <source>orchard.suggest.participate_email.title-2</source>
-                    <target>You can add it now to your orchard!Than you!</target>
+                    <target>You can add it now to your orchard! Thank you!</target>
                 </trans-unit>
                 <trans-unit id="808">
                     <source>orchard.suggest.participate_email.title-3</source>
@@ -554,7 +554,7 @@
                 </trans-unit>
                 <trans-unit id="811">
                     <source>orchard.suggest.service_email.title-2</source>
-                    <target>You can add it now to your orchard!Than you!</target>
+                    <target>You can add it now to your orchard! Thank you!</target>
                 </trans-unit>
                 <trans-unit id="812">
                     <source>orchard.suggest.service_email.title-3</source>
@@ -572,7 +572,7 @@
               </trans-unit>
               <trans-unit id="815">
                   <source>orchard.suggest.type_email.title-1</source>
-                  <target>You can add it now to your orchard!Than you!</target>
+                  <target>You can add it now to your orchard! Thank you!</target>
               </trans-unit>
               <trans-unit id="816">
                   <source>orchard.suggest.type_email.title-2</source>
@@ -653,7 +653,7 @@
             <!-- register_content.html -->
               <trans-unit id="200">
                   <source>user.register.title</source>
-                  <target> Sing up in order to join to a orcahrd or subscribe to any of the actities</target>
+                  <target>Sign up to participate in an orchard or join one of its activities</target>
               </trans-unit>
               <trans-unit id="201">
                   <source>user.register.read</source>
@@ -661,11 +661,11 @@
               </trans-unit>
               <trans-unit id="202">
                   <source>user.register.conditions</source>
-                  <target>Conditions of us</target>
+                  <target>Conditions of use</target>
               </trans-unit>
               <trans-unit id="203">
                   <source>user.register.privacy</source>
-                  <target>Privacy politic</target>
+                  <target>Privacy policy</target>
               </trans-unit>
               <trans-unit id="204">
                   <source>user.register.acount</source>
@@ -717,7 +717,7 @@
             <!-- login_content.html -->
               <trans-unit id="213">
                   <source>user.login.title</source>
-                  <target>Sing up to join in a orachrd or suscribe in any of the activities</target>
+                  <target>Log in to participate in an orchard or join one of its activities</target>
               </trans-unit>
               <trans-unit id="214">
                   <source>user.login.create</source>

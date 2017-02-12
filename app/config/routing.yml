@@ -1,6 +1,6 @@
 event:
     resource: "@EventBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /event
 
 home:
     resource: "@HomeBundle/Resources/config/routing.yml"

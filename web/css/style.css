@@ -30,6 +30,17 @@
 		display: none;
 	}
 
+	.text-muted-footer {
+		text-align: center;
+		padding-left: 0px !important;
+	}
+
+	#footer .text #dropdown-lang {
+		float: none !important;
+		margin-right: 0 !important;
+		padding-right: 0 !important;
+	}
+
 }
 
 
@@ -439,7 +450,7 @@ footer {
 	display:table;
 }
 
-.text-muted {
+.text-muted-footer {
 	padding-left: 120px;
 	font-size: 12px;
 	display: table-cell;
