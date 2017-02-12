@@ -1,3 +1,3 @@
-event_homepage:
-    path:     /
-    defaults: { _controller: EventBundle:Default:index }
+event_create:
+    path:     /create/{id_orchard}
+    defaults: { _controller: EventBundle:Create:create, id_orchard:null }

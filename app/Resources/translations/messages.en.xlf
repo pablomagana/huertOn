@@ -6,7 +6,7 @@
             <!-- base.html -->
               <trans-unit id="1">
                   <source>base.li-1</source>
-                  <target>Advertise your orchard</target>
+                  <target>Publish your orchard</target>
               </trans-unit>
               <trans-unit id="2">
                   <source>base.li-2</source>
@@ -38,7 +38,7 @@
               </trans-unit>
               <trans-unit id="9">
                   <source>base.li-9</source>
-                  <target>Start</target>
+                  <target>Home</target>
               </trans-unit>
             <!-- End base.html -->
 
@@ -98,7 +98,7 @@
               </trans-unit>
               <trans-unit id="21">
                   <source>find.results-1</source>
-                  <target>Your search was successful</target>
+                  <target>Have found</target>
               </trans-unit>
               <trans-unit id="22">
                   <source>find.results-2</source>
@@ -113,7 +113,7 @@
               <!-- list.html.twig -->
                 <trans-unit id="23">
                     <source>orchard.list.title</source>
-                    <target>The orchards you have created</target>
+                    <target>Orchards you have created</target>
                 </trans-unit>
                 <trans-unit id="24">
                     <source>orchard.list.add-btn</source>
@@ -446,7 +446,7 @@
               </trans-unit>
               <trans-unit id="96">
                   <source>orchard.steps.sub-1</source>
-                  <target>Tell them the esstentials (where is it...)</target>
+                  <target>Tell them the essentials (where is it...)</target>
               </trans-unit>
               <trans-unit id="97">
                   <source>orchard.steps.sub-2</source>

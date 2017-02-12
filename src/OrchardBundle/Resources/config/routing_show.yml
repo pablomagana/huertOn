@@ -1,0 +1,3 @@
+orchard_show_profile:
+    path:     /profile/{id_orchard}
+    defaults: { _controller: OrchardBundle:Show:profile, id_orchard:null }

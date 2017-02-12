@@ -58,7 +58,7 @@
         </div>
         <div class="col-lg-2">
           <li class="nav-item float-lg-left float-xl-left">
-            <a id="logo-desktop" href="">
+            <a href="/es" id="logo-desktop">
               <img src="{{ asset('/img/logo.png') }}" height="30" class="d-inline-block align-top" alt="" style="margin-top:10px;">
             </a>
           </li>
@@ -94,7 +94,7 @@
     <div class="container-fluid">
       <div class="navbar-header row">
         <div class="col-xs-6 col-sm-6 navbar-toggle" style="margin-top: 10px;" aria-hidden="true" data-toggle="collapse" data-target="#myNavbar">
-          <a id="logo-mobile" class="navbar-brand" href=""><img src="{{asset('/img/logo2.png')}}" alt="" height="50px;"></a>
+          <a class="navbar-brand"><img src="{{asset('/img/logo2.png')}}" alt="" height="50px;"></a>
           <i class="fa fa-angle-down fa-2x"></i>
         </div>
 
@@ -120,7 +120,7 @@
       </div>
       <div class="collapse navbar-collapse row" id="myNavbar">
         <div class="submenu-items">
-          <a href="/">{{ 'base.li-9'|trans }}</a>
+          <a href="/es" id="logo-mobile">{{ 'base.li-9'|trans }}</a>
         </div>
         <div class="submenu-items">
           <a href="/orchard/create/steps">{{ 'base.li-1'|trans }}</a>
@@ -161,21 +161,20 @@
 </html>
 
 <script type="text/javascript">
-$('#dropdown-es').on('click', function() {
-  console.log('entrando en es');
-  $('#logo-desktop').attr('href', '/es');
-  $('#logo-mobile').attr('href', '/es');
-});
 
-$('#dropdown-en').on('click', function() {
-  console.log('entrando en en');
-  $('#logo-desktop').attr('href', '/en');
-  $('#logo-mobile').attr('href', '/en');
-});
+switch (window.location.pathname) {
+  case '/es':
+    $('#logo-desktop').attr('href', '/es');
+    $('#logo-mobile').attr('href', '/es');
+    break;
+  case '/en':
+    $('#logo-desktop').attr('href', '/en');
+    $('#logo-mobile').attr('href', '/en');
+    break;
+  case '/ca':
+    $('#logo-desktop').attr('href', '/ca');
+    $('#logo-mobile').attr('href', '/ca');
+    break;
+}
 
-$('#dropdown-cat').on('click', function() {
-  console.log('entrando en ca');
-  $('#logo-desktop').attr('href', '/ca');
-  $('#logo-mobile').attr('href', '/ca');
-});
 </script>

@@ -14,6 +14,10 @@ orchard_create:
     resource: "@OrchardBundle/Resources/config/routing_create.yml"
     prefix:   /orchard/create
 
+orchard_show:
+    resource: "@OrchardBundle/Resources/config/routing_show.yml"
+    prefix:   /orchard/show
+
 orchard_upload:
     resource: "@OrchardBundle/Resources/config/routing_upload.yml"
     prefix:   /orchard/upload

@@ -1,17 +1,9 @@
 home_homepage:
     path:     /{_locale}
-    defaults: { _controller: HomeBundle:Default:index, _locale: es }
+    defaults: { _controller: HomeBundle:Home:index, _locale: es }
     requirements:
         _locale: en|es|ca
 
 home_find:
     path:     /find
-    defaults: { _controller: HomeBundle:Default:find }
-
-home_orchard_profile:
-    path:     /orchard/show/{id_orchard}
-    defaults: { _controller: HomeBundle:Default:show, id_orchard:null }
-
-home_search:
-    path:     /search
-    defaults: { _controller: HomeBundle:Default:search}
+    defaults: { _controller: HomeBundle:Search:find }
