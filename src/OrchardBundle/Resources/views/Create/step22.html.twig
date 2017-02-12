@@ -15,18 +15,30 @@
       <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
         <p><h4>{{ 'orchard.step22.title'|trans }}</h4></p>
         <div class="cuadro-subidas-pdf col-xs-12 col-sm-12 col-md-12 col-lg-12" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <input type="file" id="fileinput" accept=".pdf,.docx,.txt,.doc,.odf" hidden="hidden"/>
-          <div class="more" onclick="$('#fileinput').click();">
-            <p>{{ 'orchard.step14.add'|trans }}</p>
+          <input type="file" id="fileinput" accept=".pdf" hidden="hidden"/>
+          {% if orchard.ruleFile is defined and orchard.ruleFile|length > 0 %}
+            <div class="more" onclick="$('#fileinput').click();" hidden="hidden">
+          {% else %}
+            <div class="more" onclick="$('#fileinput').click();">
+          {% endif %}
+            <p>{{ 'orchard.step22.add'|trans }}</p>
           </div>
           <div id="files">
           </div>
+          <!-- imprimir fichero subido si lo hay -->
+          {% if orchard.ruleFile is defined and orchard.ruleFile|length > 0 %}
+            <input type="text" hidden="true" class="required" name="imagesuploaded" value="{{orchard.images|length}}"/>
+            <h1 id="h1Upload">{{ 'orchard.step22.uploaded'|trans }}</h1>
+            <div class="upload">
+              <div class="thumbnail">
+                <span class="fa fa-times-circle topRight deleteImage" id="{{orchard.id}}" onclick="deleteUpload(this)"></span>
+                <img src="/img/pdf_logo.jpg">
+                <p><a href="/orchard/file/{{orchard.ruleFile.nameFile}}">{{orchard.ruleFile.nameFile}}</a></p>
+              </div>
+          </div>
+          {% endif %}
+        <!--  -->
         </div>
-
-        <!-- <br>
-        <h3 class="centrar-o">Ó</h3>
-        <p>Quiero compartir el archivo</p>
-        <input type="text" class="form-control required" placeholder="Escribe el link"> -->
       </div>
 
       <input type="text" id="Step" hidden="hidden" value="23">
@@ -42,7 +54,7 @@
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right-pdf">
     <h3 class="display-3">{{ 'orchard.step22.title-right'|trans }}</h3>
     <h4 class="display-5">{{ 'orchard.step22.title-right-2'|trans }}</h4><br><br>
-    <h5>{{ 'orchard.step22.title-right-3'|trans }}</h5>
+    <h5><a href="http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/">{{ 'orchard.step22.title-right-3'|trans }}</a></h5>
   </div>
 
 {% endblock %}
@@ -59,7 +71,6 @@ var filesinput = document.querySelector('#fileinput');
 filesinput.addEventListener('change', function () {
   console.log("detectando cambios en input");
   $("#loading-file").fadeIn("slow");
-  //solo se permiten 10 imagenes
   if(fileNormas==null && this.files.length<2){
     //console.log(this.files[0]);
     previewImage(this.files[0]);
@@ -86,8 +97,8 @@ $('#btn-siguiente').on('click', function() {
     contentType: false,
     processData: false,
     success: function(data) {
-      console.log('success ' + data.redirect);
-      //window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
+      console.log('success :' + data);
+      window.location.href = '/orchard/create/step/' + data + '/{{ orchard.id }}';
     },
     error: function(jqXHR, exception) {
         if (jqXHR.status === 0) {

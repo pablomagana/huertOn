@@ -161,7 +161,7 @@ function deleteUpload(element) {
 function deleteFromServer(id,element) {
   $.ajax({
     type: "POST",
-    url:"/orchard/images/delete/"+id,
+    url:"/orchard/upload/images/delete/"+id,
      success: function(){$(element).parent().remove();console.log($(element).attr("id"));},
      error: function(){console.log("imagen no borrada");}
    });
@@ -170,7 +170,7 @@ function deleteFromServer(id,element) {
 function sendNewDescription(description,id) {
   $.ajax({
     type: "POST",
-    url:"/orchard/images/modify/"+id,
+    url:"/orchard/upload/images/modify/"+id,
     data:{description},
      success: function(){alert("descripción modificada")},
      error: function(){console.log("descripcion NO modificada");}

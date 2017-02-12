@@ -17,19 +17,6 @@ function previewImage(file) {
 
 }
 
-function sendFile(file){
-  $.ajax({
-    type: "POST",
-    url:"/orchard/file/upload",
-    data: {
-      'name':file.name,
-      'fileNormas':file,
-    },
-     success: function(id){alert("imagen "+file.name+" enviada con id "+id);},
-     error: function(){alert("Error al subir la imagen "+file.name);}
-   });
-}
-
 function createFileElement(file){
   var thumb = document.createElement("div");
   thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
@@ -88,12 +75,31 @@ function drop(ev) {
 function checkNumFile() {
   if(fileNormas!=null){
     $("#btn-siguiente").text("Siguiente");
+    $(".more").fadeOut(500);
   }else {
     $("#btn-siguiente").text("Ahora no");
+    $(".more").fadeIn(500);
   }
 }
 
 function removeItem() {
   fileNormas=null;
+  $("#fileinput").val("");
   checkNumFile();
+}
+function deleteUpload(element) {
+    deleteFromServer($(element).attr("id"),element);
+}
+function deleteFromServer(id,element) {
+  $.ajax({
+    type: "POST",
+    url:"/orchard/upload/files/delete/"+id,
+     success: function(data){
+       if (data=="ok") {
+         $(element).parent().remove();console.log($(element).attr("id"));}
+         $(".more").removeAttr('hidden');
+         $("#h1Upload").attr("hidden","hidden");
+       },
+     error: function(){console.log("imagen no borrada");}
+   });
 }

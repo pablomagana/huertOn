@@ -110,19 +110,50 @@ class UploadController extends Controller
   {
     if($id_orchard!=null){
       $data=$request->files->get("fileNormas");
-
+      $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
       $normas = new RuleFile();
       $normas->setFile($data);
       $date = new \DateTime('now');
       $date = $date->format('Y-m-d H:i:s');
       $normas->setUpdateAt($date);
-      $normas->setOrchard($this->container->get("orchard_service")->getOrchard($id_orchard));
+      $normas->setOrchard($orchard);
+
       $em=$this->getDoctrine()->getManager();
       $em->persist($normas);
       $em->flush();
+
+      //update step orchard
+      if($orchard->getStep()<23){
+        $orchard->setStep(23);
+        $em->persist($orchard);
+        $em->flush();
+      }
       return new JsonResponse(23);
     }else {
-      throw new NotFoundHttpException('id_orchard no efpecificado');
+      throw new NotFoundHttpException('id_orchard no especificado');
+    }
+  }
+  // public function downloadFileAction(Request $request,$id_orchard)
+  // {
+  //   $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
+  //   $entity = $orchard->getRuleFile();
+  //   $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+  //   $path = $helper->asset($entity, 'File');
+  //   $normas=$orchard->getRuleFile();
+  //   return new Response("<a href='/orchard/file/".$entity->getNameFile()."'>descargar</a>");
+  //   return new Response("<a href='".$path."'>descargar</a>");
+  // }
+
+  public function deleteFileAction(Request $request,$id_orchard)
+  {$orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
+    if($orchard){
+      $em=$this->getDoctrine()->getManager();
+      $normas = $orchard->getRuleFile();
+      $em->remove($normas);
+      $em->flush();
+      return new JsonResponse("ok");
+    }else {
+      return new JsonResponse("ko");
     }
   }
 }

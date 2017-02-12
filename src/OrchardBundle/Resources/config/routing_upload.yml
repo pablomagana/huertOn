@@ -10,6 +10,11 @@ orchard_upload_images_modify:
     path:     /images/modify/{idImage}
     defaults: { _controller: OrchardBundle:Upload:modifyImage, idImage:null}
 
+###ficheros normas
 orchard_upload_files_upload:
     path:     /files/upload/{id_orchard}
     defaults: {_controller: OrchardBundle:Upload:uploadFile, id_orchard:null}
+
+orchard_upload_files_delete:
+    path:     /files/delete/{id_orchard}
+    defaults: {_controller: OrchardBundle:Upload:deleteFile, id_orchard:null}

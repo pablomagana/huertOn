@@ -159,6 +159,13 @@ class Orchard
     private $images;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection|RuleFile[]
+     * One Orchard has One rulefile.
+     * @ORM\OneToOne(targetEntity="RuleFile", mappedBy="orchard", fetch="EAGER", cascade="remove")
+     */
+    private $ruleFile;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection|OrchardType[]
      *
      * @ORM\ManyToMany(targetEntity="OrchardType", inversedBy="orchards", fetch="EAGER")

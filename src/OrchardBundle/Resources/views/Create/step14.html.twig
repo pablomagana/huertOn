@@ -24,11 +24,11 @@
           </div>
           {% if orchard.images is defined and orchard.images|length > 0 %}
             <input type="text" hidden="true" class="required" name="imagesuploaded" value="{{orchard.images|length}}"/>
-            <h1>{{ 'orchard.step14.uploaded'|trans }}</h1>
+            <h1 id="h1Upload">{{ 'orchard.step14.uploaded'|trans }}</h1>
             <div class="upload">
           {% for img in orchard.images %}
             <div class="thumbnail">
-              <span class="fa fa-times-circle topRight deleteImage" id="{{img.id}}" onclick="deleteUpload(this)"></span>
+              <span class="fa fa-times-circle topRight deleteImage" id="{{img.id}}"></span>
               <img  src="{{img.src}}" alt="{{img.description}}">
 
               <span class="descripcion">{{img.description}}</span>
@@ -36,7 +36,7 @@
               <div class="edi" hidden="hidden">
                 <span>{{100 - img.description|length}}</span>
                 <textarea type="text" placeholder="{{ 'orchard.step14.edit'|trans }}" class="descripcion" maxlength="100" onkeyup="textAreaAdjust(this)">{{img.description}}</textarea>
-                <a onclick="sendNewDescription($(this).prev().val(),{{img.id}})">guardar</a>
+                <a onclick="sendNewDescription($(this).prev().val(),{{img.id}})">{{ 'orchard.step14.guardar'|trans }}</a>
               </div>
 
             </div>
@@ -99,15 +99,18 @@ $("#description").keydown(function() {
 $('#btn-siguiente, #btn-save-exit').on('click', function() {
   $("#loading, #loading-text").fadeIn("slow");
   //send images
+  var formImages = new FormData();
     for (var i = 0; i < imagenes.length; i++) {
       imagenes[i].des=$("span[id='"+imagenes[i].id+"']").parent().children().last().val();
-      //sendImage(imagenes[i]);
+      formImages.append('image-'+i, imagenes[i]);
     }
+
+    });
     $.ajax({
       type: "POST",
       contentType: 'application/json',
       url:"/orchard/upload/images/upload/{{ orchard.id }}",
-      data: JSON.stringify(imagenes),
+      data: formImages,
       success: function(step){
         console.log(step);
         window.location.href = '/orchard/create/step/' + step + '/{{ orchard.id }}';
