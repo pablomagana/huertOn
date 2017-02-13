@@ -110,3 +110,16 @@ fos_user:
     profile:
         form:
             validation_groups:  [Default] # Here you can also add your own groups if you have extra validation
+#config bundle to upload files
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        orchard_file:
+            uri_prefix:         /orchard/file
+            upload_destination: '%kernel.root_dir%/../web/orchard/file'
+            namer:              vich_uploader.namer_uniqid
+        orchard_image:
+            uri_prefix:         /orchard/image
+            upload_destination: '%kernel.root_dir%/../web/orchard/image'
+            namer:              vich_uploader.namer_uniqid

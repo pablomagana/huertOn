@@ -16,7 +16,7 @@
   display: inline-block;
   vertical-align: middle;
 }
-#files .thumbnail{
+.thumbnail{
     max-width:150px;
     /*height: 150px;*/
     float:left;
@@ -25,17 +25,16 @@
     vertical-align: bottom;
     overflow:hidden;
 }
-#files .thumbnail p{
+.thumbnail p{
   text-align: center;
 }
-#files .thumbnail img{
+.thumbnail img{
     width:150px;
     height: 150px;
     border-radius: 10px;
     box-shadow: 4px 5px 5px #888888;
     overflow: hidden;
-}
-#files .thumbnail span{
+}.thumbnail span{
     text-align: right!important;
 }
 .more{

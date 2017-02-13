@@ -6,54 +6,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use OrchardBundle\Entity\Orchard;
 use OrchardBundle\Entity\Image;
+use OrchardBundle\Entity\RuleFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadController extends Controller
 {
-
-  /*//Método utilizado para añadir imagenes a los huertos, recibe una imagen y la mueve a la carpeta de imagenes relacionandola con el huerto
-  //Recibe una imagen por request con su descripción por metodo POST
-  public function uploadImageActionOld(Request $request,$id_orchard){
-    $name=$request->get("name");
-    $src=$request->get("src");
-    $description=$request->get("description");
-
-    $imagen=new Image();
-    $imagen->setSrc($src);
-    $imagen->setDescription($description);
-    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
-    $imagen->setOrchard($orchard);
-
-    $em=$this->getDoctrine()->getManager();
-    $em->persist($imagen);
-    $em->flush();
-
-    return new JsonResponse($imagen->getId());
-  }*/
-
   public function uploadImageAction(Request $request,$id_orchard)
   {
-
-    ini_set('memory_limit', '-1');
-    //extraer id_orchard
-
-    //extraer json con imagenes
-    //$imagenes=$request->get("imgs");
-    $imagenes=json_decode($request->getContent());
-    //print_r($imagenes);
-    //return new JsonResponse($imagenes[0]->des);
-
     $em=$this->getDoctrine()->getManager();
-
-    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
-    if (count($imagenes)>0) {
-      foreach ($imagenes as $img) {
+    $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
+    if (count($request->files)>0) {
+      for ($i=0; $i < count($request->files); $i++) {
+        $img=$request->files->get("image-".$i);
         $imagen=new Image();
-        $imagen->setSrc($img->src);
-        $imagen->setDescription($img->des);
-
+        $imagen->setimage($img);
+        $date = new \DateTime('now');
+        $date = $date->format('Y-m-d H:i:s');
+        $imagen->setUpdateAt($date);
         $imagen->setOrchard($orchard);
 
         $em->persist($imagen);
@@ -105,14 +76,55 @@ class UploadController extends Controller
     }
   }
 
-  public function uploadFileAction(Request $request)
+  public function uploadFileAction(Request $request,$id_orchard)
   {
-    try {
-      $file=$request->files->get('normas');
-    } catch (Exception $e) {
+    if($id_orchard!=null){
+      $data=$request->files->get("fileNormas");
+      $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
+      $normas = new RuleFile();
+      $normas->setFile($data);
+      $date = new \DateTime('now');
+      $date = $date->format('Y-m-d H:i:s');
+      $normas->setUpdateAt($date);
+      $normas->setOrchard($orchard);
 
+      $em=$this->getDoctrine()->getManager();
+      $em->persist($normas);
+      $em->flush();
+
+      //update step orchard
+      if($orchard->getStep()<23){
+        $orchard->setStep(23);
+        $em->persist($orchard);
+        $em->flush();
+      }
+      return new JsonResponse(23);
+    }else {
+      throw new NotFoundHttpException('id_orchard no especificado');
     }
-    return new JsonResponse(25);
+  }
+  // public function downloadFileAction(Request $request,$id_orchard)
+  // {
+  //   $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
+  //   $entity = $orchard->getRuleFile();
+  //   $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
+  //   $path = $helper->asset($entity, 'File');
+  //   $normas=$orchard->getRuleFile();
+  //   return new Response("<a href='/orchard/file/".$entity->getNameFile()."'>descargar</a>");
+  //   return new Response("<a href='".$path."'>descargar</a>");
+  // }
 
+  public function deleteFileAction(Request $request,$id_orchard)
+  {
+    $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
+    if($orchard){
+      $em=$this->getDoctrine()->getManager();
+      $normas = $orchard->getRuleFile();
+      $em->remove($normas);
+      $em->flush();
+      return new JsonResponse("ok");
+    }else {
+      return new JsonResponse("ko");
+    }
   }
 }

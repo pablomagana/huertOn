@@ -17,6 +17,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new OrchardBundle\OrchardBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
             new UserBundle\UserBundle(),
             new HomeBundle\HomeBundle(),
             new EventBundle\EventBundle(),
