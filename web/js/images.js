@@ -141,6 +141,11 @@ function checkNumImage() {
   }else {
     $("#btn-siguiente").text("Ahora no");
   }
+  if (imagenes.length<10) {
+    $(".more").removeAttr("hidden");
+  }else{
+    $(".more").attr("hidden","hidden");
+  }
 }
 
 function removeItemWithId(array,id) {
@@ -162,7 +167,12 @@ function deleteFromServer(id,element) {
   $.ajax({
     type: "POST",
     url:"/orchard/upload/images/delete/"+id,
-     success: function(){$(element).parent().remove();console.log($(element).attr("id"));},
+     success: function(){
+       $(element).parent().remove();console.log($(element).attr("id"));
+       if ($('.upload').children().length<10) {
+         $("#more").removeAttr("hidden");
+       }
+     },
      error: function(){console.log("imagen no borrada");}
    });
 }

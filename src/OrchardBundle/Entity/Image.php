@@ -5,12 +5,14 @@ namespace OrchardBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ImageFile
  *
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="OrchardBundle\Repository\ImageRepository")
+ * @Assert\Callback(methods={"validate"})
  * @Vich\Uploadable
  */
 class Image
@@ -28,6 +30,7 @@ class Image
      * @var File
      *
      * @Vich\UploadableField(mapping="orchard_image", fileNameProperty="nameImage")
+     * @Assert\File(maxSize="10M")
      */
     private $Image;
 

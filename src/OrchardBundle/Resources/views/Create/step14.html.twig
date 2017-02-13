@@ -17,7 +17,12 @@
         <label><h4>{{ 'orchard.step14.title'|trans }}</h4></label><br>
         <div class="cuadro-subidas" ondrop="drop(event)" ondragover="allowDrop(event)">
           <input hidden type="file" id="imageinput" multiple="multiple" accept="image/*" />
-          <div class="more" onclick="$('#imageinput').click();">
+          {% if orchard.images is defined and orchard.images|length > 9 %}
+            <div class="more" onclick="$('#imageinput').click();"  hidden="hidden">
+          {% else %}
+            <div class="more" onclick="$('#imageinput').click();">
+          {% endif %}
+
             <p>{{ 'orchard.step14.add'|trans }}</p>
           </div>
           <div id="gallery">
@@ -28,8 +33,8 @@
             <div class="upload">
           {% for img in orchard.images %}
             <div class="thumbnail">
-              <span class="fa fa-times-circle topRight deleteImage" id="{{img.id}}"></span>
-              <img  src="{{img.src}}" alt="{{img.description}}">
+              <span class="fa fa-times-circle topRight deleteImage" id="{{img.id}}" onclick="deleteUpload(this)"></span>
+              <img  src="/orchard/image/{{img.nameImage}}" alt="{{img.description}}">
 
               <span class="descripcion">{{img.description}}</span>
               <a class="editDes" onclick="mostrarEditor(this)">{{ 'orchard.step14.edit'|trans }}</a>
@@ -100,21 +105,23 @@ $('#btn-siguiente, #btn-save-exit').on('click', function() {
   $("#loading, #loading-text").fadeIn("slow");
   //send images
   var formImages = new FormData();
+  var desc = new Array();
     for (var i = 0; i < imagenes.length; i++) {
-      imagenes[i].des=$("span[id='"+imagenes[i].id+"']").parent().children().last().val();
+      desc[imagenes[i].id]=[i,$("span[id='"+imagenes[i].id+"']").parent().children().last().val()];
       formImages.append('image-'+i, imagenes[i]);
     }
-    console.log(formImages);
+    formImages.append("desc",desc);
+    console.log(desc);
     $.ajax({
       type: "POST",
       url:"/orchard/upload/images/upload/{{ orchard.id }}",
-      data: formImages,
+      data:formImages,
       cache: false,
       contentType: false,
       processData: false,
       success: function(step){
         console.log(step);
-        //window.location.href = '/orchard/create/step/' + step + '/{#{{ orchard.id }}#}';
+        window.location.href = '/orchard/create/step/' + step + '/{{ orchard.id }}';
       },
       error: function(jqXHR, exception) {
           $("#loading, #loading-text").fadeOut("slow", function() {
@@ -144,18 +151,20 @@ $('#btn-atras').on('click', function() {
   $("#loading, #loading-text").fadeIn("slow");
   //send images
   var formImages = new FormData();
+  var desc = new Array();
     for (var i = 0; i < imagenes.length; i++) {
-      imagenes[i].des=$("span[id='"+imagenes[i].id+"']").parent().children().last().val();
+      desc[imagenes[i].id]=[i,$("span[id='"+imagenes[i].id+"']").parent().children().last().val()];
       formImages.append('image-'+i, imagenes[i]);
     }
+    formImages.append("desc",desc);
+    console.log(desc);
     $.ajax({
       type: "POST",
       contentType: 'application/json',
       url:"/orchard/upload/images/upload/{{ orchard.id }}",
       data: formImages,
-      success: function(step){
-        console.log(step);
-        window.location.href = '/orchard/create/steps/{{ orchard.id }}';
+      success: function(){
+        window.location.href = '/orchard/create/step/13{{ orchard.id }}';
       },
       error: function(jqXHR, exception) {
           $("#loading, #loading-text").fadeOut("slow", function() {

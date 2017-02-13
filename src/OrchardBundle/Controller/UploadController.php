@@ -25,7 +25,6 @@ class UploadController extends Controller
         $date = new \DateTime('now');
         $date = $date->format('Y-m-d H:i:s');
         $imagen->setUpdateAt($date);
-        $imagen->setDescription($des[i]);
         $imagen->setOrchard($orchard);
 
         $em->persist($imagen);
