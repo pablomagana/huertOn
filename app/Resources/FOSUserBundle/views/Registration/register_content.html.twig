@@ -5,9 +5,9 @@
 <div class="col-md-2 col-lg-2"></div>
 
 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
-    <h4>Registrate para participar en un huerto urbano o inscribirte a una de sus actividades</h4>
+    <h4>{{ 'user.register.title'|trans }}</h4>
 
-    {% trans_default_domain 'FOSUserBundle' %}
+    {% trans_default_domain 'messages' %}
     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
 
     {{ form_widget(form) }}
@@ -16,17 +16,17 @@
       <label class="custom-control custom-checkbox">
         <input type="checkbox" class="custom-control-input">
         <span class="custom-control-indicator"></span>
-        <div class="custom-control-description legal-desktop">He leído y acepto las <a target="_blank" href="{{ asset('html/terms-conditions.html') }}">Condiciones de uso</a> y la <a target="_blank" href="{{ asset('html/privacy-policy.html') }}">Política de privacidad</a>.</div>
-        <div class="custom-control-description legal-mobile">He leído y acepto las <u data-toggle="modal" data-target="#modalCondicionesUso">Condiciones de uso</u> y la <u data-toggle="modal" data-target="#modalPrivacidad">Política de privacidad</u>.</div>
+        <div class="custom-control-description legal-desktop">  <a target="_blank" href="{{ asset('html/terms-conditions.html') }}">{{ 'user.register.conditions'|trans }}</a> y la <a target="_blank" href="{{ asset('html/privacy-policy.html') }}">{{ 'user.register.privacy'|trans }}</a>.</div>
+        <div class="custom-control-description legal-mobile">{{ 'user.register.read'|trans }} <u data-toggle="modal" data-target="#modalCondicionesUso">{{ 'user.register.conditions'|trans }}</u> y la <u data-toggle="modal" data-target="#modalPrivacidad">{{ 'user.register.privacy'|trans }}</u>.</div>
       </label>
 
       <div>
-        <button type="submit" class="btn btn-primary" name="button">{{ 'registration.submit'|trans }}</button>
+        <button type="submit" class="btn btn-primary" name="button">{{ 'user.register.submit'|trans }}</button>
       </div>
 
     {{ form_end(form) }}
 
-<a href="/login">¿Ya dispones de una cuenta?</a>
+<a href="/login">{{ 'user.register.acount'|trans }}</a>
 <script type="text/javascript">
     $('#fos_user_registration_form_plainPassword_first').hidePassword(true);
     $('#fos_user_registration_form_plainPassword_second').hidePassword(true);
@@ -43,12 +43,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Condiciones de uso</h4>
+        <h4 class="modal-title">{{ 'user.register.conditions'|trans }}</h4>
       </div>
       <div class="modal-body">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.</p>
-        <p>In et mi metus. Integer risus est, cursus id tellus et, cursus efficitur quam. Nunc sit amet dolor nibh. Maecenas viverra leo libero, nec lobortis lacus posuere sed. Phasellus mollis vitae odio quis mollis. Nullam tempor ante a augue vulputate iaculis. Phasellus imperdiet ut enim non placerat. Duis nec justo dignissim, posuere dui vitae, rhoncus massa. In in orci id tellus sagittis egestas. Mauris non feugiat mi, dictum malesuada risus.</p>
-        <p>Mauris id nunc id ligula convallis pellentesque eu ut dui. Morbi efficitur id tortor ut venenatis. Curabitur aliquam leo id commodo mollis. Morbi sed nisi consequat, faucibus felis at, condimentum massa. Sed eu nibh purus. Fusce pellentesque gravida facilisis. Pellentesque nec diam tempus, vulputate erat ac, faucibus lectus. Aenean eros lacus, dictum vel ultrices non, tincidunt a felis.</p>
+        <p>{{ 'user.register.privacyPolicy'|trans }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -64,15 +62,13 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">Política de privacidad</h4>
+        <h4 class="modal-title">{{ 'user.register.privacy'|trans }}</h4>
       </div>
       <div class="modal-body">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.</p>
-        <p>In et mi metus. Integer risus est, cursus id tellus et, cursus efficitur quam. Nunc sit amet dolor nibh. Maecenas viverra leo libero, nec lobortis lacus posuere sed. Phasellus mollis vitae odio quis mollis. Nullam tempor ante a augue vulputate iaculis. Phasellus imperdiet ut enim non placerat. Duis nec justo dignissim, posuere dui vitae, rhoncus massa. In in orci id tellus sagittis egestas. Mauris non feugiat mi, dictum malesuada risus.</p>
-        <p>Mauris id nunc id ligula convallis pellentesque eu ut dui. Morbi efficitur id tortor ut venenatis. Curabitur aliquam leo id commodo mollis. Morbi sed nisi consequat, faucibus felis at, condimentum massa. Sed eu nibh purus. Fusce pellentesque gravida facilisis. Pellentesque nec diam tempus, vulputate erat ac, faucibus lectus. Aenean eros lacus, dictum vel ultrices non, tincidunt a felis.</p>
+        <p>{{ 'user.register.privacyPolicy-2'|trans }}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'stepBase.close'|trans }}</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

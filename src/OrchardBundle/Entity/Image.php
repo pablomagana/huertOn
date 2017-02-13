@@ -65,6 +65,13 @@ class Image
     private $orchard;
 
     /**
+     * Many Images have One Event.
+     * @ORM\ManyToOne(targetEntity="EventBundle\Entity\Event", inversedBy="images")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     */
+    private $event;
+
+    /**
      * Get id
      *
      * @return int
@@ -191,5 +198,29 @@ class Image
     public function getOrchard()
     {
         return $this->orchard;
+    }
+
+    /**
+     * Set event
+     *
+     * @param \EventBundle\Entity\Event $event
+     *
+     * @return Image
+     */
+    public function setEvent(\EventBundle\Entity\Event $event = null)
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get event
+     *
+     * @return \EventBundle\Entity\Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
     }
 }

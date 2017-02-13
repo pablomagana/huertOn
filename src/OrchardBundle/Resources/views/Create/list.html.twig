@@ -49,7 +49,7 @@
       {% if orchard.step > 33 %}
         <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-secondary " data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">{{ 'orchard.list.modify'|trans }}</button></a>
       {% endif %}
-        <button type="button" class="btn btn-secondary show-modal{{ orchard.id }}">{{ 'orchard.list.delete'|trans }}</button>
+        <button type="button" class="btn btn-danger show-modal{{ orchard.id }}">{{ 'orchard.list.delete'|trans }}</button>
       </div>
     </div>
   </div>
@@ -86,7 +86,7 @@
         <p>{{ 'orchard.list.sure-2'|trans }}<p></p>
       </div>
       <div class="modal-footer">
-        <a id="btn-delete-modal" href=""><button type="button" class="btn btn-secondary ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
+        <a id="btn-delete-modal" href=""><button type="button" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
         <a id="btn-unpublish-modal" href=""><button id="btn-unpublish" type="button" class="btn btn-secondary ">{{ 'orchard.list.yesUnpublish'|trans }}</button></a>
       </div>
     </div><!-- /.modal-content -->

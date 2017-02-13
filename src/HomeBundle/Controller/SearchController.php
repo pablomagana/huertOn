@@ -7,13 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use OrchardBundle\Entity\Orchard;
 use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+class SearchController extends Controller
 {
-
-  public function indexAction(Request $request)
-  {
-    return $this->render('HomeBundle:Default:index.html.twig');
-  }
 
   public function findAction(Request $request)
   {
@@ -56,15 +51,4 @@ class DefaultController extends Controller
     return $this->render('HomeBundle:Default:find.html.twig', array('orchards' => $orchards, 'type' => $type));
   }
 
-  public function showAction($id_orchard)
-  {
-
-    $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
-
-    return $this->render('HomeBundle:Default:orchard_profile.html.twig', array('orchard' => $orchard));
-  }
-  public function searchAction()
-  {
-    return $this->render('HomeBundle:Default:search.html.twig');
-  }
 }

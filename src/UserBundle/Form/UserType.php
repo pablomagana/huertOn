@@ -21,14 +21,14 @@ class UserType extends BaseRegistrationFormType {
 
   public function buildForm(FormBuilderInterface $builder, array $options) {
     $builder
-        ->add('email', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\EmailType'), array('label' => false, 'translation_domain' => 'FOSUserBundle', 'attr' => array('placeholder' => 'Dirección de correo electrónico')))
-        ->add('username', null, array('label' => false, 'translation_domain' => 'FOSUserBundle', 'attr' => array('placeholder' => 'Nombre')))
-        ->add('apellidos', null, array('label' => false, 'attr' => array('placeholder' => 'Apellidos')))
+        ->add('email', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\EmailType'), array('label' => false, 'attr' => array('placeholder' => 'user.register.type.email')))
+        ->add('username', null, array('label' => false, 'attr' => array('placeholder' => 'user.register.type.name')))
+        ->add('apellidos', null, array('label' => false, 'attr' => array('placeholder' => 'user.register.type.surnames')))
         ->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(
             'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
-            'options' => array('translation_domain' => 'FOSUserBundle'),
-            'first_options' => array('label' => false, 'attr' => array('placeholder' => 'Contraseña')),
-            'second_options' => array('label' => false, 'attr' => array('placeholder' => 'Vuelve a escribir tu contraseña')),
+            'options' => array('translation_domain' => 'messages'),
+            'first_options' => array('label' => false, 'attr' => array('placeholder' => 'user.register.type.passwd')),
+            'second_options' => array('label' => false, 'attr' => array('placeholder' => 'user.register.type.passws-2')),
             'invalid_message' => 'fos_user.password.mismatch',
         ))
     ;
@@ -42,7 +42,8 @@ class UserType extends BaseRegistrationFormType {
     {
         $resolver->setDefaults(array(
             'data_class' => 'UserBundle\Entity\User',
-            'csrf_protection' => false
+            'csrf_protection' => false,
+            'translation_domain' => 'messages'
         ));
     }
 }

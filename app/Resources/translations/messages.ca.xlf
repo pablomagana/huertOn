@@ -6,62 +6,62 @@
             <!-- base.html -->
               <trans-unit id="1">
                   <source>base.li-1</source>
-                  <target>Publish your orchard</target>
+                  <target>Publica tu huerto</target>
               </trans-unit>
               <trans-unit id="2">
                   <source>base.li-2</source>
-                  <target>Search for activites</target>
+                  <target>Busca actividades</target>
               </trans-unit>
               <trans-unit id="3">
                   <source>base.li-3</source>
-                  <target>Identified as</target>
+                  <target>Identificado como</target>
               </trans-unit>
               <trans-unit id="4">
                   <source>base.li-4</source>
-                  <target>Profile</target>
+                  <target>Mi perfil</target>
               </trans-unit>
               <trans-unit id="5">
                   <source>base.li-5</source>
-                  <target>Available orchards</target>
+                  <target>Lista de huertos</target>
               </trans-unit>
               <trans-unit id="6">
                   <source>base.li-6</source>
-                  <target>Log out</target>
+                  <target>Cerrar sesión</target>
               </trans-unit>
               <trans-unit id="7">
                   <source>base.li-7</source>
-                  <target>Sign up</target>
+                  <target>Regístrate</target>
               </trans-unit>
               <trans-unit id="8">
                   <source>base.li-8</source>
-                  <target>Log in</target>
+                  <target>Iniciar sesión</target>
               </trans-unit>
               <trans-unit id="9">
                   <source>base.li-9</source>
-                  <target>Home</target>
+                  <target>Inicio</target>
               </trans-unit>
             <!-- End base.html -->
 
             <!-- step_base.html -->
               <trans-unit id="10">
                   <source>stepBase.loading</source>
-                  <target>Saving...</target>
+                  <target>Guardando...</target>
               </trans-unit>
               <trans-unit id="11">
                   <source>stepBase.saveExit</source>
-                  <target>Save and log out </target>
+                  <target>Guardar y salir </target>
               </trans-unit>
               <trans-unit id="12">
                   <source>stepBase.email-1</source>
-                  <target>Thank you!</target>
+                  <target>Muchas gracias!</target>
               </trans-unit>
               <trans-unit id="13">
                   <source>stepBase.email-2</source>
-                  <target>Your request has to be evaluated, we will email you with our feedback.</target>
+                  <target>Cuando estudiemos tu sugerencia te enviaremos un email con el resultado.</target>
               </trans-unit>
               <trans-unit id="14">
                   <source>stepBase.close</source>
-                  <target>Close</target>
+                  <target>Cerrar</target>
               </trans-unit>
             <!-- End step_base.html -->
           <!-- End Base -->
@@ -71,38 +71,38 @@
             <!-- index.html -->
               <trans-unit id="15">
                   <source>home.title</source>
-                  <target>Search the best orchard</target>
+                  <target>Busca un hort per a tu</target>
               </trans-unit>
               <trans-unit id="16">
                   <source>home.find.placeholder</source>
-                  <target>Search by city, postal code or orchard name</target>
+                  <target>Pon tu ciudad, CP o nombre del huerto</target>
               </trans-unit>
               <trans-unit id="17">
                   <source>home.btn.search</source>
-                  <target>Search</target>
+                  <target>Buscar</target>
               </trans-unit>
               <trans-unit id="18">
                   <source>home.activities</source>
-                  <target>Activities</target>
+                  <target>Actividades</target>
               </trans-unit>
             <!-- End index.html -->
 
             <!-- find.html -->
               <trans-unit id="19">
                   <source>find.orchard</source>
-                  <target>ORCHARDS</target>
+                  <target>HUERTOS</target>
               </trans-unit>
               <trans-unit id="20">
                   <source>find.events</source>
-                  <target>EVENTS</target>
+                  <target>EVENTOS</target>
               </trans-unit>
               <trans-unit id="21">
                   <source>find.results-1</source>
-                  <target>Have found</target>
+                  <target>Se han encontrado</target>
               </trans-unit>
               <trans-unit id="22">
                   <source>find.results-2</source>
-                  <target>results</target>
+                  <target>resultados</target>
               </trans-unit>
             <!-- End find.html -->
           <!-- End HomeBundle -->
@@ -113,105 +113,105 @@
               <!-- list.html.twig -->
                 <trans-unit id="23">
                     <source>orchard.list.title</source>
-                    <target>Orchards you have created</target>
+                    <target>Huertos que has creado</target>
                 </trans-unit>
                 <trans-unit id="24">
                     <source>orchard.list.add-btn</source>
-                    <target>Add a new orchard</target>
+                    <target>Añade un nuevo huerto</target>
                 </trans-unit>
                 <trans-unit id="25">
                     <source>orchard.list.published</source>
-                    <target>Published</target>
+                    <target>Publicado</target>
                 </trans-unit>
                 <trans-unit id="26">
                     <source>orchard.list.draft</source>
-                    <target>Draft</target>
+                    <target>Borrador</target>
                 </trans-unit>
                 <trans-unit id="27">
                     <source>orchard.list.date</source>
-                    <target>Date of creation: </target>
+                    <target>Fecha de creación: </target>
                 </trans-unit>
                 <trans-unit id="28">
                     <source>orchard.list.lastDate</source>
-                    <target>Modification date: </target>
+                    <target>Última fecha de modificación: </target>
                 </trans-unit>
                 <trans-unit id="29">
                     <source>orchard.list.publish</source>
-                    <target>Publish</target>
+                    <target>Publica</target>
                 </trans-unit>
                 <trans-unit id="30">
                     <source>orchard.list.unPublish</source>
-                    <target>Undo</target>
+                    <target>Despublica</target>
                 </trans-unit>
                 <trans-unit id="31">
                     <source>orchard.list.complete</source>
-                    <target>Complete</target>
+                    <target>Completa</target>
                 </trans-unit>
                 <trans-unit id="32">
                     <source>orchard.list.modify</source>
-                    <target>Modify</target>
+                    <target>Modifica</target>
                 </trans-unit>
                 <trans-unit id="33">
                     <source>orchard.list.delete</source>
-                    <target>Delete</target>
+                    <target>Elimina</target>
                 </trans-unit>
                 <trans-unit id="34">
                     <source>orchard.list.sure</source>
-                    <target>¿Are you sure you want to delete it?</target>
+                    <target>¿Estás seguro que quieres eliminar?</target>
                 </trans-unit>
                 <trans-unit id="35">
                     <source>orchard.list.sure-2</source>
-                    <target>You will not be able to recover your data.</target>
+                    <target>No podrás recuperar estos datos.</target>
                 </trans-unit>
                 <trans-unit id="36">
                     <source>orchard.list.yesDelete</source>
-                    <target>Yes, delete</target>
+                    <target>Si, elimina</target>
                 </trans-unit>
                 <trans-unit id="37">
                     <source>orchard.list.yesUnpublish</source>
-                    <target>Publish</target>
+                    <target>Mejor despublicar</target>
                 </trans-unit>
               <!-- End list.html.twig -->
 
               <!--  step11.html.twig -->
                 <trans-unit id="38">
                     <source>orchard.step11.title</source>
-                    <target>¿How is your orchard called?</target>
+                    <target>¿Cómo se llama tu huerto?</target>
                 </trans-unit>
                 <trans-unit id="38-2">
                     <source>orchard.step11.title-2</source>
-                    <target>¿How is your orchard called?</target>
+                    <target>¿Cómo se llama tu huerto?</target>
                 </trans-unit>
                 <trans-unit id="39">
                     <source>orchard.step11.required</source>
-                    <target>Required information</target>
+                    <target>Campo requerido</target>
                 </trans-unit>
                 <trans-unit id="40">
                     <source>orchard.step11.where</source>
-                    <target>¿Where is your orchard?</target>
+                    <target>¿Dónde está tu huerto?</target>
                 </trans-unit>
                 <trans-unit id="40-2">
                     <source>orchard.step11.where-2</source>
-                    <target>Orchard's address</target>
+                    <target>Dirección de tu huerto</target>
                 </trans-unit>
                 <trans-unit id="41">
                     <source>orchard.step11.marker</source>
-                    <target> Use the pointer to select the entry to your orchard.</target>
+                    <target>Mueve el marcador para seleccionar la entrada a tu huerto.</target>
                 </trans-unit>
                 <trans-unit id="42">
                     <source>orchard.step11.back</source>
-                    <target>Back</target>
+                    <target>Atrás</target>
                 </trans-unit>
                 <trans-unit id="43">
                     <source>orchard.step11.next</source>
-                    <target>Next</target>
+                    <target>Siguiente</target>
                 </trans-unit>
               <!-- End step11.html.twig -->
 
               <!--  step12.html.twig -->
                 <trans-unit id="44">
                     <source>orchard.step12.title</source>
-                    <target>¿How can I be contacted?</target>
+                    <target>¿Cómo pueden contactar conmigo?</target>
                 </trans-unit>
                 <trans-unit id="45">
                     <source>orchard.step12.mail</source>
@@ -219,7 +219,7 @@
                 </trans-unit>
                 <trans-unit id="46">
                     <source>orchard.step12.tlf</source>
-                    <target>Phone</target>
+                    <target>Teléfono</target>
                 </trans-unit>
                 <trans-unit id="47">
                     <source>orchard.step12.web</source>
@@ -227,81 +227,81 @@
                 </trans-unit>
                 <trans-unit id="48">
                     <source>orchard.step12.web-2</source>
-                    <target>Write here your Web / Blog</target>
+                    <target>Escribe aquí tu Web / Blog</target>
                 </trans-unit>
                 <trans-unit id="49">
                     <source>orchard.step12.social</source>
-                    <target>Social media</target>
+                    <target>Redes Sociales</target>
                 </trans-unit>
               <!-- End step12.html.twig -->
 
               <!--  step13.html.twig -->
               <trans-unit id="50">
                   <source>orchard.step13.title</source>
-                  <target>¿Which kind of orchard is it?</target>
+                  <target>¿Qué tipo de huerto es?</target>
               </trans-unit>
               <trans-unit id="51">
                   <source>orchard.step13.typeOrchard</source>
-                  <target>Suggest us a type of orchard</target>
+                  <target>Sugierenos un tipo de huerto</target>
               </trans-unit>
               <trans-unit id="52">
                   <source>orchard.step13.typeOrchard-2</source>
-                  <target>¿What type of orchard is it?</target>
+                  <target>¿Qué tipo de huerto es?</target>
               </trans-unit>
               <trans-unit id="53">
                   <source>orchard.step13.send</source>
-                  <target>Send</target>
+                  <target>Enviar</target>
               </trans-unit>
               <trans-unit id="54">
                   <source>orchard.step13.title-right</source>
-                  <target>Type of orchard</target>
+                  <target>Tipo de huerto</target>
               </trans-unit>
               <trans-unit id="55">
                   <source>orchard.step13.title-right-2</source>
-                  <target>Point the pointer on the type of orchard to show more information about it.</target>
+                  <target>Situa el puntero sobre cualquier tipo de huerto para mostrar más información de cada uno.</target>
               </trans-unit>
               <trans-unit id="56">
                   <source>orchard.step13.required</source>
-                  <target>Required step</target>
+                  <target>Paso obligatorio</target>
               </trans-unit>
               <trans-unit id="57">
                   <source>orchard.step13.required-2</source>
-                  <target>Please, select a type of orchard.</target>
+                  <target>Por favor, selecciona un tipo de huerto</target>
               </trans-unit>
               <trans-unit id="58">
                   <source>orchard.step13.save</source>
-                  <target>Saved</target>
+                  <target>Guardado</target>
               </trans-unit>
               <!-- End step13.html.twig -->
 
               <!--  step14.html.twig -->
                 <trans-unit id="59">
                     <source>orchard.step14.loading</source>
-                    <target>Loading...</target>
+                    <target>Cargando...</target>
                 </trans-unit>
                 <trans-unit id="60">
                     <source>orchard.step14.title</source>
-                    <target> Upload an image in order to let them know your orchard</target>
+                    <target>Sube alguna imagen para que conozcan un poco tu huerto</target>
                 </trans-unit>
                 <trans-unit id="61">
                     <source>orchard.step14.add</source>
-                    <target>Add image here</target>
+                    <target>Añade o arrastra imagenes aqui</target>
                 </trans-unit>
                 <trans-unit id="62">
                     <source>orchard.step14.uploaded</source>
-                    <target>Uploaded images</target>
+                    <target>Imágenes subidas</target>
                 </trans-unit>
                 <trans-unit id="63">
                     <source>orchard.step14.description</source>
-                    <target>Describe the image</target>
+                    <target>Describe la imagen</target>
                 </trans-unit>
                 <trans-unit id="64">
                     <source>orchard.step14.edit</source>
-                    <target>Edit description</target>
+                    <target>Editar descripción</target>
                 </trans-unit>
                 <trans-unit id="65">
                     <source>orchard.step14.max</source>
-                    <target>Only allowed a maxium of </target>
+                    <target>Sólo ser permite un máximo de </target>
                 </trans-unit>
                 <trans-unit id="66">
                     <source>orchard.step14.max-2</source>
@@ -312,38 +312,38 @@
               <!--  step21.html.twig -->
                 <trans-unit id="67">
                     <source>orchard.step21.title</source>
-                    <target>¿Which kind of participation do you offer?</target>
+                    <target>¿Qué formas de participar ofreces?</target>
                 </trans-unit>
                 <trans-unit id="68">
                     <source>orchard.step21.participate</source>
-                    <target>Suggest a way to join us</target>
+                    <target>Sugiérenos una manera de participar</target>
                 </trans-unit>
                 <trans-unit id="69">
                     <source>orchard.step21.participate-2</source>
-                    <target>¿Which kind of participation do you offer?</target>
+                    <target>¿Qué formas de participar ofreces?</target>
                 </trans-unit>
                 <trans-unit id="70">
                     <source>orchard.step21.nowNo</source>
-                    <target>Not now</target>
+                    <target>Ahora no</target>
                 </trans-unit>
               <!-- End step21.html.twig -->
 
               <!--  step22.html.twig -->
                 <trans-unit id="71">
                     <source>orchard.step22.title</source>
-                    <target>Orchard rules</target>
+                    <target>Normas del huerto</target>
                 </trans-unit>
                 <trans-unit id="72">
                     <source>orchard.step22.add</source>
-                    <target>Add documents here</target>
+                    <target>Añade o arrastra archivos aquí</target>
                 </trans-unit>
                 <trans-unit id="73">
                     <source>orchard.step22.title-right</source>
-                    <target>Upload PDF with your orchard rules</target>
+                    <target>Sube un PDF con las normas de tu huerto</target>
                 </trans-unit>
                 <trans-unit id="74">
                     <source>orchard.step22.title-right-2</source>
-                    <target>Some interesting links with orchard rules:</target>
+                    <target>Algunos links interesantes sobre normas de huertos:</target>
                 </trans-unit>
                 <trans-unit id="75">
                     <source>orchard.step22.title-right-3</source>
@@ -354,147 +354,147 @@
               <!--  step23.html.twig -->
                 <trans-unit id="76">
                     <source>orchard.step23.title</source>
-                    <target>How to sign up in your orchard</target>
+                    <target>Como inscribirse en tu huerto</target>
                 </trans-unit>
                 <trans-unit id="77">
                     <source>orchard.step23.title-2</source>
-                    <target> Describe step by step the process to be followed in order to sign up to your orchard.</target>
+                    <target>Indique paso a paso el proceso que deberá realizar un urbanita para inscribirse en su huerto.</target>
                 </trans-unit>
                 <trans-unit id="78">
                     <source>orchard.step23.delete</source>
-                    <target>Delete this step</target>
+                    <target>Eliminar este paso</target>
                 </trans-unit>
                 <trans-unit id="79">
                     <source>orchard.step23.add</source>
-                    <target>Add a new step</target>
+                    <target>Añadir un nuevo paso</target>
                 </trans-unit>
                 <trans-unit id="80">
                     <source>orchard.step23.title-right</source>
-                    <target>Explain it step by step and with enough information to be done as easy as possible</target>
+                    <target>Explicaselo por pasos y con la info necesaria para que lo haga lo más ágil posible</target>
                 </trans-unit>
                 <trans-unit id="81">
                     <source>orchard.step23.title-right-2</source>
-                    <target>Step 1: Become member of AAVV of Patraix in www.asociacionvecinospatraix.es</target>
+                    <target>Paso 1: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</target>
                 </trans-unit>
               <!-- End step23.html.twig -->
 
               <!--  step31.html.twig -->
                 <trans-unit id="82">
                     <source>orchard.step31.title</source>
-                    <target> Explain your orchard philosophy</target>
+                    <target>Cuenta la filosofía de tu huerto</target>
                 </trans-unit>
                 <trans-unit id="83">
                     <source>orchard.step31.title-2</source>
-                    <target>¿How did the project start?</target>
+                    <target>¿Cómo se inició el proyecto?</target>
                 </trans-unit>
                 <trans-unit id="84">
                     <source>orchard.step31.title-3</source>
-                    <target>Governance Model</target>
+                    <target>Modelo de Gobernanza</target>
                 </trans-unit>
                 <trans-unit id="85">
                     <source>orchard.step31.title-2-1</source>
-                    <target>Type here how did the project start</target>
+                    <target>Escribe aquí cómo se inició el proyecto</target>
                 </trans-unit>
                 <trans-unit id="86">
                     <source>orchard.step31.title-3-1</source>
-                    <target>Type here your governace model</target>
+                    <target>Aquí puedes contar tu modelo de Gobernanza</target>
                 </trans-unit>
               <!-- End step31.html.twig -->
 
               <!--  step32.html.twig -->
                 <trans-unit id="87">
                     <source>orchard.step32.title</source>
-                    <target>¿Which kind of services do you offer?</target>
+                    <target>¿Qué servicios ofreces?</target>
                 </trans-unit>
                 <trans-unit id="88">
                     <source>orchard.step32.title-2</source>
-                    <target>Suggest a service</target>
+                    <target>Sugiérenos un servicio</target>
                 </trans-unit>
                 <trans-unit id="89">
                     <source>orchard.step32.title-3</source>
-                    <target>Type here a service</target>
+                    <target>Escribe aquí el servicio</target>
                 </trans-unit>
               <!-- End step32.html.twig -->
 
               <!--  step33.html.twig -->
                 <trans-unit id="90">
                     <source>orchard.step33.title</source>
-                    <target>¿Which kind of activities do you use to do in the orchard?</target>
+                    <target>¿Qué actividades soleis hacer en el huerto?</target>
                 </trans-unit>
                 <trans-unit id="91">
                     <source>orchard.step33.title-2</source>
-                    <target>Suggest an activity</target>
+                    <target>Sugiérenos una actividad</target>
                 </trans-unit>
                 <trans-unit id="92">
                     <source>orchard.step33.title-3</source>
-                    <target>Write here the activity</target>
+                    <target>Escribe aquí la actividad</target>
                 </trans-unit>
               <!-- End step33.html.twig -->
 
               <!--  steps.html.twig -->
               <trans-unit id="93">
                   <source>orchard.steps.title</source>
-                  <target>Hello</target>
+                  <target>Hola</target>
               </trans-unit>
               <trans-unit id="94">
                   <source>orchard.steps.title-2</source>
-                  <target>Make awareness of your orchard</target>
+                  <target>Haz que más personas conozcan tu huerto</target>
               </trans-unit>
               <trans-unit id="95">
                   <source>orchard.steps.step</source>
-                  <target>step</target>
+                  <target>paso</target>
               </trans-unit>
               <trans-unit id="96">
                   <source>orchard.steps.sub-1</source>
-                  <target>Tell them the essentials (where is it...)</target>
+                  <target>Diles lo esencial (dónde está...)</target>
               </trans-unit>
               <trans-unit id="97">
                   <source>orchard.steps.sub-2</source>
-                  <target>¿What can they find there? (photos, services...)</target>
+                  <target>¿Qué pueden encontrar allí? (fotos, servicios...)</target>
               </trans-unit>
               <trans-unit id="98">
                   <source>orchard.steps.sub-3</source>
-                  <target>Tell us more about your orchard (something special)</target>
+                  <target>Cuéntanos algo más especial de tu huerto</target>
               </trans-unit>
               <trans-unit id="99">
                   <source>orchard.steps.btn-change</source>
-                  <target>Change</target>
+                  <target>Cambiar</target>
               </trans-unit>
               <trans-unit id="100">
                   <source>orchard.steps.btn-start</source>
-                  <target>Start</target>
+                  <target>Empezar</target>
               </trans-unit>
               <trans-unit id="101">
                   <source>orchard.steps.btn-continue</source>
-                  <target>Continue</target>
+                  <target>Seguir</target>
               </trans-unit>
               <trans-unit id="102">
                   <source>orchard.steps.btn-preview</source>
-                  <target>Take a look</target>
+                  <target>Mira cómo ha quedado</target>
               </trans-unit>
               <trans-unit id="103">
                   <source>orchard.steps.title-right</source>
-                  <target>Lots of people just know 1 or 2 orchards in your city</target>
+                  <target>Muchos urbanitas sólo conocen 1 o 2 huertos en tu ciudad y alrededores</target>
               </trans-unit>
               <trans-unit id="104">
                   <source>orchard.steps.title-right-2</source>
-                  <target>¡Show them yours!</target>
+                  <target>¡Descúbreles el tuyo!</target>
               </trans-unit>
               <trans-unit id="105">
                   <source>orchard.steps.title-preview</source>
-                  <target>Orchard of </target>
+                  <target>Huerto de </target>
               </trans-unit>
               <trans-unit id="106">
                   <source>orchard.steps.preview-2</source>
-                  <target>This orchard is: </target>
+                  <target>Este huerto es: </target>
               </trans-unit>
               <trans-unit id="107">
                   <source>orchard.steps.preview-btn</source>
-                  <target>Keep going</target>
+                  <target>Seguir completando</target>
               </trans-unit>
               <trans-unit id="108">
                   <source>orchard.steps.preview-btn-1</source>
-                  <target>Publish</target>
+                  <target>Publicar</target>
               </trans-unit>
               <!-- End steps.html.twig -->
             <!-- End Create -->
@@ -504,146 +504,146 @@
               <!-- description.html.twig -->
                 <trans-unit id="800">
                     <source>orchard.suggest.description.title</source>
-                    <target>Add the description for</target>
+                    <target>Introduce la descripción para%</target>
                 </trans-unit>
               <!-- End description.html.twig -->
               <!-- orchard_activity_email.html.twig -->
                 <trans-unit id="801">
                     <source>orchard.suggest.activity_email.hello</source>
-                    <target>Hello</target>
+                    <target>Hola%</target>
                 </trans-unit>
                 <trans-unit id="802">
                     <source>orchard.suggest.activity_email.title</source>
-                    <target>Congratulations! :) Your  activity suggestion has been accepted:</target>
+                    <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir una nueva actividad:%</target>
                 </trans-unit>
                 <trans-unit id="803">
                     <source>orchard.suggest.activity_email.title-2</source>
-                    <target> You can add it now to your orchard! Thank you!</target>
+                    <target>Ya puedes añadirla a tu huerto. Muchas gracias!</target>
                 </trans-unit>
                 <trans-unit id="804">
                     <source>orchard.suggest.activity_email.title-3</source>
-                    <target>Sorry! :( Your activity suggestion has been rejected:</target>
+                    <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir una nueva actividad:</target>
                 </trans-unit>
                 <trans-unit id="805">
                     <source>orchard.suggest.activity_email.title-4</source>
-                    <target>Try to add another one. Thank you!</target>
+                    <target>Prueba a añadir otra. Muchas gracias!</target>
                 </trans-unit>
               <!-- End orchard_activity_email.html.twig -->
               <!-- orchard_participate_email.html.twig -->
                 <trans-unit id="806">
                     <source>orchard.suggest.participate_email.title</source>
-                    <target>Congratulations! :) Your suggestion about a new way to join has been accepted:</target>
+                    <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir una nueva manera de participar:</target>
                 </trans-unit>
                 <trans-unit id="807">
                     <source>orchard.suggest.participate_email.title-2</source>
-                    <target>You can add it now to your orchard! Thank you!</target>
+                    <target>Ya puedes añadirla a tu huerto. Muchas gracias!</target>
                 </trans-unit>
                 <trans-unit id="808">
                     <source>orchard.suggest.participate_email.title-3</source>
-                    <target>Sorry! :( Your suggestion about a new way to join has been rejected:</target>
+                    <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir una nueva manera de participar:</target>
                 </trans-unit>
                 <trans-unit id="809">
                     <source>orchard.suggest.participate_email.title-4</source>
-                    <target>Try to add another one. Thank you!</target>
+                    <target>Prueba a añadir otra. Muchas gracias!</target>
                 </trans-unit>
               <!-- End orchard_activity_email.html.twig -->
               <!-- orchard_service_email.html.twig -->
                 <trans-unit id="810">
                     <source>orchard.suggest.service_email.title</source>
-                    <target>Congratulations! :) Your service suggestion has been accepted:</target>
+                    <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir un nuevo servicio:</target>
                 </trans-unit>
                 <trans-unit id="811">
                     <source>orchard.suggest.service_email.title-2</source>
-                    <target>You can add it now to your orchard! Thank you!</target>
+                    <target>Ya puedes añadirlo a tu huerto. Muchas gracias!</target>
                 </trans-unit>
                 <trans-unit id="812">
                     <source>orchard.suggest.service_email.title-3</source>
-                    <target>Sorry! :( Your service suggestion has been rejected:</target>
+                    <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir un nuevo servicio:</target>
                 </trans-unit>
                 <trans-unit id="813">
                     <source>orchard.suggest.service_email.title-4</source>
-                    <target>Try to add another one. Thank you!</target>
+                    <target>Prueba a añadir otra. Muchas gracias!</target>
                 </trans-unit>
               <!-- End orchard_service_email.html.twig -->
               <!-- orchard_type_email.html.twig -->
               <trans-unit id="814">
                   <source>orchard.suggest.type_email.title</source>
-                  <target>Congratulations! :) Your new type of orchard suggestion has been accepted:</target>
+                  <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir un nuevo tipo de huerto:</target>
               </trans-unit>
               <trans-unit id="815">
                   <source>orchard.suggest.type_email.title-1</source>
-                  <target>You can add it now to your orchard! Thank you!</target>
+                  <target>Ya puedes añadirlo a tu huerto. Muchas gracias!</target>
               </trans-unit>
               <trans-unit id="816">
                   <source>orchard.suggest.type_email.title-2</source>
-                  <target>Sorry! :( Your new type of orchard suggestion has been rejected:</target>
+                  <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir un nuevo tipo de huerto:</target>
               </trans-unit>
               <trans-unit id="817">
                   <source>orchard.suggest.type_email.title-3</source>
-                  <target>Try to add another one. Thank you!</target>
+                  <target>Prueba a añadir otro. Muchas gracias!</target>
               </trans-unit>
               <!-- End orchard_type_email.html.twig -->
             <!-- End Suggest -->
               <!-- orchard_profile.html -->
                 <trans-unit id="900">
                     <source>orchard.profile.contact</source>
-                    <target>CONTACT</target>
+                    <target>CONTACTA</target>
                 </trans-unit>
                 <trans-unit id="901">
                     <source>orchard.profile.activities</source>
-                    <target>NEXT ACTIVITIES</target>
+                    <target>PRÓXIMAS ACTIVIDADES</target>
                 </trans-unit>
                 <trans-unit id="902">
                     <source>orchard.profile.noActivities</source>
-                    <target>This orchard does not have activities</target>
+                    <target>Este huerto no tiene actividades</target>
                 </trans-unit>
                 <trans-unit id="903">
                     <source>orchard.profile.howIsIt</source>
-                    <target>HOW IS IT</target>
+                    <target>CÓMO ES</target>
                 </trans-unit>
                 <trans-unit id="904">
                     <source>orchard.profile.type</source>
-                    <target>Type of orchard </target>
+                    <target>Tipo de huerto </target>
                 </trans-unit>
                 <trans-unit id="905">
                     <source>orchard.profile.equipment</source>
-                    <target>Equipment</target>
+                    <target>Equipamiento</target>
                 </trans-unit>
                 <trans-unit id="906">
                     <source>orchard.profile.join</source>
-                    <target>HOW YOU CAN JOIN</target>
+                    <target>CÓMO UNIRTE</target>
                 </trans-unit>
                 <trans-unit id="907">
                     <source>orchard.profile.modal</source>
-                    <target>Fields</target>
+                    <target>Modalidades</target>
                 </trans-unit>
                 <trans-unit id="908">
                     <source>orchard.profile.important</source>
-                    <target>It is important you know</target>
+                    <target>Antes es importante que sepas</target>
                 </trans-unit>
                 <trans-unit id="909">
                     <source>orchard.profile.rules-1</source>
-                    <target>Look</target>
+                    <target>Mira</target>
                 </trans-unit>
                 <trans-unit id="910">
                     <source>orchard.profile.rules-2</source>
-                    <target>HERE</target>
+                    <target>AQUÍ</target>
                 </trans-unit>
                 <trans-unit id="911">
                     <source>orchard.profile.rules-3</source>
-                    <target>the rules of the orchard.</target>
+                    <target>las normas del huerto.</target>
                 </trans-unit>
                 <trans-unit id="912">
                     <source>orchard.profile.inscribe</source>
-                    <target>¿What do you need to subscribe?</target>
+                    <target>¿Qué necesitas para inscribirte?</target>
                 </trans-unit>
                 <trans-unit id="913">
                     <source>orchard.profile.where</source>
-                    <target>WHERE DO YOU FIND IT</target>
+                    <target>DÓNDE SE ENCUENTRA</target>
                 </trans-unit>
                 <trans-unit id="914">
                     <source>orchard.profile.question</source>
-                    <target>¿Do you have any questions?</target>
+                    <target>¿Tienes alguna pregunta?</target>
                 </trans-unit>
               <!-- End orchard_profile.html -->
           <!-- End OrchardBundle -->
@@ -653,23 +653,23 @@
             <!-- register_content.html -->
               <trans-unit id="200">
                   <source>user.register.title</source>
-                  <target>Sign up to participate in an orchard or join one of its activities</target>
+                  <target>Registrate para participar en un huerto urbano o inscribirte a una de sus actividades</target>
               </trans-unit>
               <trans-unit id="201">
                   <source>user.register.read</source>
-                  <target>I have read and accepted the</target>
+                  <target>He leído y acepto las</target>
               </trans-unit>
               <trans-unit id="202">
                   <source>user.register.conditions</source>
-                  <target>Conditions of use</target>
+                  <target>Condiciones de uso</target>
               </trans-unit>
               <trans-unit id="203">
                   <source>user.register.privacy</source>
-                  <target>Privacy policy</target>
+                  <target>Política de privacidad</target>
               </trans-unit>
               <trans-unit id="204">
                   <source>user.register.acount</source>
-                  <target>¿Do you already have an account?</target>
+                  <target>¿Ya dispones de una cuenta?</target>
               </trans-unit>
               <trans-unit id="205">
                   <source>user.register.privacyPolicy</source>
@@ -689,55 +689,55 @@
               </trans-unit>
               <trans-unit id="207">
                   <source>user.register.submit</source>
-                  <target>Register</target>
+                  <target>Regístrate</target>
               </trans-unit>
               <!-- UserType.php -->
                 <trans-unit id="208">
                     <source>user.register.type.email</source>
-                    <target>Email address</target>
+                    <target>Dirección de correo electrónico</target>
                 </trans-unit>
                 <trans-unit id="209">
                     <source>user.register.type.name</source>
-                    <target>Name</target>
+                    <target>Nombre</target>
                 </trans-unit>
                 <trans-unit id="210">
                     <source>user.register.type.surnames</source>
-                    <target>Surnames</target>
+                    <target>Apellidos</target>
                 </trans-unit>
                 <trans-unit id="211">
                     <source>user.register.type.passwd</source>
-                    <target>Password</target>
+                    <target>Contraseña</target>
                 </trans-unit>
                 <trans-unit id="212">
                     <source>user.register.type.passws-2</source>
-                    <target>Type again the password</target>
+                    <target>Vuelve a escribir la contraseña</target>
                 </trans-unit>
               <!-- End UserType.php -->
             <!-- End register_content.html -->
             <!-- login_content.html -->
               <trans-unit id="213">
                   <source>user.login.title</source>
-                  <target>Log in to participate in an orchard or join one of its activities</target>
+                  <target>Inicia sesión para participar en un huerto urbano o inscribirte a una de sus actividades.</target>
               </trans-unit>
               <trans-unit id="214">
                   <source>user.login.create</source>
-                  <target>Don't you have an account?</target>
+                  <target>No tienes cuenta?</target>
               </trans-unit>
               <trans-unit id="215">
                   <source>user.login.remember</source>
-                  <target>Remember me</target>
+                  <target>Recuérdame</target>
               </trans-unit>
               <trans-unit id="216">
                   <source>user.login.login</source>
-                  <target>Log in</target>
+                  <target>Entrar</target>
               </trans-unit>
               <trans-unit id="217">
                   <source>user.login.register</source>
-                  <target>Register</target>
+                  <target>Regístrate</target>
               </trans-unit>
               <trans-unit id="218">
                   <source>user.login.forget</source>
-                  <target>¿Did you forget your password?</target>
+                  <target>¿Has olvidado la contraseña?</target>
               </trans-unit>
             <!-- End login_content.html -->
           <!-- End UserBundle -->

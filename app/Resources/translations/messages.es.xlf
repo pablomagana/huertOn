@@ -61,7 +61,7 @@
               </trans-unit>
               <trans-unit id="14">
                   <source>stepBase.close</source>
-                  <target>Cerrar </target>
+                  <target>Cerrar</target>
               </trans-unit>
             <!-- End step_base.html -->
           <!-- End Base -->
@@ -242,7 +242,7 @@
               </trans-unit>
               <trans-unit id="51">
                   <source>orchard.step13.typeOrchard</source>
-                  <target>¿Qué tipo de huerto es?</target>
+                  <target>Sugierenos un tipo de huerto</target>
               </trans-unit>
               <trans-unit id="52">
                   <source>orchard.step13.typeOrchard-2</source>
@@ -506,66 +506,150 @@
               </trans-unit>
               <!-- End steps.html.twig -->
             <!-- End Create -->
+
+            
             <!-- Suggest -->
+              <!-- description.html.twig -->
+                <trans-unit id="800">
+                    <source>orchard.suggest.description.title</source>
+                    <target>Introduce la descripción para%</target>
+                </trans-unit>
+              <!-- End description.html.twig -->
+              <!-- orchard_activity_email.html.twig -->
+                <trans-unit id="801">
+                    <source>orchard.suggest.activity_email.hello</source>
+                    <target>Hola%</target>
+                </trans-unit>
+                <trans-unit id="802">
+                    <source>orchard.suggest.activity_email.title</source>
+                    <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir una nueva actividad:%</target>
+                </trans-unit>
+                <trans-unit id="803">
+                    <source>orchard.suggest.activity_email.title-2</source>
+                    <target>Ya puedes añadirla a tu huerto. Muchas gracias!</target>
+                </trans-unit>
+                <trans-unit id="804">
+                    <source>orchard.suggest.activity_email.title-3</source>
+                    <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir una nueva actividad:</target>
+                </trans-unit>
+                <trans-unit id="805">
+                    <source>orchard.suggest.activity_email.title-4</source>
+                    <target>Prueba a añadir otra. Muchas gracias!</target>
+                </trans-unit>
+              <!-- End orchard_activity_email.html.twig -->
+              <!-- orchard_participate_email.html.twig -->
+                <trans-unit id="806">
+                    <source>orchard.suggest.participate_email.title</source>
+                    <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir una nueva manera de participar:</target>
+                </trans-unit>
+                <trans-unit id="807">
+                    <source>orchard.suggest.participate_email.title-2</source>
+                    <target>Ya puedes añadirla a tu huerto. Muchas gracias!</target>
+                </trans-unit>
+                <trans-unit id="808">
+                    <source>orchard.suggest.participate_email.title-3</source>
+                    <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir una nueva manera de participar:</target>
+                </trans-unit>
+                <trans-unit id="809">
+                    <source>orchard.suggest.participate_email.title-4</source>
+                    <target>Prueba a añadir otra. Muchas gracias!</target>
+                </trans-unit>
+              <!-- End orchard_activity_email.html.twig -->
+              <!-- orchard_service_email.html.twig -->
+                <trans-unit id="810">
+                    <source>orchard.suggest.service_email.title</source>
+                    <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir un nuevo servicio:</target>
+                </trans-unit>
+                <trans-unit id="811">
+                    <source>orchard.suggest.service_email.title-2</source>
+                    <target>Ya puedes añadirlo a tu huerto. Muchas gracias!</target>
+                </trans-unit>
+                <trans-unit id="812">
+                    <source>orchard.suggest.service_email.title-3</source>
+                    <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir un nuevo servicio:</target>
+                </trans-unit>
+                <trans-unit id="813">
+                    <source>orchard.suggest.service_email.title-4</source>
+                    <target>Prueba a añadir otra. Muchas gracias!</target>
+                </trans-unit>
+              <!-- End orchard_service_email.html.twig -->
+              <!-- orchard_type_email.html.twig -->
+              <trans-unit id="814">
+                  <source>orchard.suggest.type_email.title</source>
+                  <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir un nuevo tipo de huerto:</target>
+              </trans-unit>
+              <trans-unit id="815">
+                  <source>orchard.suggest.type_email.title-1</source>
+                  <target>Ya puedes añadirlo a tu huerto. Muchas gracias!</target>
+              </trans-unit>
+              <trans-unit id="816">
+                  <source>orchard.suggest.type_email.title-2</source>
+                  <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir un nuevo tipo de huerto:</target>
+              </trans-unit>
+              <trans-unit id="817">
+                  <source>orchard.suggest.type_email.title-3</source>
+                  <target>Prueba a añadir otro. Muchas gracias!</target>
+              </trans-unit>
+              <!-- End orchard_type_email.html.twig -->
             <!-- End Suggest -->
               <!-- orchard_profile.html -->
                 <trans-unit id="900">
                     <source>orchard.profile.contact</source>
                     <target>CONTACTA</target>
                 </trans-unit>
-                <trans-unit id="910">
+                <trans-unit id="901">
                     <source>orchard.profile.activities</source>
                     <target>PRÓXIMAS ACTIVIDADES</target>
                 </trans-unit>
-                <trans-unit id="920">
+                <trans-unit id="902">
                     <source>orchard.profile.noActivities</source>
                     <target>Este huerto no tiene actividades</target>
                 </trans-unit>
-                <trans-unit id="930">
+                <trans-unit id="903">
                     <source>orchard.profile.howIsIt</source>
                     <target>CÓMO ES</target>
                 </trans-unit>
-                <trans-unit id="940">
+                <trans-unit id="904">
                     <source>orchard.profile.type</source>
                     <target>Tipo de huerto </target>
                 </trans-unit>
-                <trans-unit id="950">
+                <trans-unit id="905">
                     <source>orchard.profile.equipment</source>
                     <target>Equipamiento</target>
                 </trans-unit>
-                <trans-unit id="960">
+                <trans-unit id="906">
                     <source>orchard.profile.join</source>
                     <target>CÓMO UNIRTE</target>
                 </trans-unit>
-                <trans-unit id="970">
+                <trans-unit id="907">
                     <source>orchard.profile.modal</source>
                     <target>Modalidades</target>
                 </trans-unit>
-                <trans-unit id="980">
+                <trans-unit id="908">
                     <source>orchard.profile.important</source>
                     <target>Antes es importante que sepas</target>
                 </trans-unit>
-                <trans-unit id="990">
+                <trans-unit id="909">
                     <source>orchard.profile.rules-1</source>
                     <target>Mira</target>
                 </trans-unit>
-                <trans-unit id="1000">
+                <trans-unit id="910">
                     <source>orchard.profile.rules-2</source>
                     <target>AQUÍ</target>
                 </trans-unit>
-                <trans-unit id="1010">
+                <trans-unit id="911">
                     <source>orchard.profile.rules-3</source>
                     <target>las normas del huerto.</target>
                 </trans-unit>
-                <trans-unit id="1020">
+                <trans-unit id="912">
                     <source>orchard.profile.inscribe</source>
                     <target>¿Qué necesitas para inscribirte?</target>
                 </trans-unit>
-                <trans-unit id="1030">
+                <trans-unit id="913">
                     <source>orchard.profile.where</source>
                     <target>DÓNDE SE ENCUENTRA</target>
                 </trans-unit>
-                <trans-unit id="1040">
+                <trans-unit id="914">
                     <source>orchard.profile.question</source>
                     <target>¿Tienes alguna pregunta?</target>
                 </trans-unit>
@@ -574,7 +658,96 @@
 
 
           <!-- UserBundle -->
-
+            <!-- register_content.html -->
+              <trans-unit id="200">
+                  <source>user.register.title</source>
+                  <target>Registrate para participar en un huerto urbano o inscribirte a una de sus actividades</target>
+              </trans-unit>
+              <trans-unit id="201">
+                  <source>user.register.read</source>
+                  <target>He leído y acepto las</target>
+              </trans-unit>
+              <trans-unit id="202">
+                  <source>user.register.conditions</source>
+                  <target>Condiciones de uso</target>
+              </trans-unit>
+              <trans-unit id="203">
+                  <source>user.register.privacy</source>
+                  <target>Política de privacidad</target>
+              </trans-unit>
+              <trans-unit id="204">
+                  <source>user.register.acount</source>
+                  <target>¿Ya dispones de una cuenta?</target>
+              </trans-unit>
+              <trans-unit id="205">
+                  <source>user.register.privacyPolicy</source>
+                  <target>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                  </target>
+              </trans-unit>
+              <trans-unit id="206">
+                  <source>user.register.privacyPolicy-2</source>
+                  <target>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                  </target>
+              </trans-unit>
+              <trans-unit id="207">
+                  <source>user.register.submit</source>
+                  <target>Regístrate</target>
+              </trans-unit>
+              <!-- UserType.php -->
+                <trans-unit id="208">
+                    <source>user.register.type.email</source>
+                    <target>Dirección de correo electrónico</target>
+                </trans-unit>
+                <trans-unit id="209">
+                    <source>user.register.type.name</source>
+                    <target>Nombre</target>
+                </trans-unit>
+                <trans-unit id="210">
+                    <source>user.register.type.surnames</source>
+                    <target>Apellidos</target>
+                </trans-unit>
+                <trans-unit id="211">
+                    <source>user.register.type.passwd</source>
+                    <target>Contraseña</target>
+                </trans-unit>
+                <trans-unit id="212">
+                    <source>user.register.type.passws-2</source>
+                    <target>Vuelve a escribir la contraseña</target>
+                </trans-unit>
+              <!-- End UserType.php -->
+            <!-- End register_content.html -->
+            <!-- login_content.html -->
+              <trans-unit id="213">
+                  <source>user.login.title</source>
+                  <target>Inicia sesión para participar en un huerto urbano o inscribirte a una de sus actividades.</target>
+              </trans-unit>
+              <trans-unit id="214">
+                  <source>user.login.create</source>
+                  <target>No tienes cuenta?</target>
+              </trans-unit>
+              <trans-unit id="215">
+                  <source>user.login.remember</source>
+                  <target>Recuérdame</target>
+              </trans-unit>
+              <trans-unit id="216">
+                  <source>user.login.login</source>
+                  <target>Entrar</target>
+              </trans-unit>
+              <trans-unit id="217">
+                  <source>user.login.register</source>
+                  <target>Regístrate</target>
+              </trans-unit>
+              <trans-unit id="218">
+                  <source>user.login.forget</source>
+                  <target>¿Has olvidado la contraseña?</target>
+              </trans-unit>
+            <!-- End login_content.html -->
           <!-- End UserBundle -->
 
 
