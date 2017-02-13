@@ -119,6 +119,6 @@ vich_uploader:
             upload_destination: '%kernel.root_dir%/../web/orchard/file'
             namer:              vich_uploader.namer_uniqid
         orchard_image:
-            uri_prefix:         /orchard/images
-            upload_destination: '%kernel.root_dir%/../web/orchard/images'
+            uri_prefix:         /orchard/image
+            upload_destination: '%kernel.root_dir%/../web/orchard/image'
             namer:              vich_uploader.namer_uniqid

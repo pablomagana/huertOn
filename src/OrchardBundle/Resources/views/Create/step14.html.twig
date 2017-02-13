@@ -104,16 +104,17 @@ $('#btn-siguiente, #btn-save-exit').on('click', function() {
       imagenes[i].des=$("span[id='"+imagenes[i].id+"']").parent().children().last().val();
       formImages.append('image-'+i, imagenes[i]);
     }
-
-    });
+    console.log(formImages);
     $.ajax({
       type: "POST",
-      contentType: 'application/json',
       url:"/orchard/upload/images/upload/{{ orchard.id }}",
       data: formImages,
+      cache: false,
+      contentType: false,
+      processData: false,
       success: function(step){
         console.log(step);
-        window.location.href = '/orchard/create/step/' + step + '/{{ orchard.id }}';
+        //window.location.href = '/orchard/create/step/' + step + '/{#{{ orchard.id }}#}';
       },
       error: function(jqXHR, exception) {
           $("#loading, #loading-text").fadeOut("slow", function() {
@@ -142,15 +143,16 @@ $('#btn-siguiente, #btn-save-exit').on('click', function() {
 $('#btn-atras').on('click', function() {
   $("#loading, #loading-text").fadeIn("slow");
   //send images
+  var formImages = new FormData();
     for (var i = 0; i < imagenes.length; i++) {
       imagenes[i].des=$("span[id='"+imagenes[i].id+"']").parent().children().last().val();
-      //sendImage(imagenes[i]);
+      formImages.append('image-'+i, imagenes[i]);
     }
     $.ajax({
       type: "POST",
       contentType: 'application/json',
       url:"/orchard/upload/images/upload/{{ orchard.id }}",
-      data: JSON.stringify(imagenes),
+      data: formImages,
       success: function(step){
         console.log(step);
         window.location.href = '/orchard/create/steps/{{ orchard.id }}';

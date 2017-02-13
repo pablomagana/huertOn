@@ -3,6 +3,7 @@
 namespace OrchardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -74,7 +75,7 @@ class Image
      *
      * @return ImageFile
      */
-    public function setFile(File $file = null)
+    public function setImage(File $file = null)
     {
         $this->Image = $file;
 
@@ -89,7 +90,7 @@ class Image
     /**
      * @return File|null
      */
-    public function getFile()
+    public function getImage()
     {
         return $this->Image;
     }
@@ -100,7 +101,7 @@ class Image
      *
      * @return ImageFile
      */
-    public function setNameFile($nameImage)
+    public function setNameImage($nameImage)
     {
         $this->nameImage = $nameImage;
 
@@ -112,7 +113,7 @@ class Image
      *
      * @return string
      */
-    public function getNameFile()
+    public function getNameImage()
     {
         return $this->nameImage;
     }

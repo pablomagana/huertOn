@@ -13,48 +13,19 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadController extends Controller
 {
-
-  /*//Método utilizado para añadir imagenes a los huertos, recibe una imagen y la mueve a la carpeta de imagenes relacionandola con el huerto
-  //Recibe una imagen por request con su descripción por metodo POST
-  public function uploadImageActionOld(Request $request,$id_orchard){
-    $name=$request->get("name");
-    $src=$request->get("src");
-    $description=$request->get("description");
-
-    $imagen=new Image();
-    $imagen->setSrc($src);
-    $imagen->setDescription($description);
-    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
-    $imagen->setOrchard($orchard);
-
-    $em=$this->getDoctrine()->getManager();
-    $em->persist($imagen);
-    $em->flush();
-
-    return new JsonResponse($imagen->getId());
-  }*/
-
   public function uploadImageAction(Request $request,$id_orchard)
   {
-
-    ini_set('memory_limit', '-1');
-    //extraer id_orchard
-
-    //extraer json con imagenes
-    //$imagenes=$request->get("imgs");
-    $imagenes=json_decode($request->getContent());
-    //print_r($imagenes);
-    //return new JsonResponse($imagenes[0]->des);
-
     $em=$this->getDoctrine()->getManager();
-
-    $orchard=$this->getDoctrine()->getRepository("OrchardBundle:Orchard")->findOneById($id_orchard);
-    if (count($imagenes)>0) {
-      foreach ($imagenes as $img) {
+    $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
+    if (count($request->files)>0) {
+      for ($i=0; $i < count($request->files); $i++) {
+        $img=$request->files->get("image-".$i);
         $imagen=new Image();
-        $imagen->setSrc($img->src);
-        $imagen->setDescription($img->des);
-
+        $imagen->setimage($img);
+        $date = new \DateTime('now');
+        $date = $date->format('Y-m-d H:i:s');
+        $imagen->setUpdateAt($date);
+        $imagen->setDescription($des[i]);
         $imagen->setOrchard($orchard);
 
         $em->persist($imagen);
@@ -145,7 +116,8 @@ class UploadController extends Controller
   // }
 
   public function deleteFileAction(Request $request,$id_orchard)
-  {$orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
+  {
+    $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
     if($orchard){
       $em=$this->getDoctrine()->getManager();
       $normas = $orchard->getRuleFile();
