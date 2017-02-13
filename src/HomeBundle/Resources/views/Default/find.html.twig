@@ -37,7 +37,7 @@
     <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
       <!-- Imagen -->
       {% if orchard.0.images is not empty %}
-        <div class="find-result" style="background: url({{ orchard.0.images[0].src }});"></div>
+        <div class="find-result" style="background: url({{ asset('/orchard/image/' ~ orchard.0.images[0].nameImage) }});"></div>
       {% else %}
         <div class="find-result" style="background: url(http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png);"></div>
       {% endif %}
