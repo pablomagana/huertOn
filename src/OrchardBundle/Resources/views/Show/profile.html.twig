@@ -5,7 +5,7 @@
 <div class="row" id="orchard-img">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     {% for orchardImage in orchard.images %}
-    <div class="fullscreen background parallax mySlides" style="padding:250px 0; background-image: url('{{orchardImage.src}}'); background-attachment: fixed;"  data-diff="100"></div>
+    <div class="fullscreen background parallax mySlides" style="padding:250px 0; background-image: url('{{ asset('/orchard/image/' ~ orchardImage.nameImage) }}'); background-attachment: fixed;"  data-diff="100"></div>
     {% endfor %}
     <a class="w3-btn-floating w3-display-left" onclick="plusDivs(-1)" style="margin-left:20px;">&#10094;</a>
     <a class="w3-btn-floating w3-display-right" onclick="plusDivs(1)" style="margin-right:20px;">&#10095;</a>
@@ -48,13 +48,11 @@
 
   {% if orchard.governanceModel is empty %}
   {% else %}
-  <div class="container">
     <div class="row" id="philosophy">
       <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-centered text-xs-center text-sm-center text-md-center text-lg-center text-xl-center">
         " {{ orchard.governanceModel }} "
       </div>
     </div>
-  </div>
   <div class="spacing"></div>
   {% endif %}
 
@@ -125,18 +123,18 @@
 
 
       <!-- NORMAS DE HUERTO -->
-      {#{% if orchard.rule_file is empty %}
-      {% else %}#}
+      {% if orchard.ruleFile is empty %}
+      {% else %}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
         <div class="border">
           <h6>{{ 'orchard.profile.important'|trans }}</h6>
           <br>
           <br>
-          {{ 'orchard.profile.rules-1'|trans }} <a href="/webs/orchards/files/XXXX">{{ 'orchard.profile.rules-2'|trans }}</a> {{ 'orchard.profile.rules-3'|trans }}
+          {{ 'orchard.profile.rules-1'|trans }} <a target="_blank" href="{{ asset('/orchard/file/' ~ orchard.ruleFile.nameFile) }}">{{ 'orchard.profile.rules-2'|trans }}</a> {{ 'orchard.profile.rules-3'|trans }}
         </div>
       </div>
       <div class="spacing"></div>
-      {#{% endif %}#}
+      {% endif %}
 
 
       <!-- PASOS PARA INSCRIBIRTE -->
@@ -145,6 +143,11 @@
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered" style="margin-top:40px">
         <h6>{{ 'orchard.profile.inscribe'|trans }}</h6>
         <br>
+        <ol>
+          {% for orchardInscriptionStep in orchard.orchardInscriptionStep %}
+          <li>{{ orchardInscriptionStep.text }}</li>
+          {% endfor %}
+        </ol>
       </div>
       <div class="spacing"></div>
       {% endif %}
@@ -166,10 +169,6 @@
 
 
 
-
-
-
-
   <div class="container">
     <div class="row row-centered" id="contact">
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="background-color:#f2f2f2; border-radius: 15px; padding: 40px;">
@@ -178,11 +177,11 @@
         <hr class="hr-orchard-profile">
         <br>
         <br>
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-          <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="" class="circular-image" width="200px" height="200px">
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+          <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" alt="" class="circular-image" width="100%">
         </div>
 
-        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
           <h5>Contacta con {{orchard.user.username}}, coordinador/a de este huerto.</h5><br>
           <div class="text-lg-left">
             <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>
@@ -209,13 +208,11 @@
 <div id="nav-mobile">
   {% if orchard.governanceModel is empty %}
   {% else %}
-  <div class="container">
     <div class="row" id="philosophy">
       <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-centered text-xs-center text-sm-center text-md-center text-lg-center text-xl-center">
         " {{ orchard.governanceModel }} "
       </div>
     </div>
-  </div>
   {% endif %}
 
 
@@ -286,7 +283,9 @@
                 <li data-toggle="tooltip" data-placement="bottom" title="{{orchardType.description}}">{{ orchardType.name }}</li>
                 {% endfor %}
               </ul>
+              <div class="hidden-md-up not-visible pull-right" data-toggle="modal" data-target="#modalTipoHuerto"><i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i></div>
             </div>
+
           </div>
           {% endif %}
 
@@ -336,18 +335,17 @@
 
 
           <!-- NORMAS DE HUERTO -->
-          {#{% if orchard.rule_file is empty %}
-          {% else %}#}
+          {% if orchard.ruleFile is empty %}
+          {% else %}
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
             <div class="border">
               <h6>{{ 'orchard.profile.important'|trans }}</h6>
               <br>
               <br>
-              {{ 'orchard.profile.rules-1'|trans }} <a href="/webs/orchards/files/XXXX">{{ 'orchard.profile.rules-2'|trans }}</a> {{ 'orchard.profile.rules-3'|trans }}
+              {{ 'orchard.profile.rules-1'|trans }} <a target="_blank" href="{{ asset('/orchard/file/' ~ orchard.ruleFile.nameFile) }}">{{ 'orchard.profile.rules-2'|trans }}</a> {{ 'orchard.profile.rules-3'|trans }}
             </div>
           </div>
-          <div class="spacing"></div>
-          {#{% endif %}#}
+          {% endif %}
 
 
           <!-- PASOS PARA INSCRIBIRTE -->
@@ -356,6 +354,11 @@
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered" style="margin-top:40px">
             <h6>{{ 'orchard.profile.inscribe'|trans }}</h6>
             <br>
+            <ol>
+              {% for orchardInscriptionStep in orchard.orchardInscriptionStep %}
+              <li>{{ orchardInscriptionStep.text }}</li>
+              {% endfor %}
+            </ol>
           </div>
           <div class="spacing"></div>
           {% endif %}
@@ -411,6 +414,30 @@
 
 
 </div>
+</div>
+
+
+<!--modal-->
+<div class="modal fade" id="modalTipoHuerto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-body">
+				<!--mostrar tipos + descripciones-->
+				<ul>
+				{% for orchardType in orchard.orchardType %}
+						<li>
+							<b>{{ orchardType.name }}</b>:<br>
+							<span>{{ orchardType.description }}</span>
+						</li>
+
+				{% endfor %}
+			</ul>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 
