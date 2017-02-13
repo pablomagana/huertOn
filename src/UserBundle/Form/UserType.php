@@ -21,14 +21,14 @@ class UserType extends BaseRegistrationFormType {
 
   public function buildForm(FormBuilderInterface $builder, array $options) {
     $builder
-        ->add('email', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\EmailType'), array('label' => false, 'attr' => array('placeholder' => 'user.register.type.email')))
-        ->add('username', null, array('label' => false, 'attr' => array('placeholder' => 'user.register.type.name')))
-        ->add('apellidos', null, array('label' => false, 'attr' => array('placeholder' => 'user.register.type.surnames')))
+        ->add('email', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\EmailType'), array('label' => false, 'attr' => array('placeholder' => 'user.register.type.email', 'tabindex' => 1)))
+        ->add('username', null, array('label' => false, 'attr' => array('placeholder' => 'user.register.type.name', 'tabindex' => 2)))
+        ->add('apellidos', null, array('label' => false, 'attr' => array('placeholder' => 'user.register.type.surnames', 'tabindex' => 3)))
         ->add('plainPassword', LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\RepeatedType'), array(
             'type' => LegacyFormHelper::getType('Symfony\Component\Form\Extension\Core\Type\PasswordType'),
             'options' => array('translation_domain' => 'messages'),
-            'first_options' => array('label' => false, 'attr' => array('placeholder' => 'user.register.type.passwd')),
-            'second_options' => array('label' => false, 'attr' => array('placeholder' => 'user.register.type.passws-2')),
+            'first_options' => array('label' => false, 'attr' => array('placeholder' => 'user.register.type.passwd', 'tabindex' => 4)),
+            'second_options' => array('label' => false, 'attr' => array('placeholder' => 'user.register.type.passws-2', 'tabindex' => 5)),
             'invalid_message' => 'fos_user.password.mismatch',
         ))
     ;
