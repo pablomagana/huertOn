@@ -507,7 +507,7 @@
               <!-- End steps.html.twig -->
             <!-- End Create -->
 
-            
+
             <!-- Suggest -->
               <!-- description.html.twig -->
                 <trans-unit id="800">
@@ -599,7 +599,7 @@
                 </trans-unit>
                 <trans-unit id="901">
                     <source>orchard.profile.activities</source>
-                    <target>PRÓXIMAS ACTIVIDADES</target>
+                    <target>PRÓXIMOS EVENTOS</target>
                 </trans-unit>
                 <trans-unit id="902">
                     <source>orchard.profile.noActivities</source>

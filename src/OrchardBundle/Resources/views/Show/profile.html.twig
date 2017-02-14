@@ -14,6 +14,7 @@
 
 
 <div class="row" id="location-contact">
+  <div class="spacing"></div>
   <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 container">
     <h3>{{ orchard.name }}</h3>
     <a href="#location">{{ orchard.street }}</a>
@@ -32,15 +33,49 @@
       <!-- PRÓXIMAS 3 ACTIVIDADES DE CADA HUERTO (3 COLUMNAS) -->
       <h5>{{ 'orchard.profile.activities'|trans }}</h5>
       <hr class="hr-orchard-profile" align="center">
-      {% if orchard.orchardActivity is empty %}
-      <h1>{{ 'orchard.profile.noActivities'|trans }}</h1>
-      {% else %}
-      {% for orchardActivity in orchard.orchardActivity %}
-      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-        <h5>{{ orchardActivity.name }}</h5>
-      </div>
+
+      {% for event in orchard.events|slice(0, 3) %}
+      <a href="/event/show/profile/{{ event.id }}">
+        <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+          <!-- Imagen -->
+          <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+            {% if event.images is not empty %}
+            <div class="find-result" style="background: url({{ asset('/event/image/' ~ event.images[0].nameImage) }});">
+              <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
+            </div>
+            {% else %}
+            <div class="find-result" style="background: url(http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png);">
+              <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Texto -->
+          <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+            <p><font style="font-size:20px">{{ event.title }}</font> <br><i>{{ event.orchard.name }}</i></p>
+          </div>
+
+          <input type="text" class="geometry" value="{{ event.orchard.geometry }}" hidden="hidden">
+        </div>
+      </a>
       {% endfor %}
-      {% endif %}
+
+
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
+        <div class="border">
+        {% if orchard.orchardActivity is empty %}
+        <h5>{{ 'orchard.profile.noActivities'|trans }}</h5>
+        {% else %}
+        <h6>Actividades</h6><br><br>
+        <ul>
+          {% for orchardActivity in orchard.orchardActivity %}
+          <li>{{ orchardActivity.name }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+
     </div>
   </div>
   <div class="spacing"></div>
@@ -48,22 +83,22 @@
 
   {% if orchard.governanceModel is empty %}
   {% else %}
-    <div class="row" id="philosophy">
-      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-centered text-xs-center text-sm-center text-md-center text-lg-center text-xl-center">
-        " {{ orchard.governanceModel }} "
-      </div>
+  <div class="row" id="philosophy">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-centered text-xs-center text-sm-center text-md-center text-lg-center text-xl-center">
+      " {{ orchard.governanceModel }} "
     </div>
+  </div>
   <div class="spacing"></div>
   {% endif %}
 
 
+  {% if orchard.orchardType is empty %}
+  {% else %}
   <div class="container">
     <div class="row row-centered" id="how-is-it">
       <h5>{{ 'orchard.profile.howIsIt'|trans }}</h5>
       <hr class="hr-orchard-profile">
       <!-- TIPO DE HUERTO -->
-      {% if orchard.orchardType is empty %}
-      {% else %}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
         <div class="border">
           <h6>{{ 'orchard.profile.type'|trans }}</h6>
@@ -100,13 +135,13 @@
   <div class="spacing"></div>
 
 
+  {% if orchard.orchardParticipate is empty %}
+  {% else %}
   <div class="container">
     <div class="row row-centered" id="how-to-join">
       <h5>{{ 'orchard.profile.join'|trans }}</h5>
       <hr class="hr-orchard-profile">
       <!-- MODALIDADES -->
-      {% if orchard.orchardParticipate is empty %}
-      {% else %}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
         <div class="border">
           <h6>{{ 'orchard.profile.modal'|trans }}</h6>
@@ -185,7 +220,7 @@
           <h5>Contacta con {{orchard.user.username}}, coordinador/a de este huerto.</h5><br>
           <div class="text-lg-left">
             <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>
-            <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.phone}}<br>
+            {% if orchard.phone is empty %}{% else %}<i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.phone}}{% endif %}<br>
             {% if orchard.web is empty %}{% else %}<i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.web}}{% endif %}<br>
             {% if orchard.facebook is empty %}{% else %}<i class="fa fa-facebook-official" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.facebook}}{% endif %}<br>
             {% if orchard.instagram is empty %}{% else %}<i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.instagram}}{% endif %}<br>
@@ -194,7 +229,7 @@
       </div>
       <!-- FORMULARIO DE CONTACTO -->
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        
+
       </div>
     </div>
   </div>
@@ -208,39 +243,39 @@
 <div id="nav-mobile">
   {% if orchard.governanceModel is empty %}
   {% else %}
-    <div class="row" id="philosophy">
-      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-centered text-xs-center text-sm-center text-md-center text-lg-center text-xl-center">
-        " {{ orchard.governanceModel }} "
-      </div>
+  <div class="row" id="philosophy">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-centered text-xs-center text-sm-center text-md-center text-lg-center text-xl-center">
+      " {{ orchard.governanceModel }} "
     </div>
+  </div>
   {% endif %}
 
 
-    <div class="scroller scroller-left"><i class="fa fa-chevron-left"></i></div>
-    <div class="scroller scroller-right"><i class="fa fa-chevron-right"></i></div>
+  <div class="scroller scroller-left"><i class="fa fa-chevron-left"></i></div>
+  <div class="scroller scroller-right"><i class="fa fa-chevron-right"></i></div>
 
-<div class="wrapper">
-  <ul class="nav nav-tabs list" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" href="#actividades" role="tab" data-toggle="tab">Actividades</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#como-es" role="tab" data-toggle="tab">Cómo es</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#como-unirte" role="tab" data-toggle="tab">Cómo unirte</a>
-    </li>
+  <div class="wrapper">
+    <ul class="nav nav-tabs list" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" href="#actividades" role="tab" data-toggle="tab">Actividades</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#como-es" role="tab" data-toggle="tab">Cómo es</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#como-unirte" role="tab" data-toggle="tab">Cómo unirte</a>
+      </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="#localizacion" role="tab" data-toggle="tab">Localización</a>
-    </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#localizacion" role="tab" data-toggle="tab">Localización</a>
+      </li>
 
-    <li class="nav-item">
-      <a class="nav-link" href="#contacto" role="tab" data-toggle="tab">Contacto</a>
-    </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#contacto" role="tab" data-toggle="tab">Contacto</a>
+      </li>
 
-  </ul>
-</div>
+    </ul>
+  </div>
 
   <!-- Tab panes -->
   <div class="tab-content">
@@ -413,31 +448,31 @@
     </div>
 
 
-</div>
+  </div>
 </div>
 
 
 <!--modal-->
 <div class="modal fade" id="modalTipoHuerto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-body">
-				<!--mostrar tipos + descripciones-->
-				<ul>
-				{% for orchardType in orchard.orchardType %}
-						<li>
-							<b>{{ orchardType.name }}</b>:<br>
-							<span>{{ orchardType.description }}</span>
-						</li>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!--mostrar tipos + descripciones-->
+        <ul>
+          {% for orchardType in orchard.orchardType %}
+          <li>
+            <b>{{ orchardType.name }}</b>:<br>
+            <span>{{ orchardType.description }}</span>
+          </li>
 
-				{% endfor %}
-			</ul>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-			</div>
-		</div>
-	</div>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -473,37 +508,37 @@ var hidWidth;
 var scrollBarWidths = 40;
 
 var widthOfList = function(){
-var itemsWidth = 0;
-$('.list li').each(function(){
-  var itemWidth = $(this).outerWidth();
-  itemsWidth+=itemWidth;
-});
-return itemsWidth;
+  var itemsWidth = 0;
+  $('.list li').each(function(){
+    var itemWidth = $(this).outerWidth();
+    itemsWidth+=itemWidth;
+  });
+  return itemsWidth;
 };
 
 var widthOfHidden = function(){
-return (($('.wrapper').outerWidth())-widthOfList()-getLeftPosi())-scrollBarWidths;
+  return (($('.wrapper').outerWidth())-widthOfList()-getLeftPosi())-scrollBarWidths;
 };
 
 var getLeftPosi = function(){
-return $('.list').position().left;
+  return $('.list').position().left;
 };
 
 var reAdjust = function(){
-if (($('.wrapper').outerWidth()) < widthOfList()) {
-  $('.scroller-right').show();
-}
-else {
-  $('.scroller-right').hide();
-}
+  if (($('.wrapper').outerWidth()) < widthOfList()) {
+    $('.scroller-right').show();
+  }
+  else {
+    $('.scroller-right').hide();
+  }
 
-if (getLeftPosi()<0) {
-  $('.scroller-left').show();
-}
-else {
-  $('.item').animate({left:"-="+getLeftPosi()+"px"},'slow');
-  $('.scroller-left').hide();
-}
+  if (getLeftPosi()<0) {
+    $('.scroller-left').show();
+  }
+  else {
+    $('.item').animate({left:"-="+getLeftPosi()+"px"},'slow');
+    $('.scroller-left').hide();
+  }
 }
 
 reAdjust();
@@ -514,18 +549,18 @@ $(window).on('resize',function(e){
 
 $('.scroller-right').click(function() {
 
-$('.scroller-left').fadeIn('slow');
-$('.scroller-right').fadeOut('slow');
+  $('.scroller-left').fadeIn('slow');
+  $('.scroller-right').fadeOut('slow');
 
-$('.list').animate({left:"+="+widthOfHidden()+"px"},'slow',function(){
+  $('.list').animate({left:"+="+widthOfHidden()+"px"},'slow',function(){
 
-});
+  });
 });
 
 $('.scroller-left').click(function() {
 
-$('.scroller-right').fadeIn('slow');
-$('.scroller-left').fadeOut('slow');
+  $('.scroller-right').fadeIn('slow');
+  $('.scroller-left').fadeOut('slow');
 
   $('.list').animate({left:"-="+getLeftPosi()+"px"},'slow',function(){
 
