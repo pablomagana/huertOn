@@ -82,6 +82,28 @@ class SuggestController extends Controller
 
   }
 
+  public function profileAction($name, $email, $reason, $query, $id_orchard)
+  {
+
+    $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+
+    $message = \Swift_Message::newInstance()
+    ->setContentType("text/html")
+    ->setSubject('Consulta desde formulario de contacto del huerto ' . $orchard->getName())
+    ->setFrom($email)
+    ->setTo($orchard->getMail())
+    ->setBody(
+      $this->renderView(
+        'OrchardBundle:Suggest:contact_email.html.twig',
+        array('orchardUserName' => $orchard->getUser()->getUsername(), 'userName' => $name, 'reason' => $reason, 'query' => $query)
+        )
+        )
+        ;
+        $this->get('mailer')->send($message);
+
+        return new Response();
+  }
+
   public function sendMail($entity, $subject, $to, $param, $accept)
   {
 

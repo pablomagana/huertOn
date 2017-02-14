@@ -13,3 +13,7 @@ orchard_suggest_insert:
 orchard_suggest_checkbox:
     path:     /insert/checkbox/{entity}/{param}/{accept}
     defaults: { _controller: OrchardBundle:Suggest:checkbox, accept:false }
+
+orchard_suggest_profile:
+    path:     /profile/{name}/{email}/{reason}/{query}/{id_orchard}
+    defaults: { _controller: OrchardBundle:Suggest:profile }
