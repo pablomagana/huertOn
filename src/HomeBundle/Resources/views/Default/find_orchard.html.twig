@@ -7,8 +7,8 @@
       <div class="find-title">
         <button id="btn-orchards" type="button" class="btn btn-link">{{ 'find.orchard'|trans }}</button> &nbsp;&nbsp; / &nbsp;&nbsp; <a href="/find/event"><button id="btn-events" type="button" class="btn btn-link">{{ 'find.events'|trans }}</button></a>
       </div>
-      <form id="form-home_search" action="/find" method="post">
-        <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}" required="true"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
+      <form id="form-home_search" action="/find/orchard" method="post">
+        <input id="input-home_search" name="input-home_search" type="text" value="{{ input_home_search }}" placeholder="{{ 'home.find.placeholder'|trans }}" required="true"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
         <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
         <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
       </form>
@@ -55,7 +55,7 @@
     <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
       <!-- Imagen -->
       {% if orchard.images is not empty %}
-      <div class="find-result" style="background: url({{ orchard.images[0].src }});"></div>
+      <div class="find-result" style="background: url({{ asset('/orchard/image/' ~ orchard.images[0].nameImage) }});"></div>
       {% else %}
       <div class="find-result" style="background: url(http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png);"></div>
       {% endif %}

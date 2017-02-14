@@ -26,11 +26,11 @@ function initMap() {
 
 function setMap(){
 
-	$('.geometry').each(function() {
-		if($(this).val() != '') {
-			retrieveGeometry($(this).val());
-		}
-	});
+		$('.geometry').each(function() {
+			if($(this).val() != '') {
+				retrieveGeometry($(this).val());
+			}
+		});
 
 }
 
