@@ -157,7 +157,7 @@
                 </trans-unit>
                 <trans-unit id="34">
                     <source>orchard.list.sure</source>
-                    <target>¿Are you sure you want to delete it?</target>
+                    <target>Are you sure you want to delete it?</target>
                 </trans-unit>
                 <trans-unit id="35">
                     <source>orchard.list.sure-2</source>
@@ -176,11 +176,11 @@
               <!--  step11.html.twig -->
                 <trans-unit id="38">
                     <source>orchard.step11.title</source>
-                    <target>¿How is your orchard called?</target>
+                    <target>How is your orchard called?</target>
                 </trans-unit>
                 <trans-unit id="38-2">
                     <source>orchard.step11.title-2</source>
-                    <target>¿How is your orchard called?</target>
+                    <target>How is your orchard called?</target>
                 </trans-unit>
                 <trans-unit id="39">
                     <source>orchard.step11.required</source>
@@ -188,7 +188,7 @@
                 </trans-unit>
                 <trans-unit id="40">
                     <source>orchard.step11.where</source>
-                    <target>¿Where is your orchard?</target>
+                    <target>Where is your orchard?</target>
                 </trans-unit>
                 <trans-unit id="40-2">
                     <source>orchard.step11.where-2</source>
@@ -211,7 +211,7 @@
               <!--  step12.html.twig -->
                 <trans-unit id="44">
                     <source>orchard.step12.title</source>
-                    <target>¿How can I be contacted?</target>
+                    <target>How can I be contacted?</target>
                 </trans-unit>
                 <trans-unit id="45">
                     <source>orchard.step12.mail</source>
@@ -238,7 +238,7 @@
               <!--  step13.html.twig -->
               <trans-unit id="50">
                   <source>orchard.step13.title</source>
-                  <target>¿Which kind of orchard is it?</target>
+                  <target>Which kind of orchard is it?</target>
               </trans-unit>
               <trans-unit id="51">
                   <source>orchard.step13.typeOrchard</source>
@@ -246,7 +246,7 @@
               </trans-unit>
               <trans-unit id="52">
                   <source>orchard.step13.typeOrchard-2</source>
-                  <target>¿What type of orchard is it?</target>
+                  <target>What type of orchard is it?</target>
               </trans-unit>
               <trans-unit id="53">
                   <source>orchard.step13.send</source>
@@ -312,7 +312,7 @@
               <!--  step21.html.twig -->
                 <trans-unit id="67">
                     <source>orchard.step21.title</source>
-                    <target>¿Which kind of participation do you offer?</target>
+                    <target>Which kind of participation do you offer?</target>
                 </trans-unit>
                 <trans-unit id="68">
                     <source>orchard.step21.participate</source>
@@ -320,7 +320,7 @@
                 </trans-unit>
                 <trans-unit id="69">
                     <source>orchard.step21.participate-2</source>
-                    <target>¿Which kind of participation do you offer?</target>
+                    <target>Which kind of participation do you offer?</target>
                 </trans-unit>
                 <trans-unit id="70">
                     <source>orchard.step21.nowNo</source>
@@ -385,7 +385,7 @@
                 </trans-unit>
                 <trans-unit id="83">
                     <source>orchard.step31.title-2</source>
-                    <target>¿How did the project start?</target>
+                    <target>How did the project start?</target>
                 </trans-unit>
                 <trans-unit id="84">
                     <source>orchard.step31.title-3</source>
@@ -404,7 +404,7 @@
               <!--  step32.html.twig -->
                 <trans-unit id="87">
                     <source>orchard.step32.title</source>
-                    <target>¿Which kind of services do you offer?</target>
+                    <target>Which kind of services do you offer?</target>
                 </trans-unit>
                 <trans-unit id="88">
                     <source>orchard.step32.title-2</source>
@@ -419,7 +419,7 @@
               <!--  step33.html.twig -->
                 <trans-unit id="90">
                     <source>orchard.step33.title</source>
-                    <target>¿Which kind of activities do you use to do in the orchard?</target>
+                    <target>Which kind of activities do you use to do in the orchard?</target>
                 </trans-unit>
                 <trans-unit id="91">
                     <source>orchard.step33.title-2</source>
@@ -450,7 +450,7 @@
               </trans-unit>
               <trans-unit id="97">
                   <source>orchard.steps.sub-2</source>
-                  <target>¿What can they find there? (photos, services...)</target>
+                  <target>What can they find there? (photos, services...)</target>
               </trans-unit>
               <trans-unit id="98">
                   <source>orchard.steps.sub-3</source>
@@ -635,7 +635,7 @@
                 </trans-unit>
                 <trans-unit id="912">
                     <source>orchard.profile.inscribe</source>
-                    <target>¿What do you need to subscribe?</target>
+                    <target>What do you need to subscribe?</target>
                 </trans-unit>
                 <trans-unit id="913">
                     <source>orchard.profile.where</source>
@@ -643,7 +643,7 @@
                 </trans-unit>
                 <trans-unit id="914">
                     <source>orchard.profile.question</source>
-                    <target>¿Do you have any questions?</target>
+                    <target>Do you have any questions?</target>
                 </trans-unit>
               <!-- End orchard_profile.html -->
           <!-- End OrchardBundle -->
@@ -669,7 +669,7 @@
               </trans-unit>
               <trans-unit id="204">
                   <source>user.register.acount</source>
-                  <target>¿Do you already have an account?</target>
+                  <target>Do you already have an account?</target>
               </trans-unit>
               <trans-unit id="205">
                   <source>user.register.privacyPolicy</source>
@@ -737,7 +737,7 @@
               </trans-unit>
               <trans-unit id="218">
                   <source>user.login.forget</source>
-                  <target>¿Did you forget your password?</target>
+                  <target>Did you forget your password?</target>
               </trans-unit>
             <!-- End login_content.html -->
           <!-- End UserBundle -->

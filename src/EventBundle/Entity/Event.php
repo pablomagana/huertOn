@@ -3,12 +3,15 @@
 namespace EventBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Event
  *
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="EventBundle\Repository\EventRepository")
+ * @Vich\Uploadable
  */
 class Event
 {
@@ -71,11 +74,19 @@ class Event
     private $orchard;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection|OrchardBundle\Entity\Image[]
-     * One Event has Many Images.
-     * @ORM\OneToMany(targetEntity="OrchardBundle\Entity\Image", mappedBy="event", fetch="EAGER", cascade="remove")
+     * @var File
+     *
+     * @Vich\UploadableField(mapping="orchard_event", fileNameProperty="imageName")
      */
     private $images;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="imageName", type="string", length=255, unique=true)
+     */
+    private $imageName;
+
 
     /**
      * @var \Doctrine\Common\Collections\Collection|UserBundle\Entity\User[]
@@ -270,47 +281,26 @@ class Event
     {
         return $this->orchard;
     }
+
     /**
-     * Constructor
-     */
-    public function __construct()
+      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
+      *
+      * @return RuleFile
+      */
+    public function setImages(File $file = null)
     {
-        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
-    }
+       $this->images = $file;
+       return $this;
+     }
 
     /**
-     * Add image
-     *
-     * @param \OrchardBundle\Entity\Image $image
-     *
-     * @return Event
-     */
-    public function addImage(\OrchardBundle\Entity\Image $image)
-    {
-        $this->images[] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Remove image
-     *
-     * @param \OrchardBundle\Entity\Image $image
-     */
-    public function removeImage(\OrchardBundle\Entity\Image $image)
-    {
-        $this->images->removeElement($image);
-    }
-
-    /**
-     * Get images
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
+      * @return File|null
+      */
     public function getImages()
     {
-        return $this->images;
+       return $this->images;
     }
+
 
     /**
      * Add user
@@ -344,5 +334,29 @@ class Event
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Set imageName
+     *
+     * @param string $imageName
+     *
+     * @return Event
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * Get imageName
+     *
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
     }
 }
