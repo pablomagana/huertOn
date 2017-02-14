@@ -12,7 +12,24 @@ class HomeController extends Controller
 
   public function indexAction(Request $request)
   {
-    return $this->render('HomeBundle:Default:index.html.twig');
+    $em = $this->getDoctrine()->getManager();
+
+    $repository = $this->getDoctrine()
+    ->getRepository('EventBundle:Event');
+
+    $query = null;
+
+    $query = $repository->createQueryBuilder('e')
+    ->innerJoin('OrchardBundle:Orchard o', 'WITH e.orchard = o.id')
+    ->where('e.startDate > :today')
+    ->setParameter('today', new \DateTime())
+    ->addOrderBy('e.startDate')
+    ->setMaxResults(3)
+    ->getQuery();
+    $events = $query->getResult();
+
+    return $this->render('HomeBundle:Default:index.html.twig', array('events' => $events));
   }
+
 
 }

@@ -33,14 +33,14 @@ class SearchController extends Controller
           '- radians(' . $user_longitude . ') )' .
           '+ sin( radians(' . $user_latitude . ') )' .
           '* sin( radians( o.latitude ) ) ) ) as distance')
-          ->where('o.name LIKE :param OR o.address LIKE :param')
+          ->where('(o.name LIKE :param OR o.address LIKE :param) AND o.published = 1')
           ->setParameter('param', '%' . $input_home_search . '%')
           ->addOrderBy('distance')
           ->getQuery();
     }else {
       $type = 'updatedAt';
       $query = $repository->createQueryBuilder('o')
-          ->where('o.name LIKE :param OR o.address LIKE :param')
+          ->where('(o.name LIKE :param OR o.address LIKE :param) AND o.published = 1')
           ->setParameter('param', '%' . $input_home_search . '%')
           ->addOrderBy('o.updatedAt')
           ->getQuery();

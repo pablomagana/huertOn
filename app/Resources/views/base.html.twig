@@ -135,46 +135,54 @@
 
   {% block body %}{% endblock %}
 
-<footer id="footer">
-  <div class="text text-muted-footer">
-    Copyright © 2017 huertOn. All rights reserved.
-    <div id="dropdown-lang">
-      <div class="dropup show">
-        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Idioma
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a id="dropdown-es" class="dropdown-item" href="/es">ES</a>
-          <a id="dropdown-en" class="dropdown-item" href="/en">EN</a>
-          <a id="dropdown-ca" class="dropdown-item" href="/ca">CA</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</footer>
 
 {% block javascripts %}{% endblock %}
 
-</body>
-</html>
+  <script type="text/javascript">
 
-<script type="text/javascript">
+  navigator.geolocation.getCurrentPosition(success, error, options);
 
-switch (window.location.pathname) {
-  case '/es':
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  };
+
+  function success(pos) {
+    var crd = pos.coords;
+
+    var user_latitude = crd.latitude;
+    var user_longitude = crd.longitude;
+
+    console.log('Your current position is:');
+    console.log('Latitude : ' + crd.latitude);
+    console.log('Longitude: ' + crd.longitude);
+    console.log('More or less ' + crd.accuracy + ' meters.');
+
+    $('#user_latitude').val(user_latitude);
+    $('#user_longitude').val(user_longitude);
+
+  };
+
+  function error(err) {
+    console.warn('ERROR(' + err.code + '): ' + err.message);
+  };
+
+  switch (window.location.pathname) {
+    case '/es':
     $('#logo-desktop').attr('href', '/es');
     $('#logo-mobile').attr('href', '/es');
     break;
-  case '/en':
+    case '/en':
     $('#logo-desktop').attr('href', '/en');
     $('#logo-mobile').attr('href', '/en');
     break;
-  case '/ca':
+    case '/ca':
     $('#logo-desktop').attr('href', '/ca');
     $('#logo-mobile').attr('href', '/ca');
     break;
-}
+  }
 
-</script>
+  </script>
+</body>
+</html>

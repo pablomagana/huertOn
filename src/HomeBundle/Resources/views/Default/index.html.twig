@@ -7,7 +7,7 @@
     <div class="content-b">
       <span id="title-home_search">{{ 'home.title'|trans }}</span><br><br><br><br>
       <form id="form-home_search" action="/find/orchard" method="post">
-        <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}" required="true"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
+        <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
         <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
         <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
       </form>
@@ -17,10 +17,45 @@
 <br>
 <div class="container">
 
-  <h1 class="text-sm-center text-md-center text-lg-center text-xl-center">{{ 'home.activities'|trans }}</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi elementum velit eget velit hendrerit, eu malesuada lacus posuere. Nam vel dapibus erat. Donec ex risus, tincidunt eu molestie quis, pellentesque et neque. Nulla et eros vitae eros molestie facilisis. Nulla aliquet augue et dui congue dignissim. Vivamus rutrum nisl eu ex posuere, at ornare dolor tincidunt. Donec tellus tortor, lobortis sed egestas sed, vulputate ac est. Duis ut lacus non ex rutrum rhoncus. Proin lobortis nisi ligula, eget elementum urna egestas eget. Duis risus diam, fermentum quis efficitur a, posuere eu erat. Vivamus in commodo sem, id luctus nisi. Sed ullamcorper, nisl imperdiet tincidunt auctor, turpis est sagittis metus, vitae tempor ligula elit id metus. Ut rutrum posuere ante, sed condimentum nibh.</p>
-  <p>Nam vel dapibus erat. Donec ex risus, tincidunt eu molestie quis, pellentesque et neque. Nulla et eros vitae eros molestie facilisis. Nulla aliquet augue et dui congue dignissim. Vivamus rutrum nisl eu ex posuere, at ornare dolor tincidunt. Donec tellus tortor, lobortis sed egestas sed, vulputate ac est. Duis ut lacus non ex rutrum rhoncus. Proin lobortis nisi ligula, eget elementum urna egestas eget. Duis risus diam, fermentum quis efficitur a, posuere eu erat. Vivamus in commodo sem, id luctus nisi. Sed ullamcorper, nisl imperdiet tincidunt auctor, turpis est sagittis metus, vitae tempor ligula elit id metus. Ut rutrum posuere ante, sed condimentum nibh.</p>
+<h1>EVENTOS</h1>
+<hr class="hr-orchard-profile">
+<br>
+{% for event in events %}
+<a href="/event/show/profile/{{ event.id }}">
+  <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+    <!-- Imagen -->
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+      {% if event.images is not empty %}
+        <div class="find-result" style="background: url({{ asset('/event/image/' ~ event.images[0].nameImage) }});">
+          <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
+        </div>
+      {% else %}
+      <div class="find-result" style="background: url(http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png);">
+        <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Texto -->
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+      <p><font style="font-size:20px">{{ event.title }}</font> <br><i>{{ event.orchard.name }}</i></p>
+    </div>
+
+    <input type="text" class="geometry" value="{{ event.orchard.geometry }}" hidden="hidden">
+  </div>
+</a>
+
+{% endfor %}
 </div>
+
+<div class="container">
+  <div class="spacing "></div>
+  <a href="/find/event"><button id="register-button" type="button" class="btn btn-outline-primary">Ver más</button></a>
+  <div class="spacing "></div>
+
+</div>
+
+
 <script type="text/javascript">
 
 /* detect touch */
@@ -121,34 +156,6 @@ if(!$("html").hasClass("touch")){
   $(window).scroll(parallaxPosition);
   parallaxPosition();
 }
-
-navigator.geolocation.getCurrentPosition(success, error, options);
-
-var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
-
-function success(pos) {
-  var crd = pos.coords;
-
-  var user_latitude = crd.latitude;
-  var user_longitude = crd.longitude;
-
-  console.log('Your current position is:');
-  console.log('Latitude : ' + crd.latitude);
-  console.log('Longitude: ' + crd.longitude);
-  console.log('More or less ' + crd.accuracy + ' meters.');
-
-  $('#user_latitude').val(user_latitude);
-  $('#user_longitude').val(user_longitude);
-
-};
-
-function error(err) {
-  console.warn('ERROR(' + err.code + '): ' + err.message);
-};
 
 </script>
 
