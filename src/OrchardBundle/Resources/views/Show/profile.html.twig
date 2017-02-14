@@ -196,8 +196,8 @@
     <hr class="hr-orchard-profile"><br>
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
       <div id="map-show" style="height:400px; width:100%;"></div>
-      <input type="text" class="geometry" value="{{orchard.geometry}}" hidden="hidden">
-      <input type="text" id="type" class="geometry" value="profile" hidden="hidden">
+      <input type="text" class="geometry" value="{{ orchard.geometry }}" hidden="hidden">
+      <input type="text" id="type" value="profile" hidden="hidden">
     </div>
   </div>
   <div class="spacing"></div>
@@ -407,9 +407,9 @@
         <h5>{{ 'orchard.profile.where'|trans }}</h5>
         <hr class="hr-orchard-profile"><br>
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-          <div id="map-show" style="height:400px; width:100%;"></div>
-          <input type="text" class="geometry" value="{{orchard.geometry}}" hidden="hidden">
-          <input type="text" id="type" class="geometry" value="profile" hidden="hidden">
+          <input type="text" id="type" value="profile" hidden="hidden">
+          <input type="text" class="geometry" value="{{ orchard.geometry }}" hidden="hidden">
+          <div id="map-show-mobile" style="height:400px; width:100%;"></div>
         </div>
       </div>
     </div>
@@ -481,7 +481,6 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
-
 
 var slideIndex = 1;
 showDivs(slideIndex);
