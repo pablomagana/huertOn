@@ -119,7 +119,15 @@ vich_uploader:
             uri_prefix:         /orchard/file
             upload_destination: '%kernel.root_dir%/../web/orchard/file'
             namer:              vich_uploader.namer_uniqid
+            delete_on_update:   true
+            delete_on_remove:   true
         orchard_image:
             uri_prefix:         /orchard/image
             upload_destination: '%kernel.root_dir%/../web/orchard/image'
+            namer:              vich_uploader.namer_uniqid
+            delete_on_update:   true
+            delete_on_remove:   true
+        orchard_event:
+            uri_prefix:         /orchard/event
+            upload_destination: '%kernel.root_dir%/../web/orchard/event'
             namer:              vich_uploader.namer_uniqid

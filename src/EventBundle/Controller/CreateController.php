@@ -27,7 +27,6 @@ class CreateController extends Controller
             $event->setOrchard($orchard);
 
             $em->persist($event);
-
             $em->flush();
 
             return $this->redirectToRoute('home_homepage');
