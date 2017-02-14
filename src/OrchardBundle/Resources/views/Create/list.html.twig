@@ -19,7 +19,7 @@
   {% if orchard.images != null and orchard.images is not empty %}
     <div class="row">
       <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-        <div style="width: 100%; height: 300px; background: url({{ orchard.images[0].src }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+        <div style="width: 100%; height: 300px; background: url({{ asset('/orchard/image/' ~ orchard.images[0].nameImage) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
       </div>
   {% endif %}
     <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12 container">

@@ -68,7 +68,7 @@ class Event
 
     /**
      * Many events have One Orchard.
-     * @ORM\ManyToOne(targetEntity="OrchardBundle\Entity\Orchard", inversedBy="events")
+     * @ORM\ManyToOne(targetEntity="OrchardBundle\Entity\Orchard", inversedBy="events", fetch="EAGER")
      * @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
      */
     private $orchard;

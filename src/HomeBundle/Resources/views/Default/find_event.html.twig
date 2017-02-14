@@ -7,12 +7,12 @@
       <div class="find-title">
         <a href="/find/orchard"><button id="btn-orchards" type="button" class="btn btn-link">{{ 'find.orchard'|trans }}</button></a> &nbsp;&nbsp; / &nbsp;&nbsp; <button id="btn-events" type="button" class="btn btn-link">{{ 'find.events'|trans }}</button>
       </div>
-      <form id="form-home_search" action="/find" method="post">
-        <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}" required="true"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
+      <form id="form-home_search" action="/find/event" method="post">
+        <input id="input-home_search" name="input-home_search" value="{{ input_home_search }}" type="text" placeholder="{{ 'home.find.placeholder'|trans }}" required="true"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
         <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
         <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
       </form>
-      <p>{{ 'find.results-1'|trans }} {{ orchards|length }} {{ 'find.results-2'|trans }}</p>
+      <p>{{ 'find.results-1'|trans }} {{ events|length }} {{ 'find.results-2'|trans }}</p>
     </div>
   </div>
   <div class="spacing"></div>
@@ -20,7 +20,7 @@
 
 <input id="type" type="text" value="find" hidden="hidden">
 
-{% if orchards is not empty %}
+{% if events is not empty %}
 
 <div class="map col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <div id="map-show" class="map-show" style="height: 400px; width: 100%;">
@@ -29,8 +29,8 @@
 
 {% endif %}
 
-<div id="orchard-cards" class="row container-fluid">
-  {% for orchard in orchards %}
+<div id="event-cards" class="row container-fluid">
+  {% for event in events %}
   {% if type == 'distance' %}
   <a href="/orchard/show/profile/{{ orchard.0.id }}"></a>
   <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
@@ -44,29 +44,29 @@
     </div>
     <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
       <!-- Texto -->
-      <h3>{{ orchard.0.name }}</h3>
-      <p><i>{{ orchard.0.address }}</i></p>
+      <h3>{{ event.0.title }}</h3>
+      <p><i>{{ event.0.orchard.name }}</i></p>
     </div>
   </div>
-  <input type="text" class="geometry" value="{{ orchard.0.geometry }}" hidden="hidden">
+  <input type="text" class="geometry" value="{{ event.0.orchard }}" hidden="hidden">
   {% else %}
-  <a href="/orchard/show/profile/{{ orchard.id }}"></a>
+  <a href="/orchard/show/profile/{{ event.id }}"></a>
   <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-bottom:30px;">
     <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
       <!-- Imagen -->
-      {% if orchard.images is not empty %}
-      <div class="find-result" style="background: url({{ orchard.images[0].src }});"></div>
+      {% if event.images is not empty %}
+      <div class="find-result" style="background: url({{ asset('/event/image/' ~ event.0.images[0].nameImage) }});"></div>
       {% else %}
       <div class="find-result" style="background: url(http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png);"></div>
       {% endif %}
     </div>
     <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
       <!-- Texto -->
-      <h3>{{ orchard.name }}</h3>
-      <p><i>{{ orchard.address }}</i></p>
+      <h3>{{ event.title }}</h3>
+      <p><i>{{ event.orchard.name }}</i></p>
     </div>
   </div>
-  <input type="text" class="geometry" value="{{ orchard.geometry }}" hidden="hidden">
+  <input type="text" class="geometry" value="{{ event.orchard.geometry }}" hidden="hidden">
   {% endif %}
   {% endfor %}
 </div>
