@@ -327,6 +327,22 @@ button#btn-contact {
     border-radius: 30px;
 }
 
+button#btn-send-message {
+    background-color: rgb(11, 1, 70);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 30px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 5px;
+}
+
 input#input-home_search {
     width: 50vw;
     box-sizing: border-box;
