@@ -105,9 +105,37 @@ $(function() {
 
 	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
 
+	$('textarea').each(function() {
+		var length = $(this).val().length;
+		if(length) {
+			$('#btn-siguiente').html('{{ 'orchard.step11.next'|trans }}');
+		}else if(checkEmpty()) {
+			$('#btn-siguiente').html('{{ 'orchard.step21.nowNo'|trans }}');
+		}
+	});
+
+	function checkEmpty() {
+		var empty = true;
+		$('textarea').each(function(){
+			if (this.value != "") {
+				empty = false;
+			}
+		})
+		return empty;
+	}
+
 	//NUEVO PASO
 	$('.add').click(function() {
 		$( ".base" ).clone().removeAttr( "class style" ).appendTo( ".inscription_steps" );
+		$('textarea').keyup(function() {
+			console.log('Escribiendo');
+			var length = $(this).val().length;
+			if(length) {
+				$('#btn-siguiente').html('{{ 'orchard.step11.next'|trans }}');
+			}else if(checkEmpty()) {
+				$('#btn-siguiente').html('{{ 'orchard.step21.nowNo'|trans }}');
+			}
+		});
 		$("u.remove").on( "click", function() {
 			$(this).parent().parent().remove();
 		});
