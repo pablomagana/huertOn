@@ -5,7 +5,7 @@
   <div class="row row-centered">
     <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 col-centered">
       <div class="find-title">
-        <button id="btn-orchards" type="button" class="btn btn-link">{{ 'find.orchard'|trans }}</button> &nbsp;&nbsp; / &nbsp;&nbsp; <button id="btn-events" type="button" class="btn btn-link">{{ 'find.events'|trans }}</button>
+        <a href="/find/orchard"><button id="btn-orchards" type="button" class="btn btn-link">{{ 'find.orchard'|trans }}</button></a> &nbsp;&nbsp; / &nbsp;&nbsp; <button id="btn-events" type="button" class="btn btn-link">{{ 'find.events'|trans }}</button>
       </div>
       <form id="form-home_search" action="/find" method="post">
         <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}" required="true"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
@@ -71,10 +71,10 @@
   {% endfor %}
 </div>
 
+
 <script src="{{ asset('/js/map_show.js') }}"></script>
-
 <script type="text/javascript">
-
+/*
 $( document ).ready(function() {
 
   $( "#btn-events" ).on('click', function() {
@@ -88,6 +88,6 @@ $( document ).ready(function() {
   });
 
 });
-
+*/
 </script>
 {% endblock %}
