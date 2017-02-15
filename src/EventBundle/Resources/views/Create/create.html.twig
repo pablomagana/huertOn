@@ -70,6 +70,9 @@
           <option id="{{ orchard.id }}">{{ orchard.name }}</option>
           {% endif %}
           {% endfor %}
+          {% if orchardRelated != null %}
+          <input id="orchardRelated" type="text" name="" value="{{ orchardRelated.name }}" hidden="hidden">
+          {% endif %}
         </select>
       </div>
     </div>
@@ -121,6 +124,10 @@ $("input:file").change(function(){
   console.log("detectando cambios en input");
   previewImage(this.files[0]);
 });
+
+if($('#orchardRelated').val()) {
+  $('#user_orchards').val($('#orchardRelated').val());
+}
 
 $('#eventbundle_event_id_orchard').val($( "#user_orchards option:selected" ).attr('id'));
 

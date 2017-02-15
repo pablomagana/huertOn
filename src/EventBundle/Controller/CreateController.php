@@ -15,8 +15,12 @@ class CreateController extends Controller
 
       $event = $this->container->get("event_service")->getEvent($id_event);
 
+      $orchard = null;
+
       if(!$event) {
         $event = new Event();
+      }else {
+        $orchard = $event->getOrchard();
       }
 
         $form = $this->createForm(EventType::class, $event);
@@ -40,7 +44,7 @@ class CreateController extends Controller
             return $this->redirectToRoute('home_homepage');
         }
 
-        return $this->render('EventBundle:Create:create.html.twig', array('form'=>$form->createView()));
+        return $this->render('EventBundle:Create:create.html.twig', array('form'=>$form->createView(), 'orchardRelated' => $orchard));
     }
 
     public function listAction()
