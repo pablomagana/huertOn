@@ -246,10 +246,10 @@
             </select>
           </div>
           <div class="form-group">
-            <textarea placeholder="Escribe aquí tu consulta" class="form-control" id="user_query" rows="3"></textarea>
+            <textarea maxlength="500" placeholder="Escribe aquí tu consulta" class="form-control" id="user_query" rows="3"></textarea>
           </div>
           <button id="btn-send-message">Enviar mensaje</button>
-      </div>
+        </div>
       </div>
     </div>
   </div>
@@ -459,9 +459,30 @@
               </div>
             </div>
           </div>
+          <br>
           <!-- FORMULARIO DE CONTACTO -->
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-
+            <div class="container">
+              <div class="form-group">
+                <input type="text" class="form-control" id="user_name_mobile" placeholder="Nombre">
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" id="user_email_mobile" aria-describedby="emailHelpMobile" placeholder="Dirección de correo electrónico">
+                <small id="emailHelpMobile" class="form-text text-muted">No te enviaremos spam.</small>
+              </div>
+              <div class="form-group">
+                <select class="form-control" id="user_reason_mobile">
+                  <option>Hacer una consulta</option>
+                  {% for orchardParticipate in orchard.orchardParticipate %}
+                  <option>{{ orchardParticipate.name }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-group">
+                <textarea maxlength="500" placeholder="Escribe aquí tu consulta" class="form-control" id="user_query_mobile" rows="3"></textarea>
+              </div>
+              <button id="btn-send-message-mobile">Enviar mensaje</button>
+            </div>
           </div>
         </div>
       </div>
@@ -605,7 +626,8 @@ $('.scroller-left').click(function() {
 });
 
 $('#btn-send-message').on('click', function() {
-console.log('Enviando consulta');
+  console.log('Enviando consulta');
+
     $.ajax({
       type: 'POST',
       url: '/orchard/suggest/profile/' + $('#user_name').val() + '/' + $('#user_email').val() + '/' + $( "#user_reason option:selected" ).text() + '/' + $('#user_query').val() + '/{{ orchard.id }}',
@@ -631,6 +653,38 @@ console.log('Enviando consulta');
         console.log('error');
       }
     });
-  });
+
+});
+
+$('#btn-send-message-mobile').on('click', function() {
+  console.log('Enviando consulta');
+
+    $.ajax({
+      type: 'POST',
+      url: '/orchard/suggest/profile/' + $('#user_name_mobile').val() + '/' + $('#user_email_mobile').val() + '/' + $( "#user_reason_mobile option:selected" ).text() + '/' + $('#user_query_mobile').val() + '/{{ orchard.id }}',
+      success: function(data) {
+        $('#contactModal').modal('show');
+      },
+      error: function(jqXHR, exception) {
+        if (jqXHR.status === 0) {
+          alert('Not connect.\n Verify Network.');
+        } else if (jqXHR.status == 404) {
+          alert('Requested page not found. [404]');
+        } else if (jqXHR.status == 500) {
+          alert('Internal Server Error [500].');
+        } else if (exception === 'parsererror') {
+          alert('Requested JSON parse failed.');
+        } else if (exception === 'timeout') {
+          alert('Time out error.');
+        } else if (exception === 'abort') {
+          alert('Ajax request aborted.');
+        } else {
+          alert('Uncaught Error.\n' + jqXHR.responseText);
+        }
+        console.log('error');
+      }
+    });
+
+});
 </script>
 {% endblock %}

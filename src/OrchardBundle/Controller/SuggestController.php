@@ -95,7 +95,7 @@ class SuggestController extends Controller
     ->setBody(
       $this->renderView(
         'OrchardBundle:Suggest:contact_email.html.twig',
-        array('orchardUserName' => $orchard->getUser()->getUsername(), 'userName' => $name, 'reason' => $reason, 'query' => $query)
+        array('orchardUserName' => $orchard->getUser()->getUsername(), 'userName' => $name, 'reason' => $reason, 'query' => $query, 'email' => $email)
         )
         )
         ;
