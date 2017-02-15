@@ -7,9 +7,9 @@ function previewImage(file) {
     if (!file.type.match(imageType)) {
         throw "El archivo debe ser una imagen";
     }
-    if(file.size>10240){
-      throw "El archivo supera el tamaño maximo";
-    }
+    // if(file.size>10240){
+    //   throw "El archivo supera el tamaño maximo";
+    // }
     //añado al fichero una nueva propiedad descripción
     file.des="";
     file.id=id++;

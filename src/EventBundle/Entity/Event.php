@@ -67,6 +67,14 @@ class Event
     private $price;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="showPlaces", type="boolean")
+     *
+     */
+    private $showPlaces;
+
+    /**
      * Many events have One Orchard.
      * @ORM\ManyToOne(targetEntity="OrchardBundle\Entity\Orchard", inversedBy="events", fetch="EAGER")
      * @ORM\JoinColumn(name="orchard_id", referencedColumnName="id")
@@ -358,5 +366,36 @@ class Event
     public function getImageName()
     {
         return $this->imageName;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set showPlaces
+     *
+     * @param boolean $showPlaces
+     *
+     * @return Event
+     */
+    public function setShowPlaces($showPlaces)
+    {
+        $this->showPlaces = $showPlaces;
+
+        return $this;
+    }
+
+    /**
+     * Get showPlaces
+     *
+     * @return boolean
+     */
+    public function getShowPlaces()
+    {
+        return $this->showPlaces;
     }
 }
