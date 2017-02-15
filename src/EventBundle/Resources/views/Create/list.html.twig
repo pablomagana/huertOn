@@ -20,7 +20,7 @@
     <select class="form-control" id="user_orchards">
       {% for orchard in app.user.orchard %}
       {% if orchard.name != null %}
-      <option>{{ orchard.name }}</option>
+      <option id="{{ orchard.id }}">{{ orchard.name }}</option>
       {% endif %}
       {% endfor %}
     </select>
@@ -28,33 +28,23 @@
   </div>
 </div>
 </div>
-  {% for event in app.user.orchard[0].events %}
-  <!-- No pinta la imagen si no la tiene -->
-  {% if event.images != null and event.images is not empty %}
-    <div class="row">
-      <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-        <div style="width: 100%; height: 300px; background: url({{ asset('/event/image/' ~ event.images[0].imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-      </div>
-  {% endif %}
-    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12 container">
-      <p><h3> {{ event.title }} </h3></p>
-
-    </div>
-  </div>
-
-  <br>
-
+{% if events is defined %}
+  {% for event in events %}
+      <h1>{{ event.title }}</h1>
   <script type="text/javascript">
   $(function() {
-    $('.show-modal{{ orchard.id }}').click(function(){
-      $('#btn-delete-modal').attr("href", "/orchard/create/delete/{{ orchard.id}}")
-      $('#btn-unpublish-modal').attr("href", "/orchard/create/publish/{{ orchard.id }}/false")
+    $('.show-modal{{ event.id }}').click(function(){
+      $('#btn-delete-modal').attr("href", "/orchard/create/delete/{{ event.id}}")
+      $('#btn-unpublish-modal').attr("href", "/orchard/create/publish/{{ event.id }}/false")
       $('#myModal').modal('show');
     });
   });
   </script>
 
   {% endfor %}
+  {% else %}
+      <h1>Este huerto no tiene actividades asociadas.</h1>
+  {% endif %}
   <div style="text-align: center; margin-bottom:10px;" class="draft-xs fixed-buttons">
     <a href="/orchard/create/steps"><button type="button" class="btn btn-success btn-draft-xs">{{ 'orchard.list.add-btn'|trans }}</button></a>
   </div>
@@ -83,6 +73,34 @@
   <script type="text/javascript">
   $(function () {
     $('[data-toggle="tooltip"]').tooltip();
+  });
+
+  $('#user_orchards').on('change', function() {
+    $.ajax({
+      type: 'POST',
+      url: '/event/create/orchard/' + $( "#user_orchards option:selected" ).attr('id'),
+      success: function(data) {
+        console.log('success');
+      },
+      error: function(jqXHR, exception) {
+        if (jqXHR.status === 0) {
+          alert('Not connect.\n Verify Network.');
+        } else if (jqXHR.status == 404) {
+          alert('Requested page not found. [404]');
+        } else if (jqXHR.status == 500) {
+          alert('Internal Server Error [500].');
+        } else if (exception === 'parsererror') {
+          alert('Requested JSON parse failed.');
+        } else if (exception === 'timeout') {
+          alert('Time out error.');
+        } else if (exception === 'abort') {
+          alert('Ajax request aborted.');
+        } else {
+          alert('Uncaught Error.\n' + jqXHR.responseText);
+        }
+        console.log('error');
+      }
+    });
   });
   </script>
 

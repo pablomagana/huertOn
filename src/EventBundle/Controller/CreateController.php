@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use EventBundle\Entity\Event;
 use EventBundle\Form\EventType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CreateController extends Controller
 {
@@ -38,5 +39,12 @@ class CreateController extends Controller
     public function listAction()
     {
       return $this->render('EventBundle:Create:list.html.twig');
+    }
+
+    public function orchardAction($id_orchard)
+    {
+      $events = $this->container->get("event_service")->getOrchardEvents($id_orchard);
+
+      return $this->render('EventBundle:Create:list.html.twig', array('events' => $events));
     }
 }

@@ -2,6 +2,10 @@ event_create_list:
     path:     /create/list
     defaults: { _controller: EventBundle:Create:list }
 
+event_create_orchard:
+    path:     /create/orchard/{id_orchard}
+    defaults: { _controller: EventBundle:Create:orchard, id_orchard:null }
+
 event_create:
     path:     /create/{id_orchard}
     defaults: { _controller: EventBundle:Create:create, id_orchard:null }
