@@ -14,20 +14,20 @@
     </div>
   </div>
   <div class="container">
-  <div class="row row-centered">
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-centered">
-  <div class="form-group">
-    <select class="form-control" id="user_orchards">
-      {% for orchard in app.user.orchard %}
-      {% if orchard.name != null %}
-      <option id="{{ orchard.id }}">{{ orchard.name }}</option>
-      {% endif %}
-      {% endfor %}
-    </select>
+    <div class="row row-centered">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 col-centered">
+        <div class="form-group">
+          <select class="form-control" id="user_orchards">
+            {% for orchard in app.user.orchard %}
+            {% if orchard.name != null %}
+            <option id="{{ orchard.id }}">{{ orchard.name }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
-  </div>
-</div>
-</div>
 
   <div id="events-container" class="container">
       <h1>Este huerto no tiene actividades asociadas.</h1>
@@ -37,26 +37,6 @@
     <a href="/orchard/create/steps"><button type="button" class="btn btn-success btn-draft-xs">{{ 'orchard.list.add-btn'|trans }}</button></a>
   </div>
 </div>
-
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">{{ 'orchard.list.sure'|trans }}</h4>
-      </div>
-      <div class="modal-body">
-        <p>{{ 'orchard.list.sure-2'|trans }}<p></p>
-      </div>
-      <div class="modal-footer">
-        <a id="btn-delete-modal" href=""><button type="button" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
-        <a id="btn-unpublish-modal" href=""><button id="btn-unpublish" type="button" class="btn btn-secondary ">{{ 'orchard.list.yesUnpublish'|trans }}</button></a>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
   <script type="text/javascript">
   $(function () {
@@ -120,6 +100,24 @@
   });
   </script>
 
-
+  <div class="modal fade" id="deleteModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{{ 'orchard.list.sure'|trans }}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{ 'orchard.list.sure-2'|trans }}<p></p>
+        </div>
+        <div class="modal-footer">
+          <a id="btn-delete-modal" href=""><button type="button" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
+          <a id="btn-unpublish-modal" href=""><button id="btn-unpublish" type="button" class="btn btn-secondary ">{{ 'orchard.list.yesUnpublish'|trans }}</button></a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 
 {% endblock %}
