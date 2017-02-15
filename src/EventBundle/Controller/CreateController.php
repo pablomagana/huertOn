@@ -10,10 +10,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CreateController extends Controller
 {
-    public function createAction(Request $request)
+    public function createAction(Request $request, $id_event)
     {
 
-      $event = new Event();
+      $event = $this->container->get("event_service")->getEvent($id_event);
+
+      if(!$event) {
+        $event = new Event();
+      }
 
         $form = $this->createForm(EventType::class, $event);
 

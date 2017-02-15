@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class EventType extends AbstractType
@@ -27,7 +28,7 @@ class EventType extends AbstractType
     {
         $builder
           ->add('title',TextType::class,["label" => "Titulo", 'attr' => [
-          'class' => 'form-control']])
+          'class' => 'form-control', 'maxlength' => 80]])
           ->add('startDate', DateType::class,
               ['widget' => 'single_text','format' => 'yyyy-MM-dd',
               'attr' => [
@@ -60,6 +61,7 @@ class EventType extends AbstractType
             'download_link' => true,
           ])
           ->add('guardar', SubmitType::class, array('attr' => array('class' => 'btn btn-primary')))
+          ->add('borrar', ResetType::class, array('attr' => array('class' => 'btn btn-secondary')))
           ->add('id_orchard', HiddenType::class, array('mapped' => false))
         ;
     }
