@@ -14,11 +14,8 @@ class ShowController extends Controller
 
   public function profileAction($id_event)
   {
-
-    $event=$this->getRepository("EventBundle:Entity");
-
-    return $this->render('EventBundle:Show:profile.html.twig', array('event' => $event));
-
+    $event=$this->getDoctrine()->getRepository('EventBundle:Event')->findOneById($id_event);
+    return $this->render('EventBundle:Default:profile.html.twig', array('event' => $event));
   }
 
 }
