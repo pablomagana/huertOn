@@ -9,6 +9,11 @@ services:
          arguments: [%fos_user.model.user.class%]
          tags:
              -  { name: form.type, alias:app_user_registration }
+     app.locale_listener:
+         class: HomeBundle\EventListener\LocaleListener
+         arguments: ['%kernel.default_locale%']
+         tags:
+             -  { name: kernel.event_subscriber }
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

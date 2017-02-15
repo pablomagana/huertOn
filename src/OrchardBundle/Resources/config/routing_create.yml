@@ -1,0 +1,31 @@
+orchard_create_list:
+    path:     /list
+    defaults: { _controller: OrchardBundle:Create:list }
+
+orchard_create_steps:
+    path:     /steps/{id_orchard}
+    defaults: { _controller: OrchardBundle:Create:steps, id_orchard:null }
+
+orchard_create_step:
+    path:     /step/{step_orchard}/{id_orchard}
+    defaults: { _controller: OrchardBundle:Create:step, step:11, id_orchard:null }
+
+orchard_create_insert:
+    path:     /insert/{id_orchard}
+    defaults: { _controller: OrchardBundle:Create:insert, id_orchard:null }
+
+orchard_create_insert_checkbox:
+    path:     /insert/checkbox/{id_orchard}/{entity}
+    defaults: { _controller: OrchardBundle:Create:checkbox, id_orchard:null }
+
+orchard_create_insert_custom:
+    path:     /insert/custom/{id_orchard}
+    defaults: { _controller: OrchardBundle:Create:custom, id_orchard:null }
+
+orchard_create_publish:
+    path:     /publish/{id_orchard}/{publish}
+    defaults: { _controller: OrchardBundle:Create:publish, id_orchard:null, publish:false }
+
+orchard_create_delete:
+    path:     /delete/{id_orchard}
+    defaults: { _controller: OrchardBundle:Create:delete, id_orchard:null}

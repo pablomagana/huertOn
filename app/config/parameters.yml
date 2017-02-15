@@ -1,10 +1,10 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: localhost
+    database_host: 127.0.0.1
     database_port: 3306
     database_name: parcelles
-    database_user: parcelles
-    database_password: Administrador.1
+    database_user: root
+    database_password: null
     mailer_transport: gmail
     mailer_user: parcellesflorida@gmail.com
     mailer_password: Administrador.1

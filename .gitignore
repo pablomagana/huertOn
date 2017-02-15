@@ -18,3 +18,4 @@ bin/symfony_requirements
 composer.lock
 composer.phar
 web/config.php
+web/orchard/*

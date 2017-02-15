@@ -1,0 +1,756 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+          <!-- Base -->
+            <!-- base.html -->
+              <trans-unit id="1">
+                  <source>base.li-1</source>
+                  <target>Publica tu huerto</target>
+              </trans-unit>
+              <trans-unit id="2">
+                  <source>base.li-2</source>
+                  <target>Busca actividades</target>
+              </trans-unit>
+              <trans-unit id="3">
+                  <source>base.li-3</source>
+                  <target>Identificado como</target>
+              </trans-unit>
+              <trans-unit id="4">
+                  <source>base.li-4</source>
+                  <target>Mi perfil</target>
+              </trans-unit>
+              <trans-unit id="5">
+                  <source>base.li-5</source>
+                  <target>Lista de huertos</target>
+              </trans-unit>
+              <trans-unit id="6">
+                  <source>base.li-6</source>
+                  <target>Cerrar sesión</target>
+              </trans-unit>
+              <trans-unit id="7">
+                  <source>base.li-7</source>
+                  <target>Regístrate</target>
+              </trans-unit>
+              <trans-unit id="8">
+                  <source>base.li-8</source>
+                  <target>Iniciar sesión</target>
+              </trans-unit>
+              <trans-unit id="9">
+                  <source>base.li-9</source>
+                  <target>Inicio</target>
+              </trans-unit>
+            <!-- End base.html -->
+
+            <!-- step_base.html -->
+              <trans-unit id="10">
+                  <source>stepBase.loading</source>
+                  <target>Guardando...</target>
+              </trans-unit>
+              <trans-unit id="11">
+                  <source>stepBase.saveExit</source>
+                  <target>Guardar y salir </target>
+              </trans-unit>
+              <trans-unit id="12">
+                  <source>stepBase.email-1</source>
+                  <target>Muchas gracias!</target>
+              </trans-unit>
+              <trans-unit id="13">
+                  <source>stepBase.email-2</source>
+                  <target>Cuando estudiemos tu sugerencia te enviaremos un email con el resultado.</target>
+              </trans-unit>
+              <trans-unit id="14">
+                  <source>stepBase.close</source>
+                  <target>Cerrar</target>
+              </trans-unit>
+            <!-- End step_base.html -->
+          <!-- End Base -->
+
+
+          <!-- HomeBundle -->
+            <!-- index.html -->
+              <trans-unit id="15">
+                  <source>home.title</source>
+                  <target>Busca un huerto para ti</target>
+              </trans-unit>
+              <trans-unit id="16">
+                  <source>home.find.placeholder</source>
+                  <target>Pon tu ciudad, CP o nombre del huerto</target>
+              </trans-unit>
+              <trans-unit id="17">
+                  <source>home.btn.search</source>
+                  <target>Buscar</target>
+              </trans-unit>
+              <trans-unit id="18">
+                  <source>home.activities</source>
+                  <target>Actividades</target>
+              </trans-unit>
+            <!-- End index.html -->
+
+            <!-- find.html -->
+              <trans-unit id="19">
+                  <source>find.orchard</source>
+                  <target>HUERTOS</target>
+              </trans-unit>
+              <trans-unit id="20">
+                  <source>find.events</source>
+                  <target>EVENTOS</target>
+              </trans-unit>
+              <trans-unit id="21">
+                  <source>find.results-1</source>
+                  <target>Se han encontrado</target>
+              </trans-unit>
+              <trans-unit id="22">
+                  <source>find.results-2</source>
+                  <target>resultados</target>
+              </trans-unit>
+            <!-- End find.html -->
+          <!-- End HomeBundle -->
+
+
+          <!-- OrchardBundle -->
+            <!-- Create -->
+              <!-- list.html.twig -->
+                <trans-unit id="23">
+                    <source>orchard.list.title</source>
+                    <target>Huertos que has creado</target>
+                </trans-unit>
+                <trans-unit id="24">
+                    <source>orchard.list.add-btn</source>
+                    <target>Añade un nuevo huerto</target>
+                </trans-unit>
+                <trans-unit id="25">
+                    <source>orchard.list.published</source>
+                    <target>Publicado</target>
+                </trans-unit>
+                <trans-unit id="26">
+                    <source>orchard.list.draft</source>
+                    <target>Borrador</target>
+                </trans-unit>
+                <trans-unit id="27">
+                    <source>orchard.list.date</source>
+                    <target>Fecha de creación: </target>
+                </trans-unit>
+                <trans-unit id="28">
+                    <source>orchard.list.lastDate</source>
+                    <target>Última fecha de modificación: </target>
+                </trans-unit>
+                <trans-unit id="29">
+                    <source>orchard.list.publish</source>
+                    <target>Publica</target>
+                </trans-unit>
+                <trans-unit id="30">
+                    <source>orchard.list.unPublish</source>
+                    <target>Despublica</target>
+                </trans-unit>
+                <trans-unit id="31">
+                    <source>orchard.list.complete</source>
+                    <target>Completa</target>
+                </trans-unit>
+                <trans-unit id="32">
+                    <source>orchard.list.modify</source>
+                    <target>Modifica</target>
+                </trans-unit>
+                <trans-unit id="33">
+                    <source>orchard.list.delete</source>
+                    <target>Elimina</target>
+                </trans-unit>
+                <trans-unit id="34">
+                    <source>orchard.list.sure</source>
+                    <target>¿Estás seguro que quieres eliminar?</target>
+                </trans-unit>
+                <trans-unit id="35">
+                    <source>orchard.list.sure-2</source>
+                    <target>No podrás recuperar estos datos.</target>
+                </trans-unit>
+                <trans-unit id="36">
+                    <source>orchard.list.yesDelete</source>
+                    <target>Si, elimina</target>
+                </trans-unit>
+                <trans-unit id="37">
+                    <source>orchard.list.yesUnpublish</source>
+                    <target>Mejor despublicar</target>
+                </trans-unit>
+              <!-- End list.html.twig -->
+
+              <!--  step11.html.twig -->
+                <trans-unit id="38">
+                    <source>orchard.step11.title</source>
+                    <target>¿Cómo se llama tu huerto?</target>
+                </trans-unit>
+                <trans-unit id="38-2">
+                    <source>orchard.step11.title-2</source>
+                    <target>¿Cómo se llama tu huerto?</target>
+                </trans-unit>
+                <trans-unit id="39">
+                    <source>orchard.step11.required</source>
+                    <target>Campo requerido</target>
+                </trans-unit>
+                <trans-unit id="40">
+                    <source>orchard.step11.where</source>
+                    <target>¿Dónde está tu huerto?</target>
+                </trans-unit>
+                <trans-unit id="40-2">
+                    <source>orchard.step11.where-2</source>
+                    <target>Dirección de tu huerto</target>
+                </trans-unit>
+                <trans-unit id="41">
+                    <source>orchard.step11.marker</source>
+                    <target>Mueve el marcador para seleccionar la entrada a tu huerto.</target>
+                </trans-unit>
+                <trans-unit id="42">
+                    <source>orchard.step11.back</source>
+                    <target>Atrás</target>
+                </trans-unit>
+                <trans-unit id="43">
+                    <source>orchard.step11.next</source>
+                    <target>Siguiente</target>
+                </trans-unit>
+              <!-- End step11.html.twig -->
+
+              <!--  step12.html.twig -->
+                <trans-unit id="44">
+                    <source>orchard.step12.title</source>
+                    <target>¿Cómo pueden contactar conmigo?</target>
+                </trans-unit>
+                <trans-unit id="45">
+                    <source>orchard.step12.mail</source>
+                    <target>Mail</target>
+                </trans-unit>
+                <trans-unit id="46">
+                    <source>orchard.step12.tlf</source>
+                    <target>Teléfono</target>
+                </trans-unit>
+                <trans-unit id="47">
+                    <source>orchard.step12.web</source>
+                    <target>Web / Blog</target>
+                </trans-unit>
+                <trans-unit id="48">
+                    <source>orchard.step12.web-2</source>
+                    <target>Escribe aquí tu Web / Blog</target>
+                </trans-unit>
+                <trans-unit id="49">
+                    <source>orchard.step12.social</source>
+                    <target>Redes Sociales</target>
+                </trans-unit>
+              <!-- End step12.html.twig -->
+
+              <!--  step13.html.twig -->
+              <trans-unit id="50">
+                  <source>orchard.step13.title</source>
+                  <target>¿Qué tipo de huerto es?</target>
+              </trans-unit>
+              <trans-unit id="51">
+                  <source>orchard.step13.typeOrchard</source>
+                  <target>Sugierenos un tipo de huerto</target>
+              </trans-unit>
+              <trans-unit id="52">
+                  <source>orchard.step13.typeOrchard-2</source>
+                  <target>¿Qué tipo de huerto es?</target>
+              </trans-unit>
+              <trans-unit id="53">
+                  <source>orchard.step13.send</source>
+                  <target>Enviar</target>
+              </trans-unit>
+              <trans-unit id="54">
+                  <source>orchard.step13.title-right</source>
+                  <target>Tipo de huerto</target>
+              </trans-unit>
+              <trans-unit id="55">
+                  <source>orchard.step13.title-right-2</source>
+                  <target>Situa el puntero sobre cualquier tipo de huerto para mostrar más información de cada uno.</target>
+              </trans-unit>
+              <trans-unit id="56">
+                  <source>orchard.step13.required</source>
+                  <target>Paso obligatorio</target>
+              </trans-unit>
+              <trans-unit id="57">
+                  <source>orchard.step13.required-2</source>
+                  <target>Por favor, selecciona un tipo de huerto</target>
+              </trans-unit>
+              <trans-unit id="58">
+                  <source>orchard.step13.save</source>
+                  <target>Guardado</target>
+              </trans-unit>
+              <!-- End step13.html.twig -->
+
+              <!--  step14.html.twig -->
+                <trans-unit id="59">
+                    <source>orchard.step14.loading</source>
+                    <target>Cargando...</target>
+                </trans-unit>
+                <trans-unit id="60">
+                    <source>orchard.step14.title</source>
+                    <target>Sube alguna imagen para que conozcan un poco tu huerto</target>
+                </trans-unit>
+                <trans-unit id="61">
+                    <source>orchard.step14.add</source>
+                    <target>Añade o arrastra imagenes aqui</target>
+                </trans-unit>
+                <trans-unit id="62">
+                    <source>orchard.step14.uploaded</source>
+                    <target>Imágenes subidas</target>
+                </trans-unit>
+                <trans-unit id="63">
+                    <source>orchard.step14.description</source>
+                    <target>Describe la imagen</target>
+                </trans-unit>
+                <trans-unit id="64">
+                    <source>orchard.step14.edit</source>
+                    <target>Editar descripción</target>
+                </trans-unit>
+                <trans-unit id="65">
+                    <source>orchard.step14.max</source>
+                    <target>Sólo ser permite un máximo de </target>
+                </trans-unit>
+                <trans-unit id="66">
+                    <source>orchard.step14.max-2</source>
+                    <target>imágenes</target>
+                </trans-unit>
+                <trans-unit id="666">
+                    <source>orchard.step14.guardar</source>
+                    <target>imágenes</target>
+                </trans-unit>
+              <!-- End step14.html.twig -->
+
+              <!--  step21.html.twig -->
+                <trans-unit id="67">
+                    <source>orchard.step21.title</source>
+                    <target>¿Qué formas de participar ofreces?</target>
+                </trans-unit>
+                <trans-unit id="68">
+                    <source>orchard.step21.participate</source>
+                    <target>Sugiérenos una manera de participar</target>
+                </trans-unit>
+                <trans-unit id="69">
+                    <source>orchard.step21.participate-2</source>
+                    <target>¿Qué formas de participar ofreces?</target>
+                </trans-unit>
+                <trans-unit id="70">
+                    <source>orchard.step21.nowNo</source>
+                    <target>Ahora no</target>
+                </trans-unit>
+              <!-- End step21.html.twig -->
+
+              <!--  step22.html.twig -->
+                <trans-unit id="71">
+                    <source>orchard.step22.title</source>
+                    <target>Normas del huerto</target>
+                </trans-unit>
+                <trans-unit id="72">
+                    <source>orchard.step22.add</source>
+                    <target>Añade o arrastra archivos aquí</target>
+                </trans-unit>
+                <trans-unit id="73">
+                    <source>orchard.step22.title-right</source>
+                    <target>Sube un PDF con las normas de tu huerto</target>
+                </trans-unit>
+                <trans-unit id="74">
+                    <source>orchard.step22.title-right-2</source>
+                    <target>Algunos links interesantes sobre normas de huertos:</target>
+                </trans-unit>
+                <trans-unit id="75">
+                    <source>orchard.step22.title-right-3</source>
+                    <target>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</target>
+                </trans-unit>
+                <trans-unit id="750">
+                    <source>orchard.step22.uploaded</source>
+                    <target>Archivos subidos</target>
+                </trans-unit>
+              <!-- End step22.html.twig -->
+
+              <!--  step23.html.twig -->
+                <trans-unit id="76">
+                    <source>orchard.step23.title</source>
+                    <target>Como inscribirse en tu huerto</target>
+                </trans-unit>
+                <trans-unit id="77">
+                    <source>orchard.step23.title-2</source>
+                    <target>Indique paso a paso el proceso que deberá realizar un urbanita para inscribirse en su huerto.</target>
+                </trans-unit>
+                <trans-unit id="78">
+                    <source>orchard.step23.delete</source>
+                    <target>Eliminar este paso</target>
+                </trans-unit>
+                <trans-unit id="79">
+                    <source>orchard.step23.add</source>
+                    <target>Añadir un nuevo paso</target>
+                </trans-unit>
+                <trans-unit id="80">
+                    <source>orchard.step23.title-right</source>
+                    <target>Explicaselo por pasos y con la info necesaria para que lo haga lo más ágil posible</target>
+                </trans-unit>
+                <trans-unit id="81">
+                    <source>orchard.step23.title-right-2</source>
+                    <target>Paso 1: Hacerse socio de la AAVV de Patraix en www.asociacionvecinospatraix.es</target>
+                </trans-unit>
+              <!-- End step23.html.twig -->
+
+              <!--  step31.html.twig -->
+                <trans-unit id="82">
+                    <source>orchard.step31.title</source>
+                    <target>Cuenta la filosofía de tu huerto</target>
+                </trans-unit>
+                <trans-unit id="83">
+                    <source>orchard.step31.title-2</source>
+                    <target>¿Cómo se inició el proyecto?</target>
+                </trans-unit>
+                <trans-unit id="84">
+                    <source>orchard.step31.title-3</source>
+                    <target>Modelo de Gobernanza</target>
+                </trans-unit>
+                <trans-unit id="85">
+                    <source>orchard.step31.title-2-1</source>
+                    <target>Escribe aquí cómo se inició el proyecto</target>
+                </trans-unit>
+                <trans-unit id="86">
+                    <source>orchard.step31.title-3-1</source>
+                    <target>Aquí puedes contar tu modelo de Gobernanza</target>
+                </trans-unit>
+              <!-- End step31.html.twig -->
+
+              <!--  step32.html.twig -->
+                <trans-unit id="87">
+                    <source>orchard.step32.title</source>
+                    <target>¿Qué servicios ofreces?</target>
+                </trans-unit>
+                <trans-unit id="88">
+                    <source>orchard.step32.title-2</source>
+                    <target>Sugiérenos un servicio</target>
+                </trans-unit>
+                <trans-unit id="89">
+                    <source>orchard.step32.title-3</source>
+                    <target>Escribe aquí el servicio</target>
+                </trans-unit>
+              <!-- End step32.html.twig -->
+
+              <!--  step33.html.twig -->
+                <trans-unit id="90">
+                    <source>orchard.step33.title</source>
+                    <target>¿Qué actividades soleis hacer en el huerto?</target>
+                </trans-unit>
+                <trans-unit id="91">
+                    <source>orchard.step33.title-2</source>
+                    <target>Sugiérenos una actividad</target>
+                </trans-unit>
+                <trans-unit id="92">
+                    <source>orchard.step33.title-3</source>
+                    <target>Escribe aquí la actividad</target>
+                </trans-unit>
+              <!-- End step33.html.twig -->
+
+              <!--  steps.html.twig -->
+              <trans-unit id="93">
+                  <source>orchard.steps.title</source>
+                  <target>Hola</target>
+              </trans-unit>
+              <trans-unit id="94">
+                  <source>orchard.steps.title-2</source>
+                  <target>Haz que más personas conozcan tu huerto</target>
+              </trans-unit>
+              <trans-unit id="95">
+                  <source>orchard.steps.step</source>
+                  <target>paso</target>
+              </trans-unit>
+              <trans-unit id="96">
+                  <source>orchard.steps.sub-1</source>
+                  <target>Diles lo esencial (dónde está...)</target>
+              </trans-unit>
+              <trans-unit id="97">
+                  <source>orchard.steps.sub-2</source>
+                  <target>¿Qué pueden encontrar allí? (fotos, servicios...)</target>
+              </trans-unit>
+              <trans-unit id="98">
+                  <source>orchard.steps.sub-3</source>
+                  <target>Cuéntanos algo más especial de tu huerto</target>
+              </trans-unit>
+              <trans-unit id="99">
+                  <source>orchard.steps.btn-change</source>
+                  <target>Cambiar</target>
+              </trans-unit>
+              <trans-unit id="100">
+                  <source>orchard.steps.btn-start</source>
+                  <target>Empezar</target>
+              </trans-unit>
+              <trans-unit id="101">
+                  <source>orchard.steps.btn-continue</source>
+                  <target>Seguir</target>
+              </trans-unit>
+              <trans-unit id="102">
+                  <source>orchard.steps.btn-preview</source>
+                  <target>Mira cómo ha quedado</target>
+              </trans-unit>
+              <trans-unit id="103">
+                  <source>orchard.steps.title-right</source>
+                  <target>Muchos urbanitas sólo conocen 1 o 2 huertos en tu ciudad y alrededores</target>
+              </trans-unit>
+              <trans-unit id="104">
+                  <source>orchard.steps.title-right-2</source>
+                  <target>¡Descúbreles el tuyo!</target>
+              </trans-unit>
+              <trans-unit id="105">
+                  <source>orchard.steps.title-preview</source>
+                  <target>Huerto de </target>
+              </trans-unit>
+              <trans-unit id="106">
+                  <source>orchard.steps.preview-2</source>
+                  <target>Este huerto es: </target>
+              </trans-unit>
+              <trans-unit id="107">
+                  <source>orchard.steps.preview-btn</source>
+                  <target>Seguir completando</target>
+              </trans-unit>
+              <trans-unit id="108">
+                  <source>orchard.steps.preview-btn-1</source>
+                  <target>Publicar</target>
+              </trans-unit>
+              <!-- End steps.html.twig -->
+            <!-- End Create -->
+
+
+            <!-- Suggest -->
+              <!-- description.html.twig -->
+                <trans-unit id="800">
+                    <source>orchard.suggest.description.title</source>
+                    <target>Introduce la descripción para%</target>
+                </trans-unit>
+              <!-- End description.html.twig -->
+              <!-- orchard_activity_email.html.twig -->
+                <trans-unit id="801">
+                    <source>orchard.suggest.activity_email.hello</source>
+                    <target>Hola%</target>
+                </trans-unit>
+                <trans-unit id="802">
+                    <source>orchard.suggest.activity_email.title</source>
+                    <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir una nueva actividad:%</target>
+                </trans-unit>
+                <trans-unit id="803">
+                    <source>orchard.suggest.activity_email.title-2</source>
+                    <target>Ya puedes añadirla a tu huerto. Muchas gracias!</target>
+                </trans-unit>
+                <trans-unit id="804">
+                    <source>orchard.suggest.activity_email.title-3</source>
+                    <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir una nueva actividad:</target>
+                </trans-unit>
+                <trans-unit id="805">
+                    <source>orchard.suggest.activity_email.title-4</source>
+                    <target>Prueba a añadir otra. Muchas gracias!</target>
+                </trans-unit>
+              <!-- End orchard_activity_email.html.twig -->
+              <!-- orchard_participate_email.html.twig -->
+                <trans-unit id="806">
+                    <source>orchard.suggest.participate_email.title</source>
+                    <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir una nueva manera de participar:</target>
+                </trans-unit>
+                <trans-unit id="807">
+                    <source>orchard.suggest.participate_email.title-2</source>
+                    <target>Ya puedes añadirla a tu huerto. Muchas gracias!</target>
+                </trans-unit>
+                <trans-unit id="808">
+                    <source>orchard.suggest.participate_email.title-3</source>
+                    <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir una nueva manera de participar:</target>
+                </trans-unit>
+                <trans-unit id="809">
+                    <source>orchard.suggest.participate_email.title-4</source>
+                    <target>Prueba a añadir otra. Muchas gracias!</target>
+                </trans-unit>
+              <!-- End orchard_activity_email.html.twig -->
+              <!-- orchard_service_email.html.twig -->
+                <trans-unit id="810">
+                    <source>orchard.suggest.service_email.title</source>
+                    <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir un nuevo servicio:</target>
+                </trans-unit>
+                <trans-unit id="811">
+                    <source>orchard.suggest.service_email.title-2</source>
+                    <target>Ya puedes añadirlo a tu huerto. Muchas gracias!</target>
+                </trans-unit>
+                <trans-unit id="812">
+                    <source>orchard.suggest.service_email.title-3</source>
+                    <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir un nuevo servicio:</target>
+                </trans-unit>
+                <trans-unit id="813">
+                    <source>orchard.suggest.service_email.title-4</source>
+                    <target>Prueba a añadir otra. Muchas gracias!</target>
+                </trans-unit>
+              <!-- End orchard_service_email.html.twig -->
+              <!-- orchard_type_email.html.twig -->
+              <trans-unit id="814">
+                  <source>orchard.suggest.type_email.title</source>
+                  <target>Enhorabuena! :) Se ha aceptado tu sugerencia para añadir un nuevo tipo de huerto:</target>
+              </trans-unit>
+              <trans-unit id="815">
+                  <source>orchard.suggest.type_email.title-1</source>
+                  <target>Ya puedes añadirlo a tu huerto. Muchas gracias!</target>
+              </trans-unit>
+              <trans-unit id="816">
+                  <source>orchard.suggest.type_email.title-2</source>
+                  <target>Lo sentimos! :( Se ha rechazado tu sugerencia para añadir un nuevo tipo de huerto:</target>
+              </trans-unit>
+              <trans-unit id="817">
+                  <source>orchard.suggest.type_email.title-3</source>
+                  <target>Prueba a añadir otro. Muchas gracias!</target>
+              </trans-unit>
+              <!-- End orchard_type_email.html.twig -->
+            <!-- End Suggest -->
+              <!-- orchard_profile.html -->
+                <trans-unit id="900">
+                    <source>orchard.profile.contact</source>
+                    <target>CONTACTA</target>
+                </trans-unit>
+                <trans-unit id="901">
+                    <source>orchard.profile.activities</source>
+                    <target>PRÓXIMOS EVENTOS</target>
+                </trans-unit>
+                <trans-unit id="902">
+                    <source>orchard.profile.noActivities</source>
+                    <target>Este huerto no tiene actividades</target>
+                </trans-unit>
+                <trans-unit id="903">
+                    <source>orchard.profile.howIsIt</source>
+                    <target>CÓMO ES</target>
+                </trans-unit>
+                <trans-unit id="904">
+                    <source>orchard.profile.type</source>
+                    <target>Tipo de huerto </target>
+                </trans-unit>
+                <trans-unit id="905">
+                    <source>orchard.profile.equipment</source>
+                    <target>Equipamiento</target>
+                </trans-unit>
+                <trans-unit id="906">
+                    <source>orchard.profile.join</source>
+                    <target>CÓMO UNIRTE</target>
+                </trans-unit>
+                <trans-unit id="907">
+                    <source>orchard.profile.modal</source>
+                    <target>Modalidades</target>
+                </trans-unit>
+                <trans-unit id="908">
+                    <source>orchard.profile.important</source>
+                    <target>Antes es importante que sepas</target>
+                </trans-unit>
+                <trans-unit id="909">
+                    <source>orchard.profile.rules-1</source>
+                    <target>Mira</target>
+                </trans-unit>
+                <trans-unit id="910">
+                    <source>orchard.profile.rules-2</source>
+                    <target>AQUÍ</target>
+                </trans-unit>
+                <trans-unit id="911">
+                    <source>orchard.profile.rules-3</source>
+                    <target>las normas del huerto.</target>
+                </trans-unit>
+                <trans-unit id="912">
+                    <source>orchard.profile.inscribe</source>
+                    <target>¿Qué necesitas para inscribirte?</target>
+                </trans-unit>
+                <trans-unit id="913">
+                    <source>orchard.profile.where</source>
+                    <target>DÓNDE SE ENCUENTRA</target>
+                </trans-unit>
+                <trans-unit id="914">
+                    <source>orchard.profile.question</source>
+                    <target>¿Tienes alguna pregunta?</target>
+                </trans-unit>
+              <!-- End orchard_profile.html -->
+          <!-- End OrchardBundle -->
+
+
+          <!-- UserBundle -->
+            <!-- register_content.html -->
+              <trans-unit id="200">
+                  <source>user.register.title</source>
+                  <target>Registrate para participar en un huerto urbano o inscribirte a una de sus actividades</target>
+              </trans-unit>
+              <trans-unit id="201">
+                  <source>user.register.read</source>
+                  <target>He leído y acepto las</target>
+              </trans-unit>
+              <trans-unit id="202">
+                  <source>user.register.conditions</source>
+                  <target>Condiciones de uso</target>
+              </trans-unit>
+              <trans-unit id="203">
+                  <source>user.register.privacy</source>
+                  <target>Política de privacidad</target>
+              </trans-unit>
+              <trans-unit id="204">
+                  <source>user.register.acount</source>
+                  <target>¿Ya dispones de una cuenta?</target>
+              </trans-unit>
+              <trans-unit id="205">
+                  <source>user.register.privacyPolicy</source>
+                  <target>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                  </target>
+              </trans-unit>
+              <trans-unit id="206">
+                  <source>user.register.privacyPolicy-2</source>
+                  <target>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                  </target>
+              </trans-unit>
+              <trans-unit id="207">
+                  <source>user.register.submit</source>
+                  <target>Regístrate</target>
+              </trans-unit>
+              <!-- UserType.php -->
+                <trans-unit id="208">
+                    <source>user.register.type.email</source>
+                    <target>Dirección de correo electrónico</target>
+                </trans-unit>
+                <trans-unit id="209">
+                    <source>user.register.type.name</source>
+                    <target>Nombre</target>
+                </trans-unit>
+                <trans-unit id="210">
+                    <source>user.register.type.surnames</source>
+                    <target>Apellidos</target>
+                </trans-unit>
+                <trans-unit id="211">
+                    <source>user.register.type.passwd</source>
+                    <target>Contraseña</target>
+                </trans-unit>
+                <trans-unit id="212">
+                    <source>user.register.type.passws-2</source>
+                    <target>Vuelve a escribir la contraseña</target>
+                </trans-unit>
+              <!-- End UserType.php -->
+            <!-- End register_content.html -->
+            <!-- login_content.html -->
+              <trans-unit id="213">
+                  <source>user.login.title</source>
+                  <target>Inicia sesión para participar en un huerto urbano o inscribirte a una de sus actividades.</target>
+              </trans-unit>
+              <trans-unit id="214">
+                  <source>user.login.create</source>
+                  <target>No tienes cuenta?</target>
+              </trans-unit>
+              <trans-unit id="215">
+                  <source>user.login.remember</source>
+                  <target>Recuérdame</target>
+              </trans-unit>
+              <trans-unit id="216">
+                  <source>user.login.login</source>
+                  <target>Entrar</target>
+              </trans-unit>
+              <trans-unit id="217">
+                  <source>user.login.register</source>
+                  <target>Regístrate</target>
+              </trans-unit>
+              <trans-unit id="218">
+                  <source>user.login.forget</source>
+                  <target>¿Has olvidado la contraseña?</target>
+              </trans-unit>
+            <!-- End login_content.html -->
+          <!-- End UserBundle -->
+
+
+        </body>
+    </file>
+</xliff>

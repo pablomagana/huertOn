@@ -1,0 +1,265 @@
+{% extends '::step_base.html.twig' %}
+
+{% block body %}
+
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
+		<form>
+			<div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
+				<label><h4>{{ 'orchard.step33.title'|trans }}</h4></label><br>
+
+				<div class="row">
+					{% for orchardActivity in orchardActivities %}
+
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<label class="custom-control custom-checkbox">
+							<input id="{{ orchardActivity.id }}"type="checkbox" class="custom-control-input" {% if orchardActivity in orchard.orchardActivity %} checked {% endif %}>
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">{{ orchardActivity.name }}</span>
+						</label>
+					</div>
+
+					{% endfor %}
+				</div>
+
+				<br>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<label class="custom-control custom-checkbox">
+							<input id="cb-new-activity" type="checkbox" class="custom-control-input">
+							<span class="custom-control-indicator"></span>
+							<span class="custom-control-description">{{ 'orchard.step33.title-2'|trans }}</span>
+						</label>
+						<input type="text" class="form-control" id="Activity" placeholder="{{ 'orchard.step32.title-3'|trans }}" hidden>
+
+						<br>
+						<button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>{{ 'orchard.step13.send'|trans }}</button>
+					</div>
+				</div>
+
+			</div>
+
+			<input type="text" id="Step" hidden="hidden" value="33">
+
+		</form>
+
+		<div class="fixed-buttons">
+			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.back'|trans }}</button>
+			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.next'|trans }}</button>
+		</div>
+
+	</div>
+
+	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right">
+		<img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
+	</div>
+
+</div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+<script type="text/javascript">
+
+$(function() {
+
+	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
+
+	//FUNCION BOTON SIGUIENTE
+	$('#btn-siguiente').on('click', function() {
+
+			var orchard_activities = [];
+			initSave(orchard_activities);
+
+			$.ajax({
+				type: 'POST',
+				url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardActivity',
+				data: { 'OrchardActivity': orchard_activities },
+				success: function(data) {
+					saveAnimation();
+					console.log('success');
+					window.location.href = '/orchard/create/steps/{{ orchard.id }}';
+				},
+				error: function(jqXHR, exception) {
+					saveAnimation();
+					if (jqXHR.status === 0) {
+						alert('Not connect.\n Verify Network.');
+					} else if (jqXHR.status == 404) {
+						alert('Requested page not found. [404]');
+					} else if (jqXHR.status == 500) {
+						alert('Internal Server Error [500].');
+					} else if (exception === 'parsererror') {
+						alert('Requested JSON parse failed.');
+					} else if (exception === 'timeout') {
+						alert('Time out error.');
+					} else if (exception === 'abort') {
+						alert('Ajax request aborted.');
+					} else {
+						alert('Uncaught Error.\n' + jqXHR.responseText);
+					}
+					console.log('error');
+				}
+			});
+
+			return false;
+
+	});
+
+	//FUNCION BOTON ATRAS
+	$('#btn-atras').on('click', function() {
+
+			var orchard_activities = [];
+			initSave(orchard_activities);
+
+			$.ajax({
+				type: 'POST',
+				dataType: 'json',
+				url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardActivity',
+				data: { 'OrchardActivity': orchard_activities },
+				success: function() {
+					saveAnimation();
+					window.location.href = '/orchard/create/step/31/{{ orchard.id }}';
+				}
+			});
+
+	});
+
+	//FUNCION BOTON GUARDAR Y SALIR
+	$('#btn-save-exit').on('click', function() {
+
+			var orchard_activities = [];
+			initSave(orchard_activities);
+
+			$.ajax({
+				type: 'POST',
+				url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardActivity',
+				data: { 'OrchardActivity': orchard_activities },
+				success: function(data) {
+					saveAnimation();
+					console.log('success');
+					window.location.href = '/orchard/create/steps/{{ orchard.id }}';
+				},
+				error: function(jqXHR, exception) {
+					saveAnimation();
+					if (jqXHR.status === 0) {
+						alert('Not connect.\n Verify Network.');
+					} else if (jqXHR.status == 404) {
+						alert('Requested page not found. [404]');
+					} else if (jqXHR.status == 500) {
+						alert('Internal Server Error [500].');
+					} else if (exception === 'parsererror') {
+						alert('Requested JSON parse failed.');
+					} else if (exception === 'timeout') {
+						alert('Time out error.');
+					} else if (exception === 'abort') {
+						alert('Ajax request aborted.');
+					} else {
+						alert('Uncaught Error.\n' + jqXHR.responseText);
+					}
+					console.log('error');
+				}
+			});
+
+			return false;
+
+	});
+
+	function initSave(orchard_activities) {
+		$("#loading, #loading-text").fadeIn("slow");
+		$(':checkbox:not(#cb-new-activity):checked').each(function(){
+			console.log($(this).attr('id'));
+			orchard_activities.push($(this).attr('id'));
+		});
+	}
+
+	function saveAnimation() {
+		$("#loading, #loading-text").fadeOut("slow", function() {
+			$("#loading-text").text("Guardado").fadeIn('slow');
+		});
+	}
+
+	//FUNCIÓN QUE COMPRUEBA SI SE INSERTAN REGISTROS
+	$(':checkbox:not(#cb-new-activity)').change(function() {
+		var checkeado = false;
+		if(this.checked) {
+			$('#btn-siguiente').html('{{ 'orchard.step11.next'|trans }}')
+		}else {
+			if($(':checkbox').each(function() {
+				if(this.checked) {
+					checkeado = true;
+				}
+			}));
+
+			if(!checkeado) {
+				$('#btn-siguiente').html('{{ 'orchard.step21.nowNo'|trans }}');
+			}
+		}
+	});
+
+	$(':checkbox:not(#cb-new-activity)').each(function() {
+		if(this.checked) {
+			console.log('checkeado');
+			$('#btn-siguiente').html('{{ 'orchard.step11.next'|trans }}')
+ 		}
+	});
+
+	initSuggest();
+
+	function initSuggest() {
+		//FUNCION PARA MOSTRAR/OCULTAR INPUT SUGERENCIA
+		$('#cb-new-activity').click(function() {
+			this.checked ? $('#Activity').removeAttr('hidden') : $('#Activity').attr('hidden', 'hidden');
+			this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
+		});
+
+		//borramos los handlers del onclick para evitar que se clike varias veces
+		//añade gestion de AJAX al boton enviar al entrar a la pagina por si el campo tipo ya estaba rellenado anteriormente
+		prepareSend();
+
+		//borramos los handlers del onclick para evitar que se clike varias veces
+		//añade gestion de AJAX al boton enviar cada vez que se escriba en el campo de tipo
+		$('#Activity').keyup(function() {
+			prepareSend();
+		});
+	}
+
+	function prepareSend() {
+		$('#btn-enviar').off('click');
+		$('#btn-enviar').on('click', function() {
+			if($('#Activity').val()) {
+				$.ajax({
+					type: 'POST',
+					url: '/orchard/suggest/send/orchard_activity/'+$('#Activity').val(),
+					success: function(data) {
+						console.log('success');
+						$('#myModal').modal('show');
+					},
+					error: function(jqXHR, exception) {
+						if (jqXHR.status === 0) {
+							alert('Not connect.\n Verify Network.');
+						} else if (jqXHR.status == 404) {
+							alert('Requested page not found. [404]');
+						} else if (jqXHR.status == 500) {
+							alert('Internal Server Error [500].');
+						} else if (exception === 'parsererror') {
+							alert('Requested JSON parse failed.');
+						} else if (exception === 'timeout') {
+							alert('Time out error.');
+						} else if (exception === 'abort') {
+							alert('Ajax request aborted.');
+						} else {
+							alert('Uncaught Error.\n' + jqXHR.responseText);
+						}
+						console.log('error');
+					}
+				});
+			}
+			return false;
+		});
+	}
+
+});
+</script>
+{% endblock %}

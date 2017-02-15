@@ -4,16 +4,17 @@ imports:
     - { resource: services.yml }
     - { resource: "@OrchardBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }
+    - { resource: "@HomeBundle/Resources/config/services.yml" }
+    - { resource: "@EventBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: es
     files_directory: '%kernel.root_dir%/../web/uploads/files'
 
 framework:
     #esi:             ~
-    translator:      ~
+    translator: { fallbacks: [es] } #Idioma por defecto si no encuentra la traducción
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -24,7 +25,6 @@ framework:
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
-    default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
@@ -61,6 +61,31 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+            numeric_functions:
+                 acos: DoctrineExtensions\Query\Mysql\Acos
+                 asin: DoctrineExtensions\Query\Mysql\Asin
+                 atan2: DoctrineExtensions\Query\Mysql\Atan2
+                 atan: DoctrineExtensions\Query\Mysql\Atan
+                 bit_count: DoctrineExtensions\Query\Mysql\BitCount
+                 bit_xor: DoctrineExtensions\Query\Mysql\BitXor
+                 ceil: DoctrineExtensions\Query\Mysql\Ceil
+                 cos: DoctrineExtensions\Query\Mysql\Cos
+                 cot: DoctrineExtensions\Query\Mysql\Cot
+                 degrees: DoctrineExtensions\Query\Mysql\Degrees
+                 floor: DoctrineExtensions\Query\Mysql\Floor
+                 log10: DoctrineExtensions\Query\Mysql\Log10
+                 pi: DoctrineExtensions\Query\Mysql\Pi
+                 power: DoctrineExtensions\Query\Mysql\Power
+                 quarter: DoctrineExtensions\Query\Mysql\Quarter
+                 radians: DoctrineExtensions\Query\Mysql\Radians
+                 rand: DoctrineExtensions\Query\Mysql\Rand
+                 round: DoctrineExtensions\Query\Mysql\Round
+                 stddev: DoctrineExtensions\Query\Mysql\StdDev
+                 sin: DoctrineExtensions\Query\Mysql\Sin
+                 std: DoctrineExtensions\Query\Mysql\Std
+                 tan: DoctrineExtensions\Query\Mysql\Tan
+                 variance: DoctrineExtensions\Query\Mysql\Variance
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -76,8 +101,33 @@ fos_user:
     registration:
         form:
             type: UserBundle\Form\UserType
+            validation_groups:  [Default] # Here you can also add your own groups if you have extra validation
         confirmation:
             enabled: true
             from_email:
                 address:        registration@example.com
                 sender_name:    Confirmación de cuenta Huerton
+    profile:
+        form:
+            validation_groups:  [Default] # Here you can also add your own groups if you have extra validation
+#config bundle to upload files
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        orchard_file:
+            uri_prefix:         /orchard/file
+            upload_destination: '%kernel.root_dir%/../web/orchard/file'
+            namer:              vich_uploader.namer_uniqid
+            delete_on_update:   true
+            delete_on_remove:   true
+        orchard_image:
+            uri_prefix:         /orchard/image
+            upload_destination: '%kernel.root_dir%/../web/orchard/image'
+            namer:              vich_uploader.namer_uniqid
+            delete_on_update:   true
+            delete_on_remove:   true
+        orchard_event:
+            uri_prefix:         /orchard/event
+            upload_destination: '%kernel.root_dir%/../web/orchard/event'
+            namer:              vich_uploader.namer_uniqid

@@ -1,10 +1,14 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('/css/login.css') }}" />
 
-<div class="row steps-left-register">
-  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+<div class="container">
+  <div class="spacing"></div>
 
-    {% trans_default_domain 'FOSUserBundle' %}
+  <div class="col-md-2 col-lg-2"></div>
+
+  <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+
+    {% trans_default_domain 'messages' %}
 
     {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -15,20 +19,20 @@
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
     {% endif %}
 
-    <h4 style="text-align: center">Inicia sesión para participar en un huerto urbano o inscribirte a una de sus actividades.</h4>
+    <h4 style="text-align: center">{{ 'user.login.title'|trans }}</h4>
 
-    <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'security.login.username'|trans }}" required="required" />
+    <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'user.register.type.email'|trans }}" required="required" />
 
-    <input class="form-control" type="password" id="password" name="_password" required="required" placeholder="{{ 'security.login.password'|trans }}"/>
+    <input class="form-control" type="password" id="password" name="_password" required="required" placeholder="{{ 'user.register.type.passwd'|trans }}"/>
 
     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+    <label for="remember_me">{{ 'user.login.remember'|trans }}</label>
 <br>
-    <button type="submit" id="_submit" class="btn btn-primary" name="_submit">{{ 'security.login.submit'|trans }}</button>
+    <button type="submit" id="_submit" class="btn btn-primary" name="_submit">{{ 'user.login.login'|trans }}</button>
 
-    <p>No tienes cuenta? <a href="/register">Registrate.</a>
+    <p>{{ 'user.login.create'|trans }} <a href="/register">{{ 'user.login.register'|trans }}</a>
 <br>
-      <a href="/resetting/request">¿Has olvidado la contraseña?</a>
+      <a href="/resetting/request">{{ 'user.login.forget'|trans }}</a>
     </form>
 
   </div>

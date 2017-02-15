@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form>
+      <div class="form-group">
+        <label for="exampleTextarea">{{ 'orchard.suggest.description.title'|trans }} {{ orchardType }}</label>
+        <textarea class="form-control" id="description" rows="8" cols="70" placeholder="Descripción"></textarea>
+      </div>
+
+      <button id="btn-description" type="submit" class="btn btn-primary">{{ 'orchard.step13.send'|trans }}</button>
+
+      <input id="Type" type="text" hidden="hidden" name="" value="{{ orchardType }}">
+
+    </form>
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+//borramos los handlers del onclick para evitar que se clike varias veces
+//añade gestion de AJAX al boton enviar cada vez que se escriba en el campo de tipo
+$('#description').keyup(function() {
+  $('#btn-description').off('click');
+  $('#btn-description').on('click', function() {
+    if($('#description').val()) {
+      console.log($('#Type').val());
+      $.ajax({
+        type: 'POST',
+        url: '/orchard/suggest/insert/'+$('#Type').val()+'/'+$('#description').val(),
+        success: function(data) {
+          console.log('success');
+          window.location.href = '/orchard/create/list';
+        },
+        error: function(jqXHR, exception) {
+          if (jqXHR.status === 0) {
+            alert('Not connect.\n Verify Network.');
+          } else if (jqXHR.status == 404) {
+            alert('Requested page not found. [404]');
+          } else if (jqXHR.status == 500) {
+            alert('Internal Server Error [500].');
+          } else if (exception === 'parsererror') {
+            alert('Requested JSON parse failed.');
+          } else if (exception === 'timeout') {
+            alert('Time out error.');
+          } else if (exception === 'abort') {
+            alert('Ajax request aborted.');
+          } else {
+            alert('Uncaught Error.\n' + jqXHR.responseText);
+          }
+          console.log('error');
+        }
+      });
+    }
+    return false;
+  });
+});
+</script>
+{% endblock %}

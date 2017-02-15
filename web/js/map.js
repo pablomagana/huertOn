@@ -361,6 +361,9 @@ function prepareGeometry(marker, polygon) {
 		};
 	}
 
+	$('#Latitude').attr('value', marker.getLatLng().lat);
+	$('#Longitude').attr('value', marker.getLatLng().lng);
+
 	if(polygon != undefined) {
 		var geojson = polygon.toGeoJSON()
 		var forma = JSON.stringify(geojson);

@@ -9,18 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
- *
  * @ORM\AttributeOverrides({
- *      @ORM\AttributeOverride(name="usernameCanonical",
- *          column=@ORM\Column(
- *              name     = "usernameCanonical",
- *              type     = "string",
- *              length   = 10,
- *              unique   = false
- *          )
- *      )
+ *      @ORM\AttributeOverride(name="username", column=@ORM\Column(type="string", name="username", length=180, unique=false, nullable=false)),
+ *      @ORM\AttributeOverride(name="usernameCanonical", column=@ORM\Column(type="string", name="username_canonical", length=180, unique=false, nullable=false))
  * })
- *
  */
 class User extends BaseUser
 {
@@ -35,6 +27,24 @@ class User extends BaseUser
      * @ORM\Column(type="string", nullable=false)
      */
     private $apellidos;
+
+    /**
+    * @var OrchardBundle\Entity\Orchard
+    *
+    * un usuario a muchos huertos
+    * @ORM\OneToMany(
+    *     targetEntity="OrchardBundle\Entity\Orchard",
+    *     mappedBy="user"
+    * )
+    */
+    private $orchard;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection|EventBundle\Entity\Event[]
+     *
+     * @ORM\ManyToMany(targetEntity="EventBundle\Entity\Event", mappedBy="users")
+     */
+    private $events;
 
     public function __construct()
     {
@@ -64,5 +74,41 @@ class User extends BaseUser
     public function getApellidos()
     {
         return $this->apellidos;
+    }
+
+
+
+    /**
+     * Add orchard
+     *
+     * @param \OrchardBundle\Entity\Orchard $orchard
+     *
+     * @return User
+     */
+    public function addOrchard(\OrchardBundle\Entity\Orchard $orchard)
+    {
+        $this->orchard[] = $orchard;
+
+        return $this;
+    }
+
+    /**
+     * Remove orchard
+     *
+     * @param \OrchardBundle\Entity\Orchard $orchard
+     */
+    public function removeOrchard(\OrchardBundle\Entity\Orchard $orchard)
+    {
+        $this->orchard->removeElement($orchard);
+    }
+
+    /**
+     * Get orchard
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrchard()
+    {
+        return $this->orchard;
     }
 }

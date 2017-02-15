@@ -1,0 +1,13 @@
+home_homepage:
+    path:     /{_locale}
+    defaults: { _controller: HomeBundle:Home:index, _locale: es }
+    requirements:
+        _locale: en|es|ca
+
+home_find_orchard:
+    path:     /find/orchard
+    defaults: { _controller: HomeBundle:Search:findOrchard }
+
+home_find_event:
+    path:     /find/event
+    defaults: { _controller: HomeBundle:Search:findEvent }

@@ -1,0 +1,129 @@
+{% extends '::step_base.html.twig' %}
+
+{% block stylesheets %}
+<!-- css step 2.4 carga pdf-->
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/set5.css') }}" />
+{% endblock %}
+{% block body %}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
+    <span id="loading-file" style="display: none;" class="navbar-text">
+      {{ 'orchard.step14.loading'|trans }}
+    </span>
+    <form id="formFiles">
+      <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
+        <p><h4>{{ 'orchard.step22.title'|trans }}</h4></p>
+        <div class="cuadro-subidas-pdf col-xs-12 col-sm-12 col-md-12 col-lg-12" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <input type="file" id="fileinput" accept=".pdf" hidden="hidden"/>
+          {% if orchard.ruleFile is defined and orchard.ruleFile|length > 0 %}
+            <div class="more" onclick="$('#fileinput').click();" hidden="hidden">
+          {% else %}
+            <div class="more" onclick="$('#fileinput').click();">
+          {% endif %}
+            <p>{{ 'orchard.step22.add'|trans }}</p>
+          </div>
+          <div id="files">
+          </div>
+          <!-- imprimir fichero subido si lo hay -->
+          {% if orchard.ruleFile is defined and orchard.ruleFile|length > 0 %}
+            <input type="text" hidden="true" class="required" name="imagesuploaded" value="{{orchard.images|length}}"/>
+            <h1 id="h1Upload">{{ 'orchard.step22.uploaded'|trans }}</h1>
+            <div class="upload">
+              <div class="thumbnail">
+                <span class="fa fa-times-circle topRight deleteImage" id="{{orchard.id}}" onclick="deleteUpload(this)"></span>
+                <img src="/img/pdf_logo.jpg">
+                <p><a href="/orchard/file/{{orchard.ruleFile.nameFile}}">{{orchard.ruleFile.nameFile}}</a></p>
+              </div>
+          </div>
+          {% endif %}
+        <!--  -->
+        </div>
+      </div>
+
+      <input type="text" id="Step" hidden="hidden" value="23">
+    </form>
+
+     <div class="fixed-buttons">
+  			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.back'|trans }}</button>
+  			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.next'|trans }}</button>
+  		</div>
+
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right-pdf">
+    <h3 class="display-3">{{ 'orchard.step22.title-right'|trans }}</h3>
+    <h4 class="display-5">{{ 'orchard.step22.title-right-2'|trans }}</h4><br><br>
+    <h5><a href="http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/">{{ 'orchard.step22.title-right-3'|trans }}</a></h5>
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{asset('js/files.js')}}" charset="utf-8"></script>
+<script type="text/javascript">
+
+$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 66 + '%','aria-valuenow': 66}, {duration: 400, easing: 'linear'});
+
+var fileNormas = null;
+//cargar el file con click
+var filesinput = document.querySelector('#fileinput');
+filesinput.addEventListener('change', function () {
+  console.log("detectando cambios en input");
+  $("#loading-file").fadeIn("slow");
+  if(fileNormas==null && this.files.length<2){
+    //console.log(this.files[0]);
+    previewImage(this.files[0]);
+  }else {
+    alert("solo se permite un maximo de 1 archivo");
+  }
+  $("#loading-file").fadeOut("slow");
+}, false);
+
+
+$('#btn-siguiente').on('click', function() {
+
+  var formData = new FormData();
+  // jQuery.each(jQuery('#fileinput')[0].files, function(i, file) {
+  //   formData.append('file-'+i, file);
+  // });
+  formData.append('fileNormas', fileNormas);
+  $.ajax({
+    type: 'POST',
+    url: '/orchard/upload/files/upload/{{orchard.id}}',
+    type: "post",
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    success: function(data) {
+      console.log('success :' + data);
+      window.location.href = '/orchard/create/step/' + data + '/{{ orchard.id }}';
+    },
+    error: function(jqXHR, exception) {
+        if (jqXHR.status === 0) {
+          alert('Not connect.\n Verify Network.');
+        } else if (jqXHR.status == 404) {
+          alert('Requested page not found. [404]');
+        } else if (jqXHR.status == 500) {
+          alert('Internal Server Error [500].');
+        } else if (exception === 'parsererror') {
+          alert('Requested JSON parse failed.');
+        } else if (exception === 'timeout') {
+          alert('Time out error.');
+        } else if (exception === 'abort') {
+          alert('Ajax request aborted.');
+        } else {
+          alert('Uncaught Error.\n' + jqXHR.responseText);
+        }
+        console.log('error');
+      }
+  });
+
+  return false;
+
+});
+
+</script>
+
+{% endblock %}

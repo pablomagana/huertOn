@@ -1,0 +1,195 @@
+{% extends '::step_base.html.twig' %}
+{% block stylesheets %}
+<!--css step 1.3 cargar imagenes-->
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/set3.css') }}" />
+{% endblock %}
+{% block body %}
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
+    <h1 class="display-3">
+      <span id="loading-images" style="display: none;" class="navbar-text">
+        {{ 'orchard.step14.loading'|trans }}
+      </span>
+    </h1>
+    <form>
+      <div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
+        <label><h4>{{ 'orchard.step14.title'|trans }}</h4></label><br>
+        <div class="cuadro-subidas" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <input hidden type="file" id="imageinput" multiple="multiple" accept="image/*" />
+          {% if orchard.images is defined and orchard.images|length > 9 %}
+            <div class="more" onclick="$('#imageinput').click();"  hidden="hidden">
+          {% else %}
+            <div class="more" onclick="$('#imageinput').click();">
+          {% endif %}
+
+            <p>{{ 'orchard.step14.add'|trans }}</p>
+          </div>
+          <div id="gallery">
+          </div>
+          {% if orchard.images is defined and orchard.images|length > 0 %}
+            <input type="text" hidden="true" class="required" name="imagesuploaded" value="{{orchard.images|length}}"/>
+            <h1 id="h1Upload">{{ 'orchard.step14.uploaded'|trans }}</h1>
+            <div class="upload">
+          {% for img in orchard.images %}
+            <div class="thumbnail">
+              <span class="fa fa-times-circle topRight deleteImage" id="{{img.id}}" onclick="deleteUpload(this)"></span>
+              <img  src="/orchard/image/{{img.nameImage}}" alt="{{img.description}}">
+
+              <span class="descripcion">{{img.description}}</span>
+              <a class="editDes" onclick="mostrarEditor(this)">{{ 'orchard.step14.edit'|trans }}</a>
+              <div class="edi" hidden="hidden">
+                <span>{{100 - img.description|length}}</span>
+                <textarea type="text" placeholder="{{ 'orchard.step14.edit'|trans }}" class="descripcion" maxlength="100" onkeyup="textAreaAdjust(this)">{{img.description}}</textarea>
+                <a onclick="sendNewDescription($(this).prev().val(),{{img.id}})">{{ 'orchard.step14.guardar'|trans }}</a>
+              </div>
+
+            </div>
+          {% endfor %}
+          </div>
+        {% endif %}
+
+        </div>
+      </div>
+
+      <input type="text" id="Step" hidden="hidden" value="21">
+    </form>
+
+    <div class="fixed-buttons">
+			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.back'|trans }}</button>
+			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.next'|trans }}</button>
+		</div>
+
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right">
+    <img src="{{ asset('img/step12.png') }}" width="100%" height="100%">
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="{{asset('js/images.js')}}" charset="utf-8"></script>
+
+<script type="text/javascript">
+
+$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 100 + '%','aria-valuenow': 100}, {duration: 400, easing: 'linear'});
+
+var imagenes = new Array();
+var id = 0;
+var maxfiles = 10;
+console.log(imagenes);
+//cargar imagenes con click
+var filesinput = document.querySelector('#imageinput');
+filesinput.addEventListener('change', function () {
+  console.log("detectando cambios en input");
+  $("#loading-images").fadeIn("slow");
+  //solo se permiten 10 imagenes
+  if(this.files.length+imagenes.length<maxfiles+1){
+    for(var i=0; i<this.files.length; i++){
+      console.log("dibujando imagen"+i);
+      previewImage(this.files[i]);
+      //console.log("preparando imagen "+this.files[i].name);
+    }
+  }else {
+    alert("{{ 'orchard.step14.max'|trans }}"+maxfiles+" {{ 'orchard.step14.max-2'|trans }}");
+  }
+  $("#loading-images").fadeOut("slow");
+}, false);
+
+$("#description").keydown(function() {
+  $(this).val($this.val());
+});
+
+$('#btn-siguiente, #btn-save-exit').on('click', function() {
+  $("#loading, #loading-text").fadeIn("slow");
+  //send images
+  var formImages = new FormData();
+  var desc = new Array();
+    for (var i = 0; i < imagenes.length; i++) {
+      desc[imagenes[i].id]=[i,$("span[id='"+imagenes[i].id+"']").parent().children().last().val()];
+      formImages.append('image-'+i, imagenes[i]);
+    }
+    formImages.append("desc",desc);
+    console.log(desc);
+    $.ajax({
+      type: "POST",
+      url:"/orchard/upload/images/upload/{{ orchard.id }}",
+      data:formImages,
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function(step){
+        console.log(step);
+        window.location.href = '/orchard/create/step/' + step + '/{{ orchard.id }}';
+      },
+      error: function(jqXHR, exception) {
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("{{ 'stepBase.loading'|trans }}").fadeIn('slow');
+          });
+          if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+          console.log('error');
+        }
+    });
+});
+
+$('#btn-atras').on('click', function() {
+  $("#loading, #loading-text").fadeIn("slow");
+  //send images
+  var formImages = new FormData();
+  var desc = new Array();
+    for (var i = 0; i < imagenes.length; i++) {
+      desc[imagenes[i].id]=[i,$("span[id='"+imagenes[i].id+"']").parent().children().last().val()];
+      formImages.append('image-'+i, imagenes[i]);
+    }
+    formImages.append("desc",desc);
+    console.log(desc);
+    $.ajax({
+      type: "POST",
+      contentType: 'application/json',
+      url:"/orchard/upload/images/upload/{{ orchard.id }}",
+      data: formImages,
+      success: function(){
+        window.location.href = '/orchard/create/step/13{{ orchard.id }}';
+      },
+      error: function(jqXHR, exception) {
+          $("#loading, #loading-text").fadeOut("slow", function() {
+            $("#loading-text").text("Guardado").fadeIn('slow');
+          });
+          if (jqXHR.status === 0) {
+                alert('Not connect.\n Verify Network.');
+            } else if (jqXHR.status == 404) {
+                alert('Requested page not found. [404]');
+            } else if (jqXHR.status == 500) {
+                alert('Internal Server Error [500].');
+            } else if (exception === 'parsererror') {
+                alert('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                alert('Time out error.');
+            } else if (exception === 'abort') {
+                alert('Ajax request aborted.');
+            } else {
+                alert('Uncaught Error.\n' + jqXHR.responseText);
+            }
+          console.log('error');
+        }
+    });
+});
+
+</script>
+
+{% endblock %}

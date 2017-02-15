@@ -1,0 +1,59 @@
+<html>
+<body>
+  {% if accept is defined and accept == 'true' %}
+  <h1>{{ 'orchard.suggest.activity_email.hello'|trans }} {{ app.user.username }}!<h1>
+  <label>{{ 'orchard.suggest.activity_email.title'|trans }}</label>
+  <span>{{ orchard_service }}<span>
+  <label>{{ 'orchard.suggest.activity_email.title-2'|trans }}</label>
+{% elseif accept is defined and accept == 'false' %}
+  <h1>Hola {{ app.user.username }}!<h1>
+  <label>{{ 'orchard.suggest.activity_email.title-3'|trans }}</label>
+
+  <span>{{ orchard_service }}<span>
+  <label>{{ 'orchard.suggest.activity_email.title-4'|trans }}</label>
+{% else %}
+<h1 class="display-3">Hola administrador!<h1>
+  <label>{{ app.user.username }} quiere añadir un nuevo servicio:</label>
+  <span>{{ orchard_service }}<span>
+
+    <a href="http://localhost:8000/orchard/suggest/insert/checkbox/OrchardService/{{ orchard_service }}/false"><button style="display: inline-block;
+      font-weight: 400;
+      line-height: 1.25;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: .5rem 1rem;
+      font-size: 1rem;
+      border-radius: .25rem;
+      color: #373a3c;
+      background-color: #ffffff;
+      border-color: #cccccc;" id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6 ">Rechazar</button></a>
+
+      <a href="http://localhost:8000/orchard/suggest/insert/checkbox/OrchardService/{{ orchard_service }}/true"><button style="display: inline-block;
+        font-weight: 400;
+        line-height: 1.25;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: .5rem 1rem;
+        font-size: 1rem;
+        border-radius: .25rem;
+        color: #ffffff;
+        background-color: #0275d8;
+        border-color: #0275d8;" id="btn-siguiente" type="submit" class="btn btn-primary">Aceptar</button></a>
+
+      </body>
+      </html>
+{% endif %}

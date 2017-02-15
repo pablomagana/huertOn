@@ -3,6 +3,7 @@
 namespace OrchardBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * OrchardParticipate
@@ -31,7 +32,7 @@ class OrchardParticipate
     /**
      * @var \Doctrine\Common\Collections\Collection|Orchard[]
      *
-     * @ORM\ManyToMany(targetEntity="Orchard", mappedBy="participate")
+     * @ORM\ManyToMany(targetEntity="Orchard", mappedBy="orchardParticipate")
      */
     private $orchards;
 

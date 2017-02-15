@@ -1,0 +1,748 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+          <!-- Base -->
+            <!-- base.html -->
+              <trans-unit id="1">
+                  <source>base.li-1</source>
+                  <target>Publish your orchard</target>
+              </trans-unit>
+              <trans-unit id="2">
+                  <source>base.li-2</source>
+                  <target>Search for activites</target>
+              </trans-unit>
+              <trans-unit id="3">
+                  <source>base.li-3</source>
+                  <target>Identified as</target>
+              </trans-unit>
+              <trans-unit id="4">
+                  <source>base.li-4</source>
+                  <target>Profile</target>
+              </trans-unit>
+              <trans-unit id="5">
+                  <source>base.li-5</source>
+                  <target>Available orchards</target>
+              </trans-unit>
+              <trans-unit id="6">
+                  <source>base.li-6</source>
+                  <target>Log out</target>
+              </trans-unit>
+              <trans-unit id="7">
+                  <source>base.li-7</source>
+                  <target>Sign up</target>
+              </trans-unit>
+              <trans-unit id="8">
+                  <source>base.li-8</source>
+                  <target>Log in</target>
+              </trans-unit>
+              <trans-unit id="9">
+                  <source>base.li-9</source>
+                  <target>Home</target>
+              </trans-unit>
+            <!-- End base.html -->
+
+            <!-- step_base.html -->
+              <trans-unit id="10">
+                  <source>stepBase.loading</source>
+                  <target>Saving...</target>
+              </trans-unit>
+              <trans-unit id="11">
+                  <source>stepBase.saveExit</source>
+                  <target>Save and log out </target>
+              </trans-unit>
+              <trans-unit id="12">
+                  <source>stepBase.email-1</source>
+                  <target>Thank you!</target>
+              </trans-unit>
+              <trans-unit id="13">
+                  <source>stepBase.email-2</source>
+                  <target>Your request has to be evaluated, we will email you with our feedback.</target>
+              </trans-unit>
+              <trans-unit id="14">
+                  <source>stepBase.close</source>
+                  <target>Close</target>
+              </trans-unit>
+            <!-- End step_base.html -->
+          <!-- End Base -->
+
+
+          <!-- HomeBundle -->
+            <!-- index.html -->
+              <trans-unit id="15">
+                  <source>home.title</source>
+                  <target>Search the best orchard</target>
+              </trans-unit>
+              <trans-unit id="16">
+                  <source>home.find.placeholder</source>
+                  <target>Search by city, postal code or orchard name</target>
+              </trans-unit>
+              <trans-unit id="17">
+                  <source>home.btn.search</source>
+                  <target>Search</target>
+              </trans-unit>
+              <trans-unit id="18">
+                  <source>home.activities</source>
+                  <target>Activities</target>
+              </trans-unit>
+            <!-- End index.html -->
+
+            <!-- find.html -->
+              <trans-unit id="19">
+                  <source>find.orchard</source>
+                  <target>ORCHARDS</target>
+              </trans-unit>
+              <trans-unit id="20">
+                  <source>find.events</source>
+                  <target>EVENTS</target>
+              </trans-unit>
+              <trans-unit id="21">
+                  <source>find.results-1</source>
+                  <target>Have found</target>
+              </trans-unit>
+              <trans-unit id="22">
+                  <source>find.results-2</source>
+                  <target>results</target>
+              </trans-unit>
+            <!-- End find.html -->
+          <!-- End HomeBundle -->
+
+
+          <!-- OrchardBundle -->
+            <!-- Create -->
+              <!-- list.html.twig -->
+                <trans-unit id="23">
+                    <source>orchard.list.title</source>
+                    <target>Orchards you have created</target>
+                </trans-unit>
+                <trans-unit id="24">
+                    <source>orchard.list.add-btn</source>
+                    <target>Add a new orchard</target>
+                </trans-unit>
+                <trans-unit id="25">
+                    <source>orchard.list.published</source>
+                    <target>Published</target>
+                </trans-unit>
+                <trans-unit id="26">
+                    <source>orchard.list.draft</source>
+                    <target>Draft</target>
+                </trans-unit>
+                <trans-unit id="27">
+                    <source>orchard.list.date</source>
+                    <target>Date of creation: </target>
+                </trans-unit>
+                <trans-unit id="28">
+                    <source>orchard.list.lastDate</source>
+                    <target>Modification date: </target>
+                </trans-unit>
+                <trans-unit id="29">
+                    <source>orchard.list.publish</source>
+                    <target>Publish</target>
+                </trans-unit>
+                <trans-unit id="30">
+                    <source>orchard.list.unPublish</source>
+                    <target>Undo</target>
+                </trans-unit>
+                <trans-unit id="31">
+                    <source>orchard.list.complete</source>
+                    <target>Complete</target>
+                </trans-unit>
+                <trans-unit id="32">
+                    <source>orchard.list.modify</source>
+                    <target>Modify</target>
+                </trans-unit>
+                <trans-unit id="33">
+                    <source>orchard.list.delete</source>
+                    <target>Delete</target>
+                </trans-unit>
+                <trans-unit id="34">
+                    <source>orchard.list.sure</source>
+                    <target>Are you sure you want to delete it?</target>
+                </trans-unit>
+                <trans-unit id="35">
+                    <source>orchard.list.sure-2</source>
+                    <target>You will not be able to recover your data.</target>
+                </trans-unit>
+                <trans-unit id="36">
+                    <source>orchard.list.yesDelete</source>
+                    <target>Yes, delete</target>
+                </trans-unit>
+                <trans-unit id="37">
+                    <source>orchard.list.yesUnpublish</source>
+                    <target>Publish</target>
+                </trans-unit>
+              <!-- End list.html.twig -->
+
+              <!--  step11.html.twig -->
+                <trans-unit id="38">
+                    <source>orchard.step11.title</source>
+                    <target>How is your orchard called?</target>
+                </trans-unit>
+                <trans-unit id="38-2">
+                    <source>orchard.step11.title-2</source>
+                    <target>How is your orchard called?</target>
+                </trans-unit>
+                <trans-unit id="39">
+                    <source>orchard.step11.required</source>
+                    <target>Required information</target>
+                </trans-unit>
+                <trans-unit id="40">
+                    <source>orchard.step11.where</source>
+                    <target>Where is your orchard?</target>
+                </trans-unit>
+                <trans-unit id="40-2">
+                    <source>orchard.step11.where-2</source>
+                    <target>Orchard's address</target>
+                </trans-unit>
+                <trans-unit id="41">
+                    <source>orchard.step11.marker</source>
+                    <target> Use the pointer to select the entry to your orchard.</target>
+                </trans-unit>
+                <trans-unit id="42">
+                    <source>orchard.step11.back</source>
+                    <target>Back</target>
+                </trans-unit>
+                <trans-unit id="43">
+                    <source>orchard.step11.next</source>
+                    <target>Next</target>
+                </trans-unit>
+              <!-- End step11.html.twig -->
+
+              <!--  step12.html.twig -->
+                <trans-unit id="44">
+                    <source>orchard.step12.title</source>
+                    <target>How can I be contacted?</target>
+                </trans-unit>
+                <trans-unit id="45">
+                    <source>orchard.step12.mail</source>
+                    <target>Mail</target>
+                </trans-unit>
+                <trans-unit id="46">
+                    <source>orchard.step12.tlf</source>
+                    <target>Phone</target>
+                </trans-unit>
+                <trans-unit id="47">
+                    <source>orchard.step12.web</source>
+                    <target>Web / Blog</target>
+                </trans-unit>
+                <trans-unit id="48">
+                    <source>orchard.step12.web-2</source>
+                    <target>Write here your Web / Blog</target>
+                </trans-unit>
+                <trans-unit id="49">
+                    <source>orchard.step12.social</source>
+                    <target>Social media</target>
+                </trans-unit>
+              <!-- End step12.html.twig -->
+
+              <!--  step13.html.twig -->
+              <trans-unit id="50">
+                  <source>orchard.step13.title</source>
+                  <target>Which kind of orchard is it?</target>
+              </trans-unit>
+              <trans-unit id="51">
+                  <source>orchard.step13.typeOrchard</source>
+                  <target>Suggest us a type of orchard</target>
+              </trans-unit>
+              <trans-unit id="52">
+                  <source>orchard.step13.typeOrchard-2</source>
+                  <target>What type of orchard is it?</target>
+              </trans-unit>
+              <trans-unit id="53">
+                  <source>orchard.step13.send</source>
+                  <target>Send</target>
+              </trans-unit>
+              <trans-unit id="54">
+                  <source>orchard.step13.title-right</source>
+                  <target>Type of orchard</target>
+              </trans-unit>
+              <trans-unit id="55">
+                  <source>orchard.step13.title-right-2</source>
+                  <target>Point the pointer on the type of orchard to show more information about it.</target>
+              </trans-unit>
+              <trans-unit id="56">
+                  <source>orchard.step13.required</source>
+                  <target>Required step</target>
+              </trans-unit>
+              <trans-unit id="57">
+                  <source>orchard.step13.required-2</source>
+                  <target>Please, select a type of orchard.</target>
+              </trans-unit>
+              <trans-unit id="58">
+                  <source>orchard.step13.save</source>
+                  <target>Saved</target>
+              </trans-unit>
+              <!-- End step13.html.twig -->
+
+              <!--  step14.html.twig -->
+                <trans-unit id="59">
+                    <source>orchard.step14.loading</source>
+                    <target>Loading...</target>
+                </trans-unit>
+                <trans-unit id="60">
+                    <source>orchard.step14.title</source>
+                    <target> Upload an image in order to let them know your orchard</target>
+                </trans-unit>
+                <trans-unit id="61">
+                    <source>orchard.step14.add</source>
+                    <target>Add image here</target>
+                </trans-unit>
+                <trans-unit id="62">
+                    <source>orchard.step14.uploaded</source>
+                    <target>Uploaded images</target>
+                </trans-unit>
+                <trans-unit id="63">
+                    <source>orchard.step14.description</source>
+                    <target>Describe the image</target>
+                </trans-unit>
+                <trans-unit id="64">
+                    <source>orchard.step14.edit</source>
+                    <target>Edit description</target>
+                </trans-unit>
+                <trans-unit id="65">
+                    <source>orchard.step14.max</source>
+                    <target>Only allowed a maxium of </target>
+                </trans-unit>
+                <trans-unit id="66">
+                    <source>orchard.step14.max-2</source>
+                    <target>imágenes</target>
+                </trans-unit>
+              <!-- End step14.html.twig -->
+
+              <!--  step21.html.twig -->
+                <trans-unit id="67">
+                    <source>orchard.step21.title</source>
+                    <target>Which kind of participation do you offer?</target>
+                </trans-unit>
+                <trans-unit id="68">
+                    <source>orchard.step21.participate</source>
+                    <target>Suggest a way to join us</target>
+                </trans-unit>
+                <trans-unit id="69">
+                    <source>orchard.step21.participate-2</source>
+                    <target>Which kind of participation do you offer?</target>
+                </trans-unit>
+                <trans-unit id="70">
+                    <source>orchard.step21.nowNo</source>
+                    <target>Not now</target>
+                </trans-unit>
+              <!-- End step21.html.twig -->
+
+              <!--  step22.html.twig -->
+                <trans-unit id="71">
+                    <source>orchard.step22.title</source>
+                    <target>Orchard rules</target>
+                </trans-unit>
+                <trans-unit id="72">
+                    <source>orchard.step22.add</source>
+                    <target>Add documents here</target>
+                </trans-unit>
+                <trans-unit id="73">
+                    <source>orchard.step22.title-right</source>
+                    <target>Upload PDF with your orchard rules</target>
+                </trans-unit>
+                <trans-unit id="74">
+                    <source>orchard.step22.title-right-2</source>
+                    <target>Some interesting links with orchard rules:</target>
+                </trans-unit>
+                <trans-unit id="75">
+                    <source>orchard.step22.title-right-3</source>
+                    <target>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</target>
+                </trans-unit>
+              <!-- End step22.html.twig -->
+
+              <!--  step23.html.twig -->
+                <trans-unit id="76">
+                    <source>orchard.step23.title</source>
+                    <target>How to sign up in your orchard</target>
+                </trans-unit>
+                <trans-unit id="77">
+                    <source>orchard.step23.title-2</source>
+                    <target> Describe step by step the process to be followed in order to sign up to your orchard.</target>
+                </trans-unit>
+                <trans-unit id="78">
+                    <source>orchard.step23.delete</source>
+                    <target>Delete this step</target>
+                </trans-unit>
+                <trans-unit id="79">
+                    <source>orchard.step23.add</source>
+                    <target>Add a new step</target>
+                </trans-unit>
+                <trans-unit id="80">
+                    <source>orchard.step23.title-right</source>
+                    <target>Explain it step by step and with enough information to be done as easy as possible</target>
+                </trans-unit>
+                <trans-unit id="81">
+                    <source>orchard.step23.title-right-2</source>
+                    <target>Step 1: Become member of AAVV of Patraix in www.asociacionvecinospatraix.es</target>
+                </trans-unit>
+              <!-- End step23.html.twig -->
+
+              <!--  step31.html.twig -->
+                <trans-unit id="82">
+                    <source>orchard.step31.title</source>
+                    <target> Explain your orchard philosophy</target>
+                </trans-unit>
+                <trans-unit id="83">
+                    <source>orchard.step31.title-2</source>
+                    <target>How did the project start?</target>
+                </trans-unit>
+                <trans-unit id="84">
+                    <source>orchard.step31.title-3</source>
+                    <target>Governance Model</target>
+                </trans-unit>
+                <trans-unit id="85">
+                    <source>orchard.step31.title-2-1</source>
+                    <target>Type here how did the project start</target>
+                </trans-unit>
+                <trans-unit id="86">
+                    <source>orchard.step31.title-3-1</source>
+                    <target>Type here your governace model</target>
+                </trans-unit>
+              <!-- End step31.html.twig -->
+
+              <!--  step32.html.twig -->
+                <trans-unit id="87">
+                    <source>orchard.step32.title</source>
+                    <target>Which kind of services do you offer?</target>
+                </trans-unit>
+                <trans-unit id="88">
+                    <source>orchard.step32.title-2</source>
+                    <target>Suggest a service</target>
+                </trans-unit>
+                <trans-unit id="89">
+                    <source>orchard.step32.title-3</source>
+                    <target>Type here a service</target>
+                </trans-unit>
+              <!-- End step32.html.twig -->
+
+              <!--  step33.html.twig -->
+                <trans-unit id="90">
+                    <source>orchard.step33.title</source>
+                    <target>Which kind of activities do you use to do in the orchard?</target>
+                </trans-unit>
+                <trans-unit id="91">
+                    <source>orchard.step33.title-2</source>
+                    <target>Suggest an activity</target>
+                </trans-unit>
+                <trans-unit id="92">
+                    <source>orchard.step33.title-3</source>
+                    <target>Write here the activity</target>
+                </trans-unit>
+              <!-- End step33.html.twig -->
+
+              <!--  steps.html.twig -->
+              <trans-unit id="93">
+                  <source>orchard.steps.title</source>
+                  <target>Hello</target>
+              </trans-unit>
+              <trans-unit id="94">
+                  <source>orchard.steps.title-2</source>
+                  <target>Make awareness of your orchard</target>
+              </trans-unit>
+              <trans-unit id="95">
+                  <source>orchard.steps.step</source>
+                  <target>step</target>
+              </trans-unit>
+              <trans-unit id="96">
+                  <source>orchard.steps.sub-1</source>
+                  <target>Tell them the essentials (where is it...)</target>
+              </trans-unit>
+              <trans-unit id="97">
+                  <source>orchard.steps.sub-2</source>
+                  <target>What can they find there? (photos, services...)</target>
+              </trans-unit>
+              <trans-unit id="98">
+                  <source>orchard.steps.sub-3</source>
+                  <target>Tell us more about your orchard (something special)</target>
+              </trans-unit>
+              <trans-unit id="99">
+                  <source>orchard.steps.btn-change</source>
+                  <target>Change</target>
+              </trans-unit>
+              <trans-unit id="100">
+                  <source>orchard.steps.btn-start</source>
+                  <target>Start</target>
+              </trans-unit>
+              <trans-unit id="101">
+                  <source>orchard.steps.btn-continue</source>
+                  <target>Continue</target>
+              </trans-unit>
+              <trans-unit id="102">
+                  <source>orchard.steps.btn-preview</source>
+                  <target>Take a look</target>
+              </trans-unit>
+              <trans-unit id="103">
+                  <source>orchard.steps.title-right</source>
+                  <target>Lots of people just know 1 or 2 orchards in your city</target>
+              </trans-unit>
+              <trans-unit id="104">
+                  <source>orchard.steps.title-right-2</source>
+                  <target>¡Show them yours!</target>
+              </trans-unit>
+              <trans-unit id="105">
+                  <source>orchard.steps.title-preview</source>
+                  <target>Orchard of </target>
+              </trans-unit>
+              <trans-unit id="106">
+                  <source>orchard.steps.preview-2</source>
+                  <target>This orchard is: </target>
+              </trans-unit>
+              <trans-unit id="107">
+                  <source>orchard.steps.preview-btn</source>
+                  <target>Keep going</target>
+              </trans-unit>
+              <trans-unit id="108">
+                  <source>orchard.steps.preview-btn-1</source>
+                  <target>Publish</target>
+              </trans-unit>
+              <!-- End steps.html.twig -->
+            <!-- End Create -->
+
+
+            <!-- Suggest -->
+              <!-- description.html.twig -->
+                <trans-unit id="800">
+                    <source>orchard.suggest.description.title</source>
+                    <target>Add the description for</target>
+                </trans-unit>
+              <!-- End description.html.twig -->
+              <!-- orchard_activity_email.html.twig -->
+                <trans-unit id="801">
+                    <source>orchard.suggest.activity_email.hello</source>
+                    <target>Hello</target>
+                </trans-unit>
+                <trans-unit id="802">
+                    <source>orchard.suggest.activity_email.title</source>
+                    <target>Congratulations! :) Your  activity suggestion has been accepted:</target>
+                </trans-unit>
+                <trans-unit id="803">
+                    <source>orchard.suggest.activity_email.title-2</source>
+                    <target> You can add it now to your orchard! Thank you!</target>
+                </trans-unit>
+                <trans-unit id="804">
+                    <source>orchard.suggest.activity_email.title-3</source>
+                    <target>Sorry! :( Your activity suggestion has been rejected:</target>
+                </trans-unit>
+                <trans-unit id="805">
+                    <source>orchard.suggest.activity_email.title-4</source>
+                    <target>Try to add another one. Thank you!</target>
+                </trans-unit>
+              <!-- End orchard_activity_email.html.twig -->
+              <!-- orchard_participate_email.html.twig -->
+                <trans-unit id="806">
+                    <source>orchard.suggest.participate_email.title</source>
+                    <target>Congratulations! :) Your suggestion about a new way to join has been accepted:</target>
+                </trans-unit>
+                <trans-unit id="807">
+                    <source>orchard.suggest.participate_email.title-2</source>
+                    <target>You can add it now to your orchard! Thank you!</target>
+                </trans-unit>
+                <trans-unit id="808">
+                    <source>orchard.suggest.participate_email.title-3</source>
+                    <target>Sorry! :( Your suggestion about a new way to join has been rejected:</target>
+                </trans-unit>
+                <trans-unit id="809">
+                    <source>orchard.suggest.participate_email.title-4</source>
+                    <target>Try to add another one. Thank you!</target>
+                </trans-unit>
+              <!-- End orchard_activity_email.html.twig -->
+              <!-- orchard_service_email.html.twig -->
+                <trans-unit id="810">
+                    <source>orchard.suggest.service_email.title</source>
+                    <target>Congratulations! :) Your service suggestion has been accepted:</target>
+                </trans-unit>
+                <trans-unit id="811">
+                    <source>orchard.suggest.service_email.title-2</source>
+                    <target>You can add it now to your orchard! Thank you!</target>
+                </trans-unit>
+                <trans-unit id="812">
+                    <source>orchard.suggest.service_email.title-3</source>
+                    <target>Sorry! :( Your service suggestion has been rejected:</target>
+                </trans-unit>
+                <trans-unit id="813">
+                    <source>orchard.suggest.service_email.title-4</source>
+                    <target>Try to add another one. Thank you!</target>
+                </trans-unit>
+              <!-- End orchard_service_email.html.twig -->
+              <!-- orchard_type_email.html.twig -->
+              <trans-unit id="814">
+                  <source>orchard.suggest.type_email.title</source>
+                  <target>Congratulations! :) Your new type of orchard suggestion has been accepted:</target>
+              </trans-unit>
+              <trans-unit id="815">
+                  <source>orchard.suggest.type_email.title-1</source>
+                  <target>You can add it now to your orchard! Thank you!</target>
+              </trans-unit>
+              <trans-unit id="816">
+                  <source>orchard.suggest.type_email.title-2</source>
+                  <target>Sorry! :( Your new type of orchard suggestion has been rejected:</target>
+              </trans-unit>
+              <trans-unit id="817">
+                  <source>orchard.suggest.type_email.title-3</source>
+                  <target>Try to add another one. Thank you!</target>
+              </trans-unit>
+              <!-- End orchard_type_email.html.twig -->
+            <!-- End Suggest -->
+              <!-- orchard_profile.html -->
+                <trans-unit id="900">
+                    <source>orchard.profile.contact</source>
+                    <target>CONTACT</target>
+                </trans-unit>
+                <trans-unit id="901">
+                    <source>orchard.profile.activities</source>
+                    <target>NEXT EVENTS</target>
+                </trans-unit>
+                <trans-unit id="902">
+                    <source>orchard.profile.noActivities</source>
+                    <target>This orchard does not have activities</target>
+                </trans-unit>
+                <trans-unit id="903">
+                    <source>orchard.profile.howIsIt</source>
+                    <target>HOW IS IT</target>
+                </trans-unit>
+                <trans-unit id="904">
+                    <source>orchard.profile.type</source>
+                    <target>Type of orchard </target>
+                </trans-unit>
+                <trans-unit id="905">
+                    <source>orchard.profile.equipment</source>
+                    <target>Equipment</target>
+                </trans-unit>
+                <trans-unit id="906">
+                    <source>orchard.profile.join</source>
+                    <target>HOW YOU CAN JOIN</target>
+                </trans-unit>
+                <trans-unit id="907">
+                    <source>orchard.profile.modal</source>
+                    <target>Fields</target>
+                </trans-unit>
+                <trans-unit id="908">
+                    <source>orchard.profile.important</source>
+                    <target>It is important you know</target>
+                </trans-unit>
+                <trans-unit id="909">
+                    <source>orchard.profile.rules-1</source>
+                    <target>Look</target>
+                </trans-unit>
+                <trans-unit id="910">
+                    <source>orchard.profile.rules-2</source>
+                    <target>HERE</target>
+                </trans-unit>
+                <trans-unit id="911">
+                    <source>orchard.profile.rules-3</source>
+                    <target>the rules of the orchard.</target>
+                </trans-unit>
+                <trans-unit id="912">
+                    <source>orchard.profile.inscribe</source>
+                    <target>What do you need to subscribe?</target>
+                </trans-unit>
+                <trans-unit id="913">
+                    <source>orchard.profile.where</source>
+                    <target>WHERE DO YOU FIND IT</target>
+                </trans-unit>
+                <trans-unit id="914">
+                    <source>orchard.profile.question</source>
+                    <target>Do you have any questions?</target>
+                </trans-unit>
+              <!-- End orchard_profile.html -->
+          <!-- End OrchardBundle -->
+
+
+          <!-- UserBundle -->
+            <!-- register_content.html -->
+              <trans-unit id="200">
+                  <source>user.register.title</source>
+                  <target>Sign up to participate in an orchard or join one of its activities</target>
+              </trans-unit>
+              <trans-unit id="201">
+                  <source>user.register.read</source>
+                  <target>I have read and accepted the</target>
+              </trans-unit>
+              <trans-unit id="202">
+                  <source>user.register.conditions</source>
+                  <target>Conditions of use</target>
+              </trans-unit>
+              <trans-unit id="203">
+                  <source>user.register.privacy</source>
+                  <target>Privacy policy</target>
+              </trans-unit>
+              <trans-unit id="204">
+                  <source>user.register.acount</source>
+                  <target>Do you already have an account?</target>
+              </trans-unit>
+              <trans-unit id="205">
+                  <source>user.register.privacyPolicy</source>
+                  <target>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                  </target>
+              </trans-unit>
+              <trans-unit id="206">
+                  <source>user.register.privacyPolicy-2</source>
+                  <target>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices mauris velit. Nam nec tellus feugiat, molestie nibh sit amet, aliquet nibh. Mauris fermentum magna in lacus sollicitudin, id sagittis risus scelerisque. Vivamus pharetra, augue ut ultricies fermentum, lacus ligula dignissim elit, eget dignissim enim felis rutrum quam. Mauris ac quam a tellus pulvinar sodales. Phasellus molestie porta lectus, non hendrerit ex blandit vel. Praesent sodales tincidunt enim, at elementum sapien ultricies vitae. Fusce augue magna, facilisis ac gravida eu, dictum eu metus. Praesent sollicitudin elementum aliquet. Vivamus quis eleifend nisi. Curabitur ornare viverra arcu non rhoncus.
+                  </target>
+              </trans-unit>
+              <trans-unit id="207">
+                  <source>user.register.submit</source>
+                  <target>Register</target>
+              </trans-unit>
+              <!-- UserType.php -->
+                <trans-unit id="208">
+                    <source>user.register.type.email</source>
+                    <target>Email address</target>
+                </trans-unit>
+                <trans-unit id="209">
+                    <source>user.register.type.name</source>
+                    <target>Name</target>
+                </trans-unit>
+                <trans-unit id="210">
+                    <source>user.register.type.surnames</source>
+                    <target>Surnames</target>
+                </trans-unit>
+                <trans-unit id="211">
+                    <source>user.register.type.passwd</source>
+                    <target>Password</target>
+                </trans-unit>
+                <trans-unit id="212">
+                    <source>user.register.type.passws-2</source>
+                    <target>Type again the password</target>
+                </trans-unit>
+              <!-- End UserType.php -->
+            <!-- End register_content.html -->
+            <!-- login_content.html -->
+              <trans-unit id="213">
+                  <source>user.login.title</source>
+                  <target>Log in to participate in an orchard or join one of its activities</target>
+              </trans-unit>
+              <trans-unit id="214">
+                  <source>user.login.create</source>
+                  <target>Don't you have an account?</target>
+              </trans-unit>
+              <trans-unit id="215">
+                  <source>user.login.remember</source>
+                  <target>Remember me</target>
+              </trans-unit>
+              <trans-unit id="216">
+                  <source>user.login.login</source>
+                  <target>Log in</target>
+              </trans-unit>
+              <trans-unit id="217">
+                  <source>user.login.register</source>
+                  <target>Register</target>
+              </trans-unit>
+              <trans-unit id="218">
+                  <source>user.login.forget</source>
+                  <target>Did you forget your password?</target>
+              </trans-unit>
+            <!-- End login_content.html -->
+          <!-- End UserBundle -->
+
+
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,19 @@
+orchard_suggest_send:
+    path:     /send/{entity}/{param}
+    defaults: { _controller: OrchardBundle:Suggest:send }
+
+orchard_suggest_description:
+    path:     /description/{orchard_type}/{accept}
+    defaults: { _controller: OrchardBundle:Suggest:description, accept:false }
+
+orchard_suggest_insert:
+    path:     /insert/{orchard_type}/{description}
+    defaults: { _controller: OrchardBundle:Suggest:insert, description:null }
+
+orchard_suggest_checkbox:
+    path:     /insert/checkbox/{entity}/{param}/{accept}
+    defaults: { _controller: OrchardBundle:Suggest:checkbox, accept:false }
+
+orchard_suggest_profile:
+    path:     /profile/{name}/{email}/{reason}/{query}/{id_orchard}
+    defaults: { _controller: OrchardBundle:Suggest:profile }

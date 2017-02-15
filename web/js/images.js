@@ -7,6 +7,9 @@ function previewImage(file) {
     if (!file.type.match(imageType)) {
         throw "El archivo debe ser una imagen";
     }
+    // if(file.size>10240){
+    //   throw "El archivo supera el tamaño maximo";
+    // }
     //añado al fichero una nueva propiedad descripción
     file.des="";
     file.id=id++;
@@ -141,6 +144,11 @@ function checkNumImage() {
   }else {
     $("#btn-siguiente").text("Ahora no");
   }
+  if (imagenes.length<10) {
+    $(".more").removeAttr("hidden");
+  }else{
+    $(".more").attr("hidden","hidden");
+  }
 }
 
 function removeItemWithId(array,id) {
@@ -161,8 +169,13 @@ function deleteUpload(element) {
 function deleteFromServer(id,element) {
   $.ajax({
     type: "POST",
-    url:"/orchard/images/delete/"+id,
-     success: function(){$(element).parent().remove();console.log($(element).attr("id"));},
+    url:"/orchard/upload/images/delete/"+id,
+     success: function(){
+       $(element).parent().remove();console.log($(element).attr("id"));
+       if ($('.upload').children().length<10) {
+         $("#more").removeAttr("hidden");
+       }
+     },
      error: function(){console.log("imagen no borrada");}
    });
 }
@@ -170,7 +183,7 @@ function deleteFromServer(id,element) {
 function sendNewDescription(description,id) {
   $.ajax({
     type: "POST",
-    url:"/orchard/images/modify/"+id,
+    url:"/orchard/upload/images/modify/"+id,
     data:{description},
      success: function(){alert("descripción modificada")},
      error: function(){console.log("descripcion NO modificada");}

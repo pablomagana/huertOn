@@ -1,10 +1,30 @@
+event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /event
+
+home:
+    resource: "@HomeBundle/Resources/config/routing.yml"
+    prefix:   /
+
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /user
 
-orchard:
-    resource: "@OrchardBundle/Resources/config/routing.yml"
-    prefix:   /orchard
+orchard_create:
+    resource: "@OrchardBundle/Resources/config/routing_create.yml"
+    prefix:   /orchard/create
+
+orchard_show:
+    resource: "@OrchardBundle/Resources/config/routing_show.yml"
+    prefix:   /orchard/show
+
+orchard_upload:
+    resource: "@OrchardBundle/Resources/config/routing_upload.yml"
+    prefix:   /orchard/upload
+
+orchard_suggest:
+    resource: "@OrchardBundle/Resources/config/routing_suggest.yml"
+    prefix:   /orchard/suggest
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
