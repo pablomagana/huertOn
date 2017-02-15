@@ -78,20 +78,21 @@ class UploadController extends Controller
 
   public function uploadFileAction(Request $request,$id_orchard)
   {
+    $data=$request->files->get("fileNormas");
     if($id_orchard!=null){
-      $data=$request->files->get("fileNormas");
-      $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
-      $normas = new RuleFile();
-      $normas->setFile($data);
-      $date = new \DateTime('now');
-      $date = $date->format('Y-m-d H:i:s');
-      $normas->setUpdateAt($date);
-      $normas->setOrchard($orchard);
-
       $em=$this->getDoctrine()->getManager();
-      $em->persist($normas);
-      $em->flush();
+      $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
+      if ($data!=null) {
+        $normas = new RuleFile();
+        $normas->setFile($data);
+        $date = new \DateTime('now');
+        $date = $date->format('Y-m-d H:i:s');
+        $normas->setUpdateAt($date);
+        $normas->setOrchard($orchard);
 
+        $em->persist($normas);
+        $em->flush();
+      }
       //update step orchard
       if($orchard->getStep()<23){
         $orchard->setStep(23);
@@ -100,7 +101,7 @@ class UploadController extends Controller
       }
       return new JsonResponse(23);
     }else {
-      throw new NotFoundHttpException('id_orchard no especificado');
+      return new JsonResponse(null);
     }
   }
   // public function downloadFileAction(Request $request,$id_orchard)
