@@ -32,6 +32,11 @@ class CreateController extends Controller
             return $this->redirectToRoute('home_homepage');
         }
 
-        return $this->render('EventBundle:Default:create.html.twig', array('form'=>$form->createView()));
+        return $this->render('EventBundle:Create:create.html.twig', array('form'=>$form->createView()));
+    }
+
+    public function listAction()
+    {
+      return $this->render('EventBundle:Create:list.html.twig');
     }
 }
