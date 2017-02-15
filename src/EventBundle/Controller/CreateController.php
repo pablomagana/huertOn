@@ -45,6 +45,6 @@ class CreateController extends Controller
     {
       $events = $this->container->get("event_service")->getOrchardEvents($id_orchard);
 
-      return $this->render('EventBundle:Create:list.html.twig', array('events' => $events));
+      return $this->render('EventBundle:Create:list_events.html.twig', array('events' => $events));
     }
 }
