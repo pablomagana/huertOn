@@ -219,7 +219,7 @@
         <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
           <h5>Contacta con {{orchard.user.username}}, coordinador/a de este huerto.</h5><br>
           <div class="text-lg-left">
-            <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>
+            {#<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>#}
             {% if orchard.phone is empty %}{% else %}<i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.phone}}{% endif %}<br>
             {% if orchard.web is empty %}{% else %}<i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.web}}{% endif %}<br>
             {% if orchard.facebook is empty %}{% else %}<i class="fa fa-facebook-official" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.facebook}}{% endif %}<br>
@@ -230,11 +230,14 @@
       <!-- FORMULARIO DE CONTACTO -->
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="container">
+          {% if app.user != null %}
           <div class="form-group">
-            <input type="text" class="form-control" id="user_name" placeholder="Nombre">
+            <label for="user_name">{{ app.user.username }}</label>
+            <input type="text" class="form-control" id="user_name" placeholder="Nombre" value="{{ app.user.username }}" hidden="hidden">
           </div>
           <div class="form-group">
-            <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" placeholder="Dirección de correo electrónico">
+            <label for="user_email">{{ app.user.email}}</label>
+            <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" placeholder="Dirección de correo electrónico" value="{{ app.user.email}}" hidden="hidden">
             <small id="emailHelp" class="form-text text-muted">No te enviaremos spam.</small>
           </div>
           <div class="form-group">
@@ -249,6 +252,10 @@
             <textarea maxlength="500" placeholder="Escribe aquí tu consulta" class="form-control" id="user_query" rows="3"></textarea>
           </div>
           <button id="btn-send-message">Enviar mensaje</button>
+          {% else %}
+          <h1>¿Tienes alguna pregunta?</h1>
+          <a href="/register"><button class="btn btn-primary" name="button">{{ 'user.register.submit'|trans }}</button></a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -451,7 +458,7 @@
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <h5>Contacta con {{orchard.user.username}}, coordinador/a de este huerto.</h5><br>
               <div class="text-lg-left">
-                <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>
+                {#<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>#}
                 <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.phone}}<br>
                 {% if orchard.web is empty %}{% else %}<i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.web}}{% endif %}<br>
                 {% if orchard.facebook is empty %}{% else %}<i class="fa fa-facebook-official" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.facebook}}{% endif %}<br>
