@@ -1,0 +1,28 @@
+.dateblock{
+  display:inline-block;
+}
+.imageDiv{
+  border: 1px solid;
+  width: 300px;
+  height: 100px;
+  margin: 10px;
+}
+.more{
+  height:100%;
+}
+#plus{
+  font-size:40pt;
+  position:relative;
+  left:43%;
+  top:2%;
+}
+#gallery{
+  padding:2px;
+  width:300px;
+  height:100px;}
+#gallery .thumbnail{
+  margin:10px;
+  height:80px;
+  width:80px;
+  }
+#gallery img{height: 50px;width:80px;}
