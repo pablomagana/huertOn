@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CreateController extends Controller
 {
-    public function createAction(Request $request, $id_event)
+    public function createAction(Request $request, $id_event, $id_orchard)
     {
 
       $event = $this->container->get("event_service")->getEvent($id_event);
@@ -19,6 +19,10 @@ class CreateController extends Controller
 
       if(!$event) {
         $event = new Event();
+        if ($id_orchard) {
+          $this->container->get("orchard_service")->checkOwner($id_orchard);
+          $orchard = $orchard = $this->container->get("orchard_service")->getOrchard($id_orchard);
+        }
       }else {
         $orchard = $event->getOrchard();
       }
