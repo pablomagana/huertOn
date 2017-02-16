@@ -128,4 +128,19 @@ class UploadController extends Controller
       return new JsonResponse("ko");
     }
   }
+
+  public function favouriteAction($id_image)
+  {
+    $em=$this->getDoctrine()->getManager();
+
+    $image=$em->getRepository("OrchardBundle:Image")->findOneById($id_image);
+
+    $image->setFavourite(true);
+
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($image);
+    $em->flush();
+
+    return new JsonResponse("ok");
+  }
 }

@@ -5,10 +5,40 @@
 <div class="row" id="orchard-img">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     {% for orchardImage in orchard.images %}
-    <div class="fullscreen background parallax mySlides" style="padding:250px 0; background-image: url('{{ asset('/orchard/image/' ~ orchardImage.nameImage) }}'); background-attachment: fixed;"  data-diff="100"></div>
+    <div class="fullscreen background parallax mySlides" style="padding:250px 0; background-image: url('{{ asset('/orchard/image/' ~ orchardImage.nameImage) }}'); background-attachment: fixed;"  data-diff="100"><span style="display: none;">Marcada como favorita</span><i data-toogle="tooltip" data-placement="top" title="Marcar como favorita" id="fav-{{ orchardImage.id }}" class="image-fav fa fa-heart-o fa-lg" aria-hidden="true"></i></div>
+    <script type="text/javascript">
+    $('#fav-{{ orchardImage.id }}').on('click', function() {
+      $.ajax({
+        type: 'POST',
+        url: '/orchard/upload/images/favourite/{{ orchardImage.id }}',
+        success: function(data) {
+          console.log('success');
+          $('#fav-{{ orchardImage.id }}').tooltip('show');
+        },
+        error: function(jqXHR, exception) {
+          if (jqXHR.status === 0) {
+            alert('Not connect.\n Verify Network.');
+          } else if (jqXHR.status == 404) {
+            alert('Requested page not found. [404]');
+          } else if (jqXHR.status == 500) {
+            alert('Internal Server Error [500].');
+          } else if (exception === 'parsererror') {
+            alert('Requested JSON parse failed.');
+          } else if (exception === 'timeout') {
+            alert('Time out error.');
+          } else if (exception === 'abort') {
+            alert('Ajax request aborted.');
+          } else {
+            alert('Uncaught Error.\n' + jqXHR.responseText);
+          }
+          console.log('error');
+        }
+      });
+    });
+    </script>
     {% endfor %}
-    <a class="w3-btn-floating w3-display-left" onclick="plusDivs(-1)" style="margin-left:20px;">&#10094;</a>
-    <a class="w3-btn-floating w3-display-right" onclick="plusDivs(1)" style="margin-right:20px;">&#10095;</a>
+    <a class="w3-btn-floating w3-display-left" onclick="plusDivs(-1)" style="margin-left:15px;">&#10094;</a>
+    <a class="w3-btn-floating w3-display-right" onclick="plusDivs(1)" style="margin-right:15px;">&#10095;</a>
   </div>
 </div>
 

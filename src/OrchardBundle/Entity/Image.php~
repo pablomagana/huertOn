@@ -231,28 +231,4 @@ class Image
     {
         return $this->event;
     }
-
-    /**
-     * Set favourite
-     *
-     * @param boolean $favourite
-     *
-     * @return Image
-     */
-    public function setFavourite($favourite)
-    {
-        $this->favourite = $favourite;
-
-        return $this;
-    }
-
-    /**
-     * Get favourite
-     *
-     * @return boolean
-     */
-    public function getFavourite()
-    {
-        return $this->favourite;
-    }
 }
