@@ -463,6 +463,10 @@ a{
 	color: #0b0146!important;
 }
 
+a.btn-social{
+	color: #fff!important;
+}
+
 .circular-image {
   border-radius:  50%;
 }
