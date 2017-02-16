@@ -30,7 +30,9 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "beberlei/DoctrineExtensions": "^1.0",
-        "vich/uploader-bundle": "^1.4"
+        "vich/uploader-bundle": "^1.4",
+        "snilius/twig-sort-by-field": "^0.1.5",
+        "hwi/oauth-bundle": "^0.5.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

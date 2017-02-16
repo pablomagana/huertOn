@@ -18,6 +18,9 @@
   <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/js/bootstrap.min.js" charset="utf-8"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
+
   <!-- Load Leaflet from CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0/leaflet.js"></script>
@@ -58,7 +61,7 @@
         </div>
         <div class="col-lg-2">
           <li class="nav-item float-lg-left float-xl-left">
-            <a href="/es" id="logo-desktop">
+            <a href="/{{ app.request.getLocale() }}" id="logo-desktop">
               <img src="{{ asset('/img/logo.png') }}" height="30" class="d-inline-block align-top" alt="" style="margin-top:10px;">
             </a>
           </li>
@@ -122,7 +125,7 @@
       </div>
       <div class="collapse navbar-collapse row" id="myNavbar">
         <div class="submenu-items">
-          <a href="/es" id="logo-mobile">{{ 'base.li-9'|trans }}</a>
+          <a href="/ {{ app.request.getLocale() }}" id="logo-mobile">{{ 'base.li-9'|trans }}</a>
         </div>
         <div class="submenu-items">
           <a href="/orchard/create/steps">{{ 'base.li-1'|trans }}</a>
@@ -137,8 +140,7 @@
 
   {% block body %}{% endblock %}
 
-
-{% block javascripts %}{% endblock %}
+  {% block javascripts %}{% endblock %}
 
   <script type="text/javascript">
 
@@ -170,19 +172,8 @@
     console.warn('ERROR(' + err.code + '): ' + err.message);
   };
 
-  switch (window.location.pathname) {
-    case '/es':
-    $('#logo-desktop').attr('href', '/es');
-    $('#logo-mobile').attr('href', '/es');
-    break;
-    case '/en':
-    $('#logo-desktop').attr('href', '/en');
-    $('#logo-mobile').attr('href', '/en');
-    break;
-    case '/ca':
-    $('#logo-desktop').attr('href', '/ca');
-    $('#logo-mobile').attr('href', '/ca');
-    break;
+  function lenguage(len) {
+    window.location.href = '/'+len;
   }
 
   </script>

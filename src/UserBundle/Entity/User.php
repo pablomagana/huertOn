@@ -29,6 +29,13 @@ class User extends BaseUser
     private $apellidos;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="google_id", type="string", nullable=true)
+     */
+    private $googleID;
+
+    /**
     * @var OrchardBundle\Entity\Orchard
     *
     * un usuario a muchos huertos
@@ -76,7 +83,29 @@ class User extends BaseUser
         return $this->apellidos;
     }
 
+    /**
+     * Set googleID
+     *
+     * @param string googleID
+     *
+     * @return User
+     */
+    public function setGoogleID($googleID)
+    {
+        $this->googleID = $googleID;
 
+        return $this;
+    }
+
+    /**
+     * Get googleID
+     *
+     * @return string
+     */
+    public function getGoogleID()
+    {
+        return $this->googleID;
+    }
 
     /**
      * Add orchard

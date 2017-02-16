@@ -40,6 +40,7 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
+
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -131,3 +132,28 @@ vich_uploader:
             uri_prefix:         /orchard/event
             upload_destination: '%kernel.root_dir%/../web/orchard/event'
             namer:              vich_uploader.namer_uniqid
+
+hwi_oauth:
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_names: [main]
+    connect:
+        account_connector: app.provider.oauth
+    resource_owners:
+        # facebook:
+        #     type:                facebook
+        #     client_id:           %facebook_client_id%
+        #     client_secret:       %facebook_client_secret%
+        #     scope:               "email, public_profile"
+        #     infos_url:           "https://graph.facebook.com/me?fields=id,name,email,picture.type(large)"
+        #     paths:
+        #         email: email
+        #     options:
+        #         display: page
+        google:
+            type:                google
+            client_id:           717071780074-pip6gfjnbdiaa0nfvu8l3bvfdmuf9ssi.apps.googleusercontent.com
+            client_secret:       CS3ceqlB0EObGVXn4R4C7RCU
+            scope:              "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+            paths:
+                email: email
+                profile: profile

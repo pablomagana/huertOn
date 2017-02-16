@@ -33,7 +33,7 @@
       <!-- PRÓXIMAS 3 ACTIVIDADES DE CADA HUERTO (3 COLUMNAS) -->
       <h5>{{ 'orchard.profile.activities'|trans }}</h5>
       <hr class="hr-orchard-profile" align="center">
-
+      <div class="spacing"></div>
       {% for event in orchard.events|slice(0, 3) %}
       <a href="/event/show/profile/{{ event.id }}">
         <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
@@ -723,26 +723,22 @@ $('#btn-send-message-mobile').on('click', function() {
 
 function validateForm() {
   var valid = true;
-  $('.required').each(function() {
-    if($(this).val() == '') {
-      $(this).tooltip('show');
-      $(this).css('border-color', '#ff0000');
-      valid = false;
-    }
-  });
+  if($('#user_query').val() == '') {
+    $('#user_query').tooltip('show');
+    $('#user_query').css('border-color', '#ff0000');
+    valid = false;
+  }
 
   return valid;
 }
 
 function validateFormMobile() {
   var valid = true;
-  $('.tab-pane .required').each(function() {
-    if($(this).val() == '') {
-      $(this).tooltip('show');
-      $(this).css('border-color', '#ff0000');
-      valid = false;
-    }
-  });
+  if($('#user_query_mobile').val() == '') {
+    $('#user_query_mobile').tooltip('show');
+    $('#user_query_mobile').css('border-color', '#ff0000');
+    valid = false;
+  }
 
   return valid;
 }

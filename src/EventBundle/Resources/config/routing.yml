@@ -7,8 +7,8 @@ event_create_orchard:
     defaults: { _controller: EventBundle:Create:orchard, id_orchard:null }
 
 event_create:
-    path:     /create/{id_event}
-    defaults: { _controller: EventBundle:Create:create, id_event:null }
+    path:     /create/{id_event}/{id_orchard}
+    defaults: { _controller: EventBundle:Create:create, id_event:null, id_orchard:null  }
 
 event_show_profile:
     path:     /show/profile/{id_event}
