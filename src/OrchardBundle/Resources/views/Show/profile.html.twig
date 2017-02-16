@@ -52,7 +52,7 @@
 
           <!-- Texto -->
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-            <p><font style="font-size:20px">{{ event.title }}</font> <br><i>{{ event.orchard.name }}</i></p>
+            <p><font style="font-size:20px">{{ event.title }}</font><br><strong>{% if event.price == 0 %}Gratis{% else %}{{ event.price }}€{% endif %}</strong>&nbsp;&nbsp;<i>{{ event.orchard.name }}</i></p>
           </div>
 
           <input type="text" class="geometry" value="{{ event.orchard.geometry }}" hidden="hidden">
@@ -60,6 +60,14 @@
       </a>
       {% endfor %}
 
+      <div class="container">
+        <div class="spacing"></div>
+        <form action="/find/event" method="post">
+          <input id="input-home_search" name="input-home_search" type="text" value="{{ orchard.name }}" placeholder="{{ 'home.find.placeholder'|trans }}" hidden="hidden">
+          <button id="register-button" type="submit" class="btn btn-outline-primary">Ver más</button>
+        </form>
+        <div class="spacing "></div>
+      </div>
 
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
         <div class="border">
@@ -135,13 +143,13 @@
   <div class="spacing"></div>
 
 
-  {% if orchard.orchardParticipate is empty %}
-  {% else %}
   <div class="container">
     <div class="row row-centered" id="how-to-join">
       <h5>{{ 'orchard.profile.join'|trans }}</h5>
       <hr class="hr-orchard-profile">
       <!-- MODALIDADES -->
+      {% if orchard.orchardParticipate is empty %}
+      {% else %}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
         <div class="border">
           <h6>{{ 'orchard.profile.modal'|trans }}</h6>
@@ -219,7 +227,7 @@
         <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
           <h5>Contacta con {{orchard.user.username}}, coordinador/a de este huerto.</h5><br>
           <div class="text-lg-left">
-            <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>
+            {#<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>#}
             {% if orchard.phone is empty %}{% else %}<i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.phone}}{% endif %}<br>
             {% if orchard.web is empty %}{% else %}<i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.web}}{% endif %}<br>
             {% if orchard.facebook is empty %}{% else %}<i class="fa fa-facebook-official" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.facebook}}{% endif %}<br>
@@ -230,11 +238,14 @@
       <!-- FORMULARIO DE CONTACTO -->
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="container">
+          {% if app.user != null %}
           <div class="form-group">
-            <input type="text" class="form-control" id="user_name" placeholder="Nombre">
+            <label for="user_name">{{ app.user.username }}</label>
+            <input type="text" class="form-control" id="user_name" placeholder="Nombre" value="{{ app.user.username }}" hidden="hidden">
           </div>
           <div class="form-group">
-            <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" placeholder="Dirección de correo electrónico">
+            <label for="user_email">{{ app.user.email}}</label>
+            <input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" placeholder="Dirección de correo electrónico" value="{{ app.user.email}}" hidden="hidden">
             <small id="emailHelp" class="form-text text-muted">No te enviaremos spam.</small>
           </div>
           <div class="form-group">
@@ -246,9 +257,14 @@
             </select>
           </div>
           <div class="form-group">
-            <textarea maxlength="500" placeholder="Escribe aquí tu consulta" class="form-control" id="user_query" rows="3"></textarea>
+            <span style="display: none;">{{ 'orchard.step11.required'|trans }}</span>
+            <textarea data-toogle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}" maxlength="500" placeholder="Escribe aquí tu consulta" class="form-control required" id="user_query" rows="3"></textarea>
           </div>
           <button id="btn-send-message">Enviar mensaje</button>
+          {% else %}
+          <h1>¿Tienes alguna pregunta?</h1>
+          <a href="/register"><button class="btn btn-primary" name="button">{{ 'user.register.submit'|trans }}</button></a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -451,7 +467,7 @@
             <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
               <h5>Contacta con {{orchard.user.username}}, coordinador/a de este huerto.</h5><br>
               <div class="text-lg-left">
-                <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>
+                {#<i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.mail}}<br>#}
                 <i class="fa fa-phone" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.phone}}<br>
                 {% if orchard.web is empty %}{% else %}<i class="fa fa-desktop" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.web}}{% endif %}<br>
                 {% if orchard.facebook is empty %}{% else %}<i class="fa fa-facebook-official" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;{{orchard.facebook}}{% endif %}<br>
@@ -463,11 +479,14 @@
           <!-- FORMULARIO DE CONTACTO -->
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="container">
+              {% if app.user != null %}
               <div class="form-group">
-                <input type="text" class="form-control" id="user_name_mobile" placeholder="Nombre">
+                <label for="user_name_mobile">{{ app.user.username }}</label>
+                <input type="text" class="form-control" id="user_name_mobile" placeholder="Nombre" value="{{ app.user.username }}" hidden="hidden">
               </div>
               <div class="form-group">
-                <input type="email" class="form-control" id="user_email_mobile" aria-describedby="emailHelpMobile" placeholder="Dirección de correo electrónico">
+                <label for="user_email_mobile">{{ app.user.email}}</label>
+                <input type="email" class="form-control" id="user_email_mobile" aria-describedby="emailHelpMobile" placeholder="Dirección de correo electrónico" value="{{ app.user.email}}" hidden="hidden">
                 <small id="emailHelpMobile" class="form-text text-muted">No te enviaremos spam.</small>
               </div>
               <div class="form-group">
@@ -479,9 +498,14 @@
                 </select>
               </div>
               <div class="form-group">
-                <textarea maxlength="500" placeholder="Escribe aquí tu consulta" class="form-control" id="user_query_mobile" rows="3"></textarea>
+                <span style="display: none;">{{ 'orchard.step11.required'|trans }}</span>
+                <textarea data-toogle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}" maxlength="500" placeholder="Escribe aquí tu consulta" class="form-control required" id="user_query_mobile" rows="3"></textarea>
               </div>
               <button id="btn-send-message-mobile">Enviar mensaje</button>
+              {% else %}
+              <h1>¿Tienes alguna pregunta?</h1>
+              <a href="/register"><button class="btn btn-primary" name="button">{{ 'user.register.submit'|trans }}</button></a>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -628,6 +652,8 @@ $('.scroller-left').click(function() {
 $('#btn-send-message').on('click', function() {
   console.log('Enviando consulta');
 
+  if(validateForm()) {
+
     $.ajax({
       type: 'POST',
       url: '/orchard/suggest/profile/' + $('#user_name').val() + '/' + $('#user_email').val() + '/' + $( "#user_reason option:selected" ).text() + '/' + $('#user_query').val() + '/{{ orchard.id }}',
@@ -654,10 +680,15 @@ $('#btn-send-message').on('click', function() {
       }
     });
 
+    return false;
+  }
+
 });
 
 $('#btn-send-message-mobile').on('click', function() {
   console.log('Enviando consulta');
+
+  if(validateFormMobile()) {
 
     $.ajax({
       type: 'POST',
@@ -685,6 +716,35 @@ $('#btn-send-message-mobile').on('click', function() {
       }
     });
 
+    return false;
+  }
+
 });
+
+function validateForm() {
+  var valid = true;
+  $('.required').each(function() {
+    if($(this).val() == '') {
+      $(this).tooltip('show');
+      $(this).css('border-color', '#ff0000');
+      valid = false;
+    }
+  });
+
+  return valid;
+}
+
+function validateFormMobile() {
+  var valid = true;
+  $('.tab-pane .required').each(function() {
+    if($(this).val() == '') {
+      $(this).tooltip('show');
+      $(this).css('border-color', '#ff0000');
+      valid = false;
+    }
+  });
+
+  return valid;
+}
 </script>
 {% endblock %}

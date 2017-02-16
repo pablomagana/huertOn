@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+{% for event in events %}
+{% if event.images != null and event.images is not empty %}
+  <div class="row">
+    <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+      <div style="width: 100%; height: 300px; background: url({{ asset('/event/image/' ~ event.images[0].imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+    </div>
+{% endif %}
+  <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12 container">
+    <p><h3> {{ event.title }} </h3></p>
+    <p><i>Inicio: {{ event.startDate|date("d/M/Y h:m")}}</i></p>
+    <p><i>Fin: {{ event.endDate|date("d/M/Y h:m")}}</i></p>
+
+    <div class="botones">
+      <button type="button" class="btn btn-danger show-modal{{ event.id }}">{{ 'orchard.list.delete'|trans }}</button>
+      <a href="/event/create/{{ event.id }}"><button type="button" class="btn btn-secondary">Editar evento</button></a>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<script type="text/javascript">
+$(function () {
+  $('.show-modal{{ event.id }}').click(function(){
+    $('#btn-delete-modal').attr("href", "/event/create/delete/{{ event.id}}");
+    $('#deleteModal').modal('show');
+  });
+});
+</script>
+{% endfor %}
+{% endblock %}

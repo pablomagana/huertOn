@@ -23,6 +23,12 @@
     <br>
     {{ form_widget(form.startDate) }}
   </div>
+<br>
+
+      {{ form_label(form.startTime) }}
+      {{ form_errors(form.startTime) }}
+      <br>
+      {{ form_widget(form.startTime) }}
 
 <!-- fecha de fin -->
   <div class="dateblock">
@@ -31,6 +37,12 @@
     <br>
     {{ form_widget(form.endDate) }}
   </div>
+
+<br>
+      {{ form_label(form.endTime) }}
+      {{ form_errors(form.endTime) }}
+      <br>
+      {{ form_widget(form.endTime) }}
 </div>
 
 <div class="row">
@@ -45,6 +57,26 @@
       <div id="gallery">
       </div>
       </div>
+</div>
+
+<div class="container">
+  <div class="row row-centered">
+    <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 col-xl-4 col-centered">
+      <div class="form-group">
+        <label for="user_orchards">Ubicación</label>
+        <select class="form-control" id="user_orchards">
+          {% for orchard in app.user.orchard %}
+          {% if orchard.name != null %}
+          <option id="{{ orchard.id }}">{{ orchard.name }}</option>
+          {% endif %}
+          {% endfor %}
+          {% if orchardRelated != null %}
+          <input id="orchardRelated" type="text" name="" value="{{ orchardRelated.name }}" hidden="hidden">
+          {% endif %}
+        </select>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -92,6 +124,17 @@ $("input:file").change(function(){
   console.log("detectando cambios en input");
   previewImage(this.files[0]);
 });
+
+if($('#orchardRelated').val()) {
+  $('#user_orchards').val($('#orchardRelated').val());
+}
+
+$('#eventbundle_event_id_orchard').val($( "#user_orchards option:selected" ).attr('id'));
+
+$('#user_orchards').on('change', function() {
+  $('#eventbundle_event_id_orchard').val($( "#user_orchards option:selected" ).attr('id'));
+});
+
 </script>
 <script src="{{asset("/js/event.js")}}" charset="utf-8"></script>
 
