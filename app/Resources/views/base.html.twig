@@ -58,7 +58,7 @@
         </div>
         <div class="col-lg-2">
           <li class="nav-item float-lg-left float-xl-left">
-            <a href="/es" id="logo-desktop">
+            <a href="/{{ app.request.getLocale() }}" id="logo-desktop">
               <img src="{{ asset('/img/logo.png') }}" height="30" class="d-inline-block align-top" alt="" style="margin-top:10px;">
             </a>
           </li>
@@ -122,7 +122,7 @@
       </div>
       <div class="collapse navbar-collapse row" id="myNavbar">
         <div class="submenu-items">
-          <a href="/es" id="logo-mobile">{{ 'base.li-9'|trans }}</a>
+          <a href="/ {{ app.request.getLocale() }}" id="logo-mobile">{{ 'base.li-9'|trans }}</a>
         </div>
         <div class="submenu-items">
           <a href="/orchard/create/steps">{{ 'base.li-1'|trans }}</a>
@@ -137,6 +137,25 @@
 
   {% block body %}{% endblock %}
 
+  <footer id="footer">
+    <div class="text text-muted-footer">
+      Copyright © 2017 huertOn. All rights reserved.
+      <div id="dropdown-lang">
+        <div class="dropup show">
+          <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Idioma
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a id="es" onclick="lenguage(this.id)" class="dropdown-item">ES</a>
+            <a id="en" onclick="lenguage(this.id)" class="dropdown-item">EN</a>
+            <a id="ca" onclick="lenguage(this.id)" class="dropdown-item">CA</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </footer>
 
 {% block javascripts %}{% endblock %}
 
@@ -170,19 +189,8 @@
     console.warn('ERROR(' + err.code + '): ' + err.message);
   };
 
-  switch (window.location.pathname) {
-    case '/es':
-    $('#logo-desktop').attr('href', '/es');
-    $('#logo-mobile').attr('href', '/es');
-    break;
-    case '/en':
-    $('#logo-desktop').attr('href', '/en');
-    $('#logo-mobile').attr('href', '/en');
-    break;
-    case '/ca':
-    $('#logo-desktop').attr('href', '/ca');
-    $('#logo-mobile').attr('href', '/ca');
-    break;
+  function lenguage(len) {
+    window.location.href = '/'+len;
   }
 
   </script>
