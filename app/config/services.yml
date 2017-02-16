@@ -14,6 +14,10 @@ services:
          arguments: ['%kernel.default_locale%']
          tags:
              -  { name: kernel.event_subscriber }
+     twig.extension.sortbyfield:
+        class: Snilius\Twig\SortByFieldExtension
+        tags:
+            - { name: twig.extension }
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

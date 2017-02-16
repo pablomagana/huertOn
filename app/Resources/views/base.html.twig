@@ -137,25 +137,7 @@
 
   {% block body %}{% endblock %}
 
-  <footer id="footer">
-    <div class="text text-muted-footer">
-      Copyright © 2017 huertOn. All rights reserved.
-      <div id="dropdown-lang">
-        <div class="dropup show">
-          <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Idioma
-          </a>
-
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a id="es" onclick="lenguage(this.id)" class="dropdown-item">ES</a>
-            <a id="en" onclick="lenguage(this.id)" class="dropdown-item">EN</a>
-            <a id="ca" onclick="lenguage(this.id)" class="dropdown-item">CA</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </footer>
+  {% block footer %}{% endblock %}
 
 {% block javascripts %}{% endblock %}
 

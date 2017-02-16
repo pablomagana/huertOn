@@ -20,17 +20,18 @@
 <br>
 <div class="tab-content">
   <div class="tab-pane active" id="next" role="tabpanel">
-    {% for event in events %}
+    {% for event in events | sortbyfield('startDate') %}
     {% if event.startDate|date("d/M/Y h:m") > date()|date("d/M/Y h:m") %}
       <h1>{{ event.title }}</h1>
       <p><i>Inicio: {{ event.startDate|date("d/M/Y h:m")}}</i></p>
       <p><i>Fin: {{ event.endDate|date("d/M/Y h:m")}}</i></p>
+      <a href="/event/create/{{ event.id }}"><button type="button" class="btn btn-secondary">Editar evento</button></a>
     {% endif %}
     {% endfor %}
 </div>
 
 <div class="tab-pane" id="past" role="tabpanel">
-  {% for event in events %}
+  {% for event in events | sortbyfield('startDate') %}
   {% if event.startDate|date("d/M/Y h:m") < date()|date("d/M/Y h:m") %}
     <h1>{{ event.title }}</h1>
     <p><i>Inicio: {{ event.startDate|date("d/M/Y h:m")}}</i></p>
@@ -41,4 +42,8 @@
 </div>
 
 {% endif %}
+{% endblock %}
+
+{% block footer %}
+
 {% endblock %}
