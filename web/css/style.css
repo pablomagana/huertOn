@@ -532,4 +532,5 @@ div.left-scroll {
 	position: absolute;
 	top: 80px;
   right: 50px;
+	cursor: pointer;
 }

@@ -74,7 +74,7 @@ class Image
     /**
      * @var boolean
      *
-     * @ORM\Column(name="favourite", type="boolean")
+     * @ORM\Column(name="favourite", type="boolean", nullable=true)
      *
      */
      protected $favourite;
