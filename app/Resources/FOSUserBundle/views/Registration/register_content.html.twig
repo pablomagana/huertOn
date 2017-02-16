@@ -26,6 +26,13 @@
 
     {{ form_end(form) }}
 
+    <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
+      <span>Facebook</span>
+    </a>
+    <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}">
+      <span>Google</span>
+    </a>
+
 <a href="/login">{{ 'user.register.acount'|trans }}</a>
 <script type="text/javascript">
     $('#fos_user_registration_form_plainPassword_first').hidePassword(true);

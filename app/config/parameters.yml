@@ -10,3 +10,5 @@ parameters:
     mailer_password: Administrador.1
     secret: 83770f199ec1aae578f3a85ed02a6eb290cc6698\
     mailer_host: 127.0.0.1
+    google_client_id: 717071780074-pip6gfjnbdiaa0nfvu8l3bvfdmuf9ssi.apps.googleusercontent.com
+    google_client_secret: CS3ceqlB0EObGVXn4R4C7RCU
