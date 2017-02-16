@@ -5,61 +5,108 @@
 
 {% block body %}
 <br><br>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-      <h1 id="title">{{event.title}}</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5 ">
-      {% if event.imageName != null %}
-          <img id="profileImg" class="img-response" src="{{ asset('orchard/event/') }}{{event.imageName}}" alt="">
-      {% else %}
-          <img id="profileImg" class="img-response" src="" alt="">
-      {% endif %}
 
-    </div>
-    <div class="col-12 col-sm-12 col-md-6 col-lg-7 col-xl-7 ">
-      <h2>Fecha y hora</h2>
-      <p> <strong>De :</strong> {{event.startDate|date('d-m-y h:m')}}</p>
-      <p> <strong>A :</strong> {{event.endDate|date('d-m-y h:m')}}</p>
-      <h2>Ubicación y organizador</h2>
-      <p>null</p>
-      <h2>Precio</h2>
-      {% if event.price == 0 %}
-        <p>Gratis</p>
+<div class="jumbotron" style="background-color:#eceeef;">
+  <h1 id="title">{{event.title}}</h1>
+</div>
+
+<div class="container-fluid" style="height:auto;">
+  <div class="row">
+
+    <!--imagen-->
+    <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 offset-xl-2 offset-lg-2 offset-md-2">
+      {% if event.imageName != null %}
+      <img id="profileImg" class="img-response" src="{{ asset('orchard/event/') }}{{event.imageName}}" alt="">
       {% else %}
-        <p>{{event.price}} €</p>
+      <img id="profileImg" class="img-response" src="http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png" alt="">
+      {% endif %}
+    </div>
+
+
+    <!--texto-->
+    <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+      <strong>FECHA Y HORA</strong>
+      <p> <strong>De :</strong> {{event.startDate|date('d-m-y')}} - {{event.startTime|date('h:m')}}</p>
+      <p> <strong>A :</strong> {{event.endDate|date('d-m-y')}} - {{event.endTime|date('h:m')}}</p>
+
+      <strong>UBICACIÓN</strong>
+      <p>{{event.orchard.name}}</p>
+
+      <strong>PRECIO</strong>
+      {% if event.price == 0 %}
+      <p>Gratis</p>
+      {% else %}
+      <p>{{event.price}} €</p>
       {% endif %}
       {% if event.showPlaces == true %}
-        <h2>Plazas</h2>
-        <p>{{event.places}}</p>
+
+      <strong>PLAZAS</strong>
+      <p>{{event.places}}</p>
       {% endif %}
     </div>
   </div>
   <div class="row">
-    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 spacing">
-      <h2>Descripción</h2>
+    <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 offset-xl-2 offset-lg-2 offset-md-2">
+      <strong>DESCRIPCIÓN</strong>
       <p>{{event.description}}</p>
     </div>
   </div>
+
 </div>
+
+<div class="spacing">
+
+</div>
+
 <div class="container">
   <div class="row">
+
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-      <a href="#"><button type="button" class="btn" name="button">Únete</button></a>
+      {% if app.user != null %}
+      <button id="unete" type="button" class="btn" name="button">Únete</button>
+      {% else %}
+      <a href="/register"><button type="button" class="btn" name="button">Únete</button></a>
+      {% endif %}
     </div>
-    <div class="row">
-      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-        <p>¿ Tienes dudas ?  <a href="#">Contacta</a></p>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+      <p>¿ Tienes dudas ?  <a href="#">Contacta</a></p>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="modalPlaces">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h2 class="modal-title">Unete</h2>
+      </div>
+      <div class="modal-body">
+        <h3>{{event.title}}</h3>
+        <p>{{event.endDate|date('d-m-y')}}  {{event.endTime|date('h:m')}}</p>
+          <div class="form-group">
+            <label for="places">Nº Plazas</label>
+              <select class="form-control" id="places">
+                {% for num in 1.. event.places %}
+                    <option value="{{num}}">{{num}}</option>
+                {% endfor %}
+              </select>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <a href="/event/add/userevent/{{event.id}}"><button type="button" class="btn btn-primary">Enviar</button></a>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
+<script type="text/javascript">
+$('#unete').on("click",function() {
+  $('#modalPlaces').modal('show');
+})
+</script>
 {% endblock %}
