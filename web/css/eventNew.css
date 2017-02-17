@@ -2,10 +2,11 @@
   display:inline-block;
 }
 .imageDiv{
-  border: 1px solid;
-  width: 300px;
+  border: 1px dotted;
+  width: 100%;
   height: 100px;
   margin: 10px;
+  border-radius: 10px;
 }
 .more{
   height:100%;

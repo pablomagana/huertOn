@@ -12,74 +12,33 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
         <h1>Crea una actividad</h1>
       </div>
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 container" style=" padding:20px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 container" style="padding:20px;">
         <button type="submit" name="button" class="btn save-button" style="padding:10px 60px;">Guardar</button>
       </div>
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 container" style=" padding:20px;">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 container" style="padding:20px;">
         <button type="reset" name="button" class="btn btn-outline-primary delete-button" style="padding:10px 60px;">Borrar</button>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container-fluid" style="margin-left:10px;">
-  <br>
-  <div class="row">
-    <!-- titulo -->
-    {{ form_label(form.title) }}
-    {{ form_errors(form.title) }}
-    {{ form_widget(form.title) }}
-  </div>
-
-  <div class="row">
-    <!-- fecha de inicio -->
-    <div class="dateblock">
-      {{ form_label(form.startDate) }}
-      {{ form_errors(form.startDate) }}
-      <br>
-      {{ form_widget(form.startDate) }}
-    </div>
-    <br>
-
-    {{ form_label(form.startTime) }}
-    {{ form_errors(form.startTime) }}
-    <br>
-    {{ form_widget(form.startTime) }}
-
-    <!-- fecha de fin -->
-    <div class="dateblock">
-      {{ form_label(form.endDate) }}
-      {{ form_errors(form.endDate) }}
-      <br>
-      {{ form_widget(form.endDate) }}
-    </div>
-
-    <br>
-    {{ form_label(form.endTime) }}
-    {{ form_errors(form.endTime) }}
-    <br>
-    {{ form_widget(form.endTime) }}
-  </div>
-
-  <div class="row">
-    <!-- imagen de evento  -->
-    {{ form_label(form.images) }}
-    {{ form_errors(form.images) }}
-    {{ form_widget(form.images) }}
-    <div class="imageDiv" ondrop="drop(event)" ondragover="allowDrop(event)">
-      <div class="more" onclick="$('input:file').click();">
-        <span id="plus" class="glyphicon glyphicon-plus-sign">+</span>
-      </div>
-      <div id="gallery">
-      </div>
+<div class="container-fluid" style="margin:0 210px;;">
+  <div class="container-fluid">
+    <div class="row">
+      <br><br>
+      <!-- titulo -->
+      {{ form_label(form.title) }}
+      {{ form_errors(form.title) }}
+      {{ form_widget(form.title) }}
     </div>
   </div>
+<br>
 
-  <div class="container">
-    <div class="row row-centered">
-      <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 col-xl-4 col-centered">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="form-group">
-          <label for="user_orchards">Ubicación</label>
+          <label for="user_orchards">UBICACIÓN</label>
           <select class="form-control" id="user_orchards">
             {% for orchard in app.user.orchard %}
             {% if orchard.name != null %}
@@ -95,33 +54,94 @@
     </div>
   </div>
 
-  <div class="row">
-    <!-- descripcion -->
-    {{ form_label(form.description) }}
-    {{ form_errors(form.description) }}
-    <br>
-    {{ form_widget(form.description) }}
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+        <!-- fecha de inicio -->
+        <div class="dateblock">
+          {{ form_label(form.startDate) }}
+          {{ form_errors(form.startDate) }}
+          <br>
+          {{ form_widget(form.startDate) }}
+        </div>
+      </div>
+
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+        <!-- hora de inicio -->
+        {{ form_label(form.startTime) }}
+        {{ form_errors(form.startTime) }}
+        {{ form_widget(form.startTime) }}
+      </div>
+
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+        <!-- fecha de fin -->
+        <div class="dateblock">
+          {{ form_label(form.endDate) }}
+          {{ form_errors(form.endDate) }}
+          {{ form_widget(form.endDate) }}
+        </div>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+        {{ form_label(form.endTime) }}
+        {{ form_errors(form.endTime) }}
+        {{ form_widget(form.endTime) }}
+      </div>
+
+    </div>
+  </div>
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- descripcion -->
+      {{ form_label(form.description) }}
+      {{ form_errors(form.description) }}
+      <br>
+      {{ form_widget(form.description) }}
+    </div>
+  </div>
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+        <!-- imagen de evento  -->
+        {{ form_label(form.images) }}
+        {{ form_errors(form.images) }}
+        {{ form_widget(form.images) }}
+        <div class="imageDiv" ondrop="drop(event)" ondragover="allowDrop(event)">
+          <div class="more" onclick="$('input:file').click();">
+            <span id="plus"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
+          </div>
+          <div id="gallery"></div>
+        </div>        
+    </div>
   </div>
 
-  <div class="row">
-    <!-- nº de plazas -->
-    {{ form_label(form.places) }}
-    {{ form_errors(form.places) }}
-    {{ form_widget(form.places) }}
-    <!-- boolean mostrar nºplazas -->
-    {{ form_widget(form.showPlaces) }}
-    {{ form_label(form.showPlaces) }}
-    {{ form_errors(form.showPlaces) }}
 
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- nº de plazas -->
+      {{ form_label(form.places) }}
+      {{ form_errors(form.places) }}
+      {{ form_widget(form.places) }}
+      <!-- boolean mostrar nºplazas -->
+      <label class="custom-control custom-checkbox">
+      {{ form_widget(form.showPlaces) }}
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">{{ form_label(form.showPlaces) }}</span>
+      </label>
+      {{ form_errors(form.showPlaces) }}
+    </div>
   </div>
-
-  <div class="row">
-    <!-- precio -->
-    {{ form_label(form.price) }}
-    {{ form_errors(form.price) }}
-    {{ form_widget(form.price) }}
+  <br>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- precio -->
+      {{ form_label(form.price) }}
+      {{ form_errors(form.price) }}
+      {{ form_widget(form.price) }}
+    </div>
   </div>
-
 
   {{ form_end(form) }}
 
