@@ -60,8 +60,6 @@ class EventType extends AbstractType
             'allow_delete' => true,
             'download_link' => true,
           ])
-          ->add('guardar', SubmitType::class, array('attr' => array('class' => 'btn btn-primary')))
-          ->add('borrar', ResetType::class, array('attr' => array('class' => 'btn btn-secondary')))
           ->add('id_orchard', HiddenType::class, array('mapped' => false))
         ;
     }

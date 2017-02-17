@@ -4,49 +4,65 @@
 {% endblock %}
 {% block body %}
 
+{{ form_start(form) }}
+
+<div style="margin-bottom: -20px; background-color:#f2f2f2;">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 container">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+        <h1>Crea una actividad</h1>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 container" style=" padding:20px;">
+        <button type="submit" name="button" class="btn save-button" style="padding:10px 60px;">Guardar</button>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 container" style=" padding:20px;">
+        <button type="reset" name="button" class="btn btn-outline-primary delete-button" style="padding:10px 60px;">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container-fluid" style="margin-left:10px;">
   <br>
-<h1>Crear nuevo evento</h1>
-{{ form_start(form) }}
-<div class="row">
-  <!-- titulo -->
+  <div class="row">
+    <!-- titulo -->
     {{ form_label(form.title) }}
     {{ form_errors(form.title) }}
     {{ form_widget(form.title) }}
-</div>
-
-<div class="row">
-  <!-- fecha de inicio -->
-  <div class="dateblock">
-    {{ form_label(form.startDate) }}
-    {{ form_errors(form.startDate) }}
-    <br>
-    {{ form_widget(form.startDate) }}
-  </div>
-<br>
-
-      {{ form_label(form.startTime) }}
-      {{ form_errors(form.startTime) }}
-      <br>
-      {{ form_widget(form.startTime) }}
-
-<!-- fecha de fin -->
-  <div class="dateblock">
-    {{ form_label(form.endDate) }}
-    {{ form_errors(form.endDate) }}
-    <br>
-    {{ form_widget(form.endDate) }}
   </div>
 
-<br>
-      {{ form_label(form.endTime) }}
-      {{ form_errors(form.endTime) }}
+  <div class="row">
+    <!-- fecha de inicio -->
+    <div class="dateblock">
+      {{ form_label(form.startDate) }}
+      {{ form_errors(form.startDate) }}
       <br>
-      {{ form_widget(form.endTime) }}
-</div>
+      {{ form_widget(form.startDate) }}
+    </div>
+    <br>
 
-<div class="row">
-  <!-- imagen de evento  -->
+    {{ form_label(form.startTime) }}
+    {{ form_errors(form.startTime) }}
+    <br>
+    {{ form_widget(form.startTime) }}
+
+    <!-- fecha de fin -->
+    <div class="dateblock">
+      {{ form_label(form.endDate) }}
+      {{ form_errors(form.endDate) }}
+      <br>
+      {{ form_widget(form.endDate) }}
+    </div>
+
+    <br>
+    {{ form_label(form.endTime) }}
+    {{ form_errors(form.endTime) }}
+    <br>
+    {{ form_widget(form.endTime) }}
+  </div>
+
+  <div class="row">
+    <!-- imagen de evento  -->
     {{ form_label(form.images) }}
     {{ form_errors(form.images) }}
     {{ form_widget(form.images) }}
@@ -56,61 +72,58 @@
       </div>
       <div id="gallery">
       </div>
-      </div>
-</div>
+    </div>
+  </div>
 
-<div class="container">
-  <div class="row row-centered">
-    <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 col-xl-4 col-centered">
-      <div class="form-group">
-        <label for="user_orchards">Ubicación</label>
-        <select class="form-control" id="user_orchards">
-          {% for orchard in app.user.orchard %}
-          {% if orchard.name != null %}
-          <option id="{{ orchard.id }}">{{ orchard.name }}</option>
-          {% endif %}
-          {% endfor %}
-          {% if orchardRelated != null %}
-          <input id="orchardRelated" type="text" name="" value="{{ orchardRelated.name }}" hidden="hidden">
-          {% endif %}
-        </select>
+  <div class="container">
+    <div class="row row-centered">
+      <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 col-xl-4 col-centered">
+        <div class="form-group">
+          <label for="user_orchards">Ubicación</label>
+          <select class="form-control" id="user_orchards">
+            {% for orchard in app.user.orchard %}
+            {% if orchard.name != null %}
+            <option id="{{ orchard.id }}">{{ orchard.name }}</option>
+            {% endif %}
+            {% endfor %}
+            {% if orchardRelated != null %}
+            <input id="orchardRelated" type="text" name="" value="{{ orchardRelated.name }}" hidden="hidden">
+            {% endif %}
+          </select>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="row">
-  <!-- descripcion -->
+  <div class="row">
+    <!-- descripcion -->
     {{ form_label(form.description) }}
     {{ form_errors(form.description) }}
     <br>
     {{ form_widget(form.description) }}
-</div>
+  </div>
 
-<div class="row">
-  <!-- nº de plazas -->
+  <div class="row">
+    <!-- nº de plazas -->
     {{ form_label(form.places) }}
     {{ form_errors(form.places) }}
     {{ form_widget(form.places) }}
-<!-- boolean mostrar nºplazas -->
+    <!-- boolean mostrar nºplazas -->
     {{ form_widget(form.showPlaces) }}
     {{ form_label(form.showPlaces) }}
     {{ form_errors(form.showPlaces) }}
 
-</div>
+  </div>
 
-<div class="row">
-  <!-- precio -->
+  <div class="row">
+    <!-- precio -->
     {{ form_label(form.price) }}
     {{ form_errors(form.price) }}
     {{ form_widget(form.price) }}
-</div>
+  </div>
 
-<div class="row">
-    {{ form_widget(form.guardar) }}
-</div>
 
-{{ form_end(form) }}
+  {{ form_end(form) }}
 
 </div>
 {% endblock %}

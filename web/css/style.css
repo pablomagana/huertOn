@@ -68,6 +68,9 @@
 html,body,.map,.step-1,.steps {
     height:100%;
 }
+body{
+	margin: 60px 0!important;
+}
 
 .container-fluid {
     height: 84%;
@@ -112,7 +115,6 @@ html,body,.map,.step-1,.steps {
 }
 .jumbotron{
 	background-color: transparent;
-	margin-bottom: 60px;
 }
 .botones{
 	margin: 10px 0 50px 0;
@@ -533,4 +535,19 @@ div.left-scroll {
 	top: 80px;
   right: 50px;
 	cursor: pointer;
+}
+
+.delete-button{
+	border-color: #0b0146!important;
+	color: #0b0146!important;
+}
+
+.delete-button:hover{
+	color: white!important;
+	background-color: #0b0146!important;
+}
+
+.save-button{
+	background-color: #45ad30;
+	color: white!important;
 }
