@@ -14,7 +14,7 @@
       $('#fav-{{ orchardImage.id }}').on('click', function() {
         $.ajax({
           type: 'POST',
-          url: '/orchard/upload/images/favourite/{{ orchardImage.id }}/false',
+          url: '/orchard/upload/images/favourite/{{ orchard.id }}/{{ orchardImage.id }}/false',
           success: function(data) {
             console.log('success');
             location.reload();
@@ -29,7 +29,7 @@
       $('#fav-{{ orchardImage.id }}').on('click', function() {
         $.ajax({
           type: 'POST',
-          url: '/orchard/upload/images/favourite/{{ orchardImage.id }}/true',
+          url: '/orchard/upload/images/favourite/{{ orchard.id }}/{{ orchardImage.id }}/true',
           success: function(data) {
             console.log('success');
             location.reload();

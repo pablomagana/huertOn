@@ -129,9 +129,15 @@ class UploadController extends Controller
     }
   }
 
-  public function favouriteAction($id_image, $favourite)
+  public function favouriteAction($id_orchard, $id_image, $favourite)
   {
     $em=$this->getDoctrine()->getManager();
+
+    $images = $em->getRepository("OrchardBundle:Image")->findByOrchard($id_orchard);
+
+    foreach ($images as $image) {
+      $image->setFavourite(false);
+    }
 
     $image=$em->getRepository("OrchardBundle:Image")->findOneById($id_image);
 
