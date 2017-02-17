@@ -15,8 +15,12 @@ class ShowController extends Controller
   // mostrar evento segun id en parametro
   public function profileAction($id_event)
   {
-    $event=$this->getDoctrine()->getRepository('EventBundle:Event')->findOneById($id_event);
-    return $this->render('EventBundle:Show:profile.html.twig', array('event' => $event));
+    $user=$this->container->get("orchard_service")->getUser();
+    $event=$this->getDoctrine()->getRepository("EventBundle:Event")->findOneById($id_event);
+    $eventUser=$this->getDoctrine()->getRepository("EventBundle:EventUser")->findOneBy(
+      array('event' => $event->getId(), 'user' => $user->getId())
+    );
+    return $this->render('EventBundle:Show:profile.html.twig', array('event' => $event , 'eventUser' => $eventUser));
   }
 
   // añade un participante al evento

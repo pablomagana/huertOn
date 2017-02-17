@@ -62,17 +62,11 @@
   <div class="row">
 
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-      {% if app.user != null %}
-      <p>usuarios:
-      {{dump(event.users|length)}}</p>
-
-      <p>id User
-        {% for e in event.users %}
-          {{dump(e.user.id)}}
-          plazas reservadas:
-          {{dump(e.amount)}}
-        {% endfor %}
-      </p>
+      {% if app.user %}
+      {% if eventUser != null %}
+        <p>Tienes reservadas {{eventUser.amount}}</p>
+      {% endif %}
+      <p id="reservadas"></p>
       <button id="unete" type="button" class="btn" name="button">Únete</button>
       {% else %}
       <a href="/register"><button type="button" class="btn" name="button">Únete</button></a>
@@ -123,7 +117,8 @@ $('#reservar').on("click",function() {
     method: "POST",
     url: "/event/add/userevent/{{event.id}}/"+$('#places').val(),
     success: function(result) {
-      alert("reservadas "+result+" plazas");
+      // alert("reservadas "+result+" plazas");
+      $('#reservadas').val("Tienes reservadas" + result); 
       $('#modalPlaces').modal('hide');
     },
     error: function(result) {
