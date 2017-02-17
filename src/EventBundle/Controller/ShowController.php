@@ -13,13 +13,13 @@ use Symfony\Component\HttpFoundation\Response;
 class ShowController extends Controller
 {
   // mostrar evento segun id en parametro
-  public function profileAction($id_event)
+  public function profileAction($id_event, $search)
   {
     $user = $this->container->get("orchard_service")->getUser();
     $event = $this->container->get("event_service")->getEvent($id_event);
     $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $event->getId(), 'user' => $user->getId()));
 
-    return $this->render('EventBundle:Show:profile.html.twig', array('event' => $event , 'eventUser' => $eventUser));
+    return $this->render('EventBundle:Show:profile.html.twig', array('event' => $event , 'eventUser' => $eventUser , 'search' => $search));
   }
 
   // añade un participante al evento

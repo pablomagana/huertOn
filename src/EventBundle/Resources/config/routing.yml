@@ -19,8 +19,8 @@ event_create_inscribed_delete:
     defaults: { _controller: EventBundle:Create:deleteInscribed, id_event:null, id_user:null }
 
 event_show_profile:
-    path:     /show/profile/{id_event}
-    defaults: { _controller: EventBundle:Show:profile, id_event:null }
+    path:     /show/profile/{id_event}/{{ search }}
+    defaults: { _controller: EventBundle:Show:profile, id_event:null , search:null}
 
 event_add_user:
     path:     /add/userevent/{id_event}/{amount}

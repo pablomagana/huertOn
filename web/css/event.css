@@ -12,3 +12,17 @@
   width:auto;
   display:inline;
 }
+
+/* small (mobiles) */
+@media (max-width: 991px) {
+  .btn-event-desktop{
+    display: none;
+  }
+}
+
+/* large devices and large (desktops, 992px and up) */
+@media (min-width: 992px){
+  .btn-event-mobile{
+    display: none;
+  }
+}
