@@ -110,7 +110,7 @@ class SuggestController extends Controller
     $message = \Swift_Message::newInstance()
     ->setContentType("text/html")
     ->setSubject($subject)
-    ->setFrom('parcellesflorida@gmail.com')
+    ->setFrom('huertOnflorida@gmail.com')
     ->setTo($to)
     ->setBody(
       $this->renderView(

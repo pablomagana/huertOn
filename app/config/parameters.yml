@@ -6,7 +6,7 @@ parameters:
     database_user: root
     database_password: null
     mailer_transport: gmail
-    mailer_user: parcellesflorida@gmail.com
+    mailer_user: huertOnflorida@gmail.com
     mailer_password: Administrador.1
     secret: 83770f199ec1aae578f3a85ed02a6eb290cc6698\
     mailer_host: 127.0.0.1

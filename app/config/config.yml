@@ -151,8 +151,8 @@ hwi_oauth:
         #         display: page
         google:
             type:                google
-            client_id:           717071780074-pip6gfjnbdiaa0nfvu8l3bvfdmuf9ssi.apps.googleusercontent.com
-            client_secret:       CS3ceqlB0EObGVXn4R4C7RCU
+            client_id:           243181958832-f7ahc6dhkf1c32vpqius4lpog4go4m08.apps.googleusercontent.com
+            client_secret:       djYfFnV-yMAbMunpCU7nJsXn
             scope:              "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
             paths:
                 email: email
