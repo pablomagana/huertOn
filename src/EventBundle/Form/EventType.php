@@ -27,7 +27,7 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('title',TextType::class,["label" => "Titulo", 'attr' => [
+          ->add('title',TextType::class,["label" => "NOMBRE DE LA ACTIVIDAD", 'attr' => [
           'class' => 'form-control', 'maxlength' => 80]])
           ->add('startDate', DateType::class,
               ['widget' => 'single_text','format' => 'yyyy-MM-dd',
@@ -47,15 +47,15 @@ class EventType extends AbstractType
               'class' => 'form-control',
               'data-provide' => 'datepicker',
               'data-date-format' => 'yyy-mm-dd']])
-          ->add('places', IntegerType::class, ["label" => "Nº Plazas",'attr' => ['min' => 1, 'class' => 'form-control']])
-          ->add('description',TextareaType::class,["label" => "Descripción de la actividad", 'attr' => [
+          ->add('places', IntegerType::class, ["label" => "Nº DE PLAZAS",'attr' => ['min' => 1, 'class' => 'form-control']])
+          ->add('description',TextareaType::class,["label" => "DESCRIPCIÓN DE LA ACTIVIDAD", 'attr' => [
           'class' => 'form-control']])
-          ->add('price',MoneyType::class,["label" => "Precio","attr" => ["value" => 0, 'class' => 'form-control']])
-          ->add('showPlaces',CheckboxType::class,["label" => "Muestra el numero de plazas restantes", 'required' => false, 'attr' => [
-          'class' => 'form-control']])
+          ->add('price',MoneyType::class,["label" => "PRECIO","attr" => ["value" => 0, 'class' => 'form-control']])
+          ->add('showPlaces',null,["label" => "Muestra el numero de plazas restantes", 'required' => false, 'attr' => [
+          'class' => 'custom-control-input']])
           ->add('images', VichImageType::class, [
             'attr' => ['id' => 'imageinput','hidden' => 'hidden'],
-            'label' => "Foto de la actividad",
+            'label' => "FOTO DE LA ACTIVIDAD",
             'required' => false,
             'allow_delete' => true,
             'download_link' => true,
