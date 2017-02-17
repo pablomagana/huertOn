@@ -112,7 +112,7 @@ class Event
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="EventBundle\Entity\EventUser", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="EventBundle\Entity\EventUser", mappedBy="user", fetch="EAGER")
      */
     private $users;
 

@@ -49,6 +49,13 @@ class EventService
     return $repository->findOneBy($array);
   }
 
+  public function getEventUserByEvent($id_event)
+  {
+    $repository = $this->em->getRepository("EventBundle:EventUser");
+    $event = $this->getEvent($id_event);
+    return $repository->findOneByEvent($event);
+  }
+
   public function getOrchardEvents($id_orchard)
   {
     $repository = $this->em->getRepository('OrchardBundle:Orchard');

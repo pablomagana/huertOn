@@ -48,7 +48,7 @@ class User extends BaseUser
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="EventBundle\Entity\EventUser", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="EventBundle\Entity\EventUser", mappedBy="event", fetch="EAGER")
      */
     private $events;
 

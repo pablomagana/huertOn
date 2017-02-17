@@ -15,14 +15,14 @@ class EventUser
     /**
      * @var \Doctrine\Common\Collections\Collection|EventBundle\Entity\Event[]
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="EventBundle\Entity\Event", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="EventBundle\Entity\Event", inversedBy="users", fetch="EAGER")
      */
     private $event;
 
     /**
      * @var \Doctrine\Common\Collections\Collection|UserBundle\Entity\User[]
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="events")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="events", fetch="EAGER")
      */
     private $user;
 

@@ -62,4 +62,22 @@ class CreateController extends Controller
 
       return $this->render('EventBundle:Create:list_events.html.twig', array('events' => $events));
     }
+
+    public function inscribedAction($id_event)
+    {
+      $em = $this->getDoctrine()->getManager();
+
+      $repository = $em->getRepository('EventBundle:EventUser');
+      $eventUsers = $repository->findByEvent($id_event);
+
+      $users = array();
+      $amounts = array();
+
+      foreach ($eventUsers as $eventUser) {
+        array_push($users, $eventUser->getUser());
+        array_push($amounts, $eventUser->getAmount());
+      }
+
+      return $this->render('EventBundle:Create:inscribed.html.twig', array('users' => $users, 'amounts' => $amounts));
+    }
 }

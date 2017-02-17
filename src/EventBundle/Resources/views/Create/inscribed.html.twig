@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+<div class="" style="margin-top:100px;">
+  <a href="/event/create/list"><< Mis actividades</a>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-3">Inscritos</h1>
+          <a href="/event/create/list/users/add/"><button type="button" class="btn btn-success">Añadir inscrito</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+    <table class="table">
+      {% for key, value in users %}
+        <tr>
+          <td>{{ value.username }}</td>
+          <td>{{ value.email }}</td>
+          <td id="amount">{{ amounts[key] }} plazas</td>
+          <td><a href="#"><button type="button" class="btn btn-danger" name="button">Eliminar</button></a></td>
+          <td><a href="#"><button type="button" class="btn btn-primary" name="button">Editar</button></a></td>
+        </tr>
+      {% endfor %}
+
+    </table>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -28,7 +28,8 @@
       <h1>{{ event.title }}</h1>
       <p><i>Inicio: {{ event.startDate|date("d/M/Y h:m")}}</i></p>
       <p><i>Fin: {{ event.endDate|date("d/M/Y h:m")}}</i></p>
-      <a href="/event/create/{{ event.id }}"><button type="button" class="btn btn-secondary">Editar evento</button></a>
+      <a href="/event/create/{{ event.id }}"><button type="button" class="btn btn-secondary">Editar actividad</button></a>
+      <a href="/event/create/list/inscribed/{{ event.id }}"><button type="button" class="btn btn-secondary">Inscritos</button></a>
     </div>
     </div>
     {% endif %}
