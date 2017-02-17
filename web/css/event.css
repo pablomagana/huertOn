@@ -18,6 +18,9 @@
   .btn-event-desktop{
     display: none;
   }
+  .img-response{
+    margin-bottom:20px;
+  }
 }
 
 /* large devices and large (desktops, 992px and up) */
@@ -25,4 +28,13 @@
   .btn-event-mobile{
     display: none;
   }
+
+  .hr-mobile {
+    display: none;
+  }
+}
+.jumbotron{
+  height: auto;
+  padding-top:10px;
+  padding-bottom: 10px;
 }
