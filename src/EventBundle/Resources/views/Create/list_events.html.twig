@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row row-centered">
     <div class="col col-centered">
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-pills">
         <li class="nav-item">
           <a class="nav-link active" data-toggle="tab" href="#next" role="tab">Próximas</a>
         </li>
@@ -13,15 +13,24 @@
     </div>
   </div>
 </div>
-<br>
+<div class="spacing"></div>
 <div class="tab-content">
   <div class="tab-pane active" id="next" role="tabpanel">
     {% for event in events | sortbyfield('startDate') %}
     {% if event.startDate|date("d/M/Y h:m") >= date()|date("d/M/Y h:m") %}
+    <div class="row">
+    {% if event.imageName != null %}
+        <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
+          <div style="width: 100%; height: 300px; background: url({{ asset('/orchard/event/' ~ event.imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+        </div>
+    {% endif %}
+    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12 container">
       <h1>{{ event.title }}</h1>
       <p><i>Inicio: {{ event.startDate|date("d/M/Y h:m")}}</i></p>
       <p><i>Fin: {{ event.endDate|date("d/M/Y h:m")}}</i></p>
       <a href="/event/create/{{ event.id }}"><button type="button" class="btn btn-secondary">Editar evento</button></a>
+    </div>
+    </div>
     {% endif %}
     {% endfor %}
 </div>

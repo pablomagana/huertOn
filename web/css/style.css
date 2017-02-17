@@ -463,7 +463,7 @@ a{
 	color: #0b0146!important;
 }
 
-a.btn-social{
+a.btn-social,a.nav-link.active,a.w3-btn-floating{
 	color: #fff!important;
 }
 
@@ -526,4 +526,11 @@ div.left-scroll {
 	width: auto;;
 	height: 63vh;
 	overflow: auto;
+}
+
+.image-fav {
+	position: absolute;
+	top: 80px;
+  right: 50px;
+	cursor: pointer;
 }

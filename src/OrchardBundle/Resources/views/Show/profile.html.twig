@@ -5,10 +5,44 @@
 <div class="row" id="orchard-img">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     {% for orchardImage in orchard.images %}
-    <div class="fullscreen background parallax mySlides" style="padding:250px 0; background-image: url('{{ asset('/orchard/image/' ~ orchardImage.nameImage) }}'); background-attachment: fixed;"  data-diff="100"></div>
+    <div class="fullscreen background parallax mySlides" style="padding:250px 0; background-image: url('{{ asset('/orchard/image/' ~ orchardImage.nameImage) }}'); background-attachment: fixed;"  data-diff="100">
+      {% if app.user == orchard.user %}
+      {% if orchardImage.favourite == true %}
+      <span style="display: none;">Desmarcada como favorita</span>
+      <i data-toogle="tooltip" data-placement="top" title="Desmarcar como favorita" id="fav-{{ orchardImage.id }}" class="image-fav fa fa-heart fa-lg" aria-hidden="true"></i>
+      <script type="text/javascript">
+      $('#fav-{{ orchardImage.id }}').on('click', function() {
+        $.ajax({
+          type: 'POST',
+          url: '/orchard/upload/images/favourite/{{ orchardImage.id }}/false',
+          success: function(data) {
+            console.log('success');
+            location.reload();
+          }
+        });
+      });
+      </script>
+      {% else %}
+      <span style="display: none;">Marcada como favorita</span>
+      <i data-toogle="tooltip" data-placement="top" title="Marcar como favorita" id="fav-{{ orchardImage.id }}" class="image-fav fa fa-heart-o fa-lg" aria-hidden="true"></i>
+      <script type="text/javascript">
+      $('#fav-{{ orchardImage.id }}').on('click', function() {
+        $.ajax({
+          type: 'POST',
+          url: '/orchard/upload/images/favourite/{{ orchardImage.id }}/true',
+          success: function(data) {
+            console.log('success');
+            location.reload();
+          }
+        });
+      });
+      </script>
+    {% endif %}
+    {% endif %}
+  </div>
     {% endfor %}
-    <a class="w3-btn-floating w3-display-left" onclick="plusDivs(-1)" style="margin-left:20px;">&#10094;</a>
-    <a class="w3-btn-floating w3-display-right" onclick="plusDivs(1)" style="margin-right:20px;">&#10095;</a>
+    <a class="w3-btn-floating w3-display-left" onclick="plusDivs(-1)" style="margin-left:15px;">&#10094;</a>
+    <a class="w3-btn-floating w3-display-right" onclick="plusDivs(1)" style="margin-right:15px;">&#10095;</a>
   </div>
 </div>
 
