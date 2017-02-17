@@ -47,9 +47,8 @@ class User extends BaseUser
     private $orchard;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection|EventBundle\Entity\Event[]
      *
-     * @ORM\ManyToMany(targetEntity="EventBundle\Entity\Event", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="EventBundle\Entity\EventUser", mappedBy="event")
      */
     private $events;
 
@@ -139,5 +138,39 @@ class User extends BaseUser
     public function getOrchard()
     {
         return $this->orchard;
+    }
+
+    /**
+     * Add event
+     *
+     * @param \EventBundle\Entity\EventUser $event
+     *
+     * @return User
+     */
+    public function addEvent(\EventBundle\Entity\EventUser $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event
+     *
+     * @param \EventBundle\Entity\EventUser $event
+     */
+    public function removeEvent(\EventBundle\Entity\EventUser $event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

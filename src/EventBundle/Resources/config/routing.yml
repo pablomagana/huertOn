@@ -15,5 +15,5 @@ event_show_profile:
     defaults: { _controller: EventBundle:Show:profile, id_event:null }
 
 event_add_user:
-    path:     /add/userevent/{id_event}
+    path:     /add/userevent/{id_event}/{amount}
     defaults: { _controller: EventBundle:Show:addUserToEvent, id_event:null }

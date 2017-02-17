@@ -63,6 +63,16 @@
 
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
       {% if app.user != null %}
+      <p>usuarios:
+      {{dump(event.users|length)}}</p>
+
+      <p>id User
+        {% for e in event.users %}
+          {{dump(e.user.id)}}
+          plazas reservadas:
+          {{dump(e.amount)}}
+        {% endfor %}
+      </p>
       <button id="unete" type="button" class="btn" name="button">Únete</button>
       {% else %}
       <a href="/register"><button type="button" class="btn" name="button">Únete</button></a>
@@ -99,7 +109,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <a href="/event/add/userevent/{{event.id}}"><button type="button" class="btn btn-primary">Enviar</button></a>
+        <button id="reservar" type="button" class="btn btn-primary">Enviar</button>
       </div>
     </div>
   </div>
@@ -107,6 +117,19 @@
 <script type="text/javascript">
 $('#unete').on("click",function() {
   $('#modalPlaces').modal('show');
-})
+});
+$('#reservar').on("click",function() {
+  $.ajax({
+    method: "POST",
+    url: "/event/add/userevent/{{event.id}}/"+$('#places').val(),
+    success: function(result) {
+      alert("reservadas "+result+" plazas");
+      $('#modalPlaces').modal('hide');
+    },
+    error: function(result) {
+      alert('Error al reservar plazas. Intentalo otra vez');
+    }
+  })
+});
 </script>
 {% endblock %}
