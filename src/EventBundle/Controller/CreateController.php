@@ -67,6 +67,8 @@ class CreateController extends Controller
     {
       $em = $this->getDoctrine()->getManager();
 
+      $event = $this->container->get("event_service")->getEvent($id_event);
+
       $repository = $em->getRepository('EventBundle:EventUser');
       $eventUsers = $repository->findByEvent($id_event);
 
@@ -78,6 +80,18 @@ class CreateController extends Controller
         array_push($amounts, $eventUser->getAmount());
       }
 
-      return $this->render('EventBundle:Create:inscribed.html.twig', array('users' => $users, 'amounts' => $amounts));
+      return $this->render('EventBundle:Create:inscribed.html.twig', array('event' => $event, 'users' => $users, 'amounts' => $amounts));
     }
+
+    public function deleteInscribedAction($id_event, $id_user)
+    {
+      $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $id_event, 'user' => $id_user));
+
+      $em = $this->getDoctrine()->getManager();
+      $em->remove($eventUser);
+      $em->flush();
+
+      return $this->redirect($this->generateUrl('event_create_inscribed', array('id_event' => $id_event)));
+    }
+
 }
