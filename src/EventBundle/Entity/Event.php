@@ -62,7 +62,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=500)
      */
     private $description;
 
@@ -111,18 +111,8 @@ class Event
 
 
     /**
-     * @var \Doctrine\Common\Collections\Collection|UserBundle\Entity\User[]
      *
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", inversedBy="events", fetch="EAGER")
-     * @ORM\JoinTable(
-     *  name="event_user",
-     *  joinColumns={
-     *      @ORM\JoinColumn(name="event_id", referencedColumnName="id")
-     *  },
-     *  inverseJoinColumns={
-     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *  }
-     * )
+     * @ORM\OneToMany(targetEntity="EventBundle\Entity\EventUser", mappedBy="user")
      */
     private $users;
 
@@ -323,41 +313,6 @@ class Event
        return $this->images;
     }
 
-
-    /**
-     * Add user
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return Event
-     */
-    public function addUser(\UserBundle\Entity\User $user)
-    {
-        $this->users[] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Remove user
-     *
-     * @param \UserBundle\Entity\User $user
-     */
-    public function removeUser(\UserBundle\Entity\User $user)
-    {
-        $this->users->removeElement($user);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
     /**
      * Set imageName
      *
@@ -459,5 +414,39 @@ class Event
     public function getEndTime()
     {
         return $this->endTime;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \EventBundle\Entity\EventUser $user
+     *
+     * @return Event
+     */
+    public function addUser(\EventBundle\Entity\EventUser $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \EventBundle\Entity\EventUser $user
+     */
+    public function removeUser(\EventBundle\Entity\EventUser $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

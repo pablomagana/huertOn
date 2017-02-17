@@ -11,5 +11,9 @@ event_create:
     defaults: { _controller: EventBundle:Create:create, id_event:null, id_orchard:null  }
 
 event_show_profile:
-    path:     /profile/{id_orchard}
-    defaults: { _controller: EventBundle:Show:profile, id_orchard:null }
+    path:     /show/profile/{id_event}
+    defaults: { _controller: EventBundle:Show:profile, id_event:null }
+
+event_add_user:
+    path:     /add/userevent/{id_event}/{amount}
+    defaults: { _controller: EventBundle:Show:addUserToEvent, id_event:null }
