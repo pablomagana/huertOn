@@ -28,8 +28,8 @@
         <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
           <!-- Imagen -->
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-            {% if event.0.images is not empty %}
-            <div class="find-result" style="background: url({{ asset('/event/image/' ~ event.0.images[0].nameImage) }});">
+            {% if event.0.imageName is not empty %}
+            <div class="find-result" style="background: url({{ asset('/orchard/event/' ~ event.0.imageName) }});">
               <div style="height:50px; width:50px; background-color:lightgrey; text-align:center;"><strong>{{ event.0.startDate|date("d") }}</strong><br><strong>{{ event.0.startDate|date("F")|slice(0, 3) }}</strong></div>
             </div>
             {% else %}
@@ -56,8 +56,8 @@
         <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
           <!-- Imagen -->
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-            {% if event.images is not empty %}
-            <div class="find-result" style="background: url({{ asset('/orchard/image/' ~ event.images[0].nameImage) }});">
+            {% if event.imageName is not empty %}
+            <div class="find-result" style="background: url({{ asset('/orchard/event/' ~ event.imageName) }});">
               <div style="height:50px; width:50px; background-color:lightgrey; text-align:center;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
             </div>
             {% else %}
