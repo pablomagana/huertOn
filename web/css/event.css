@@ -4,6 +4,7 @@
 }
 #title{
   text-align: center;
+  margin-top: 40px;
 }
 .data{
   text-indent:50px;
@@ -28,13 +29,33 @@
   .btn-event-mobile{
     display: none;
   }
+}
+
+/* large devices and large (desktops, 992px and up) */
+@media (min-width: 767px){
 
   .hr-mobile {
     display: none;
   }
+  .fa{
+    display: none;
+  }
+@media (max-width: 338px){
+
 }
 .jumbotron{
   height: auto;
   padding-top:10px;
   padding-bottom: 10px;
+}
+
+.col-xs-2, .col-sm-2{
+  text-align: center;
+}
+i{
+  margin: 5px;
+}
+
+a.contact:link,a.contact:active,a.contact:visited{
+  color:#56B442!important;
 }
