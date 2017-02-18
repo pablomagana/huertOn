@@ -72,15 +72,17 @@ class CreateController extends Controller
       $repository = $em->getRepository('EventBundle:EventUser');
       $eventUsers = $repository->findByEvent($id_event);
 
-      $users = array();
-      $amounts = array();
+      // $users = array();
+      // $amounts = array();
+      //
+      // foreach ($eventUsers as $eventUser) {
+      //   array_push($users, $eventUser->getUser());
+      //   array_push($amounts, $eventUser->getAmount());
+      // }
 
-      foreach ($eventUsers as $eventUser) {
-        array_push($users, $eventUser->getUser());
-        array_push($amounts, $eventUser->getAmount());
-      }
+      // return $this->render('EventBundle:Create:inscribed.html.twig', array('event' => $event, 'users' => $users, 'amounts' => $amounts));
+      return $this->render('EventBundle:Create:inscribed.html.twig', array('event' => $event, 'eventUsers' => $eventUsers));
 
-      return $this->render('EventBundle:Create:inscribed.html.twig', array('event' => $event, 'users' => $users, 'amounts' => $amounts));
     }
 
     public function deleteInscribedAction($id_event, $id_user)

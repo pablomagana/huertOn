@@ -29,12 +29,7 @@
         <p class="reservadas"></p>
         {% endif %}
         {% if app.user %}
-          <div class="btn-event-desktop">
-            {% if eventUser != null %}
-              <p class="reservadas">Tienes reservadas {{eventUser.amount}} entradas</p>
-            {% else %}
-              <p class="reservadas"></p>
-            {% endif %}
+          <div class="btn-event-desktop"> 
 
             {% if event.places > 0 or eventUser != null  %}
               <button type="button" class="btn save-button unete" onclick="mostrarUnete()" name="button">Únete</button>
