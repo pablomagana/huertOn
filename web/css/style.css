@@ -35,10 +35,7 @@
 /* large devices and large (desktops, 992px and up) */
 @media (min-width: 992px){
   .fixed-buttons {
-		position: fixed;
-	    bottom: 0px;
-	    z-index: 9999 !important;
-	    width: 50%;
+		display: none;
 	}
 	.legal-mobile{
 		display: none;
@@ -65,7 +62,7 @@
 }*/
 
 
-html,body,.map,.step-1,.steps {
+html,body,.map,.steps {
     height:100%;
 }
 body{
@@ -73,7 +70,7 @@ body{
 }
 
 .container-fluid {
-    height: 84%;
+    height: 100%;
 }
 
 .fixed {
@@ -95,10 +92,25 @@ body{
   font-weight: 400;
 }
 
-.steps-left{
-	padding: 30px;
+.steps-left	{
+	padding: 50px 50px 0px 50px;
 }
-
+.steps-left-content	{
+	margin-top: 50px;
+}
+.steps-left-innerContent	{
+	margin-top: 50px;
+}
+.btn-atras, .btn-siguiente	{
+	margin-top: 50px;
+	padding:10px 60px;
+}
+.btn-atras	{
+	float: left;
+}
+.btn-siguiente	{
+	float: right;
+}
 /*scroll left*/
 .steps-left-12 {
   padding: 30px;
@@ -550,4 +562,27 @@ div.left-scroll {
 .save-button{
 	background-color: #45ad30;
 	color: white!important;
+}
+
+.text-step{
+	padding-top: 10px;
+}
+
+.progress {
+	height: 8px;
+}
+
+.progress-huerton[value]::-webkit-progress-value {
+  background-color: #0b0146;
+	height: 8px;
+}
+
+.progress-huerton[value]::-moz-progress-bar {
+  background-color: #0b0146;
+	height: 8px;
+}
+
+.progress-huerton[value]::-ms-fill {
+  background-color: #0b0146;
+	height: 8px;
 }

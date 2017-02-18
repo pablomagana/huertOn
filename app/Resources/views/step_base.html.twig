@@ -48,23 +48,24 @@
       <img src="{{ asset('/img/logo.png')}}" height="30" class="d-inline-block align-top" alt="">
     </a>
     <ul id="btn-save-exit" class="nav navbar-nav float-xs-right float-sm-right float-md-right float-lg-right">
-      <li class="nav-item">
-        <div id="loading" style="display: none;" class="loading"></div>
+      <li class="nav-item text-muted text-step">
+        Estás en el paso {% block currentStep %}{% endblock %}
       </li>
       <li class="nav-item">
-        <span id="loading-text" style="display: none;" class="navbar-text">
+        <div id="loading" style="display: none; float: left; margin: 10px" class="loading"></div>
+        <span id="loading-text" style="display: none; padding-top:10px;" class="navbar-text">
           {{ 'stepBase.loading'|trans }}
         </span>
       </li>
       {% if orchard.step >= 14 %}
       <li class="nav-item">
-        <a class="nav-link" href="#">{{ 'stepBase.saveExit'|trans }}</a>
+        <a href="#"><button id="register-button" type="button" class="btn btn-outline-primary">{{ 'stepBase.saveExit'|trans }}</button></a>
       </li>
       {% endif %}
     </ul>
   </nav>
 
-  <progress id="progressbar" class="progress" max="100" aria-describedby="example-caption-2"></progress>
+  <progress id="progressbar" class="progress progress-huerton" max="100" aria-describedby="example-caption-2"></progress>
 
   <div class="container-fluid">
 
@@ -122,7 +123,7 @@
 
   <script type="text/javascript">
   //FUNCION BOTON SIGUIENTE
-  $('#btn-siguiente').on('click', function() {
+  $('.btn-siguiente').on('click', function() {
 
     if(validateForm()) {
       var form =  {};
@@ -164,7 +165,7 @@
   });
 
   //FUNCION BOTON ATRAS
-  $('#btn-atras').on('click', function() {
+  $('.btn-atras').on('click', function() {
     var form =  {};
     initSave(form);
 
