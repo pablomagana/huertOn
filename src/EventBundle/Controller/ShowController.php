@@ -23,9 +23,17 @@ class ShowController extends Controller
   }
 
   // añade un participante al evento
-  public function addUserToEventAction($id_event, $amount)
+  public function addUserToEventAction($id_event, $amount, $id_user)
   {
-    $user = $this->container->get("orchard_service")->getUser();
+
+    $user = null;
+
+    if ($id_user != null) {
+      $user = $this->container->get("event_service")->getUserById($id_user);
+    }else {
+      $user = $this->container->get("orchard_service")->getUser();
+    }
+
     $event = $this->container->get("event_service")->getEvent($id_event);
     $em = $this->getDoctrine()->getManager();
     $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $event->getId(), 'user' => $user->getId()));

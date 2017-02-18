@@ -22,9 +22,9 @@
         <tr>
           <td>{{ value.username }}</td>
           <td>{{ value.email }}</td>
-          <td id="amount">{{ amounts[key] }} plazas</td>
+          <td id="amount{{ value.id }}">{{ amounts[key] }} plazas</td>
           <td><button type="button" class="btn btn-danger show-modal{{ value.id }}">Eliminar</button></td>
-          <td><a href="#"><button type="button" class="btn btn-primary" name="button">Editar</button></a></td>
+          <td><button type="button" class="btn btn-primary show-modal-places{{ value.id }}" name="button">Editar</button></td>
         </tr>
 
         <script type="text/javascript">
@@ -32,6 +32,29 @@
           $('.show-modal{{ value.id }}').click(function(){
             $('#btn-delete-modal').attr("href", "/event/create/list/inscribed/delete/{{ event.id }}/{{ value.id }}");
             $('#myModal').modal('show');
+          });
+
+          $('.show-modal-places{{ value.id }}').click(function(){
+            $('#user_name_places').html('{{ value.username }} {{ value.apellidos }}');
+            $('#user_mail_places').html('{{ value.email }}');
+            $('#modalPlaces').modal('show');
+          });
+
+          var select_places = "<select class='form-control' id='places'>" + '{% for num in 1.. event.places + amounts[key] %}' + "<option value=" + '{{ num }}' + ">" + '{{num}}' + "</option>" + '{% endfor %}' + "</select>";
+          $(select_places).appendTo('#places-label');
+
+          $('#reservar').on("click",function() {
+            $.ajax({
+              method: "POST",
+              url: "/event/add/userevent/{{event.id}}/"+$('#places').val()+"/{{ value.id }}",
+              success: function(result) {
+                $('#modalPlaces').modal('hide');
+                $('#amount{{ value.id }}').html(result + ' plazas');
+              },
+              error: function(result) {
+                alert('Error al reservar plazas. Intentalo otra vez');
+              }
+            })
           });
         });
         </script>
@@ -42,7 +65,27 @@
   </div>
 </div>
 
+<div class="modal fade" id="modalPlaces">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-right:40px;margin-top:20px;">
+        <span style="font-size:30pt;" aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body" style="margin:60px;">
+        <h1 id="user_name_places"></h1>
+        <p id="user_mail_places"></p>
+        <br>
+        <div class="form-group">
+          <label id="places-label" for="places">Número de Plazas reservadas</label><br>
 
+          <br>
+          <br>
+          <button id="reservar" type="button" class="btn btn-success" style="width:100%;">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="myModal">
   <div class="modal-dialog" role="document">

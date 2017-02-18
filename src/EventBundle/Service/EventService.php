@@ -67,4 +67,10 @@ class EventService
     return $this->tokenStorage->getToken()->getUser();
   }
 
+  public function getUserById($id_user)
+  {
+    $repository = $this->em->getRepository('UserBundle:User');
+    return $repository->findOneById($id_user);
+  }
+
 }

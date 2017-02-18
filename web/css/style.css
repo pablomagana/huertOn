@@ -68,10 +68,33 @@
 html,body,.map,.step-1,.steps {
     height:100%;
 }
-body{
+body {
 	margin: 60px 0!important;
 }
 
+footer {
+background-color: #07012D;
+}
+
+.foot{
+	padding: 50px 100px 100px 100px;
+	color: #fff !important;
+}
+
+.foot-down {
+	background-color: white;
+	padding: 15px;
+	color: #fff !important;
+}
+
+.foot-down-txt {
+	padding: 15px 15px 0 15px;
+	color: #fff !important;
+}
+
+.fa-facebook-square, .fa-twitter-square {
+	font-size: 20px;
+}
 .container-fluid {
     height: 84%;
 }

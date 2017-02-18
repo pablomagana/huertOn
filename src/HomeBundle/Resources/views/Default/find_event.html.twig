@@ -24,7 +24,7 @@
     <div class="left-scroll">
       {% if type == 'distance' %}<!-- SI SE TIENE LA UBUCACION DEL USUARIO -->
       {% for event in events %}
-      <a href="/event/show/profile/{{ event.0.id }}/{{ input_home_search }}">
+      <a href="/event/show/profile/{{ event.0.id }}{% if input_home_search != '' %}/{{ input_home_search }}{% endif %}">
         <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
           <!-- Imagen -->
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
@@ -41,7 +41,7 @@
 
           <!-- Texto -->
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-            <p><font style="font-size:20px">{{ event.0.title }}</font><br><strong>{% if event.price == 0 %}Gratis{% else %}{{ event.price }}€{% endif %}</strong>&nbsp;&nbsp;<i>{{ event.0.orchard.name }}</i></p>
+            <p><font style="font-size:20px">{{ event.0.title }}</font><br><strong>{% if event.0.price == 0 %}Gratis{% else %}{{ event.0.price }}€{% endif %}</strong>&nbsp;&nbsp;<i>{{ event.0.orchard.name }}</i></p>
           </div>
 
           <input type="text" class="geometry" value="{{ event.0.orchard.geometry }}" hidden="hidden">
@@ -52,7 +52,7 @@
       {% else %}<!-- SI NO SE TIENE LA UBICACION DEL USUARIO -->
       {% for event in events %}
 
-      <a href="/event/show/profile/{{ event.id }}/{{ input_home_search }}">
+      <a href="/event/show/profile/{{ event.id }}{% if input_home_search != '' %}/{{ input_home_search }}{% endif %}">
         <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
           <!-- Imagen -->
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">

@@ -23,5 +23,5 @@ event_show_profile:
     defaults: { _controller: EventBundle:Show:profile, id_event:null , search:null}
 
 event_add_user:
-    path:     /add/userevent/{id_event}/{amount}
-    defaults: { _controller: EventBundle:Show:addUserToEvent, id_event:null }
+    path:     /add/userevent/{id_event}/{amount}/{id_user}
+    defaults: { _controller: EventBundle:Show:addUserToEvent, id_event:null, id_user:null }
