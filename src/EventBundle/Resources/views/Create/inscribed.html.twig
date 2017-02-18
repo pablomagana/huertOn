@@ -1,67 +1,108 @@
-{% extends '::base.html.twig' %}
-{% block body %}
-<div class="" style="margin-top:100px;">
-  <a href="/event/create/list"><< Mis actividades</a>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-      <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <h1 class="display-3">Inscritos {{ event.title }}</h1>
-          <a href="/event/create/list/users/add/"><button type="button" class="btn btn-success">Añadir inscrito</button></a>
+  {% extends '::base.html.twig' %}
+  {% block body %}
+  <div class="" style="margin-top:100px;">
+    <a href="/event/create/list"><< Mis actividades</a>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-3">Inscritos {{ event.title }}</h1>
+            <a href="/event/create/list/users/add/"><button type="button" class="btn btn-success">Añadir inscrito</button></a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-    <table class="table">
-      {% for key, value in users %}
-        <tr>
-          <td>{{ value.username }}</td>
-          <td>{{ value.email }}</td>
-          <td id="amount">{{ amounts[key] }} plazas</td>
-          <td><button type="button" class="btn btn-danger show-modal{{ value.id }}">Eliminar</button></td>
-          <td><a href="#"><button type="button" class="btn btn-primary" name="button">Editar</button></a></td>
-        </tr>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+      <table class="table">
+        {% for eventUser in eventUsers %}
+          <tr>
+            <td>{{ eventUser.user.username }}</td>
+            <td>{{ eventUser.user.email }}</td>
+            <td id="amount{{ eventUser.user.id }}">{{ eventUser.amount}} plazas</td>
+            <td><button type="button" class="btn btn-danger show-modal{{ eventUser.user.id }}">Eliminar</button></td>
+            <td><button type="button" class="btn btn-primary show-modal-places{{ eventUser.user.id }}" name="button">Editar</button></td>
+          </tr>
+        {% endfor %}
 
-        <script type="text/javascript">
-        $(function() {
-          $('.show-modal{{ value.id }}').click(function(){
-            $('#btn-delete-modal').attr("href", "/event/create/list/inscribed/delete/{{ event.id }}/{{ value.id }}");
-            $('#myModal').modal('show');
-          });
-        });
-        </script>
-
-      {% endfor %}
-
-    </table>
+      </table>
+    </div>
   </div>
-</div>
-
-
-
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+<!-- Modal para editar entrada -->
+  <div class="modal fade" id="modalPlaces">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-right:40px;margin-top:20px;">
+          <span style="font-size:30pt;" aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">{{ 'orchard.list.sure'|trans }}</h4>
+        <div class="modal-body" style="margin:60px;">
+          <h1 id="user_name_places"></h1>
+          <p id="user_mail_places"></p>
+          <br>
+          <div class="form-group">
+            <label id="places-label" for="places">Número de Plazas reservadas</label><br>
+            <div id="select-places-container"></div>
+            <br>
+            <br>
+            <button id="reservar" type="button" onclick="reservar()" class="btn btn-success" style="width:100%;">Enviar</button>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <p>{{ 'orchard.list.sure-2'|trans }}<p></p>
-      </div>
-      <div class="modal-footer">
-        <a id="btn-delete-modal" href=""><button type="button" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
-        <a id="btn-no-delete" href=""><button type="button" data-dismiss="modal" class="btn btn-secondary">Cancelar</button></a>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
 
-{% endblock %}
+
+<!-- Modal para borrar entradas -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{{ 'orchard.list.sure'|trans }}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{ 'orchard.list.sure-2'|trans }}<p></p>
+        </div>
+        <div class="modal-footer">
+          <a id="btn-delete-modal" href=""><button type="button" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
+          <a id="btn-no-delete" href=""><button type="button" data-dismiss="modal" class="btn btn-secondary">Cancelar</button></a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <script type="text/javascript">
+
+  function reservar(eventId,valueId) {
+    $.ajax({
+      method: "POST",
+      url: "/event/add/userevent/"+eventId+"/"+$('#places').val()+"/",
+      success: function(result) {
+        $('#modalPlaces').modal('hide');
+        $('#amount').html(result + ' plazas');
+      },
+      error: function(result) {
+        alert('Error al reservar plazas. Intentalo otra vez');
+      }
+    })
+  }
+         function mostrarModel() {
+           $('#select-places-container').html("<select class='form-control' id='places{{ value.id }}'>" + '{% for num in 1.. event.places + amount %}' + "<option value=" + '{{ num }}' + ">" + '{{num}}' + "</option>" + '{% endfor %}' + "</select>");
+           $('#myModal').modal('show');
+         }
+
+           $('.show-modal-places{{ value.id }}').click(function(){
+             $('#btn-delete-modal').attr("href", "/event/create/list/inscribed/delete/{{ event.id }}/{{ value.id }}");
+             $('#user_name_places').html('{{ value.username }} {{ value.apellidos }}');
+             $('#user_mail_places').html('{{ value.email }}');
+             $('#modalPlaces').modal('show');
+           });
+
+         });
+  </script>
+  {% endblock %}
