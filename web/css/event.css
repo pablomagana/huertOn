@@ -1,0 +1,40 @@
+  #profileImg{
+  width: 100%;
+  height: 100%;
+}
+#title{
+  text-align: center;
+}
+.data{
+  text-indent:50px;
+}
+.modal select{
+  width:auto;
+  display:inline;
+}
+
+/* small (mobiles) */
+@media (max-width: 991px) {
+  .btn-event-desktop{
+    display: none;
+  }
+  .img-response{
+    margin-bottom:20px;
+  }
+}
+
+/* large devices and large (desktops, 992px and up) */
+@media (min-width: 992px){
+  .btn-event-mobile{
+    display: none;
+  }
+
+  .hr-mobile {
+    display: none;
+  }
+}
+.jumbotron{
+  height: auto;
+  padding-top:10px;
+  padding-bottom: 10px;
+}

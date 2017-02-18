@@ -1,0 +1,186 @@
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/event.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron" style="background-color:#eceeef;">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+      {% if search is defined and search != null %}
+      <form id="form-home_search" action="/find/event" method="post">
+        <input id="input-home_search" name="input-home_search" type="text" hidden="hidden" value="{{ search }}" placeholder="{{ 'home.find.placeholder'|trans }}"></button>
+        <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
+        <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
+        <button type="submit" name="button" class="btn btn-link"><<   Actividades {{search}}</button>
+      </form>
+
+      {% endif %}
+    </div>
+    <div class="col-12 col-sm-12 col-md-5 col-lg-6 col-xl-6" class=".align-middle">
+      <h1 id="title">{{event.title}}</h1>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3" style=" padding:20px;">
+      <button type="button" class="btn btn save-button unete btn-event-desktop " style="padding:10px 60px;" name="button">Únete</button>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="height:auto;">
+  <div class="row">
+
+    <!--imagen-->
+    <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 offset-xl-2 offset-lg-2 offset-md-2">
+      {% if event.imageName != null %}
+      <img id="profileImg" class="img-response" src="{{ asset('orchard/event/') }}{{event.imageName}}" alt="">
+      {% else %}
+      <img id="profileImg" class="img-response" src="http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png" alt="">
+      {% endif %}
+    </div>
+
+
+    <!--texto-->
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+      <div class="row">
+        <div class="col-xs-2 col-sm-2">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-10 col-sm-10">
+          <strong>FECHA Y HORA</strong>
+          {% if event.startDate|date('d/m/y') == event.endDate|date('d/m/y') %}
+          {{event.startDate|date('d/m/y')}}
+          <br>
+          {{event.startTime|date('h:m')}} - {{event.endTime|date('h:m')}}
+          {% else %}
+          <br><strong>De :</strong> {{event.startDate|date('d/m/y')}} - {{event.startTime|date('h:m')}}
+          <br><strong>A :</strong> {{event.endDate|date('d/m/y')}} - {{event.endTime|date('h:m')}}
+          {% endif %}
+        </div>
+      </div>
+
+      <hr class="hr-mobile">
+
+      <div class="row">
+        <div class="col-xs-2 col-sm-2">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-10 col-sm-10">
+          <strong>UBICACIÓN</strong>
+          <p>{{event.orchard.name}}</p>
+        </div>
+      </div>
+
+      <hr class="hr-mobile">
+
+      <div class="row">
+        <div class="col-xs-2 col-sm-2">
+          <i class="fa fa-money" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-10 col-sm-10">
+          <strong>PRECIO</strong>
+          {% if event.price == 0 %}
+          <p>Gratis</p>
+          {% else %}
+          <p>{{event.price}} €</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <hr class="hr-mobile">
+
+      {% if event.showPlaces == true %}
+      <div class="row">
+        <div class="col-xs-2 col-sm-2">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-10 col-sm-10">
+          <strong>PLAZAS</strong>
+          <p>{{event.places}}</p>
+        </div>
+      </div>
+    {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="spacing"></div>
+
+<div class="row">
+  <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 offset-xl-2 offset-lg-2 offset-md-2">
+    <strong>DESCRIPCIÓN</strong>
+    <p>{{event.description}}</p>
+  </div>
+</div>
+
+</div>
+<div class="container">
+  <div class="row">
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+      {% if app.user %}
+      {% if eventUser != null %}
+      <p class="reservadas">Tienes reservadas {{eventUser.amount}} reservadas</p>
+      {% else %}
+      <p class="reservadas"></p>
+      {% endif %}
+      <button type="button" class="btn unete btn-event-mobile" name="button">Únete</button>
+      {% else %}
+      <a href="/register"><button type="button" class="btn btn-event-mobile" name="button">Únete</button></a>
+      {% endif %}
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+      <p>¿ Tienes dudas ?  <a href="#">Contacta</a></p>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="modalPlaces">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h2 class="modal-title">Unete</h2>
+      </div>
+      <div class="modal-body">
+        <h3>{{event.title}}</h3>
+        <p>{{event.endDate|date('d-m-y')}}  {{event.endTime|date('h:m')}}</p>
+        <div class="form-group">
+          <label for="places">Nº Plazas</label>
+          <select class="form-control" id="places">
+            {% for num in 1.. event.places %}
+            <option value="{{num}}">{{num}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="reservar" type="button" class="btn btn-primary">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$('.unete').on("click",function() {
+  $('#modalPlaces').modal('show');
+});
+$('#reservar').on("click",function() {
+  $.ajax({
+    method: "POST",
+    url: "/event/add/userevent/{{event.id}}/"+$('#places').val(),
+    success: function(result) {
+      // alert("reservadas "+result+" plazas");
+      $('.reservadas').html("Tienes reservadas " + result+" reservadas");
+      $('#modalPlaces').modal('hide');
+    },
+    error: function(result) {
+      alert('Error al reservar plazas. Intentalo otra vez');
+    }
+  })
+});
+</script>
+{% endblock %}

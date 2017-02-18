@@ -29,6 +29,13 @@ class User extends BaseUser
     private $apellidos;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="google_id", type="string", nullable=true)
+     */
+    private $googleID;
+
+    /**
     * @var OrchardBundle\Entity\Orchard
     *
     * un usuario a muchos huertos
@@ -40,9 +47,8 @@ class User extends BaseUser
     private $orchard;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection|EventBundle\Entity\Event[]
      *
-     * @ORM\ManyToMany(targetEntity="EventBundle\Entity\Event", mappedBy="users")
+     * @ORM\OneToMany(targetEntity="EventBundle\Entity\EventUser", mappedBy="event")
      */
     private $events;
 
@@ -76,7 +82,29 @@ class User extends BaseUser
         return $this->apellidos;
     }
 
+    /**
+     * Set googleID
+     *
+     * @param string googleID
+     *
+     * @return User
+     */
+    public function setGoogleID($googleID)
+    {
+        $this->googleID = $googleID;
 
+        return $this;
+    }
+
+    /**
+     * Get googleID
+     *
+     * @return string
+     */
+    public function getGoogleID()
+    {
+        return $this->googleID;
+    }
 
     /**
      * Add orchard
@@ -110,5 +138,39 @@ class User extends BaseUser
     public function getOrchard()
     {
         return $this->orchard;
+    }
+
+    /**
+     * Add event
+     *
+     * @param \EventBundle\Entity\EventUser $event
+     *
+     * @return User
+     */
+    public function addEvent(\EventBundle\Entity\EventUser $event)
+    {
+        $this->events[] = $event;
+
+        return $this;
+    }
+
+    /**
+     * Remove event
+     *
+     * @param \EventBundle\Entity\EventUser $event
+     */
+    public function removeEvent(\EventBundle\Entity\EventUser $event)
+    {
+        $this->events->removeElement($event);
+    }
+
+    /**
+     * Get events
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEvents()
+    {
+        return $this->events;
     }
 }

@@ -18,9 +18,11 @@
   <!-- No pinta la imagen si no la tiene -->
   {% if orchard.images != null and orchard.images is not empty %}
     <div class="row">
+      <a href="/orchard/show/profile/{{ orchard.id }}">
       <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
         <div style="width: 100%; height: 300px; background: url({{ asset('/orchard/image/' ~ orchard.images[0].nameImage) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
       </div>
+    </a>
   {% endif %}
     <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12 container">
       <p><h3> {{ orchard.name }} </h3></p>
@@ -50,7 +52,7 @@
         <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-secondary " data-toggle="tooltip" data-placement="bottom" title="Tardarás 5 min en completar tu huerto">{{ 'orchard.list.modify'|trans }}</button></a>
       {% endif %}
         <button type="button" class="btn btn-danger show-modal{{ orchard.id }}">{{ 'orchard.list.delete'|trans }}</button>
-        <a href="/event/create/{{ orchard.id }}"><button type="button" class="btn btn-secondary">Crear evento</button></a>
+        <a href="/event/create/null/{{ orchard.id }}"><button type="button" class="btn btn-secondary">Crear evento</button></a>
       </div>
     </div>
   </div>

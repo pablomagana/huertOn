@@ -2,6 +2,10 @@ orchard_upload_images_upload:
     path:     /images/upload/{id_orchard}
     defaults: { _controller: OrchardBundle:Upload:uploadImage, id_orchard:null}
 
+orchard_upload_images_favourite:
+    path:     /images/favourite/{id_orchard}/{id_image}/{favourite}
+    defaults: { _controller: OrchardBundle:Upload:favourite, id_orchard:null, id_image:null}
+
 orchard_upload_images_delete:
     path:     /images/delete/{idImage}
     defaults: { _controller: OrchardBundle:Upload:deleteImage, idImage:null}

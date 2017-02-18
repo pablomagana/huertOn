@@ -259,7 +259,7 @@ function setMap(crd){
 }
 
 function reverseGeocoding(marker) {
-	$.getJSON('https://search.mapzen.com/v1/reverse?api_key=mapzen-9gW9cQ&point.lat='+marker.getLatLng().lat+'&point.lon='+marker.getLatLng().lng+'&size=1&layers=address&boundary.country=ES', function(data, status, xhr) {
+	$.getJSON('https://search.mapzen.com/v1/reverse?api_key=mapzen-imBC1aC&point.lat='+marker.getLatLng().lat+'&point.lon='+marker.getLatLng().lng+'&size=1&layers=address&boundary.country=ES', function(data, status, xhr) {
 		if(data.features[0] == undefined){
 			marker.bindPopup('No se han encontrado resultados.').openPopup();
 		}else{

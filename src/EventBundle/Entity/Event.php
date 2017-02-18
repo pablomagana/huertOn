@@ -34,21 +34,35 @@ class Event
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startDate", type="datetime")
+     * @ORM\Column(name="startDate", type="date")
      */
     private $startDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="endDate", type="datetime")
+     * @ORM\Column(name="startTime", type="time")
+     */
+    private $startTime;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="endDate", type="date")
      */
     private $endDate;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="endTime", type="time")
+     */
+    private $endTime;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=500)
      */
     private $description;
 
@@ -65,6 +79,14 @@ class Event
      * @ORM\Column(name="price", type="float")
      */
     private $price;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="showPlaces", type="boolean")
+     *
+     */
+    private $showPlaces;
 
     /**
      * Many events have One Orchard.
@@ -89,18 +111,8 @@ class Event
 
 
     /**
-     * @var \Doctrine\Common\Collections\Collection|UserBundle\Entity\User[]
      *
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", inversedBy="events", fetch="EAGER")
-     * @ORM\JoinTable(
-     *  name="event_user",
-     *  joinColumns={
-     *      @ORM\JoinColumn(name="event_id", referencedColumnName="id")
-     *  },
-     *  inverseJoinColumns={
-     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     *  }
-     * )
+     * @ORM\OneToMany(targetEntity="EventBundle\Entity\EventUser", mappedBy="user")
      */
     private $users;
 
@@ -301,41 +313,6 @@ class Event
        return $this->images;
     }
 
-
-    /**
-     * Add user
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return Event
-     */
-    public function addUser(\UserBundle\Entity\User $user)
-    {
-        $this->users[] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Remove user
-     *
-     * @param \UserBundle\Entity\User $user
-     */
-    public function removeUser(\UserBundle\Entity\User $user)
-    {
-        $this->users->removeElement($user);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
     /**
      * Set imageName
      *
@@ -358,5 +335,118 @@ class Event
     public function getImageName()
     {
         return $this->imageName;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set showPlaces
+     *
+     * @param boolean $showPlaces
+     *
+     * @return Event
+     */
+    public function setShowPlaces($showPlaces)
+    {
+        $this->showPlaces = $showPlaces;
+
+        return $this;
+    }
+
+    /**
+     * Get showPlaces
+     *
+     * @return boolean
+     */
+    public function getShowPlaces()
+    {
+        return $this->showPlaces;
+    }
+
+    /**
+     * Set startTime
+     *
+     * @param \DateTime $startTime
+     *
+     * @return Event
+     */
+    public function setStartTime($startTime)
+    {
+        $this->startTime = $startTime;
+
+        return $this;
+    }
+
+    /**
+     * Get startTime
+     *
+     * @return \DateTime
+     */
+    public function getStartTime()
+    {
+        return $this->startTime;
+    }
+
+    /**
+     * Set endTime
+     *
+     * @param \DateTime $endTime
+     *
+     * @return Event
+     */
+    public function setEndTime($endTime)
+    {
+        $this->endTime = $endTime;
+
+        return $this;
+    }
+
+    /**
+     * Get endTime
+     *
+     * @return \DateTime
+     */
+    public function getEndTime()
+    {
+        return $this->endTime;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \EventBundle\Entity\EventUser $user
+     *
+     * @return Event
+     */
+    public function addUser(\EventBundle\Entity\EventUser $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \EventBundle\Entity\EventUser $user
+     */
+    public function removeUser(\EventBundle\Entity\EventUser $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }
