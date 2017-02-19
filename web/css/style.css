@@ -101,6 +101,7 @@ background-color: #07012D;
 .fa-facebook-square, .fa-twitter-square {
 	font-size: 20px;
 }
+
 .container-fluid {
     height: 100%;
 }
@@ -596,6 +597,7 @@ footer h6{
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
+
 .text-step{
 	padding-top: 10px;
 }
@@ -648,4 +650,17 @@ footer h6{
 .fa-check {
 	float: right;
 	color: #45ad30;
+}
+
+.list-bt{
+  border-color: #0b0146!important;
+  color: #0b0146!important;
+	padding:5px 25px;
+}
+
+.list-bt-delete{
+  border-color: #910b0e;
+  color: white;
+	padding:5px 25px;
+	background-color: #910b0e;
 }
