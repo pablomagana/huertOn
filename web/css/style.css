@@ -29,6 +29,12 @@
 	#nav-desktop{
 		display: none;
 	}
+
+	.event-create{
+		margin: 0 20px;
+	}
+
+
 }
 
 
@@ -56,6 +62,11 @@
 	#nav-mobile{
 		display: none;
 	}
+
+	.event-create{
+		margin: 0 210px;
+	}
+
 
 }
 /*+++++++++++++++++MEDIA QUERIES+++++++++++++++++*/
@@ -573,4 +584,25 @@ div.left-scroll {
 .save-button{
 	background-color: #45ad30;
 	color: white!important;
+}
+
+footer hr{
+	background-color: white;
+}
+
+footer a p{
+	color: white;
+}
+
+footer h6{
+	color: white;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
