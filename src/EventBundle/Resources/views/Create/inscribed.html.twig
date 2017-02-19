@@ -23,8 +23,8 @@
             <td>{{ eventUser.user.username }}</td>
             <td>{{ eventUser.user.email }}</td>
             <td id="amount{{ eventUser.user.id }}">{{ eventUser.amount}} plazas</td>
-            <td><button type="button" class="btn btn-danger show-modal{{ eventUser.user.id }}">Eliminar</button></td>
-            <td><button type="button" class="btn btn-primary show-modal-places{{ eventUser.user.id }}" name="button">Editar</button></td>
+            <td><button type="button" class="btn btn-danger" onclick="eliminarModal('{{ event.id }}','{{ eventUser.user.id }}')">Eliminar</button></td>
+            <td><button type="button" class="btn btn-primary" onclick="editarModal('{{ eventUser.user.id }}','{{ event.id }}','{{ eventUser.user.username }}','{{ eventUser.user.email }}',{{ event.places }},{{ eventUser.amount }} );"> Editar </button></td>
           </tr>
         {% endfor %}
 
@@ -41,6 +41,8 @@
         <div class="modal-body" style="margin:60px;">
           <h1 id="user_name_places"></h1>
           <p id="user_mail_places"></p>
+          <input type="text" hidden name="idEvent" id="idEvent" value="">
+          <input type="text" hidden name="idUser" id="idUser" value="">
           <br>
           <div class="form-group">
             <label id="places-label" for="places">Número de Plazas reservadas</label><br>
@@ -56,7 +58,7 @@
 
 
 <!-- Modal para borrar entradas -->
-  <div class="modal fade" id="myModal">
+  <div class="modal fade" id="modalRemove">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -67,9 +69,11 @@
         </div>
         <div class="modal-body">
           <p>{{ 'orchard.list.sure-2'|trans }}<p></p>
+          <input type="text" hidden name="idEventdel" id="idEventdel" value="">
+          <input type="text" hidden name="idUserdel" id="idUserdel" value="">
         </div>
         <div class="modal-footer">
-          <a id="btn-delete-modal" href=""><button type="button" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
+          <a id="btn-delete-modal" href=""><button type="button" onclick="eliminar()" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
           <a id="btn-no-delete" href=""><button type="button" data-dismiss="modal" class="btn btn-secondary">Cancelar</button></a>
         </div>
       </div><!-- /.modal-content -->
@@ -78,31 +82,61 @@
 
   <script type="text/javascript">
 
-  function reservar(eventId,valueId) {
+  function reservar() {
     $.ajax({
       method: "POST",
-      url: "/event/add/userevent/"+eventId+"/"+$('#places').val()+"/",
+      url: "/event/add/userevent/"+$('#idEvent').val()+"/"+$('#selectModificar').val()+"/"+$('#idUser').val(),
       success: function(result) {
         $('#modalPlaces').modal('hide');
-        $('#amount').html(result + ' plazas');
+        $('#amount'+$('#idUser').val()).html(result + ' plazas');
       },
       error: function(result) {
         alert('Error al reservar plazas. Intentalo otra vez');
       }
-    })
+    });
   }
-         function mostrarModel() {
-           $('#select-places-container').html("<select class='form-control' id='places{{ value.id }}'>" + '{% for num in 1.. event.places + amounts[key] %}' + "<option value=" + '{{ num }}' + ">" + '{{num}}' + "</option>" + '{% endfor %}' + "</select>");
-           $('#myModal').modal('show');
-         }
+  function eliminar() {
+    $.ajax({
+      method: "POST",
+      url: "/event/create/list/inscribed/delete/"+$('#idEventdel').val()+"/"+$('#idUserdel').val(),
+      success: function() {
+        $('#modalRemove').modal('hide');
 
-           $('.show-modal-places{{ value.id }}').click(function(){
-             $('#btn-delete-modal').attr("href", "/event/create/list/inscribed/delete/{{ event.id }}/{{ value.id }}");
-             $('#user_name_places').html('{{ value.username }} {{ value.apellidos }}');
-             $('#user_mail_places').html('{{ value.email }}');
-             $('#modalPlaces').modal('show');
-           });
+      },
+      error: function() {
+        alert('Error al eliminar plazas. Intentalo otra vez');
+      }
+    });
+  }
+  function eliminarModal(idEvent,idUser) {
+    $('#idEventdel').val(idEvent);
+    $('#idUserdel').val(idUser);
 
-         });
+    $('#modalRemove').modal('show');
+  }
+
+  function editarModal(idUser,idEvent,nombre,email,plazas,reservadas) {
+    var select =document.createElement('select');
+    var option;
+    var selectLenght =plazas + reservadas;
+    select.id="selectModificar";
+    for (var i = 1; i <= selectLenght; i++) {
+      option = document.createElement('option');
+      option.value = i;
+      option.text = i;
+      if (reservadas == i) {
+        option.selected=true;
+      }
+      select.append(option);
+    }
+    $('#select-places-container').html(select);
+    $('#user_name_places').html(nombre);
+    $('#user_mail_places').html(email);
+    $('#idEvent').val(idEvent);
+    $('#idUser').val(idUser);
+
+    $('#modalPlaces').modal('show');
+  }
+
   </script>
   {% endblock %}
