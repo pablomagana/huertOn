@@ -1,5 +1,10 @@
 {% extends '::step_base.html.twig' %}
-{% block currentStep %}11{% endblock %}
+{% block currentStep %}
+  1
+  <span class="step-title">
+    : Empieza con lo esencial
+  </span>
+{% endblock %}
 {% block body %}
 
 <div class="row steps">
@@ -15,7 +20,7 @@
         <label for="form-address" data-toggle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}">{{ 'orchard.step11.where'|trans }}<small id="fileHelp" class="form-text text-muted">
           <span class="label-control" style="display:none;color:red">{{ 'orchard.step11.required'|trans }}</span>
           <input type="text" class="form-control required" id="Address" value="{{ orchard.address }}" placeholder="{{ 'orchard.step11.where-2'|trans }}">
-          <i>{{ 'orchard.step11.marker'|trans }}.</i></small></label>
+          <i>{{ 'orchard.step11.marker'|trans }}</i></small></label>
 
           <input type="text" id="Town" value="{{ orchard.town }}" hidden="hidden">
           <input type="text" id="Street" value="{{ orchard.street }}" hidden="hidden">
@@ -37,12 +42,13 @@
 
       <!-- Buttons mobile -->
       <div class="fixed-buttons">
-  			<button type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-atras">{{ 'orchard.step11.back'|trans }}</button>
-  			<button type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
+  			<button type="button" class="btn btn-outline-primary delete-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-atras">{{ 'orchard.step11.back'|trans }}</button>
+  			<button type="submit" class="btn save-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
   		</div>
 
     </div>
 
+    <!--pantalla de la derecha -->
     <div class="map col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <div id="map" class="map"></div>
     </div>

@@ -285,7 +285,7 @@
                 </trans-unit>
                 <trans-unit id="61">
                     <source>orchard.step14.add</source>
-                    <target>Añade o arrastra imagenes aqui</target>
+                    <target>Sube una imagen para tu huerto</target>
                 </trans-unit>
                 <trans-unit id="62">
                     <source>orchard.step14.uploaded</source>

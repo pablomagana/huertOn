@@ -1,6 +1,9 @@
 .cuadro-subidas{
-  border: solid 2px black;
+  border: dashed 2px #CDCDCD;
   overflow: hidden;
+  border-radius: 1px;
+  min-height: 300px;
+
 }
 #gallery, #upload{
   display: inline-block;
@@ -43,14 +46,14 @@
   overflow: hidden;
 }
 .more{
-  margin: 10px 10% 20px 10%;
+  margin: 5%;
+  margin-bottom: 0;
   height: 50px;
-  width: 80%;
+  width: 90%;
   display: inline-block;
-  border-style: dashed;
-  border-radius: 15px;
   cursor:pointer;
   display: table;
+  text-align: center;
 }
 .more p{
   text-align:center;
