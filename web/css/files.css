@@ -15,16 +15,17 @@
     /*float:left;*/
     display:inline-table;
     margin:15px;
+    margin-top: 0px;
     text-align: center;
     vertical-align: bottom;
     overflow:hidden;
+    border-radius: 10px;
+    box-shadow:none;
 }
 .thumbnail img{
     width:150px;
     height: 150px;
-    border-radius: 10px;
-    box-shadow: 4px 5px 5px #888888;
-    overflow: hidden;
+    border-radius: 20px;
 }
 .thumbnail input{
   margin-top: 5px;
@@ -37,8 +38,11 @@
 }
 .thumbnail span{
   display: block;
-  text-align: right;
-  color: rgb(175, 175, 175);
+  float: right;
+  position: relative;
+  top: 25px;
+  margin-right:5px;
+  color: rgb(0, 0, 0);
 }
 .descripcion{
   width: 90%;
@@ -77,4 +81,7 @@
   display: inline;
   text-decoration: underline!important;
   cursor: pointer;
+}
+.steps-left-innerContent{
+  overflow-y: scroll;
 }

@@ -1,142 +1,145 @@
 {% extends '::step_base.html.twig' %}
 {% block currentStep %}
-	2
-	<span class="step-title">
-		: ¿Cómo pueden contactar conmigo?
-	</span>
+    2
+    <span class="step-title">
+        : ¿Cómo pueden contactar conmigo?
+    </span>
 {% endblock %}
 {% block body %}
 
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-left-12">
-		<h3>{{ 'orchard.step12.title'|trans }}</h3>
-			<form class="steps-left-content">
-				<div class="row steps-left-innerContent">
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-						<label for="Mail" class="label-control" data-toogle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}">{{ 'orchard.step12.mail'|trans }}</label>
-						<span style="display: none;">{{ 'orchard.step11.required'|trans }}</span>
-						<input type="email" class="form-control required" id="Mail" value="{{ orchard.mail }}" placeholder="Escribe aquí tu email"><br>
-					</div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-left-12">
+            <h3>{{ 'orchard.step12.title'|trans }}</h3>
+            <form class="steps-left-content">
+                <div class="row steps-left-innerContent">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label for="Mail" class="label-control" data-toogle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}">{{ 'orchard.step12.mail'|trans }}</label>
+                        <span style="display: none;">{{ 'orchard.step11.required'|trans }}</span>
+                        <input type="email" class="form-control required" id="Mail" value="{{ orchard.mail }}" placeholder="Escribe aquí tu email"><br>
+                    </div>
 
-					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-						<label for="Phone" class="label-control" data-toogle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}">{{ 'orchard.step12.tlf'|trans }}</label>
-						<span style="display: none;">{{ 'orchard.step11.required'|trans }}</span>
-						<input type="tel" class="form-control" id="Phone" value="{{ orchard.phone }}" placeholder="Escribe aquí tu teléfono"><br>
-					</div>
-				</div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <label for="Phone" class="label-control" data-toogle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}">{{ 'orchard.step12.tlf'|trans }}</label>
+                        <span style="display: none;">{{ 'orchard.step11.required'|trans }}</span>
+                        <input type="tel" class="form-control" id="Phone" value="{{ orchard.phone }}" placeholder="Escribe aquí tu teléfono"><br>
+                    </div>
+                </div>
 
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<label for="Web" >{{ 'orchard.step12.web'|trans }}</label>
-						<input type="url" class="form-control" id="Web"  value="{{ orchard.web }}"placeholder="{{ 'orchard.step12.web-2'|trans }}">
-					</div>
-					<br><br><br><br>
-				</div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label for="Web">{{ 'orchard.step12.web'|trans }}</label>
+                        <input type="url" class="form-control" id="Web" value="{{ orchard.web }}" placeholder="{{ 'orchard.step12.web-2'|trans }}">
+                    </div>
+                    <br><br><br><br>
+                </div>
 
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<label for="orchard-social">{{ 'orchard.step12.social'|trans }}</label>
-						<span class="input input--fumi">
-							<input class="input__field input__field--fumi form-control" type="text" id="Facebook" value="{{ orchard.facebook }}" />
-							<label class="input__label input__label--fumi" for="orchard-facebook">
-								<i class="fa fa-fw fa-facebook-official icon icon--fumi"></i>
-								<span class="input__label-content input__label-content--fumi">Facebook</span>
-							</label>
-						</span>
-					</div>
-				</div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label for="orchard-social">{{ 'orchard.step12.social'|trans }}</label>
+                        <span class="input input--fumi">
+                            <input class="input__field input__field--fumi form-control" type="text" id="Facebook" value="{{ orchard.facebook }}"/>
+                            <label class="input__label input__label--fumi" for="orchard-facebook">
+                                <i class="fa fa-fw fa-facebook-official icon icon--fumi"></i>
+                                <span class="input__label-content input__label-content--fumi">Facebook</span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
 
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<span class="input input--fumi">
-							<input class="input__field input__field--fumi form-control" type="text" id="Instagram" value="{{ orchard.instagram }}" />
-							<label class="input__label input__label--fumi" for="orchard-instagram">
-								<i class="fa fa-fw fa-instagram icon icon--fumi"></i>
-								<span class="input__label-content input__label-content--fumi">Instagram</span>
-							</label>
-						</span>
-					</div>
-				</div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <span class="input input--fumi">
+                            <input class="input__field input__field--fumi form-control" type="text" id="Instagram" value="{{ orchard.instagram }}"/>
+                            <label class="input__label input__label--fumi" for="orchard-instagram">
+                                <i class="fa fa-fw fa-instagram icon icon--fumi"></i>
+                                <span class="input__label-content input__label-content--fumi">Instagram</span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
 
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<span class="input input--fumi">
-							<input class="input__field input__field--fumi form-control" type="text" id="Twitter" value="{{ orchard.twitter }}" />
-							<label class="input__label input__label--fumi" for="orchard-twitter">
-								<i class="fa fa-fw fa-twitter icon icon--fumi"></i>
-								<span class="input__label-content input__label-content--fumi">Twitter</span>
-							</label>
-						</span>
-					</div>
-				</div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <span class="input input--fumi">
+                            <input class="input__field input__field--fumi form-control" type="text" id="Twitter" value="{{ orchard.twitter }}"/>
+                            <label class="input__label input__label--fumi" for="orchard-twitter">
+                                <i class="fa fa-fw fa-twitter icon icon--fumi"></i>
+                                <span class="input__label-content input__label-content--fumi">Twitter</span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
 
-			<input type="text" id="Step" hidden="hidden" value="13">
+                <input type="text" id="Step" hidden="hidden" value="13">
 
-		</form>
+            </form>
 
-		<!-- Buttons desktop -->
-		<div class="buttons">
-			<button type="submit" name="button" class="btn btn-outline-primary delete-button btn-atras">{{ 'orchard.step11.back'|trans }}</button>
-			<button type="reset" name="button" class="btn save-button btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
-		</div>
+            <!-- Buttons desktop -->
+            <div class="buttons">
+                <button type="submit" name="button" class="btn btn-outline-primary delete-button btn-atras">{{ 'orchard.step11.back'|trans }}</button>
+                <button type="reset" name="button" class="btn save-button btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
+            </div>
 
-		<!-- Buttons mobile -->
-		<div class="fixed-buttons">
-			<button type="button" class="btn btn-outline-primary delete-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-atras">{{ 'orchard.step11.back'|trans }}</button>
-			<button type="submit" class="btn save-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
-		</div>
+            <!-- Buttons mobile -->
+            <div class="fixed-buttons">
+                <button type="button" class="btn btn-outline-primary delete-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-atras">{{ 'orchard.step11.back'|trans }}</button>
+                <button type="submit" class="btn save-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
+            </div>
 
-	</div>
+        </div>
 
-	<!--pantalla de la derecha -->
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
-		<h1 style="line-height: 1.5; font-weight: bold;">ES MUY PROBABLE QUE EL URBANITA QUIERA SABER UN POCO MÁS DE TU PROYECTO.</h1>
-		<p>Hazle facil ponerse en contacto contigo</p>
-	</div>
+        <!--pantalla de la derecha -->
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
+            <h1 style="line-height: 1.5; font-weight: bold;">ES MUY PROBABLE QUE EL URBANITA QUIERA SABER UN POCO MÁS DE TU PROYECTO.</h1>
+            <p>Hazle facil ponerse en contacto contigo</p>
+        </div>
 
-</div>
+    </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/classie/1.0.1/classie.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/classie/1.0.1/classie.js"></script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-(function() {
+        (function() {
 
-	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 50 + '%','aria-valuenow': 50}, {duration: 400, easing: 'linear'});
+            $('#progressbar').val(localStorage.getItem('lastProgress')).animate({
+                'value': 20 + '%',
+                'aria-valuenow': 20
+            }, {
+                duration: 400,
+                easing: 'linear'
+            });
 
-	// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
-	if (!String.prototype.trim) {
-		(function() {
-			// Make sure we trim BOM and NBSP
-			var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-			String.prototype.trim = function() {
-				return this.replace(rtrim, '');
-			};
-		})();
-	}
+            // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+            if (!String.prototype.trim) {
+                (function() {
+                    // Make sure we trim BOM and NBSP
+                    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                    String.prototype.trim = function() {
+                        return this.replace(rtrim, '');
+                    };
+                })();
+            }[].slice.call(document.querySelectorAll('input.input__field')).forEach(function(inputEl) {
+                // in case the input is already filled..
+                if (inputEl.value.trim() !== '') {
+                    classie.add(inputEl.parentNode, 'input--filled');
+                }
 
-	[].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
-		// in case the input is already filled..
-		if( inputEl.value.trim() !== '' ) {
-			classie.add( inputEl.parentNode, 'input--filled' );
-		}
+                // events:
+                inputEl.addEventListener('focus', onInputFocus);
+                inputEl.addEventListener('blur', onInputBlur);
+            });
 
-		// events:
-		inputEl.addEventListener( 'focus', onInputFocus );
-		inputEl.addEventListener( 'blur', onInputBlur );
-	} );
+            function onInputFocus(ev) {
+                classie.add(ev.target.parentNode, 'input--filled');
+            }
 
-	function onInputFocus( ev ) {
-		classie.add( ev.target.parentNode, 'input--filled' );
-	}
-
-	function onInputBlur( ev ) {
-		if( ev.target.value.trim() === '' ) {
-			classie.remove( ev.target.parentNode, 'input--filled' );
-		}
-	}
-})();
-
-</script>
+            function onInputBlur(ev) {
+                if (ev.target.value.trim() === '') {
+                    classie.remove(ev.target.parentNode, 'input--filled');
+                }
+            }
+        })();
+    </script>
 
 {% endblock %}

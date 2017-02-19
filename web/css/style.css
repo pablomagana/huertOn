@@ -4,15 +4,13 @@
 	.fixed-buttons {
 		position: fixed;
 	    bottom: 0px;
+			left: 0px;
 	    z-index: 9999 !important;
-	    width: 93vw;
+	    width: 100vw;
 	}
 	.buttons {
 		display: none;
 	}
-  .steps-right-pdf {
-    display: none;
-  }
 	.legal-desktop{
 		display: none;
 	}
@@ -95,32 +93,29 @@ body{
 .steps-left	{
 	padding: 50px;
 }
-.steps-left-content	{
+
+.steps-left-content, .steps-left-innerContent	{
 	margin-top: 50px;
 }
-.steps-left-innerContent	{
-	margin-top: 50px;
-}
+
 .btn-atras, .btn-siguiente	{
 	margin-top: 50px;
 	padding:10px 60px;
 }
+
 .btn-atras	{
 	float: left;
 }
+
 .btn-siguiente	{
 	float: right;
 }
+
 /*scroll left*/
 .steps-left-12 {
 	padding: 50px;
 }
 
-.steps-right-pdf {
-  height: 100%;
-  padding: 10%;
-  z-index: -9999;
-}
 .jumbotron{
 	background-color: transparent;
 }
@@ -576,4 +571,24 @@ div.left-scroll {
 	height: 200px;
 	padding: 50px;
 	background-color: #fff;
+}
+
+.btn-pdf-link	{
+	border-color: #FEC014 !important
+}
+
+.btn-pdf-link:hover	{
+	background-color: transparent !important;
+	color: #000 !important
+}
+.btn-link {
+	color: #45ad30;
+	text-decoration: none;
+}
+.btn-link:hover {
+	color: #45ad30;
+}
+.fa-check {
+	float: right;
+	color: #45ad30;
 }

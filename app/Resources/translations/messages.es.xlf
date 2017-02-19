@@ -349,10 +349,6 @@
                     <source>orchard.step22.title-right-2</source>
                     <target>Algunos links interesantes sobre normas de huertos:</target>
                 </trans-unit>
-                <trans-unit id="75">
-                    <source>orchard.step22.title-right-3</source>
-                    <target>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</target>
-                </trans-unit>
                 <trans-unit id="750">
                     <source>orchard.step22.uploaded</source>
                     <target>Archivos subidos</target>
