@@ -48,7 +48,7 @@ class SearchController extends Controller
 
     $orchards = $query->getResult();
 
-    return $this->render('HomeBundle:Default:find_orchard.html.twig', array('orchards' => $orchards, 'type' => $type, 'input_home_search' => $input_home_search));
+    return $this->render('HomeBundle:Search:find_orchard.html.twig', array('orchards' => $orchards, 'type' => $type, 'input_home_search' => $input_home_search));
   }
 
 
@@ -93,7 +93,7 @@ class SearchController extends Controller
 
     $events = $query->getResult();
 
-    return $this->render('HomeBundle:Default:find_event.html.twig', array('events' => $events, 'type' => $type, 'input_home_search' => $input_home_search));
+    return $this->render('HomeBundle:Search:find_event.html.twig', array('events' => $events, 'type' => $type, 'input_home_search' => $input_home_search));
   }
 
 

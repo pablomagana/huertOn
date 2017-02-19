@@ -28,8 +28,12 @@ class HomeController extends Controller
     ->getQuery();
     $events = $query->getResult();
 
-    return $this->render('HomeBundle:Default:index.html.twig', array('events' => $events));
+    return $this->render('HomeBundle:Home:index.html.twig', array('events' => $events));
   }
 
+  public function faqAction()
+  {
+    return $this->render('HomeBundle:Home:faq.html.twig');
+  }
 
 }
