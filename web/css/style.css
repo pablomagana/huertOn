@@ -126,6 +126,7 @@ background-color: #07012D;
 
 .steps-left	{
 	padding: 50px;
+	padding-bottom: 0;
 }
 
 .steps-left-content, .steps-left-innerContent	{
@@ -133,7 +134,7 @@ background-color: #07012D;
 }
 
 .btn-atras, .btn-siguiente	{
-	margin-top: 50px;
+	margin-top: 25px;
 	padding:10px 60px;
 }
 
@@ -148,6 +149,7 @@ background-color: #07012D;
 /*scroll left*/
 .steps-left-12 {
 	padding: 50px;
+	padding-bottom: 0;
 }
 
 .jumbotron{

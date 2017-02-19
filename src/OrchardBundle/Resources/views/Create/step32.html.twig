@@ -29,10 +29,10 @@
                             <label class="custom-control custom-checkbox">
                                 <input id="cb-new-service" type="checkbox" class="custom-control-input">
                                 <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">{{ 'orchard.step13.typeOrchard'|trans }}</span>
+                                <span class="custom-control-description">{{ 'orchard.step32.title-2'|trans }}</span>
                             </label>
                             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                                <input type="text" class="form-control" id="Service" placeholder="{{ 'orchard.step13.typeOrchard-2'|trans }}" hidden>
+                                <input type="text" class="form-control" id="Service" placeholder="{{ 'orchard.step32.title-3'|trans }}" hidden>
 
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
@@ -218,7 +218,7 @@
                     ;
 
                     if (!checkeado) {
-                        $('.btn-siguiente').html('{{ ' orchard.step21.nowNo '|trans }}');
+                        $('.btn-siguiente').html('{{ 'orchard.step21.nowNo'|trans }}');
                     }
                 }
             });
@@ -226,7 +226,7 @@
             $(':checkbox:not(#cb-new-service)').each(function() {
                 if (this.checked) {
                     console.log('checkeado');
-                    $('.btn-siguiente').html('{{ ' orchard.step11.next '|trans }}')
+                    $('.btn-siguiente').html('{{ 'orchard.step11.next'|trans }}')
                 }
             });
 

@@ -208,7 +208,7 @@
             $(':checkbox:not(#cb-new-participate)').change(function() {
                 var checkeado = false;
                 if (this.checked) {
-                    $('.btn-siguiente').html('{{ ' orchard.step11.next '|trans }}')
+                    $('.btn-siguiente').html('{{ 'orchard.step11.next'|trans }}')
                 } else {
                     if ($(':checkbox').each(function() {
                         if (this.checked) {
@@ -218,7 +218,7 @@
                     ;
 
                     if (!checkeado) {
-                        $('.btn-siguiente').html('{{ ' orchard.step21.nowNo '|trans }}');
+                        $('.btn-siguiente').html('{{ 'orchard.step21.nowNo'|trans }}');
                     }
                 }
             });
@@ -226,7 +226,7 @@
             $(':checkbox:not(#cb-new-participate)').each(function() {
                 if (this.checked) {
                     console.log('checkeado');
-                    $('.btn-siguiente').html('{{ ' orchard.step11.next '|trans }}')
+                    $('.btn-siguiente').html('{{ 'orchard.step11.next'|trans }}')
                 }
             });
 

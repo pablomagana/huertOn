@@ -66,9 +66,9 @@
             $('textarea').each(function() {
                 var length = $(this).val().length;
                 if (length) {
-                    $('.btn-siguiente').html('{{ ' orchard.step11.next '|trans }}');
+                    $('.btn-siguiente').html('{{ 'orchard.step11.next'|trans }}');
                 } else if (checkEmpty()) {
-                    $('.btn-siguiente').html('{{ ' orchard.step21.nowNo '|trans }}');
+                    $('.btn-siguiente').html('{{ 'orchard.step21.nowNo'|trans }}');
                 }
             });
 
@@ -87,9 +87,9 @@
             $('textarea').keyup(function() {
                 var length = $(this).val().length;
                 if (length) {
-                    $('.btn-siguiente').html('{{ ' orchard.step11.next '|trans }}');
+                    $('.btn-siguiente').html('{{ 'orchard.step11.next'|trans }}');
                 } else if (checkEmpty()) {
-                    $('.btn-siguiente').html('{{ ' orchard.step21.nowNo '|trans }}');
+                    $('.btn-siguiente').html('{{ 'orchard.step21.nowNo'|trans }}');
                 }
                 var length = maxLength - length;
                 $(this).prev().text(length);

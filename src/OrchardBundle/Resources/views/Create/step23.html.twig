@@ -114,9 +114,9 @@ $(function() {
     $('textarea').each(function() {
         var length = $(this).val().length;
         if (length) {
-            $('.btn-siguiente').html('{{ ' orchard.step11.next '|trans }}');
+            $('.btn-siguiente').html('{{ 'orchard.step11.next'|trans }}');
         } else if (checkEmpty()) {
-            $('.btn-siguiente').html('{{ ' orchard.step21.nowNo '|trans }}');
+            $('.btn-siguiente').html('{{ 'orchard.step21.nowNo'|trans }}');
         }
     });
 
@@ -137,9 +137,9 @@ $(function() {
             console.log('Escribiendo');
             var length = $(this).val().length;
             if (length) {
-                $('#btn-siguiente').html('{{ ' orchard.step11.next '|trans }}');
+                $('.btn-siguiente').html('{{ 'orchard.step11.next'|trans }}');
             } else if (checkEmpty()) {
-                $('#btn-siguiente').html('{{ ' orchard.step21.nowNo '|trans }}');
+                $('.btn-siguiente').html('{{ 'orchard.step21.nowNo'|trans }}');
             }
         });
         $("u.remove").on("click", function() {

@@ -41,7 +41,7 @@
   {% endblock %}
   <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
-<body>
+<body style="margin:0 !important;">
   <!-- Image and text -->
   <nav class="navbar navbar-light bg-faded">
     <a class="navbar-brand" href="/orchard/create/list">
@@ -95,7 +95,7 @@
   <script type="text/javascript">
 
   if($('.required').length === 0) {
-    $("#btn-siguiente").html('Ahora no');
+    $(".btn-siguiente").html('Ahora no');
   }
 
   window.onbeforeunload = function() {
