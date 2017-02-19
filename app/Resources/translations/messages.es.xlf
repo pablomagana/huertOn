@@ -285,7 +285,7 @@
                 </trans-unit>
                 <trans-unit id="61">
                     <source>orchard.step14.add</source>
-                    <target>Añade o arrastra imagenes aqui</target>
+                    <target>Sube una imagen para tu huerto</target>
                 </trans-unit>
                 <trans-unit id="62">
                     <source>orchard.step14.uploaded</source>
@@ -348,10 +348,6 @@
                 <trans-unit id="74">
                     <source>orchard.step22.title-right-2</source>
                     <target>Algunos links interesantes sobre normas de huertos:</target>
-                </trans-unit>
-                <trans-unit id="75">
-                    <source>orchard.step22.title-right-3</source>
-                    <target>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</target>
                 </trans-unit>
                 <trans-unit id="750">
                     <source>orchard.step22.uploaded</source>

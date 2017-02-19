@@ -1,334 +1,362 @@
 {% extends '::step_base.html.twig' %}
-
+{% block currentStep %}
+    3
+    <span class="step-title">
+        : ¿Qué tipo de huerto es?
+    </span>
+{% endblock %}
 {% block body %}
 
-<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 ">
-		<form>
-			<div class="form-group steps-left-12 col-xs-12 col-sm-12 col-md-12 col-lg-5">
-				<label><h4>{{ 'orchard.step13.title'|trans }}</h4></label><br>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-left">
+            <h3>{{ 'orchard.step13.title'|trans }}</h3>
+            <form class="steps-left-content">
+                <div class="row steps-left-innerContent">
+                    {% for orchardType in orchardTypes %}
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <label class="custom-control custom-checkbox">
+                                <input id="{{ orchardType.id }}" type="checkbox" class="custom-control-input" {% if orchardType in orchard.orchardType %} checked {% endif %}>
+                                <span class="custom-control-indicator"></span>
 
-				<div class="row">
-					{% for orchardType in orchardTypes %}
-						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-							<label class="custom-control custom-checkbox">
-								<input id="{{ orchardType.id }}" type="checkbox" class="custom-control-input" {% if orchardType in orchard.orchardType %} checked {% endif %}>
-								<span class="custom-control-indicator"></span>
+                                <div class="text-right">
+                                    <span class="custom-control-description type-name">{{ orchardType.name }}</span>
+                                    <span class="type-description" style="display: none;">{{ orchardType.description }}</span>
+                                </div>
 
-								<div class="text-right">
-									<span class="custom-control-description type-name">{{ orchardType.name }}</span>
-									<span class="type-description" style="display: none;">{{ orchardType.description }}</span>
-								</div>
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="row steps-left-innerContent">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <label class="custom-control custom-checkbox">
+                            <input id="cb-new-type" type="checkbox" class="custom-control-input">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">{{ 'orchard.step13.typeOrchard'|trans }}</span>
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                            <input type="text" class="form-control" id="Type" placeholder="{{ 'orchard.step13.typeOrchard-2'|trans }}" hidden>
 
-							</label>
-						</div>
-					{% endfor %}
-				</div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                            <button style="float: right;" id="btn-enviar" class="btn btn-outline-primary delete-button" hidden>{{ 'orchard.step13.send'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
 
-				<br>
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<label class="custom-control custom-checkbox">
-							<input id="cb-new-type" type="checkbox" class="custom-control-input">
-							<span class="custom-control-indicator"></span>
-							<span class="custom-control-description">{{ 'orchard.step13.typeOrchard'|trans }}</span>
-						</label>
-						<input type="text" class="form-control" id="Type" placeholder="{{ 'orchard.step13.typeOrchard-2'|trans }}" hidden>
+                <div class="hidden-md-up not-visible pull-right" data-toggle="modal" data-target="#modalDescripciones">
+                    <i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i>
+                </div>
 
-						<br>
-						<button id="btn-enviar" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6" hidden>{{ 'orchard.step13.send'|trans }}</button>
-					</div>
-				</div>
-				<br><br>
+                <!-- Buttons desktop -->
+                <div class="buttons">
+                    <button type="submit" name="button" class="btn btn-outline-primary delete-button btn-atras">{{ 'orchard.step11.back'|trans }}</button>
+                    <button type="reset" name="button" class="btn save-button btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
+                </div>
 
+                <!-- Buttons mobile -->
+                <div class="fixed-buttons">
+                    <button type="button" class="btn btn-outline-primary delete-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-atras">{{ 'orchard.step11.back'|trans }}</button>
+                    <button type="submit" class="btn save-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
+                </div>
 
-				<div class="hidden-md-up not-visible pull-right" data-toggle="modal" data-target="#modalDescripciones"><i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i></div>
+            </div>
 
+            <input type="text" id="Step" hidden="hidden" value="14">
+            <span id="required-hidden-input" class="required" hidden="hidden"></span>
 
-			</div>
+        </form>
 
-			<input type="text" id="Step" hidden="hidden" value="14">
-      <span id="required-hidden-input" class="required" hidden="hidden"></span>
+        <!--pantalla de la derecha -->
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
+            <h1 style="line-height: 1.5; font-weight: bold;">AYUDA AL URBANITA A CONOCER LOS DIFERENTES MODELOS DE HUERTO</h1>
+            <p>Puedes ver una pequeña descripción pasando por encima de cada uno</p>
 
-		</form>
+            <div class="show-type">
+                <h4 id="show-type-title"></h4>
+                <h5 id="show-description">{{ 'orchard.step13.title-right-2'|trans }}</h5>
+            </div>
 
-		<div class="fixed-buttons">
-			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.back'|trans }}</button>
-			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.next'|trans }}</button>
-		</div>
+        </div>
 
-	</div>
+    </div>
 
-	<!--pantalla de la derecha -->
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 steps-right" style="padding: 150px;">
-		<h4 id="show-type">{{ 'orchard.step13.title-right'|trans }}</h4> <br><br>
-		<h5 id="show-description">{{ 'orchard.step13.title-right-2'|trans }}</h5><br>
-	</div>
+    <!--modal-->
+    <div class="modal fade" id="modalDescripciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!--mostrar tipos + descripciones-->
+                    <ul>
+                        {% for orchardType in orchardTypes %}
+                            <li>
+                                <b>{{ orchardType.name }}</b>:<br>
+                                <span>{{ orchardType.description }}</span>
+                            </li>
 
-</div>
-
-
-<!--modal-->
-<div class="modal fade" id="modalDescripciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-body">
-				<!--mostrar tipos + descripciones-->
-				<ul>
-				{% for orchardType in orchardTypes %}
-						<li>
-							<b>{{ orchardType.name }}</b>:<br>
-							<span>{{ orchardType.description }}</span>
-						</li>
-
-				{% endfor %}
-			</ul>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-			</div>
-		</div>
-	</div>
-</div>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 {% block javascripts %}
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-$(function() {
+        $(function() {
 
-	$('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 75 + '%','aria-valuenow': 75}, {duration: 400, easing: 'linear'});
+            $('#progressbar').val(localStorage.getItem('lastProgress')).animate({
+                'value': 30 + '%',
+                'aria-valuenow': 30
+            }, {
+                duration: 400,
+                easing: 'linear'
+            });
 
-	//FUNCION BOTON SIGUIENTE
-	$('#btn-siguiente').on('click', function() {
+            //FUNCION BOTON SIGUIENTE
+            $('.btn-siguiente').on('click', function() {
 
-		if (!$('#required-hidden-input').length) {
+                if (!$('#required-hidden-input').length) {
 
-			var orchard_types = [];
-			initSave(orchard_types);
+                    var orchard_types = [];
+                    initSave(orchard_types);
 
-			$.ajax({
-				type: 'POST',
-				url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardType',
-				data: { 'OrchardType': orchard_types },
-				success: function(data) {
-					saveAnimation();
-					console.log('success');
-					window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
-				},
-				error: function(jqXHR, exception) {
-					saveAnimation();
-					if (jqXHR.status === 0) {
-						alert('Not connect.\n Verify Network.');
-					} else if (jqXHR.status == 404) {
-						alert('Requested page not found. [404]');
-					} else if (jqXHR.status == 500) {
-						alert('Internal Server Error [500].');
-					} else if (exception === 'parsererror') {
-						alert('Requested JSON parse failed.');
-					} else if (exception === 'timeout') {
-						alert('Time out error.');
-					} else if (exception === 'abort') {
-						alert('Ajax request aborted.');
-					} else {
-						alert('Uncaught Error.\n' + jqXHR.responseText);
-					}
-					console.log('error');
-				}
-			});
+                    $.ajax({
+                        type: 'POST',
+                        url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardType',
+                        data: {
+                            'OrchardType': orchard_types
+                        },
+                        success: function(data) {
+                            saveAnimation();
+                            console.log('success');
+                            window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
+                        },
+                        error: function(jqXHR, exception) {
+                            saveAnimation();
+                            if (jqXHR.status === 0) {
+                                alert('Not connect.\n Verify Network.');
+                            } else if (jqXHR.status == 404) {
+                                alert('Requested page not found. [404]');
+                            } else if (jqXHR.status == 500) {
+                                alert('Internal Server Error [500].');
+                            } else if (exception === 'parsererror') {
+                                alert('Requested JSON parse failed.');
+                            } else if (exception === 'timeout') {
+                                alert('Time out error.');
+                            } else if (exception === 'abort') {
+                                alert('Ajax request aborted.');
+                            } else {
+                                alert('Uncaught Error.\n' + jqXHR.responseText);
+                            }
+                            console.log('error');
+                        }
+                    });
 
-			return false;
+                    return false;
 
-		}
+                }
 
-	});
+            });
 
-	//FUNCION BOTON ATRAS
-	$('#btn-atras').on('click', function() {
+            //FUNCION BOTON ATRAS
+            $('.btn-atras').on('click', function() {
 
-		if (!$('#required-hidden-input').length) {
+                if (!$('#required-hidden-input').length) {
 
-		var orchard_types = [];
-		initSave(orchard_types);
+                    var orchard_types = [];
+                    initSave(orchard_types);
 
-		$.ajax({
-			type: 'POST',
-			dataType: 'json',
-			url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardType',
-			data: { 'OrchardType': orchard_types },
-			success: function() {
-				saveAnimation();
-				if($('#Step').val() == '12' || $('#Step').val() == '22') {
-					window.location.href = '/orchard/create/steps/{{ orchard.id }}'
-				}else if ($('#Step').val() == '21' || $('#Step').val() == '31') {
-					var step = parseInt($('#Step').val()) - 8;
-					window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
-				}else {
-					var step = parseInt($('#Step').val()) - 2;
-					window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
-				}
-			}
-		});
+                    $.ajax({
+                        type: 'POST',
+                        dataType: 'json',
+                        url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardType',
+                        data: {
+                            'OrchardType': orchard_types
+                        },
+                        success: function() {
+                            saveAnimation();
+                            if ($('#Step').val() == '12' || $('#Step').val() == '22') {
+                                window.location.href = '/orchard/create/steps/{{ orchard.id }}'
+                            } else if ($('#Step').val() == '21' || $('#Step').val() == '31') {
+                                var step = parseInt($('#Step').val()) - 8;
+                                window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
+                            } else {
+                                var step = parseInt($('#Step').val()) - 2;
+                                window.location.href = '/orchard/create/step/' + step.toString() + '/{{ orchard.id }}';
+                            }
+                        }
+                    });
 
-	}
+                }
 
-	});
+            });
 
-	//FUNCION BOTON GUARDAR Y SALIR
-	$('#btn-save-exit').on('click', function() {
+            //FUNCION BOTON GUARDAR Y SALIR
+            $('#btn-save-exit').on('click', function() {
 
-		if (!$('#required-hidden-input').length) {
+                if (!$('#required-hidden-input').length) {
 
-			var orchard_types = [];
-			initSave(orchard_types);
+                    var orchard_types = [];
+                    initSave(orchard_types);
 
-			$.ajax({
-				type: 'POST',
-				url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardType',
-				data: { 'OrchardType': orchard_types },
-				success: function(data) {
-					saveAnimation();
-					console.log('success');
-					window.location.href = '/orchard/create/steps/{{ orchard.id }}';
-				},
-				error: function(jqXHR, exception) {
-					saveAnimation();
-					if (jqXHR.status === 0) {
-						alert('Not connect.\n Verify Network.');
-					} else if (jqXHR.status == 404) {
-						alert('Requested page not found. [404]');
-					} else if (jqXHR.status == 500) {
-						alert('Internal Server Error [500].');
-					} else if (exception === 'parsererror') {
-						alert('Requested JSON parse failed.');
-					} else if (exception === 'timeout') {
-						alert('Time out error.');
-					} else if (exception === 'abort') {
-						alert('Ajax request aborted.');
-					} else {
-						alert('Uncaught Error.\n' + jqXHR.responseText);
-					}
-					console.log('error');
-				}
-			});
+                    $.ajax({
+                        type: 'POST',
+                        url: '/orchard/create/insert/checkbox/{{ orchard.id }}/OrchardType',
+                        data: {
+                            'OrchardType': orchard_types
+                        },
+                        success: function(data) {
+                            saveAnimation();
+                            console.log('success');
+                            window.location.href = '/orchard/create/steps/{{ orchard.id }}';
+                        },
+                        error: function(jqXHR, exception) {
+                            saveAnimation();
+                            if (jqXHR.status === 0) {
+                                alert('Not connect.\n Verify Network.');
+                            } else if (jqXHR.status == 404) {
+                                alert('Requested page not found. [404]');
+                            } else if (jqXHR.status == 500) {
+                                alert('Internal Server Error [500].');
+                            } else if (exception === 'parsererror') {
+                                alert('Requested JSON parse failed.');
+                            } else if (exception === 'timeout') {
+                                alert('Time out error.');
+                            } else if (exception === 'abort') {
+                                alert('Ajax request aborted.');
+                            } else {
+                                alert('Uncaught Error.\n' + jqXHR.responseText);
+                            }
+                            console.log('error');
+                        }
+                    });
 
-			return false;
+                    return false;
 
-		}
+                }
 
-	});
+            });
 
-	function initSave(orchard_types) {
-		$("#loading, #loading-text").fadeIn("slow");
-		$(':checkbox:not(#cb-new-type):checked').each(function(){
-			console.log($(this).attr('id'));
-			orchard_types.push($(this).attr('id'));
-		});
-	}
+            function initSave(orchard_types) {
+                $("#loading, #loading-text").fadeIn("slow");
+                $(':checkbox:not(#cb-new-type):checked').each(function() {
+                    console.log($(this).attr('id'));
+                    orchard_types.push($(this).attr('id'));
+                });
+            }
 
-	function saveAnimation() {
-		$("#loading, #loading-text").fadeOut("slow", function() {
-			$("#loading-text").text("{{ 'orchard.step13.save'|trans }}").fadeIn('slow');
-		});
-	}
+            function saveAnimation() {
+                $("#loading, #loading-text").fadeOut("slow", function() {
+                    $("#loading-text").text("{{ 'orchard.step13.save'|trans }}").fadeIn('slow');
+                });
+            }
 
-	$('#btn-siguiente').attr('data-toggle', 'popover').attr('title', '{{ 'orchard.step13.required'|trans }}').attr('data-content', '{{ 'orchard.step13.required-2'|trans }}').attr('data-placement', 'top');
-	$('[data-toggle="popover"]').popover();
+            $('.btn-siguiente').attr('data-toggle', 'popover').attr('title', '{{ ' orchard.step13.required '|trans }}').attr('data-content', '{{ ' orchard.step13.required - 2 '|trans }}').attr('data-placement', 'top');
+            $('[data-toggle="popover"]').popover();
 
-	//FUNCIÓN QUE COMPRUEBA SI SE INSERTAN REGISTROS
-	$(':checkbox:not(#cb-new-type)').change(function() {
-		var checkeado = false;
-	    if(this.checked) {
-					$('#btn-siguiente').popover('disable')
-					$('#required-hidden-input').remove();
-	    }else {
-				if($(':checkbox').each(function() {
-					if(this.checked) {
-						checkeado = true;
-					}
-				}));
+            //FUNCIÓN QUE COMPRUEBA SI SE INSERTAN REGISTROS
+            $(':checkbox:not(#cb-new-type)').change(function() {
+                var checkeado = false;
+                if (this.checked) {
+                    $('.btn-siguiente').popover('disable')
+                    $('#required-hidden-input').remove();
+                } else {
+                    if ($(':checkbox').each(function() {
+                        if (this.checked) {
+                            checkeado = true;
+                        }
+                    }))
+                    ;
 
-				if(!checkeado) {
-					$('#btn-siguiente').popover('enable');
-					$('<span id="required-hidden-input" class="required" hidden="hidden"></span>').appendTo('body');
-				}
-			}
-	});
+                    if (!checkeado) {
+                        $('.btn-siguiente').popover('enable');
+                        $('<span id="required-hidden-input" class="required" hidden="hidden"></span>').appendTo('body');
+                    }
+                }
+            });
 
-	$(':checkbox:not(#cb-new-type)').each(function() {
-		if(this.checked) {
-			console.log('checkeado');
-				$('#btn-siguiente').popover('disable')
-				$('#required-hidden-input').remove();
-		}
-	});
+            $(':checkbox:not(#cb-new-type)').each(function() {
+                if (this.checked) {
+                    console.log('checkeado');
+                    $('.btn-siguiente').popover('disable')
+                    $('#required-hidden-input').remove();
+                }
+            });
 
-	initSuggest();
+            initSuggest();
 
-	function initSuggest() {
-		//FUNCION PARA MOSTRAR/OCULTAR INPUT SUGERENCIA
-		$('#cb-new-type').click(function() {
-			this.checked ? $('#Type').removeAttr('hidden') : $('#Type').attr('hidden', 'hidden');
-			this.checked ? $('#btn-enviar').removeAttr('hidden') : $('#btn-enviar').attr('hidden', 'hidden');
-		});
+            function initSuggest() {
+                //FUNCION PARA MOSTRAR/OCULTAR INPUT SUGERENCIA
+                $('#cb-new-type').click(function() {
+                    this.checked
+                        ? $('#Type').removeAttr('hidden')
+                        : $('#Type').attr('hidden', 'hidden');
+                    this.checked
+                        ? $('#btn-enviar').removeAttr('hidden')
+                        : $('#btn-enviar').attr('hidden', 'hidden');
+                });
 
-		//borramos los handlers del onclick para evitar que se clike varias veces
-		//añade gestion de AJAX al boton enviar al entrar a la pagina por si el campo tipo ya estaba rellenado anteriormente
-		prepareSend();
+                //borramos los handlers del onclick para evitar que se clike varias veces añade gestion de AJAX al boton enviar al entrar a la pagina por si el campo tipo ya estaba rellenado anteriormente
+                prepareSend();
 
-		//borramos los handlers del onclick para evitar que se clike varias veces
-		//añade gestion de AJAX al boton enviar cada vez que se escriba en el campo de tipo
-		$('#Type').keyup(function() {
-			prepareSend();
-		});
-	}
+                //borramos los handlers del onclick para evitar que se clike varias veces añade gestion de AJAX al boton enviar cada vez que se escriba en el campo de tipo
+                $('#Type').keyup(function() {
+                    prepareSend();
+                });
+            }
 
-	function prepareSend() {
-		$('#btn-enviar').off('click');
-		$('#btn-enviar').on('click', function() {
-			if($('#Type').val()) {
-				$.ajax({
-					type: 'POST',
-					url: '/orchard/suggest/send/orchard_type/'+$('#Type').val(),
-					success: function(data) {
-						console.log('success');
-						$('#myModal').modal('show');
-					},
-					error: function(jqXHR, exception) {
-						if (jqXHR.status === 0) {
-							alert('Not connect.\n Verify Network.');
-						} else if (jqXHR.status == 404) {
-							alert('Requested page not found. [404]');
-						} else if (jqXHR.status == 500) {
-							alert('Internal Server Error [500].');
-						} else if (exception === 'parsererror') {
-							alert('Requested JSON parse failed.');
-						} else if (exception === 'timeout') {
-							alert('Time out error.');
-						} else if (exception === 'abort') {
-							alert('Ajax request aborted.');
-						} else {
-							alert('Uncaught Error.\n' + jqXHR.responseText);
-						}
-						console.log('error');
-					}
-				});
-			}
-			return false;
-		});
-	}
+            function prepareSend() {
+                $('#btn-enviar').off('click');
+                $('#btn-enviar').on('click', function() {
+                    if ($('#Type').val()) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/orchard/suggest/send/orchard_type/' + $('#Type').val(),
+                            success: function(data) {
+                                console.log('success');
+                                $('#myModal').modal('show');
+                            },
+                            error: function(jqXHR, exception) {
+                                if (jqXHR.status === 0) {
+                                    alert('Not connect.\n Verify Network.');
+                                } else if (jqXHR.status == 404) {
+                                    alert('Requested page not found. [404]');
+                                } else if (jqXHR.status == 500) {
+                                    alert('Internal Server Error [500].');
+                                } else if (exception === 'parsererror') {
+                                    alert('Requested JSON parse failed.');
+                                } else if (exception === 'timeout') {
+                                    alert('Time out error.');
+                                } else if (exception === 'abort') {
+                                    alert('Ajax request aborted.');
+                                } else {
+                                    alert('Uncaught Error.\n' + jqXHR.responseText);
+                                }
+                                console.log('error');
+                            }
+                        });
+                    }
+                    return false;
+                });
+            }
 
-	//MOSTRAR TEXTO A LA DERECHA
-	$('span.type-name').hover(function() {
-		$("#show-type").html($(this).text());
-		$('#show-description').html($(this).next().text());
-	}, function(){
-			$("#show-type").html("Tipo de huerto");
-			$("#show-description").html("Situa el puntero sobre cualquier tipo de huerto para mostrar más información de cada uno.");
-  });
+            //MOSTRAR TEXTO A LA DERECHA
+            $('span.type-name').hover(function() {
+                $("#show-type-title").html($(this).text());
+                $('#show-description').html($(this).next().text());
+            }, function() {
+                $("#show-type-title").html("Tipo de huerto");
+                $("#show-description").html("Situa el puntero sobre cualquier tipo de huerto para mostrar más información de cada uno.");
+            });
 
-});
-</script>
+        });
+    </script>
 {% endblock %}
