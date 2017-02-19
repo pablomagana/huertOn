@@ -29,7 +29,7 @@
         <p class="reservadas"></p>
         {% endif %}
         {% if app.user %}
-          <div class="btn-event-desktop"> 
+          <div class="btn-event-desktop">
 
             {% if event.places > 0 or eventUser != null  %}
               <button type="button" class="btn save-button unete" onclick="mostrarUnete()" name="button">Únete</button>
@@ -61,7 +61,8 @@
 
     <!--texto-->
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-      <div class="row">
+      <!--FECHA Y HORA-->
+      <div class="row event-spacing">
         <div class="col-xs-2 col-sm-2">
           <i class="fa fa-calendar fa-3x" aria-hidden="true"></i>
         </div>
@@ -81,7 +82,9 @@
 
       <hr class="hr-mobile">
 
-      <div class="row">
+
+      <!--UBICACION-->
+      <div class="row event-spacing">
         <div class="col-xs-2 col-sm-2">
           <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
         </div>
@@ -93,7 +96,8 @@
 
       <hr class="hr-mobile">
 
-      <div class="row">
+      <!--PRECIO-->
+      <div class="row event-spacing">
         <div class="col-xs-2 col-sm-2">
           <i class="fa fa-money fa-3x" aria-hidden="true"></i>
         </div>
@@ -109,8 +113,9 @@
 
       <hr class="hr-mobile">
 
+      <!--PLAZAS-->
       {% if event.showPlaces == true %}
-      <div class="row">
+      <div class="row event-spacing">
         <div class="col-xs-2 col-sm-2">
           <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
         </div>
@@ -120,16 +125,19 @@
         </div>
       </div>
     {% endif %}
+
+
     </div>
   </div>
 </div>
 
 <div class="spacing"></div>
-
-<div class="row">
-  <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 offset-xl-2 offset-lg-2 offset-md-2">
-    <strong>DESCRIPCIÓN</strong>
-    <p>{{event.description}}</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 offset-xl-2 offset-lg-2 offset-md-2">
+      <strong>DESCRIPCIÓN</strong>
+      <p>{{event.description}}</p>
+    </div>
   </div>
 </div>
 
