@@ -39,7 +39,9 @@
 		margin: 0 20px;
 	}
 
-
+	.spacing-mobile{
+		margin: 50px 0;
+	}
 }
 
 
@@ -69,6 +71,13 @@
 		margin: 0 210px;
 	}
 
+	.how {
+		margin-left: 160px;
+	}
+
+	.how-content {
+		margin-left: 16px;
+	}
 
 }
 /*+++++++++++++++++MEDIA QUERIES+++++++++++++++++*/
@@ -713,12 +722,4 @@ ul#next-prev > li > a.active {
 
 video{
 	filter: blur(4px);
-}
-
-.how {
-	margin-left: 160px;
-}
-
-.how-content {
-	margin-left: 16px;
 }

@@ -5,11 +5,11 @@ home_homepage:
         _locale: en|es|ca
 
 home_why:
-    path:     /why/{action}
+    path:     /why
     defaults: { _controller: HomeBundle:Home:why }
 
 home_how:
-    path:     /how/{action}
+    path:     /how
     defaults: { _controller: HomeBundle:Home:how }
 
 home_find_orchard:

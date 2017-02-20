@@ -31,14 +31,14 @@ class HomeController extends Controller
     return $this->render('HomeBundle:Home:index.html.twig', array('events' => $events));
   }
 
-  public function whyAction($action)
+  public function whyAction()
   {
-    return $this->render('HomeBundle:Home:why.html.twig', array('action' => $action));
+    return $this->render('HomeBundle:Home:why.html.twig');
   }
 
-  public function howAction($action)
+  public function howAction()
   {
-    return $this->render('HomeBundle:Home:how.html.twig', array('action' => $action));
+    return $this->render('HomeBundle:Home:how.html.twig');
   }
 
 }
