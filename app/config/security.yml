@@ -38,4 +38,5 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/orchard/create, role: IS_AUTHENTICATED_FULLY  }
+        - { path: ^/event/create, role: IS_AUTHENTICATED_FULLY  }
         - { path: ^/user, role: IS_AUTHENTICATED_FULLY  }

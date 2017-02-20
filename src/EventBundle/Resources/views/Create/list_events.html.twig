@@ -1,50 +1,82 @@
 {% if events != null and events is not empty %}
-<div class="container">
-  <div class="row row-centered">
-    <div class="col col-centered">
-      <ul class="nav nav-pills">
-        <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="#next" role="tab">Próximas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#past" role="tab">Anteriores</a>
-        </li>
-      </ul>
-    </div>
+
+
+<div class="row row-centered">
+  <div class="col col-centered">
+    <ul class="nav nav-pills" id="next-prev">
+      <li class="nav-item">
+        <a data-toggle="tab" href="#next" role="tab" class=" active btn " style="padding:10px 40px;">Próximas</a>
+      </li>
+      <li class="nav-item">
+        <a data-toggle="tab" href="#past" role="tab" class=" btn " style="padding:10px 40px; ">Anteriores</a>
+      </li>
+    </ul>
   </div>
 </div>
+
+
 <div class="spacing"></div>
+
 <div class="tab-content">
   <div class="tab-pane active" id="next" role="tabpanel">
-    {% for event in events | sortbyfield('startDate') %}
-    {% if event.startDate|date("d/M/Y h:m") >= date()|date("d/M/Y h:m") %}
     <div class="row">
-    {% if event.imageName != null %}
-        <div class="col-lg-5 col-md-5 col-xs-12 col-sm-12">
-          <div style="width: 100%; height: 300px; background: url({{ asset('/orchard/event/' ~ event.imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-        </div>
-    {% endif %}
-    <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12 container">
-      <h1>{{ event.title }}</h1>
-      <p><i>Inicio: {{ event.startDate|date("d/M/Y h:m")}}</i></p>
-      <p><i>Fin: {{ event.endDate|date("d/M/Y h:m")}}</i></p>
-      <a href="/event/create/{{ event.id }}"><button type="button" class="btn btn-secondary">Editar actividad</button></a>
-      <a href="/event/create/list/inscribed/{{ event.id }}"><button type="button" class="btn btn-secondary">Inscritos</button></a>
-    </div>
-    </div>
-    {% endif %}
-    {% endfor %}
-</div>
+      {% for event in events | sortbyfield('startDate') %}
+      {% if event.startDate|date("d/M/Y h:m") >= date()|date("d/M/Y h:m") %}
+      <div class="col-xl-6 col-lg-6 col-md-12 col-xs-12 col-sm-12">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-sm-12">
+          <div class="row">
+            <div class="col-xl-9 col-lg-9 col-md-9 col-xs-9 col-sm-9 text-xs-left text-sm-left text-lg-left text-xl-left"><a href="/event/show/profile/{{ event.id }}"><h3>{{ event.title }}</h3></a></div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-xs-3 col-sm-3"><a href="/event/create/{{ event.id }}"><button id="register-button" type="button" class="btn btn-secondary" style="padding:5px 25px;">Edita</button></a></div>
+          </div>
+          {% if event.imageName != null %}
+          <a href="/event/show/profile/{{ event.id }}"><div style="width: 100%; height: 300px; background: url({{ asset('/orchard/event/' ~ event.imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div></a>
+          {% endif %}
 
-<div class="tab-pane" id="past" role="tabpanel">
-  {% for event in events | sortbyfield('startDate') %}
-  {% if event.startDate|date("d/M/Y h:m") < date()|date("d/M/Y h:m") %}
-    <h1>{{ event.title }}</h1>
-    <p><i>Inicio: {{ event.startDate|date("d/M/Y h:m")}}</i></p>
-    <p><i>Fin: {{ event.endDate|date("d/M/Y h:m")}}</i></p>
-  {% endif %}
-  {% endfor %}
-</div>
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6 text-xs-left text-sm-left text-lg-left text-xl-left">
+              <p><i>Inicio: {{ event.startDate|date("d/M/Y h:m")}}</i></p>
+              <p><i>Fin: {{ event.endDate|date("d/M/Y h:m")}}</i></p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6 text-xs-right text-sm-right text-lg-right text-xl-right"><br>
+              <a href="/event/create/list/inscribed/{{ event.id }}"><button type="button" class="btn btn-secondary list-bt">Ver inscritos</button></a>
+            </div>
+          </div>
+          <div class="spacing"></div>
+        
+        </div>
+      </div>
+
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="tab-pane" id="past" role="tabpanel">
+    <div class="row">
+      {% for event in events | sortbyfield('startDate') %}
+      {% if event.startDate|date("d/M/Y h:m") < date()|date("d/M/Y h:m") %}
+      <div class="col-xl-6 col-lg-6 col-md-12 col-xs-12 col-sm-12">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-sm-12">
+          <div class="row">
+            <div class="col-xl-9 col-lg-9 col-md-9 col-xs-9 col-sm-9 text-xs-left text-sm-left text-lg-left text-xl-left"><h3>{{ event.title }}</h3></div>
+          </div>
+          {% if event.imageName != null %}
+          <div style="width: 100%; height: 300px; background: url({{ asset('/orchard/event/' ~ event.imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+          {% endif %}
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6 text-xs-left text-sm-left text-lg-left text-xl-left">
+              <p><i>Inicio: {{ event.startDate|date("d/M/Y h:m")}}</i></p>
+              <p><i>Fin: {{ event.endDate|date("d/M/Y h:m")}}</i></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 </div>
 
 {% endif %}

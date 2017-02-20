@@ -22,130 +22,124 @@
   </div>
 </div>
 
-<div class="container-fluid" style="margin:0 210px;;">
-  <div class="container-fluid">
-    <div class="row">
-      <br><br>
-      <!-- titulo -->
-      {{ form_label(form.title) }}
-      {{ form_errors(form.title) }}
-      {{ form_widget(form.title) }}
-    </div>
+<div class="container-fluid event-create">
+  <div class="row">
+    <br><br>
+    <!-- titulo -->
+    {{ form_label(form.title) }}
+    {{ form_errors(form.title) }}
+    {{ form_widget(form.title) }}
   </div>
-<br>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <div class="form-group">
-          <label for="user_orchards">UBICACIÓN</label>
-          <select class="form-control" id="user_orchards">
-            {% for orchard in app.user.orchard %}
-            {% if orchard.name != null %}
-            <option id="{{ orchard.id }}">{{ orchard.name }}</option>
-            {% endif %}
-            {% endfor %}
-            {% if orchardRelated != null %}
-            <input id="orchardRelated" type="text" name="" value="{{ orchardRelated.name }}" hidden="hidden">
-            {% endif %}
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <br>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-        <!-- fecha de inicio -->
-        <div class="dateblock">
-          {{ form_label(form.startDate) }}
-          {{ form_errors(form.startDate) }}
-          <br>
-          {{ form_widget(form.startDate) }}
-        </div>
-      </div>
 
-      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-        <!-- hora de inicio -->
-        {{ form_label(form.startTime) }}
-        {{ form_errors(form.startTime) }}
-        {{ form_widget(form.startTime) }}
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="form-group">
+        <label for="user_orchards">UBICACIÓN</label>
+        <select class="form-control" id="user_orchards">
+          {% for orchard in app.user.orchard %}
+          {% if orchard.name != null %}
+          <option id="{{ orchard.id }}">{{ orchard.name }}</option>
+          {% endif %}
+          {% endfor %}
+          {% if orchardRelated != null %}
+          <input id="orchardRelated" type="text" name="" value="{{ orchardRelated.name }}" hidden="hidden">
+          {% endif %}
+        </select>
       </div>
-
-      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-        <!-- fecha de fin -->
-        <div class="dateblock">
-          {{ form_label(form.endDate) }}
-          {{ form_errors(form.endDate) }}
-          {{ form_widget(form.endDate) }}
-        </div>
-      </div>
-      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-        {{ form_label(form.endTime) }}
-        {{ form_errors(form.endTime) }}
-        {{ form_widget(form.endTime) }}
-      </div>
-
     </div>
   </div>
   <br>
-  <div class="container-fluid">
-    <div class="row">
-      <!-- descripcion -->
-      {{ form_label(form.description) }}
-      {{ form_errors(form.description) }}
-      <br>
-      {{ form_widget(form.description) }}
+
+  <div class="row">
+    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-3 col-xl-3">
+      <!-- fecha de inicio -->
+      <div class="dateblock">
+        {{ form_label(form.startDate, 'Fecha de inicio') }}
+        {{ form_errors(form.startDate) }}
+        <br>
+        {{ form_widget(form.startDate) }}
+      </div>
+    </div>
+
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3 col-xl-3">
+      <!-- hora de inicio -->
+      {{ form_label(form.startTime, 'Hora de inicio') }}
+      {{ form_errors(form.startTime) }}
+      {{ form_widget(form.startTime) }}
+    </div>
+
+    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-3 col-xl-3">
+      <!-- fecha de fin -->
+      <div class="dateblock">
+        {{ form_label(form.endDate, 'Fecha de fin') }}
+        {{ form_errors(form.endDate) }}
+        {{ form_widget(form.endDate) }}
+      </div>
+    </div>
+    <!--hora de fin-->
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3 col-xl-3">
+      {{ form_label(form.endTime, 'Hora de fin')  }}
+      {{ form_errors(form.endTime) }}
+      {{ form_widget(form.endTime) }}
     </div>
   </div>
   <br>
-  <div class="container-fluid">
-    <div class="row">
-        <!-- imagen de evento  -->
-        {{ form_label(form.images) }}
-        {{ form_errors(form.images) }}
-        {{ form_widget(form.images) }}
-        <div class="imageDiv" ondrop="drop(event)" ondragover="allowDrop(event)">
-          <div class="more" onclick="$('input:file').click();">
-            <span id="plus"><i class="fa fa-picture-o" aria-hidden="true"></i></span>
-          </div>
-          <div id="gallery"></div>
-        </div>        
-    </div>
+
+  <div class="row">
+    <!-- descripcion -->
+    {{ form_label(form.description) }}
+    {{ form_errors(form.description) }}
+    <br>
+    {{ form_widget(form.description) }}
   </div>
-
-
   <br>
-  <div class="container-fluid">
-    <div class="row">
-      <!-- nº de plazas -->
-      {{ form_label(form.places) }}
-      {{ form_errors(form.places) }}
-      {{ form_widget(form.places) }}
-      <!-- boolean mostrar nºplazas -->
-      <label class="custom-control custom-checkbox">
+
+  <div class="row">
+    <!-- imagen de evento  -->
+    {{ form_label(form.images) }}
+    {{ form_errors(form.images) }}
+    {{ form_widget(form.images) }}
+    <div class="imageDiv" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <div class="more" onclick="$('input:file').click();">
+        <span id="plus"><img src="/img/image-upload.png" width="50px" height="50px" alt=""></span>
+      </div>
+      <div id="gallery"></div>
+    </div>
+    <p style="font-size: 12px;">Recomendamos el uso de al menos un 2160x1080px:<br>
+    Imagen (2 proporción 1) que no sea más grande de 10 MB.</p>
+  </div>
+  <br>
+
+  <div class="row">
+    <!-- nº de plazas -->
+    {{ form_label(form.places) }}
+    {{ form_errors(form.places) }}
+    {{ form_widget(form.places) }}
+    <!-- boolean mostrar nºplazas -->
+    <label class="custom-control custom-checkbox">
       {{ form_widget(form.showPlaces) }}
-        <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">{{ form_label(form.showPlaces) }}</span>
-      </label>
-      {{ form_errors(form.showPlaces) }}
-    </div>
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description noselect">{{ form_label(form.showPlaces) }}</span>
+    </label>
+    {{ form_errors(form.showPlaces) }}
   </div>
   <br>
-  <div class="container-fluid">
-    <div class="row">
-      <!-- precio -->
-      {{ form_label(form.price) }}
-      {{ form_errors(form.price) }}
-      {{ form_widget(form.price) }}
-    </div>
+
+  <div class="row">
+    <!-- precio -->
+    {{ form_label(form.price) }}
+    {{ form_errors(form.price) }}
+    {{ form_widget(form.price) }}
   </div>
 
   {{ form_end(form) }}
 
+  <div class="spacing"></div>
 </div>
+
+
+
 {% endblock %}
 {% block javascripts %}
 <script type="text/javascript">
@@ -170,5 +164,4 @@ $('#user_orchards').on('change', function() {
 
 </script>
 <script src="{{asset("/js/event.js")}}" charset="utf-8"></script>
-
 {% endblock %}

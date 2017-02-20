@@ -72,26 +72,72 @@ class CreateController extends Controller
       $repository = $em->getRepository('EventBundle:EventUser');
       $eventUsers = $repository->findByEvent($id_event);
 
-      $users = array();
-      $amounts = array();
+      return $this->render('EventBundle:Create:inscribed.html.twig', array('event' => $event, 'eventUsers' => $eventUsers));
 
-      foreach ($eventUsers as $eventUser) {
-        array_push($users, $eventUser->getUser());
-        array_push($amounts, $eventUser->getAmount());
-      }
-
-      return $this->render('EventBundle:Create:inscribed.html.twig', array('event' => $event, 'users' => $users, 'amounts' => $amounts));
     }
 
     public function deleteInscribedAction($id_event, $id_user)
     {
       $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $id_event, 'user' => $id_user));
+      $event = $this->container->get("event_service")->getEvent($id_event);
+
+      $user = $this->container->get("event_service")->getUserById($id_user);
+
+      $event->setPlaces($eventUser->getAmount() + $event->getPlaces());
 
       $em = $this->getDoctrine()->getManager();
       $em->remove($eventUser);
       $em->flush();
 
-      return $this->redirect($this->generateUrl('event_create_inscribed', array('id_event' => $id_event)));
+      $em->persist($event);
+      $em->flush();
+
+      $message = \Swift_Message::newInstance()
+      ->setContentType("text/html")
+      ->setSubject('Confirmación registro ' . $event->getTitle())
+      ->setFrom('huertOnflorida@gmail.com')
+      ->setTo($user->getEmail())
+      ->setBody(
+        $this->renderView(
+          'OrchardBundle:Suggest:confirmation_email.html.twig',
+          array('event' => $event, 'action' => false, 'user' => $user, 'amount' => $amount, 'orchard' => $event->getOrchard())
+          )
+          )
+          ;
+          $this->get('mailer')->send($message);
+
+      return new JsonResponse("ok");
+      //return $this->redirect($this->generateUrl('event_create_inscribed', array('id_event' => $id_event)));
+    }
+    public function addInscribedAction($id_event, $mail_user, $amount)
+    {
+      $user=$this->getDoctrine()->getRepository("UserBundle:User")->findOneByEmail($mail_user);
+
+      $event = $this->container->get("event_service")->getEvent($id_event);
+      $em = $this->getDoctrine()->getManager();
+      $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $event->getId(), 'user' => $user->getId()));
+
+      $response=$this->container->get("event_service")->addUserToEvent($event, $user, $eventUser, $amount);
+
+      $em->persist($response[0]);
+      $em->persist($response[1]);
+      $em->flush();
+
+      $message = \Swift_Message::newInstance()
+      ->setContentType("text/html")
+      ->setSubject('Confirmación registro ' . $event->getTitle())
+      ->setFrom('huertOnflorida@gmail.com')
+      ->setTo($user->getEmail())
+      ->setBody(
+        $this->renderView(
+          'OrchardBundle:Suggest:confirmation_email.html.twig',
+          array('event' => $event, 'action' => true, 'user' => $user, 'amount' => $amount, 'orchard' => $event->getOrchard())
+          )
+          )
+          ;
+          $this->get('mailer')->send($message);
+
+      return new JsonResponse($response[2]);
     }
 
 }

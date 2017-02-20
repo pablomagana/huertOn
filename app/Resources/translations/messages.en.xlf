@@ -2,6 +2,25 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
+          <!-- IDIOMA -->
+          <trans-unit id="1462">
+              <source>language</source>
+              <target>English</target>
+          </trans-unit>
+          <trans-unit id="1463">
+              <source>language.es</source>
+              <target>Spanish</target>
+          </trans-unit>
+          <trans-unit id="1464">
+              <source>language.en</source>
+              <target>English</target>
+          </trans-unit>
+          <trans-unit id="1465">
+              <source>language.ca</source>
+              <target>Catalan</target>
+          </trans-unit>
+          <!-- Fin IDIOMA -->
+
           <!-- Base -->
             <!-- base.html -->
               <trans-unit id="1">
@@ -344,10 +363,6 @@
                 <trans-unit id="74">
                     <source>orchard.step22.title-right-2</source>
                     <target>Some interesting links with orchard rules:</target>
-                </trans-unit>
-                <trans-unit id="75">
-                    <source>orchard.step22.title-right-3</source>
-                    <target>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</target>
                 </trans-unit>
               <!-- End step22.html.twig -->
 

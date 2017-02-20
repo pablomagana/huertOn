@@ -18,10 +18,14 @@ event_create_inscribed_delete:
     path:     /create/list/inscribed/delete/{id_event}/{id_user}
     defaults: { _controller: EventBundle:Create:deleteInscribed, id_event:null, id_user:null }
 
+event_create_inscribed_add:
+    path:     /create/list/inscribed/add/{id_event}/{mail_user}/{amount}
+    defaults: { _controller: EventBundle:Create:addInscribed, id_event:null, mail_user:null , amount:null}
+
 event_show_profile:
     path:     /show/profile/{id_event}/{search}
     defaults: { _controller: EventBundle:Show:profile, id_event:null , search:null}
 
 event_add_user:
-    path:     /add/userevent/{id_event}/{amount}
-    defaults: { _controller: EventBundle:Show:addUserToEvent, id_event:null }
+    path:     /add/userevent/{id_event}/{amount}/{id_user}
+    defaults: { _controller: EventBundle:Show:addUserToEvent, id_event:null, id_user:null }

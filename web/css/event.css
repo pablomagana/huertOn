@@ -1,13 +1,17 @@
-  #profileImg{
+#profileImg{
   width: 100%;
   height: 100%;
 }
+
 #title{
   text-align: center;
+  margin-top: 40px;
 }
+
 .data{
   text-indent:50px;
 }
+
 .modal select{
   width:auto;
   display:inline;
@@ -23,18 +27,48 @@
   }
 }
 
+
+/* large devices and large (desktops, 992px and up) */
+@media (min-width: 767px){
+
+  .hr-mobile {
+    display: none;
+  }
+  .fa{
+    display: none;
+  }
+}
+
 /* large devices and large (desktops, 992px and up) */
 @media (min-width: 992px){
   .btn-event-mobile{
     display: none;
   }
 
-  .hr-mobile {
-    display: none;
+  .event-spacing{
+    margin-bottom: 30px;
   }
+
 }
+
+@media (max-width: 338px){
+
+}
+
 .jumbotron{
   height: auto;
   padding-top:10px;
   padding-bottom: 10px;
+}
+
+.col-xs-2, .col-sm-2{
+  text-align: center;
+}
+
+i{
+  margin: 5px;
+}
+
+a.contact:link,a.contact:active,a.contact:visited{
+  color:#56B442!important;
 }

@@ -3,6 +3,7 @@
 namespace EventBundle\Service;
 
 use EventBundle\Entity\Event;
+use EventBundle\Entity\EventUser;
 use OrchardBundle\Entity\Orchard;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -65,6 +66,39 @@ class EventService
   public function getUser()
   {
     return $this->tokenStorage->getToken()->getUser();
+  }
+
+  public function getUserById($id_user)
+  {
+    $repository = $this->em->getRepository('UserBundle:User');
+    return $repository->findOneById($id_user);
+  }
+
+  public function addUserToEvent($event, $user ,$eventUser, $amount)
+  {
+
+    if (!$eventUser) {
+      $eventUser = new EventUser();
+      $eventUser->setUser($user);
+      $eventUser->setEvent($event);
+    }
+
+    if ($amount > $eventUser->getAmount()) {
+      $amountFinal = $event->getPlaces() - ($amount - $eventUser->getAmount());
+    }else {
+      $amountFinal = $event->getPlaces() + ($eventUser->getAmount() - $amount);
+    }
+
+    $eventUser->setAmount($amount);
+    $event->setPlaces($amountFinal);
+
+    if (!$event) {
+      return "ko";
+    }
+
+    $response=[$eventUser,$event,$amount];
+
+    return $response;
   }
 
 }

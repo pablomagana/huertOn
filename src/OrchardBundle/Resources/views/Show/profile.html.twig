@@ -78,7 +78,7 @@
               <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
             </div>
             {% else %}
-            <div class="find-result" style="background: url(http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png);">
+            <div class="find-result" style="background: url({{ asset('/img/event-default.jpg') }});">
               <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
             </div>
             {% endif %}
@@ -119,6 +119,8 @@
       </div>
 
     </div>
+
+
   </div>
   <div class="spacing"></div>
 
@@ -313,8 +315,8 @@
 <div id="nav-mobile">
   {% if orchard.governanceModel is empty %}
   {% else %}
-  <div class="row" id="philosophy">
-    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-centered text-xs-center text-sm-center text-md-center text-lg-center text-xl-center">
+  <div class="row row-centered" id="philosophy">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-centered">
       " {{ orchard.governanceModel }} "
     </div>
   </div>
@@ -351,20 +353,58 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade in active" id="actividades">
       <div class="container">
-        <div class="row" id="next-activities">
+        <div class="row container" id="next-activities">
           <!-- PRÓXIMAS 3 ACTIVIDADES DE CADA HUERTO (3 COLUMNAS) -->
           <h5>{{ 'orchard.profile.activities'|trans }}</h5>
           <hr class="hr-orchard-profile" align="center">
-          {% if orchard.orchardActivity is empty %}
-          <h1>{{ 'orchard.profile.noActivities'|trans }}</h1>
-          {% else %}
-          {% for orchardActivity in orchard.orchardActivity %}
-          <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-            <h5>{{ orchardActivity.name }}</h5>
-            <br>
-          </div>
+          <div class="spacing"></div>
+          {% for event in orchard.events|slice(0, 3) %}
+          <a href="/event/show/profile/{{ event.id }}">
+            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+              <!-- Imagen -->
+              <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                {% if event.images is not empty %}
+                <div class="find-result" style="background: url({{ asset('/event/image/' ~ event.images[0].nameImage) }});">
+                  <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
+                </div>
+                {% else %}
+                <div class="find-result" style="background: url({{ asset('/img/event-default.jpg') }});">
+                  <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
+                </div>
+                {% endif %}
+              </div>
+
+              <!-- Texto -->
+              <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                <p><font style="font-size:20px">{{ event.title }}</font><br><strong>{% if event.price == 0 %}Gratis{% else %}{{ event.price }}€{% endif %}</strong>&nbsp;&nbsp;<i>{{ event.orchard.name }}</i></p>
+              </div>
+
+              <input type="text" class="geometry" value="{{ event.orchard.geometry }}" hidden="hidden">
+            </div>
+          </a>
           {% endfor %}
-          {% endif %}
+          <div class="container">
+            <div class="spacing"></div>
+            <form action="/find/event" method="post">
+              <input id="input-home_search" name="input-home_search" type="text" value="{{ orchard.name }}" placeholder="{{ 'home.find.placeholder'|trans }}" hidden="hidden">
+              <button id="register-button" type="submit" class="btn btn-outline-primary">Ver más</button>
+            </form>
+            <div class="spacing "></div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
+            <div class="border">
+              {% if orchard.orchardActivity is empty %}
+              <h5>{{ 'orchard.profile.noActivities'|trans }}</h5>
+              {% else %}
+              <h6>Actividades</h6><br><br>
+              <ul>
+                {% for orchardActivity in orchard.orchardActivity %}
+                <li>{{ orchardActivity.name }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
         </div>
       </div>
     </div>

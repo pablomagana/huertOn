@@ -2,6 +2,25 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
+          <!-- IDIOMA -->
+          <trans-unit id="1462">
+              <source>language</source>
+              <target>Español</target>
+          </trans-unit>
+          <trans-unit id="1463">
+              <source>language.es</source>
+              <target>Español</target>
+          </trans-unit>
+          <trans-unit id="1464">
+              <source>language.en</source>
+              <target>Inglés</target>
+          </trans-unit>
+          <trans-unit id="1465">
+              <source>language.ca</source>
+              <target>Catalán</target>
+          </trans-unit>
+          <!-- Fin IDIOMA -->
+
           <!-- Base -->
             <!-- base.html -->
               <trans-unit id="1">
@@ -285,7 +304,7 @@
                 </trans-unit>
                 <trans-unit id="61">
                     <source>orchard.step14.add</source>
-                    <target>Añade o arrastra imagenes aqui</target>
+                    <target>Sube una imagen para tu huerto</target>
                 </trans-unit>
                 <trans-unit id="62">
                     <source>orchard.step14.uploaded</source>
@@ -348,10 +367,6 @@
                 <trans-unit id="74">
                     <source>orchard.step22.title-right-2</source>
                     <target>Algunos links interesantes sobre normas de huertos:</target>
-                </trans-unit>
-                <trans-unit id="75">
-                    <source>orchard.step22.title-right-3</source>
-                    <target>http://www.agrohuerto.com/buenas-practicas-en-huertos-municipales/</target>
                 </trans-unit>
                 <trans-unit id="750">
                     <source>orchard.step22.uploaded</source>

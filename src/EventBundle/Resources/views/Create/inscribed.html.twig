@@ -1,67 +1,214 @@
-{% extends '::base.html.twig' %}
-{% block body %}
-<div class="" style="margin-top:100px;">
-  <a href="/event/create/list"><< Mis actividades</a>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-      <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          <h1 class="display-3">Inscritos {{ event.title }}</h1>
-          <a href="/event/create/list/users/add/"><button type="button" class="btn btn-success">Añadir inscrito</button></a>
+  {% extends '::base.html.twig' %}
+  {% block body %}
+  <div class="" style="margin-top:100px;">
+    <a href="/event/create/list"><< Mis actividades</a>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-3">Inscritos {{ event.title }}</h1>
+            <button type="button" onclick="addModal('{{ event.id }}','{{ event.places }}');" class="btn save-button">Añadir inscrito</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-    <table class="table">
-      {% for key, value in users %}
-        <tr>
-          <td>{{ value.username }}</td>
-          <td>{{ value.email }}</td>
-          <td id="amount">{{ amounts[key] }} plazas</td>
-          <td><button type="button" class="btn btn-danger show-modal{{ value.id }}">Eliminar</button></td>
-          <td><a href="#"><button type="button" class="btn btn-primary" name="button">Editar</button></a></td>
-        </tr>
-
-        <script type="text/javascript">
-        $(function() {
-          $('.show-modal{{ value.id }}').click(function(){
-            $('#btn-delete-modal').attr("href", "/event/create/list/inscribed/delete/{{ event.id }}/{{ value.id }}");
-            $('#myModal').modal('show');
-          });
-        });
-        </script>
-
-      {% endfor %}
-
-    </table>
+{% for eventUser in eventUsers %}
+  <br><hr>
+  <div class="row">
+    <div class="container">
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3">
+        {{ eventUser.user.username }}
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-6 col-sm-6">
+        {{ eventUser.user.email }}
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3" id="amount{{ eventUser.user.id }}">
+         {{ eventUser.amount}} plazas
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-12 col-sm-12">
+        <button type="button" class="btn list-bt" onclick="eliminarModal('{{ event.id }}','{{ eventUser.user.id }}') ">Eliminar</button>
+        <button id="{{eventUser.user.id}}" type="button" class="btn list-bt" onclick="editarModal('{{ eventUser.user.id }}','{{ event.id }}','{{ eventUser.user.username }}','{{ eventUser.user.email }}',{{ event.places }}, $(this).attr('amount') );" amount="{{eventUser.amount}}"> Editar </button>
+      </div>
+    </div>
   </div>
-</div>
+{% endfor %}
 
-
-
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+<!-- Modal para editar entrada -->
+  <div class="modal fade" id="modalPlaces">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="alert alert-danger" style="display:none;" role="alert" id="alert-reservar">
+          <strong>Uops!</strong> No hemos podido reservar plazas.
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-right:40px;margin-top:20px;">
+          <span style="font-size:30pt;" aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title">{{ 'orchard.list.sure'|trans }}</h4>
+        <div class="modal-body" style="margin:60px;">
+          <h1 id="user_name_places"></h1>
+          <p id="user_mail_places"></p>
+          <input type="text" hidden name="idEvent" id="idEvent" value="">
+          <input type="text" hidden name="idUser" id="idUser" value="">
+          <br>
+          <div class="form-group">
+            <label id="places-label" for="places">Número de Plazas reservadas</label><br>
+            <div id="select-places-container"></div>
+            <br>
+            <br>
+            <button id="reservar" type="button" onclick="reservar($('#idUser').val())" class="btn save-button" style="width:100%;">Enviar</button>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <p>{{ 'orchard.list.sure-2'|trans }}<p></p>
-      </div>
-      <div class="modal-footer">
-        <a id="btn-delete-modal" href=""><button type="button" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
-        <a id="btn-no-delete" href=""><button type="button" data-dismiss="modal" class="btn btn-secondary">Cancelar</button></a>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
 
-{% endblock %}
+  <!-- Modal para anadir entrada -->
+    <div class="modal fade" id="modalAdd">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="alert alert-danger" style="display:none;" role="alert" id="alert-add">
+            <strong>Uops!</strong> No hemos encontrado correo.
+          </div>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-right:40px;margin-top:20px;">
+            <span style="font-size:30pt;" aria-hidden="true">&times;</span>
+          </button>
+          <div class="modal-body" style="margin:60px;">
+            <!-- <label for="user_name_places_add">Nombre</label>
+            <p><input type="text" id="user_name_places_add" name="user_name_places_add" value=""></p> -->
+            <label for="user_mail_places_add">Mail</label>
+            <p><input class="form-control" type="text" id="user_mail_places_add" name="user_mail_places_add" value=""></p>
+            <input type="text" hidden name="idEventadd" id="idEventadd" value="">
+            <br>
+            <div class="form-group">
+              <label id="places-label" for="places">Número de Plazas reservadas</label><br>
+              <div id="select-places-container-add"></div>
+              <br>
+              <br>
+              <button id="addinscrito" type="button" onclick="add()" class="btn save-button" style="width:100%;">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Modal para borrar entradas -->
+  <div class="modal fade" id="modalRemove">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="alert alert-danger" style="display:none;" role="alert" id="alert-eliminiar">
+          <strong>Uops!</strong> No hemos podido eliminar, inténtalo otra vez.
+        </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">{{ 'orchard.list.sure'|trans }}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{ 'orchard.list.sure-2'|trans }}<p></p>
+          <input type="text" hidden name="idEventdel" id="idEventdel" value="">
+          <input type="text" hidden name="idUserdel" id="idUserdel" value="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="eliminar()" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button>
+          <a id="btn-no-delete" href=""><button type="button" data-dismiss="modal" class="btn btn-secondary">Cancelar</button></a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <script type="text/javascript">
+  function reservar(id) {
+    $.ajax({
+      method: "POST",
+      url: "/event/add/userevent/"+$('#idEvent').val()+"/"+$('#selectModificar').val()+"/"+$('#idUser').val(),
+      success: function(result) {
+        $('#modalPlaces').modal('hide');
+        $('#amount'+$('#idUser').val()).html(result + ' plazas');
+        $("#"+id).attr("amount",result);
+      },
+      error: function(result) {
+        $("#alert-reservar").slideToggle("slow").delay(3000).slideToggle("slow");
+      }
+    });
+  }
+  function eliminar() {
+    $.ajax({
+      method: "POST",
+      url: "/event/create/list/inscribed/delete/"+$('#idEventdel').val()+"/"+$('#idUserdel').val(),
+      success: function() {
+        $('#modalRemove').modal('hide');
+        location.reload();
+      },
+      error: function() {
+        $("#alert-eliminiar").slideToggle("slow").delay(3000).slideToggle("slow");
+      }
+    });
+  }
+  function add() {
+    $.ajax({
+      method: "POST",
+      url: "/event/create/list/inscribed/add/"+$('#idEventadd').val()+"/"+$('#user_mail_places_add').val()+"/"+$('#selectModificaradd').val(),
+      success: function(result) {
+        $('#modalPlaces').modal('hide');
+        location.reload();
+      },
+      error: function(result) {
+        $("#alert-add").slideToggle("slow").delay(3000).slideToggle("slow");
+      }
+    });
+  }
+  function eliminarModal(idEvent,idUser) {
+    $('#idEventdel').val(idEvent);
+    $('#idUserdel').val(idUser);
+
+    $('#modalRemove').modal('show');
+  }
+  function editarModal(idUser,idEvent,nombre,email,plazas,reservadas) {
+    var select =document.createElement('select');
+    var option;
+    var selectLenght =plazas + reservadas;
+    select.id="selectModificar";
+    for (var i = 1; i <= selectLenght; i++) {
+      if (i>=5) {
+        break;
+      }
+      option = document.createElement('option');
+      option.value = i;
+      option.text = i;
+      if (reservadas == i) {
+        option.selected=true;
+      }
+      select.append(option);
+    }
+    $('#select-places-container').html(select);
+    $('#user_name_places').html(nombre);
+    $('#user_mail_places').html(email);
+    $('#idEvent').val(idEvent);
+    $('#idUser').val(idUser);
+
+    $('#modalPlaces').modal('show');
+  }
+  function addModal(idEvent,plazas) {
+    var select = document.createElement('select');
+    var option;
+    var selectLenght = plazas;
+    select.id="selectModificaradd";
+    for (var i = 1; i <= selectLenght; i++) {
+      if (i>=5) {
+        break;
+      }
+      option = document.createElement('option');
+      option.value = i;
+      option.text = i;
+
+      select.append(option);
+    }
+    $('#select-places-container-add').html(select);
+    $('#idEventadd').val(idEvent);
+    $('#modalAdd').modal("show");
+  }
+  </script>
+  {% endblock %}

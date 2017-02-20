@@ -17,43 +17,47 @@ class ShowController extends Controller
   {
     $user = $this->container->get("orchard_service")->getUser();
     $event = $this->container->get("event_service")->getEvent($id_event);
+    if ($user="anon.") {
+      return $this->render('EventBundle:Show:profile.html.twig', array('event' => $event , 'search' => $search));
+    }
     $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $event->getId(), 'user' => $user->getId()));
-
     return $this->render('EventBundle:Show:profile.html.twig', array('event' => $event , 'eventUser' => $eventUser , 'search' => $search));
   }
 
   // añade un participante al evento
-  public function addUserToEventAction($id_event, $amount)
+  public function addUserToEventAction($id_event, $amount, $id_user)
   {
-    $user = $this->container->get("orchard_service")->getUser();
+    if ($id_user != null) {
+      $user = $this->container->get("event_service")->getUserById($id_user);
+    }else {
+      $user = $this->container->get("orchard_service")->getUser();
+    }
+
     $event = $this->container->get("event_service")->getEvent($id_event);
     $em = $this->getDoctrine()->getManager();
     $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $event->getId(), 'user' => $user->getId()));
 
-    if (!$eventUser) {
-      $eventUser = new EventUser();
-      $eventUser->setUser($user);
-      $eventUser->setEvent($event);
-    }
+    $response=$this->container->get("event_service")->addUserToEvent($event, $user, $eventUser, $amount);
 
-    if ($amount > $eventUser->getAmount()) {
-      $amountFinal = $event->getPlaces() - ($amount - $eventUser->getAmount());
-    }else {
-      $amountFinal = $event->getPlaces() + ($eventUser->getAmount() - $amount);
-    }
-
-    $eventUser->setAmount($amount);
-    $event->setPlaces($amountFinal);
-
-    if (!$event) {
-      return new JsonResponse("ko");
-    }
-
-    $em->persist($eventUser);
-    $em->persist($event);
+    $em->persist($response[0]);
+    $em->persist($response[1]);
     $em->flush();
 
-    return new JsonResponse($amount);
+    $message = \Swift_Message::newInstance()
+    ->setContentType("text/html")
+    ->setSubject('Confirmación registro ' . $event->getTitle())
+    ->setFrom('huertOnflorida@gmail.com')
+    ->setTo($user->getEmail())
+    ->setBody(
+      $this->renderView(
+        'OrchardBundle:Suggest:confirmation_email.html.twig',
+        array('event' => $event, 'action' => true, 'user' => $user, 'amount' => $amount, 'orchard' => $event->getOrchard())
+        )
+        )
+        ;
+        $this->get('mailer')->send($message);
+
+    return new JsonResponse($response[2]);
   }
 
 }

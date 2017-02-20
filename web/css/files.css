@@ -1,0 +1,87 @@
+.cuadro-subidas{
+  border: dashed 2px #CDCDCD;
+  overflow: hidden;
+  border-radius: 1px;
+  min-height: 300px;
+
+}
+#gallery, #upload{
+  display: inline-block;
+  vertical-align: middle;
+}
+.thumbnail{
+    max-width:150px;
+    /*min-height: 370px;*/
+    /*float:left;*/
+    display:inline-table;
+    margin:15px;
+    margin-top: 0px;
+    text-align: center;
+    vertical-align: bottom;
+    overflow:hidden;
+    border-radius: 10px;
+    box-shadow:none;
+}
+.thumbnail img{
+    width:150px;
+    height: 150px;
+    border-radius: 20px;
+}
+.thumbnail input{
+  margin-top: 5px;
+  border-radius: 10px;
+  vertical-align: bottom;
+}
+.thumbnail div p{
+  width: 95%;
+  /*max-height: 50px;*/
+}
+.thumbnail span{
+  display: block;
+  float: right;
+  position: relative;
+  top: 25px;
+  margin-right:5px;
+  color: rgb(0, 0, 0);
+}
+.descripcion{
+  width: 90%;
+  max-height: 115px;
+  overflow: hidden;
+}
+.more{
+  margin: 5%;
+  margin-bottom: 0;
+  height: 50px;
+  width: 90%;
+  display: inline-block;
+  cursor:pointer;
+  display: table;
+  text-align: center;
+}
+.more p{
+  text-align:center;
+  vertical-align: middle;
+  display: table-cell;
+  margin: 0px;
+}
+.topRight{
+  float:right;
+  vertical-align: middle;
+  font-size: 150%;
+
+}
+.deleteImage{
+  position:relative;
+  top:0px;
+  left:0px;
+  cursor:pointer;
+}
+.editDes ,.edi a{
+  display: inline;
+  text-decoration: underline!important;
+  cursor: pointer;
+}
+.steps-left-innerContent{
+  overflow-y: scroll;
+}

@@ -144,8 +144,8 @@ class CreateController extends Controller
         $redirect = '22';
         break;
       case 'OrchardActivity':
-        $orchard->setStep('34');
-        $redirect = '34';
+        $orchard->setStep('33');
+        $redirect = '33';
         break;
       case 'OrchardService':
         $orchard->setStep('33');
