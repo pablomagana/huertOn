@@ -24,11 +24,11 @@
       <div class="col-xl-6 col-lg-6 col-md-12 col-xs-12 col-sm-12">
         <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12 col-sm-12">
           <div class="row">
-            <div class="col-xl-9 col-lg-9 col-md-9 col-xs-9 col-sm-9 text-xs-left text-sm-left text-lg-left text-xl-left"><h3>{{ event.title }}</h3></div>
+            <div class="col-xl-9 col-lg-9 col-md-9 col-xs-9 col-sm-9 text-xs-left text-sm-left text-lg-left text-xl-left"><a href="/event/show/profile/{{ event.id }}"><h3>{{ event.title }}</h3></a></div>
             <div class="col-xl-3 col-lg-3 col-md-3 col-xs-3 col-sm-3"><a href="/event/create/{{ event.id }}"><button id="register-button" type="button" class="btn btn-secondary" style="padding:5px 25px;">Edita</button></a></div>
           </div>
           {% if event.imageName != null %}
-          <div style="width: 100%; height: 300px; background: url({{ asset('/orchard/event/' ~ event.imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+          <a href="/event/show/profile/{{ event.id }}"><div style="width: 100%; height: 300px; background: url({{ asset('/orchard/event/' ~ event.imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div></a>
           {% endif %}
 
           <div class="row">
@@ -40,9 +40,9 @@
               <a href="/event/create/list/inscribed/{{ event.id }}"><button type="button" class="btn btn-secondary list-bt">Ver inscritos</button></a>
             </div>
           </div>
-
         </div>
       </div>
+
       {% endif %}
       {% endfor %}
     </div>
