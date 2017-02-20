@@ -24,9 +24,9 @@
           <div class="form-group">
             <select class="form-control" id="user_orchards">
               {% for orchard in app.user.orchard %}
-              {% if orchard.name != null %}
-              <option id="{{ orchard.id }}">{{ orchard.name }}</option>
-              {% endif %}
+                {% if orchard.name != null %}
+                <option id="{{ orchard.id }}">{{ orchard.name }}</option>
+                {% endif %}
               {% endfor %}
             </select>
           </div>
@@ -36,7 +36,7 @@
     </div>
 
     <div id="events-container" class="container">
-      <h1>Este huerto no tiene actividades asociadas.</h1>
+      <h1>Cargando...</h1>
     </div>
 
     <div style="text-align: center; margin-bottom:10px;" class="draft-xs fixed-buttons">
