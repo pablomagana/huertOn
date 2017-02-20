@@ -54,7 +54,7 @@
       {% if event.imageName != null %}
       <img id="profileImg" class="img-response" src="{{ asset('orchard/event/') }}{{event.imageName}}" alt="">
       {% else %}
-      <img id="profileImg" class="img-response" src="http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png" alt="">
+      <img id="profileImg" class="img-response" src="{{ asset('/img/event-default.jpg') }}" alt="">
       {% endif %}
     </div>
 
@@ -90,7 +90,7 @@
         </div>
         <div class="col-xs-10 col-sm-10">
           <strong>UBICACIÓN</strong>
-          <p>{{event.orchard.name}}</p>
+          <a href="/orchard/show/profile/{{event.orchard.id}}"><p>{{event.orchard.name}}</p></a>
         </div>
       </div>
 
