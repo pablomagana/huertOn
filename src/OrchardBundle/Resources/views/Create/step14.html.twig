@@ -126,7 +126,57 @@
             $(this).val($this.val());
         });
 
-        $('.btn-siguiente, #btn-save-exit').on('click', function() {
+        $('#btn-save-exit').on('click', function() {
+            $("#loading, #loading-text").fadeIn("slow");
+            //send images
+            var formImages = new FormData();
+            var desc = new Array();
+            for (var i = 0; i < imagenes.length; i++) {
+                desc[imagenes[i].id] = [
+                    i,
+                    $("span[id='" + imagenes[i].id + "']").parent().children().last().val()
+                ];
+                formImages.append('image-' + i, imagenes[i]);
+            }
+            formImages.append("desc", desc);
+            console.log(desc);
+            $.ajax({
+                type: "POST",
+                url: "/orchard/upload/images/upload/{{ orchard.id }}",
+                data: formImages,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(step) {
+                    console.log(step);
+                    window.location.href = '/orchard/create/steps/{{ orchard.id }}';
+                },
+                error: function(jqXHR, exception) {
+                    $("#loading, #loading-text").fadeOut("slow", function() {
+                        $("#loading-text").text("{{ 'stepBase.loading'|trans }}").fadeIn('slow');
+                    });
+                    if (jqXHR.status === 0) {
+                        alert('Not connect.\n Verify Network.');
+                    } else if (jqXHR.status == 404) {
+                        alert('Requested page not found. [404]');
+                    } else if (jqXHR.status == 500) {
+                        alert('Internal Server Error [500].');
+                    } else if (exception === 'parsererror') {
+                        alert('Requested JSON parse failed.');
+                    } else if (exception === 'timeout') {
+                        alert('Time out error.');
+                    } else if (exception === 'abort') {
+                        alert('Ajax request aborted.');
+                    } else {
+                        alert('Uncaught Error.\n' + jqXHR.responseText);
+                    }
+                    console.log('error');
+                }
+            });
+        });
+
+
+        $('.btn-siguiente').on('click', function() {
             $("#loading, #loading-text").fadeIn("slow");
             //send images
             var formImages = new FormData();

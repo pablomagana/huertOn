@@ -105,7 +105,48 @@
                     $("#loading-file").fadeOut("slow");
                 }, false);
 
-                $('.btn-siguiente,#btn-save-exit').on('click', function() {
+                $('#btn-save-exit').on('click', function() {
+
+                    var formData = new FormData();
+                    // jQuery.each(jQuery('#fileinput')[0].files, function(i, file) {   formData.append('file-'+i, file); });
+                    formData.append('fileNormas', fileNormas);
+                    $.ajax({
+                        type: 'POST',
+                        url: '/orchard/upload/files/upload/{{orchard.id}}',
+                        type: "post",
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            console.log('success :' + data);
+                            window.location.href = '/orchard/create/steps/{{ orchard.id }}';
+                        },
+                        error: function(jqXHR, exception) {
+                            if (jqXHR.status === 0) {
+                                alert('Not connect.\n Verify Network.');
+                            } else if (jqXHR.status == 404) {
+                                alert('Requested page not found. [404]');
+                            } else if (jqXHR.status == 500) {
+                                alert('Internal Server Error [500].');
+                            } else if (exception === 'parsererror') {
+                                alert('Requested JSON parse failed.');
+                            } else if (exception === 'timeout') {
+                                alert('Time out error.');
+                            } else if (exception === 'abort') {
+                                alert('Ajax request aborted.');
+                            } else {
+                                alert('Uncaught Error.\n' + jqXHR.responseText);
+                            }
+                            console.log('error');
+                        }
+                    });
+
+                    return false;
+
+                });
+
+                $('.btn-siguiente').on('click', function() {
 
                     var formData = new FormData();
                     // jQuery.each(jQuery('#fileinput')[0].files, function(i, file) {   formData.append('file-'+i, file); });
