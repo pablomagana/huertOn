@@ -14,21 +14,30 @@ class HomeController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
 
-    $repository = $this->getDoctrine()
+    $repositoryOrchard = $this->getDoctrine()
+    ->getRepository('OrchardBundle:Orchard');
+    $repositoryEvent = $this->getDoctrine()
     ->getRepository('EventBundle:Event');
 
-    $query = null;
+    $queryOrchard = null;
+    $queryEvent = null;
 
-    $query = $repository->createQueryBuilder('e')
+    $queryOrchard = $repositoryOrchard->createQueryBuilder('o')
+    ->addOrderBy('o.createdAt')
+    ->setMaxResults(3)
+    ->getQuery();
+    $orchards = $queryOrchard->getResult();
+
+    $queryEvent = $repositoryEvent->createQueryBuilder('e')
     ->innerJoin('OrchardBundle:Orchard o', 'WITH e.orchard = o.id')
-    ->where('e.startDate > :today')
+    ->where('e.startDate >= :today')
     ->setParameter('today', new \DateTime())
     ->addOrderBy('e.startDate')
     ->setMaxResults(3)
     ->getQuery();
-    $events = $query->getResult();
+    $events = $queryEvent->getResult();
 
-    return $this->render('HomeBundle:Home:index.html.twig', array('events' => $events));
+    return $this->render('HomeBundle:Home:index.html.twig', array('orchards' => $orchards, 'events' => $events));
   }
 
   public function whyAction()
