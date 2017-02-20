@@ -147,9 +147,11 @@ function checkNumImage() {
     $(".btn-siguiente").text("Ahora no");
   }
   if (imagenes.length<10) {
-    $(".more").removeAttr("hidden");
+    //$(".more").removeAttr("hidden");
+    $(".more").fadeIn(500);
   }else{
-    $(".more").attr("hidden","hidden");
+    //$(".more").attr("hidden","hidden");
+    $(".more").fadeOut(500);
   }
 }
 
@@ -176,6 +178,10 @@ function deleteFromServer(id,element) {
        $(element).parent().remove();console.log($(element).attr("id"));
        if ($('.upload').children().length<10) {
          $("#more").removeAttr("hidden");
+       }
+       if ($('.upload').children().length<1) {
+         $(".btn-siguiente").text("Ahora no");
+         $('#h1Upload').fadeOut(500);
        }
      },
      error: function(){console.log("imagen no borrada");}
