@@ -23,6 +23,7 @@ class HomeController extends Controller
     $queryEvent = null;
 
     $queryOrchard = $repositoryOrchard->createQueryBuilder('o')
+    ->where('o.published = true')
     ->addOrderBy('o.createdAt')
     ->setMaxResults(3)
     ->getQuery();
