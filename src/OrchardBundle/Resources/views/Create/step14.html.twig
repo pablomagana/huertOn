@@ -194,8 +194,11 @@
                 contentType: 'application/json',
                 url: "/orchard/upload/images/upload/{{ orchard.id }}",
                 data: formImages,
+                cache: false,
+                contentType: false,
+                processData: false,
                 success: function() {
-                    window.location.href = '/orchard/create/step/13{{ orchard.id }}';
+                    window.location.href = '/orchard/create/step/13/{{ orchard.id }}';
                 },
                 error: function(jqXHR, exception) {
                     $("#loading, #loading-text").fadeOut("slow", function() {
