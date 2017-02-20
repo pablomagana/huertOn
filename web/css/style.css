@@ -716,10 +716,6 @@ ul#next-prev > li > a > button.active {
     z-index: 0;
 }
 
-video{
-	filter: blur(4px);
-}
-
 span#title-home_search {
     color: white;
     font-size: 6vw;
