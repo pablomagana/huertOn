@@ -705,3 +705,7 @@ footer h6{
     transform: translate(-50%,-50%);
     z-index: 0;
 }
+
+video{
+	filter: blur(4px);
+}
