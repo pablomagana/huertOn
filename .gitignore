@@ -19,3 +19,4 @@ composer.lock
 composer.phar
 web/config.php
 web/orchard/*
+/app/config/parameters.yml
