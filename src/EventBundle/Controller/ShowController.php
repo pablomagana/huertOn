@@ -25,9 +25,6 @@ class ShowController extends Controller
   // añade un participante al evento
   public function addUserToEventAction($id_event, $amount, $id_user)
   {
-
-    $user = null;
-
     if ($id_user != null) {
       $user = $this->container->get("event_service")->getUserById($id_user);
     }else {
@@ -38,30 +35,12 @@ class ShowController extends Controller
     $em = $this->getDoctrine()->getManager();
     $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $event->getId(), 'user' => $user->getId()));
 
-    if (!$eventUser) {
-      $eventUser = new EventUser();
-      $eventUser->setUser($user);
-      $eventUser->setEvent($event);
-    }
+    $response=$this->container->get("event_service")->addUserToEvent($event, $user, $eventUser, $amount);
 
-    if ($amount > $eventUser->getAmount()) {
-      $amountFinal = $event->getPlaces() - ($amount - $eventUser->getAmount());
-    }else {
-      $amountFinal = $event->getPlaces() + ($eventUser->getAmount() - $amount);
-    }
-
-    $eventUser->setAmount($amount);
-    $event->setPlaces($amountFinal);
-
-    if (!$event) {
-      return new JsonResponse("ko");
-    }
-
-    $em->persist($eventUser);
-    $em->persist($event);
+    $em->persist($response[0]);
+    $em->persist($response[1]);
     $em->flush();
-
-    return new JsonResponse($amount);
+    return new JsonResponse($response[2]);
   }
 
 }

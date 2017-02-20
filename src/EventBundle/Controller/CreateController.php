@@ -79,12 +79,33 @@ class CreateController extends Controller
     public function deleteInscribedAction($id_event, $id_user)
     {
       $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $id_event, 'user' => $id_user));
+      $event = $this->container->get("event_service")->getEvent($id_event);
+
+      $event->setPlaces($eventUser->getAmount() + $event->getPlaces());
 
       $em = $this->getDoctrine()->getManager();
       $em->remove($eventUser);
       $em->flush();
+
+      $em->persist($event);
+      $em->flush();
       return new JsonResponse("ok");
       //return $this->redirect($this->generateUrl('event_create_inscribed', array('id_event' => $id_event)));
+    }
+    public function addInscribedAction($id_event, $mail_user, $amount)
+    {
+      $user=$this->getDoctrine()->getRepository("UserBundle:User")->findOneByEmail($mail_user);
+
+      $event = $this->container->get("event_service")->getEvent($id_event);
+      $em = $this->getDoctrine()->getManager();
+      $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $event->getId(), 'user' => $user->getId()));
+
+      $response=$this->container->get("event_service")->addUserToEvent($event, $user, $eventUser, $amount);
+
+      $em->persist($response[0]);
+      $em->persist($response[1]);
+      $em->flush();
+      return new JsonResponse($response[2]);
     }
 
 }
