@@ -15,7 +15,6 @@
         <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
         <button type="submit" name="button" class="btn btn-link"><<   Actividades {{search}}</button>
       </form>
-
       {% endif %}
     </div>
     <div class="col-12 col-sm-12 col-md-5 col-lg-6 col-xl-6" class=".align-middle">
@@ -90,7 +89,7 @@
         </div>
         <div class="col-xs-10 col-sm-10">
           <strong>UBICACIÓN</strong>
-          <p>{{event.orchard.name}}</p>
+          <p><a href="/orchard/show/profile/{{event.orchard.id}}">{{event.orchard.name}}</a></p>
         </div>
       </div>
 
@@ -192,7 +191,11 @@
             {% else %}
               {% set amount = eventUser.amount %}
             {% endif %}
-            {% for num in 1.. event.places + amount %}
+            {% set total = event.places + amount %}
+            {% if total >4 %}
+            {% set total = 4 %}
+            {% endif %}
+            {% for num in 1.. total %}
             <option value="{{num}}">{{num}}</option>
             {% endfor %}
           </select>

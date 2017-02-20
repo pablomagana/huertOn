@@ -23,8 +23,8 @@
             <td>{{ eventUser.user.username }}</td>
             <td>{{ eventUser.user.email }}</td>
             <td id="amount{{ eventUser.user.id }}">{{ eventUser.amount}} plazas</td>
-            <td><button type="button" class="btn btn-danger" onclick="eliminarModal('{{ event.id }}','{{ eventUser.user.id }}')">Eliminar</button></td>
-            <td><button type="button" class="btn btn-primary" onclick="editarModal('{{ eventUser.user.id }}','{{ event.id }}','{{ eventUser.user.username }}','{{ eventUser.user.email }}',{{ event.places }},{{ eventUser.amount }} );"> Editar </button></td>
+            <td><button type="button" class="btn btn-danger" onclick="eliminarModal('{{ event.id }}','{{ eventUser.user.id }}') ">Eliminar</button></td>
+            <td><button id="{{eventUser.user.id}}" type="button" class="btn btn-primary" onclick="editarModal('{{ eventUser.user.id }}','{{ event.id }}','{{ eventUser.user.username }}','{{ eventUser.user.email }}',{{ event.places }}, $(this).attr('amount') );" amount="{{eventUser.amount}}"> Editar </button></td>
           </tr>
         {% endfor %}
 
@@ -49,7 +49,7 @@
             <div id="select-places-container"></div>
             <br>
             <br>
-            <button id="reservar" type="button" onclick="reservar()" class="btn btn-success" style="width:100%;">Enviar</button>
+            <button id="reservar" type="button" onclick="reservar($('#idUser').val())" class="btn btn-success" style="width:100%;">Enviar</button>
           </div>
         </div>
       </div>
@@ -106,13 +106,14 @@
   </div><!-- /.modal -->
 
   <script type="text/javascript">
-  function reservar() {
+  function reservar(id) {
     $.ajax({
       method: "POST",
       url: "/event/add/userevent/"+$('#idEvent').val()+"/"+$('#selectModificar').val()+"/"+$('#idUser').val(),
       success: function(result) {
         $('#modalPlaces').modal('hide');
         $('#amount'+$('#idUser').val()).html(result + ' plazas');
+        $("#"+id).attr("amount",result);
       },
       error: function(result) {
         alert('Error al reservar plazas. Intentalo otra vez');
