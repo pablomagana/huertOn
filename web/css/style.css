@@ -706,9 +706,9 @@ footer h6{
     z-index: 0;
 }
 
-.active {
-	background-color: transparent !important;
-	color: #373a3c !important;
+ul#next-prev > li > a.active {
+	background-color: #45ad30;
+	color: #fff !important;
 }
 
 video{
