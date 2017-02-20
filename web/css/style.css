@@ -705,7 +705,12 @@ footer h6{
     transform: translate(-50%,-50%);
     z-index: 0;
 }
+
 .active {
 	background-color: transparent !important;
 	color: #373a3c !important;
+}
+
+video{
+	filter: blur(4px);
 }
