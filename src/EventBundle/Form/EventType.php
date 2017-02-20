@@ -28,29 +28,35 @@ class EventType extends AbstractType
     {
         $builder
           ->add('title',TextType::class,["label" => "NOMBRE DE LA ACTIVIDAD", 'attr' => [
-          'class' => 'form-control', 'maxlength' => 80]])
+            'required' => true,
+            'class' => 'form-control',
+            'maxlength' => 80]])
           ->add('startDate', DateType::class,
               ['widget' => 'single_text','format' => 'yyyy-MM-dd',
               'attr' => [
+              'required' => true,
               'class' => 'form-control',
               'data-provide' => 'datepicker',
               'data-date-format' => 'yyy-mm-dd']])
           ->add('startTime', null, ['widget' => 'single_text',
           'attr' => [
+          'required' => true,
           'class' => 'form-control']])
           ->add('endTime', null, ['widget' => 'single_text',
           'attr' => [
+            'required' => true,
           'class' => 'form-control']])
           ->add('endDate', DateType::class,
               ['widget' => 'single_text','format' => 'yyyy-MM-dd',
               'attr' => [
+                'required' => true,
               'class' => 'form-control',
               'data-provide' => 'datepicker',
               'data-date-format' => 'yyy-mm-dd']])
-          ->add('places', IntegerType::class, ["label" => "Nº DE PLAZAS", 'attr' => ['style' => 'width: 100px', 'min' => 1, 'class' => 'form-control']])
-          ->add('description',TextareaType::class,["label" => "DESCRIPCIÓN", 'attr' => ['style' => 'height: 150px',  'maxlength'=> "3500", 'class' => 'form-control']])
-          ->add('price',MoneyType::class,["label" => "PRECIO","attr" => ['style' => 'width: 100px', "value" => 0, 'class' => 'form-control']])
-          ->add('showPlaces',null,["label" => "Muestra el numero de plazas restantes", 'required' => false, 'attr' => [
+          ->add('places', IntegerType::class, ["label" => "Nº DE PLAZAS", 'attr' => ['required' => true, 'style' => 'width: 100px', 'min' => 1, 'class' => 'form-control']])
+          ->add('description',TextareaType::class,["label" => "DESCRIPCIÓN", 'attr' => ['required' => true, 'style' => 'height: 150px',  'maxlength'=> "3500", 'class' => 'form-control']])
+          ->add('price',MoneyType::class,["label" => "PRECIO","attr" => ['required' => true, 'style' => 'width: 100px', "value" => 0, 'class' => 'form-control']])
+          ->add('showPlaces',null,["label" => "Muestra el numero de plazas restantes", 'required' => false, 'attr' => ['required' => true,
           'class' => 'custom-control-input']])
           ->add('images', VichImageType::class, [
             'attr' => ['id' => 'imageinput','hidden' => 'hidden'],

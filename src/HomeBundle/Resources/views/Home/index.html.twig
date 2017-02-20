@@ -34,7 +34,7 @@
           <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
         </div>
         {% else %}
-        <div class="find-result" style="background: url(http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png);">
+        <div class="find-result" style="background: url({{ asset('/img/event-default.jpg') }});">
           <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
         </div>
         {% endif %}
