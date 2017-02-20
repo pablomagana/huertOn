@@ -4,9 +4,13 @@ home_homepage:
     requirements:
         _locale: en|es|ca
 
-home_faq:
-    path:     /faq
-    defaults: { _controller: HomeBundle:Home:faq }
+home_why:
+    path:     /why/{action}
+    defaults: { _controller: HomeBundle:Home:why }
+
+home_how:
+    path:     /how/{action}
+    defaults: { _controller: HomeBundle:Home:how }
 
 home_find_orchard:
     path:     /find/orchard

@@ -714,3 +714,11 @@ footer h6{
 video{
 	filter: blur(4px);
 }
+
+.how {
+	margin-left: 160px;
+}
+
+.how-content {
+	margin-left: 16px;
+}

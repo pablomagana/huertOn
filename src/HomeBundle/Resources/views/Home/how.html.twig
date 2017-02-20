@@ -2,68 +2,93 @@
 
 {% block body %}
 
-<div class="fullscreen background parallax video-parallax" style="background-attachment: fixed;" data-img-width="1600" data-img-height="1064" data-diff="100">
-  <video loop muted="true" autoplay>
-    <source src="{{ asset('/video/home.mp4') }}" type="video/mp4" />
-  </video>
-
+<div class="fullscreen background parallax" style="background-image: url('https://source.unsplash.com/rHbob_bEsSs/1600x900&quot'); background-attachment: fixed;" data-img-width="1600" data-img-height="1064" data-diff="100">
   <div class="content-a">
     <div class="content-b">
-      <span id="title-home_search" style="color:#0b0146">{{ 'home.title'|trans }}</span><br><br><br><br>
-      <form id="form-home_search" action="/find/orchard" method="post">
-        <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
-        <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
-        <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
-      </form>
+      <span id="title-home_search">SÓLO 10 MIN PARA DAR A CONOCER TU HUERTO</span>
     </div>
   </div>
 </div>
 
-<br>
 <div class="container">
-  <h1>EVENTOS</h1>
-  <hr class="hr-orchard-profile">
-  <br>
-  {% for event in events %}
-  <a href="/event/show/profile/{{ event.id }}">
-    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
-      <!-- Imagen -->
-      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-        {% if event.imageName is not empty %}
-        <div class="find-result" style="background: url({{ asset('/orchard/event/' ~ event.imageName) }});">
-          <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
+  <div class="spacing"></div>
+  <h3>3 PASOS PARA SUBIR TU HUERTO</h3>
+</div>
+
+  <div class="spacing"></div>
+
+<div class="container-fluid how">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+          <div class="numberCircle"><span>1</span></div>
         </div>
-        {% else %}
-        <div class="find-result" style="background: url(http://tratamientosparatodo.hol.es/wp-content/themes/creativemag/images/default.png);">
-          <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
+        <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8 how-content">
+          <h6>Lo básico que necesita saber el futuro hortelano (dirección, datos, contacto…)</h6>
+          <br>
+          <small>Consejo: Sube alguno foto para que vean tu proyecto real y cercano.</small>
         </div>
-        {% endif %}
       </div>
-
-      <!-- Texto -->
-      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-        <p><font style="font-size:20px">{{ event.title }}</font>
-        </a>
-        <br>
-        <strong>{% if event.price == 0 %}Gratis{% else %}{{ event.price }}€{% endif %}</strong>&nbsp;&nbsp;
-        <a href="/orchard/show/profile/{{ event.orchard.id }}">
-
-          <i>{{ event.orchard.name }}</i>
-        </p>
-      </div>
-
-      <input type="text" class="geometry" value="{{ event.orchard.geometry }}" hidden="hidden">
     </div>
+    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+      <img width="auto" height="200" src="{{ asset('/img/how1.png') }}" alt="">
+    </div>
+  </div>
+  <div class="spacing"></div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+          <div class="numberCircle"><span>2</span></div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8 how-content">
+          <h6>Cómo pueden participar y qué tiene que saber antes</h6>
+          <br>
+          <small>Consejo: Saber qué formas de participar tenéis, las normas o cómo inscribirte es indispensable para acercarse a tu proyecto. </small>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+      <img width="auto" height="200" src="{{ asset('/img/how2.png') }}" alt="">
+    </div>
+  </div>
+  <div class="spacing"></div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+      <div class="row">
+        <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+          <div class="numberCircle"><span>3</span></div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8 how-content">
+          <h6>Un poco más sobre tu proyecto</h6>
+          <br>
+          <small>Consejo: Cuenta cómo y por qué empezasteis. Estos detalles pueden conectar mucho con las personas</small>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+      <img width="auto" height="200" src="{{ asset('/img/how3.png') }}" alt="">
+    </div>
+  </div>
+  </div>
+  <div class="spacing"></div>
+  <div class="container">
+    <h3>¡Y NO TE OLVIDES DE LAS ACTIVIDADES!</h3>
+  </div>
+  <div class="spacing"></div>
 
-  {% endfor %}
-</div>
-
-<div class="container">
-  <div class="spacing "></div>
-  <a href="/find/event"><button id="register-button" type="button" class="btn btn-outline-primary">Ver más</button></a>
-  <div class="spacing "></div>
-
-</div>
+  <div class="jumbotron" style="background-color: #ECEEEF; margin-bottom: 0px;">
+    <div class="container">
+      <div class="row-centered">
+        <a href="http://localhost:8000/orchard/create/steps">
+          <div class="col-centered">
+          <button class="btn save-button btn-siguiente">Publica tu huerto</button>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
 <footer class="footer">
   <div class="container-fluid">
@@ -83,36 +108,34 @@
           </div>
         </div>
       </div>
-      <div class="footer-desktop">
-        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
-          <h6>Por qué</h6>
-          <hr>
-          <a href="/why/publish"><p>Por qué publicar tu huerto</p></a>
-          <a href="/why/participate"><p>Por qué participar en un huerto</p></a>
-        </div>
-        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
-          <h6>Cómo funciona</h6>
-          <hr>
-          <a href="/how/orchard"><p>Cómo subir mi huerto</p></a>
-          <a href="/how/event"><p>Cómo subo una actividad</p></a>
-        </div>
-        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
-          <h6>Contacto</h6>
-          <hr>
-          <a href="#"><p>Escríbenos</p></a>
-          <a href="#"><p>Prensa</p></a>
-          <i class="fa fa-facebook-square" aria-hidden="true"></i>
-          <i class="fa fa-twitter-square" aria-hidden="true"></i>
-        </div>
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <h6>Por qué</h6>
+        <hr>
+        <a href="#"><p>Por qué publicar tu huerto</p></a>
+        <a href="#"><p>Por qué participar en un huerto</p></a>
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <h6>Cómo funciona</h6>
+        <hr>
+        <a href="#"><p>Cómo subir mi huerto</p></a>
+        <a href="#"><p>Cómo subo una actividad</p></a>
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <h6>Contacto</h6>
+        <hr>
+        <a href="#"><p>Escríbenos</p></a>
+        <a href="#"><p>Prensa</p></a>
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+        <i class="fa fa-twitter-square" aria-hidden="true"></i>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 foot-down footer-desktop">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 foot-down">
         <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
           <img src="{{ asset('/img/logo.png') }}" height="30" class="d-inline-block align-top" alt="" style="margin-top:10px;">
         </div>
         <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 foot-down-txt">
-          <p style="color: black;">Research & service design by YADEMÁS</p>
+          <p>Research & service design by YADEMÁS</p>
         </div>
         <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 foot-down-txt">
           <p><a href="#">Condiciones privacidad y cookies</a></p>

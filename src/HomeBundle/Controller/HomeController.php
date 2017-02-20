@@ -31,9 +31,14 @@ class HomeController extends Controller
     return $this->render('HomeBundle:Home:index.html.twig', array('events' => $events));
   }
 
-  public function faqAction()
+  public function whyAction($action)
   {
-    return $this->render('HomeBundle:Home:faq.html.twig');
+    return $this->render('HomeBundle:Home:why.html.twig', array('action' => $action));
+  }
+
+  public function howAction($action)
+  {
+    return $this->render('HomeBundle:Home:how.html.twig', array('action' => $action));
   }
 
 }
