@@ -150,7 +150,7 @@ background-color: #07012D;
 	padding-bottom: 0;
 }
 
-.steps-left-content, .steps-left-innerContent	{
+.steps-left-content	{
 	margin-top: 50px;
 }
 
@@ -169,7 +169,6 @@ background-color: #07012D;
 
 /*scroll left*/
 .steps-left-12 {
-	padding: 50px;
 	padding-bottom: 0;
 }
 

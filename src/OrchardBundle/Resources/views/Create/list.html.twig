@@ -39,6 +39,10 @@
       <a href="/orchard/show/profile/{{ orchard.id }}">
         <div style="width: 100%; height: 300px; background: url({{ asset('/orchard/image/' ~ orchard.images[0].nameImage) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
       </a>
+      {% else %}
+      <a href="/orchard/show/profile/{{ orchard.id }}">
+        <div style="width: 100%; height: 300px; background: url({{ asset('/img/orchard-default.jpg') }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+      </a>
       {% endif %}
 
       <div class="row">

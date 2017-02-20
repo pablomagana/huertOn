@@ -4,12 +4,21 @@
 <!--SLIDER-->
 <div class="row" id="orchard-img">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+
+    {% if orchard.images is empty %}
+    <div class="fullscreen background parallax mySlides" style="padding:250px 0; background-image: url('{{ asset('/img/orchard-default.jpg') }}'); background-attachment: fixed;"  data-diff="100">
+
+    </div>
+
+    {% else %}
+
     {% for orchardImage in orchard.images %}
     <div class="fullscreen background parallax mySlides" style="padding:250px 0; background-image: url('{{ asset('/orchard/image/' ~ orchardImage.nameImage) }}'); background-attachment: fixed;"  data-diff="100">
       {% if app.user == orchard.user %}
       {% if orchardImage.favourite == true %}
       <span style="display: none;">Desmarcada como favorita</span>
       <i data-toogle="tooltip" data-placement="top" title="Desmarcar como favorita" id="fav-{{ orchardImage.id }}" class="image-fav fa fa-heart fa-lg" aria-hidden="true"></i>
+
       <script type="text/javascript">
       $('#fav-{{ orchardImage.id }}').on('click', function() {
         $.ajax({
@@ -22,6 +31,7 @@
         });
       });
       </script>
+
       {% else %}
       <span style="display: none;">Marcada como favorita</span>
       <i data-toogle="tooltip" data-placement="top" title="Marcar como favorita" id="fav-{{ orchardImage.id }}" class="image-fav fa fa-heart-o fa-lg" aria-hidden="true"></i>
@@ -37,12 +47,17 @@
         });
       });
       </script>
-    {% endif %}
-    {% endif %}
-  </div>
+      {% endif %}
+      {% endif %}
+    </div>
     {% endfor %}
     <a class="w3-btn-floating w3-display-left" onclick="plusDivs(-1)" style="margin-left:15px;">&#10094;</a>
     <a class="w3-btn-floating w3-display-right" onclick="plusDivs(1)" style="margin-right:15px;">&#10095;</a>
+    
+    {% endif %}
+
+
+
   </div>
 </div>
 
@@ -181,8 +196,6 @@
 
   <div class="container">
     <div class="row row-centered" id="how-to-join">
-      <h5>{{ 'orchard.profile.join'|trans }}</h5>
-      <hr class="hr-orchard-profile">
       <!-- MODALIDADES -->
       {% if orchard.orchardParticipate is empty %}
       {% else %}
@@ -204,12 +217,15 @@
       <!-- NORMAS DE HUERTO -->
       {% if orchard.ruleFile is empty %}
       {% else %}
+
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
         <div class="border">
           <h6>{{ 'orchard.profile.important'|trans }}</h6>
           <br>
           <br>
-          {{ 'orchard.profile.rules-1'|trans }} <a target="_blank" href="{{ asset('/orchard/file/' ~ orchard.ruleFile.nameFile) }}">{{ 'orchard.profile.rules-2'|trans }}</a> {{ 'orchard.profile.rules-3'|trans }}
+          {{ 'orchard.profile.rules-1'|trans }}
+          <a target="_blank" href="{{ asset('/orchard/file/' ~ orchard.ruleFile.nameFile) }}">{{ 'orchard.profile.rules-2'|trans }}</a>
+          {{ 'orchard.profile.rules-3'|trans }}
         </div>
       </div>
       <div class="spacing"></div>
@@ -220,6 +236,8 @@
       {% if orchard.orchardInscriptionStep is empty %}
       {% else %}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered" style="margin-top:40px">
+        <h5>{{ 'orchard.profile.join'|trans }}</h5>
+        <hr class="hr-orchard-profile">
         <h6>{{ 'orchard.profile.inscribe'|trans }}</h6>
         <br>
         <ol>
