@@ -1,0 +1,138 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+  <div style="margin-bottom: -20px; background-color:#f2f2f2;">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 container">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+          <h1>Actividades que has creado</h1>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" style="padding:20px;">
+          <a href="/event/create"><button type="button" class="btn save-button" style="padding:10px 60px;">Añade una actividad</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacing"></div>
+
+    <div class="container-fluid">
+      <div class="row row-centered">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 col-centered">
+          {% if app.user.orchard != null and app.user.orchard is not empty %}
+          <div class="form-group">
+            <select class="form-control" id="user_orchards">
+              {% for orchard in app.user.orchard %}
+                {% if orchard.name != null %}
+                <option id="{{ orchard.id }}">{{ orchard.name }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div id="events-container" class="container">
+      <h1>Cargando...</h1>
+    </div>
+
+    <div style="text-align: center; margin-bottom:10px;" class="draft-xs fixed-buttons">
+      <a href="/event/create"><button type="button" class="btn btn-success btn-draft-xs">Añadir una nueva actividad.</button></a>
+    </div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+
+  if ($('#user_orchards').val()) {
+
+    $.ajax({
+      type: 'POST',
+      url: '/event/create/orchard/' + $( "#user_orchards option:selected" ).attr('id'),
+      success: function(data) {
+        console.log('success');
+        $('#events-container').html(data);
+      },
+      error: function(jqXHR, exception) {
+        if (jqXHR.status === 0) {
+          alert('Not connect.\n Verify Network.');
+        } else if (jqXHR.status == 404) {
+          alert('Requested page not found. [404]');
+        } else if (jqXHR.status == 500) {
+          alert('Internal Server Error [500].');
+        } else if (exception === 'parsererror') {
+          alert('Requested JSON parse failed.');
+        } else if (exception === 'timeout') {
+          alert('Time out error.');
+        } else if (exception === 'abort') {
+          alert('Ajax request aborted.');
+        } else {
+          alert('Uncaught Error.\n' + jqXHR.responseText);
+        }
+        console.log('error');
+      }
+    });
+
+  }
+
+});
+
+$('#user_orchards').on('change', function() {
+  $.ajax({
+    type: 'POST',
+    url: '/event/create/orchard/' + $( "#user_orchards option:selected" ).attr('id'),
+    success: function(data) {
+      console.log('success');
+      $('#events-container').html(data);
+    },
+    error: function(jqXHR, exception) {
+      if (jqXHR.status === 0) {
+        alert('Not connect.\n Verify Network.');
+      } else if (jqXHR.status == 404) {
+        alert('Requested page not found. [404]');
+      } else if (jqXHR.status == 500) {
+        alert('Internal Server Error [500].');
+      } else if (exception === 'parsererror') {
+        alert('Requested JSON parse failed.');
+      } else if (exception === 'timeout') {
+        alert('Time out error.');
+      } else if (exception === 'abort') {
+        alert('Ajax request aborted.');
+      } else {
+        alert('Uncaught Error.\n' + jqXHR.responseText);
+      }
+      console.log('error');
+    }
+  });
+});
+</script>
+
+<div class="modal fade" id="deleteModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{ 'orchard.list.sure'|trans }}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{ 'orchard.list.sure-2'|trans }}<p></p>
+      </div>
+      <div class="modal-footer">
+        <a id="btn-delete-modal" href=""><button type="button" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
+        <a id="btn-unpublish-modal" href=""><button id="btn-unpublish" type="button" class="btn btn-secondary ">{{ 'orchard.list.yesUnpublish'|trans }}</button></a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% endblock %}

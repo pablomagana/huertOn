@@ -250,7 +250,7 @@ class Orchard
      /**
       * @var \Doctrine\Common\Collections\Collection|OrchardInscriptionStep[]
       * One Orchard has Many OrchardInscriptionSteps.
-      * @ORM\OneToMany(targetEntity="OrchardInscriptionStep", mappedBy="orchard", fetch="EAGER")
+      * @ORM\OneToMany(targetEntity="OrchardInscriptionStep", mappedBy="orchard", fetch="EAGER", cascade="remove")
       */
      protected $orchardInscriptionStep;
 
@@ -290,7 +290,7 @@ class Orchard
         /**
          * @var \Doctrine\Common\Collections\Collection|EventBundle\Entity\Event[]
          * One Orchard has Many Events.
-         * @ORM\OneToMany(targetEntity="EventBundle\Entity\Event", mappedBy="orchard", fetch="EAGER")
+         * @ORM\OneToMany(targetEntity="EventBundle\Entity\Event", mappedBy="orchard", fetch="EAGER", cascade="remove")
          */
         protected $events;
 

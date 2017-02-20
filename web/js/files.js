@@ -74,10 +74,10 @@ function drop(ev) {
 
 function checkNumFile() {
   if(fileNormas!=null){
-    $("#btn-siguiente").text("Siguiente");
+    $(".btn-siguiente").text("Siguiente");
     $(".more").fadeOut(500);
   }else {
-    $("#btn-siguiente").text("Ahora no");
+    $(".btn-siguiente").text("Ahora no");
     $(".more").fadeIn(500);
   }
 }
@@ -99,6 +99,7 @@ function deleteFromServer(id,element) {
          $(element).parent().remove();console.log($(element).attr("id"));}
          $(".more").removeAttr('hidden');
          $("#h1Upload").attr("hidden","hidden");
+         $(".btn-siguiente").text("Ahora no");
        },
      error: function(){console.log("imagen no borrada");}
    });

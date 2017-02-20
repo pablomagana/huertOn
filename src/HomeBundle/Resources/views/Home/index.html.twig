@@ -1,0 +1,278 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+<div class="fullscreen background parallax video-parallax" style="background-attachment: fixed;" data-img-width="1600" data-img-height="1064" data-diff="100">
+  <video loop muted="true" autoplay>
+    <source src="{{ asset('/video/home.mp4') }}" type="video/mp4" />
+  </video>
+
+  <div class="content-a">
+    <div class="content-b">
+      <span id="title-home_search">{{ 'home.title'|trans }}</span>
+      <h3 style="color: #fff;">La lista de huertos urbanos y actividades más completa de España</h3><br><br><br><br>
+      <form id="form-home_search" action="/find/orchard" method="post">
+        <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
+        <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
+        <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron" style="background-color: #ECEEEF; margin-bottom: 0px;">
+<div class="container">
+  <h1>HUERTOS</h1>
+  <small>Últimos huertos subidos</small>
+  <div class="spacing"></div>
+  {% for orchard in orchards %}
+
+  <a href="/orchard/show/profile/{{ orchard.id }}">
+    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+      <!-- Imagen -->
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        {% if orchard.images is not empty %}
+        {% set hasFavourite = false %}
+        {% for orchardImage in orchard.images %}
+            {% if orchardImage.favourite == true %}
+              <div class="find-result" style="background: url({{ asset('/orchard/image/' ~ orchardImage.nameImage) }}); background-position: center;"></div>
+              {% set hasFavourite = true %}
+            {% endif %}
+        {% endfor %}
+        {% if hasFavourite == false %}
+        <div class="find-result" style="background: url({{ asset('/orchard/image/' ~ orchard.images[0].nameImage) }}); background-position: center;"></div>
+        {% endif %}
+        {% else %}
+        <div class="find-result" style="background: url({{ asset('/img/orchard-default.jpg') }});"></div>
+        {% endif %}
+      </div>
+
+      <!-- Texto -->
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <p><font style="font-size:20px">{{ orchard.name }}</font> <br><i>{{ orchard.address }}</i></p>
+      </div>
+
+      <input type="text" class="geometry" value="{{ orchard.geometry }}" hidden="hidden">
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+<div class="container">
+  <div class="spacing "></div>
+  <a href="/find/orchard"><button id="register-button" type="button" class="btn btn-outline-primary">Ver más</button></a>
+  <div class="spacing "></div>
+
+</div>
+
+</div>
+
+<div class="container">
+  <h1>EVENTOS</h1>
+  <small>Agroecología cómo consumo responsable, gatronomia, etc.</small>
+  <div class="spacing"></div>
+  {% for event in events %}
+  <a href="/event/show/profile/{{ event.id }}">
+    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+      <!-- Imagen -->
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        {% if event.imageName is not empty %}
+        <div class="find-result" style="background: url({{ asset('/orchard/event/' ~ event.imageName) }});">
+          <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
+        </div>
+        {% else %}
+        <div class="find-result" style="background: url({{ asset('/img/event-default.jpg') }});">
+          <div style="height:50px; width:50px; background-color:lightgrey;"><strong>{{ event.startDate|date("d") }}</strong><br><strong>{{ event.startDate|date("F")|slice(0, 3) }}</strong></div>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Texto -->
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <p><font style="font-size:20px">{{ event.title }}</font>
+        </a>
+        <br>
+        <strong>{% if event.price == 0 %}Gratis{% else %}{{ event.price }}€{% endif %}</strong>&nbsp;&nbsp;
+        <a href="/orchard/show/profile/{{ event.orchard.id }}">
+
+          <i>{{ event.orchard.name }}</i>
+        </p>
+      </div>
+
+      <input type="text" class="geometry" value="{{ event.orchard.geometry }}" hidden="hidden">
+    </div>
+
+  {% endfor %}
+</div>
+
+<div class="container">
+  <div class="spacing "></div>
+  <a href="/find/event"><button id="register-button" type="button" class="btn btn-outline-primary">Ver más</button></a>
+  <div class="spacing "></div>
+
+</div>
+
+<footer class="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <h6>Idioma</h6>
+        <hr>
+        <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ 'language'|trans }}
+          </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="/es">{{ 'language.es'|trans }}</a>
+            <a class="dropdown-item" href="/en">{{ 'language.en'|trans }}</a>
+            <a class="dropdown-item" href="/ca">{{ 'language.ca'|trans }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-desktop">
+        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+          <h6>Por qué</h6>
+          <hr>
+          <a href="/why"><p>Por qué publicar tu huerto</p></a>
+          <a href="/why#publish"><p>Por qué participar en un huerto</p></a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+          <h6>Cómo funciona</h6>
+          <hr>
+          <a href="/how"><p>Cómo subir mi huerto</p></a>
+          <a href="/how#event"><p>Cómo subo una actividad</p></a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+          <h6>Contacto</h6>
+          <hr>
+          <a href="#"><p>Escríbenos</p></a>
+          <a href="#"><p>Prensa</p></a>
+          <i class="fa fa-facebook-square" aria-hidden="true"></i>
+          <i class="fa fa-twitter-square" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 foot-down footer-desktop">
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+          <img src="{{ asset('/img/logo.png') }}" height="30" class="d-inline-block align-top" alt="" style="margin-top:10px;">
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 foot-down-txt">
+          <p style="color: black;">Research & service design by YADEMÁS</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 foot-down-txt">
+          <p><a href="#">Condiciones privacidad y cookies</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript">
+
+/* detect touch */
+if("ontouchstart" in window){
+  document.documentElement.className = document.documentElement.className + " touch";
+}
+if(!$("html").hasClass("touch")){
+  /* background fix */
+  $(".parallax").css("background-attachment", "fixed");
+}
+
+/* fix vertical when not overflow
+call fullscreenFix() if .fullscreen content changes */
+function fullscreenFix(){
+  var h = $('body').height();
+  // set .fullscreen height
+  $(".content-b").each(function(i){
+    if($(this).innerHeight() > h){ $(this).closest(".fullscreen").addClass("overflow");
+  }
+});
+}
+$(window).resize(fullscreenFix);
+fullscreenFix();
+
+/* resize background images */
+function backgroundResize(){
+  var windowH = $(window).height();
+  $(".background").each(function(i){
+    var path = $(this);
+    // variables
+    var contW = path.width();
+    var contH = path.height();
+    var imgW = path.attr("data-img-width");
+    var imgH = path.attr("data-img-height");
+    var ratio = imgW / imgH;
+    // overflowing difference
+    var diff = parseFloat(path.attr("data-diff"));
+    diff = diff ? diff : 0;
+    // remaining height to have fullscreen image only on parallax
+    var remainingH = 0;
+    if(path.hasClass("parallax") && !$("html").hasClass("touch")){
+      var maxH = contH > windowH ? contH : windowH;
+      remainingH = windowH - contH;
+    }
+    // set img values depending on cont
+    imgH = contH + remainingH + diff;
+    imgW = imgH * ratio;
+    // fix when too large
+    if(contW > imgW){
+      imgW = contW;
+      imgH = imgW / ratio;
+    }
+    //
+    path.data("resized-imgW", imgW);
+    path.data("resized-imgH", imgH);
+    path.css("background-size", imgW + "px " + imgH + "px");
+  });
+}
+$(window).resize(backgroundResize);
+$(window).focus(backgroundResize);
+backgroundResize();
+
+/* set parallax background-position */
+function parallaxPosition(e){
+  var heightWindow = $(window).height();
+  var topWindow = $(window).scrollTop();
+  var bottomWindow = topWindow + heightWindow;
+  var currentWindow = (topWindow + bottomWindow) / 2;
+  $(".parallax").each(function(i){
+    var path = $(this);
+    var height = path.height();
+    var top = path.offset().top;
+    var bottom = top + height;
+    // only when in range
+    if(bottomWindow > top && topWindow < bottom){
+      var imgW = path.data("resized-imgW");
+      var imgH = path.data("resized-imgH");
+      // min when image touch top of window
+      var min = 0;
+      // max when image touch bottom of window
+      var max = - imgH + heightWindow;
+      // overflow changes parallax
+      var overflowH = height < heightWindow ? imgH - height : imgH - heightWindow; // fix height on overflow
+      top = top - overflowH;
+      bottom = bottom + overflowH;
+      // value with linear interpolation
+      var value = min + (max - min) * (currentWindow - top) / (bottom - top);
+      // set background-position
+      var orizontalPosition = path.attr("data-oriz-pos");
+      orizontalPosition = orizontalPosition ? orizontalPosition : "50%";
+      $(this).css("background-position", orizontalPosition + " " + value + "px");
+    }
+  });
+}
+if(!$("html").hasClass("touch")){
+  $(window).resize(parallaxPosition);
+  //$(window).focus(parallaxPosition);
+  $(window).scroll(parallaxPosition);
+  parallaxPosition();
+}
+
+</script>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

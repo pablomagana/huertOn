@@ -2,6 +2,25 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" datatype="plaintext" original="file.ext">
         <body>
+          <!-- IDIOMA -->
+          <trans-unit id="1462">
+              <source>language</source>
+              <target>Català</target>
+          </trans-unit>
+          <trans-unit id="1463">
+              <source>language.es</source>
+              <target>Castellà</target>
+          </trans-unit>
+          <trans-unit id="1464">
+              <source>language.en</source>
+              <target>Anglés</target>
+          </trans-unit>
+          <trans-unit id="1465">
+              <source>language.ca</source>
+              <target>Català</target>
+          </trans-unit>
+          <!-- Fin IDIOMA -->
+
           <!-- Base -->
             <!-- base.html -->
               <trans-unit id="1">

@@ -1,0 +1,30 @@
+<html>
+<body>
+  {% if action == true %}
+
+  Hola {{ user.username }}, el resumen de tu reserva en huertOn es el siguiente:
+<ul>
+  <li><strong>Actividad:</strong>{{ event.title }}</li>
+  <li><strong>Número de plazas reservadas:</strong>{{ amount }}</li>
+  <li><strong>Ubicación:</strong><a href="http://huert-on.com/orchard/show/profile/{{ orchard.id }}">{{ orchard.name }}</a></li>
+  <li><strong>Fecha:</strong>{{ event.startDate|date('d/m/Y') }}</li>
+  <li><strong>Hora:</strong>{{ event.startTime|date('h:m') }}</li>
+</ul>
+
+  Puedes ver más informacion de la actividad, accede a:
+  http://www.huert-on.com/event/show/profile/{{ event.id }}
+
+  Te esperamos!
+
+  Gracias, equipo huertOn.
+
+  {% else %}
+
+  Hola {{ user.username }}, {{ event.orchard.user.username }}, gestor del huerto {{ event.orchard.name }},
+  le ha dado de baja en la actividad " {{ event.title }} ", que se iba a realizar el dia {{ event.startDate|date('d/m/Y') }} a las {{ event.startTime|date('h:m') }}.<br>
+  Disculpe las molestias.
+
+  {% endif %}
+
+</body>
+</html>

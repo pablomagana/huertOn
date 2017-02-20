@@ -72,6 +72,14 @@ class Image
     private $event;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="favourite", type="boolean", nullable=true)
+     *
+     */
+     protected $favourite;
+
+    /**
      * Get id
      *
      * @return int
@@ -222,5 +230,29 @@ class Image
     public function getEvent()
     {
         return $this->event;
+    }
+
+    /**
+     * Set favourite
+     *
+     * @param boolean $favourite
+     *
+     * @return Image
+     */
+    public function setFavourite($favourite)
+    {
+        $this->favourite = $favourite;
+
+        return $this;
+    }
+
+    /**
+     * Get favourite
+     *
+     * @return boolean
+     */
+    public function getFavourite()
+    {
+        return $this->favourite;
     }
 }

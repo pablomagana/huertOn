@@ -4,6 +4,14 @@ home_homepage:
     requirements:
         _locale: en|es|ca
 
+home_why:
+    path:     /why
+    defaults: { _controller: HomeBundle:Home:why }
+
+home_how:
+    path:     /how
+    defaults: { _controller: HomeBundle:Home:how }
+
 home_find_orchard:
     path:     /find/orchard
     defaults: { _controller: HomeBundle:Search:findOrchard }

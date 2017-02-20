@@ -1,0 +1,234 @@
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('css/event.css')}}">
+{% endblock %}
+
+{% block body %}
+
+<div class="jumbotron" style="background-color:#eceeef;">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+      {% if search is defined and search != null %}
+      <form id="form-home_search" action="/find/event" method="post">
+        <input id="input-home_search" name="input-home_search" type="text" hidden="hidden" value="{{ search }}" placeholder="{{ 'home.find.placeholder'|trans }}"></button>
+        <input id="user_latitude" name="user_latitude" type="text" hidden="hidden">
+        <input id="user_longitude" name="user_longitude" type="text" hidden="hidden">
+        <button type="submit" name="button" class="btn btn-link"><<   Actividades {{search}}</button>
+      </form>
+      {% endif %}
+    </div>
+    <div class="col-12 col-sm-12 col-md-5 col-lg-6 col-xl-6" class=".align-middle">
+      <h1 id="title">{{event.title}}</h1>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3" style=" padding:20px;">
+      <div class="btn-event-desktop">
+        {% if eventUser is defined %}
+          <p class="reservadas">Tienes reservadas {{eventUser.amount}} entradas</p>
+        {% else %}
+          <p class="reservadas"></p>
+        {% endif %}
+        {% if app.user %}
+          <div class="btn-event-desktop">
+
+            {% if event.places > 0 or eventUser is defined  %}
+              <button type="button" class="btn save-button unete" onclick="mostrarUnete()" name="button">Únete</button>
+            {% else %}
+              <!-- <p>no quedan plazas para el evento</p> -->
+              <button type="button"  class="btn save-button unete" name="button" data-toggle="tooltip" data-placement="top" title="Ups has llegado tarde, no quedan plazas">Únete</button>
+            {% endif %}
+          </div>
+        {% else %}
+              <a href="/register"><button type="button" class="btn save-button btn-event-desktop unete" name="button">Únete</button></a>
+              </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" style="height:auto;">
+  <div class="row">
+
+    <!--imagen-->
+    <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 offset-xl-2 offset-lg-2 offset-md-2">
+      {% if event.imageName != null %}
+      <img id="profileImg" class="img-response" src="{{ asset('orchard/event/') }}{{event.imageName}}" alt="">
+      {% else %}
+      <img id="profileImg" class="img-response" src="{{ asset('/img/event-default.jpg') }}" alt="">
+      {% endif %}
+    </div>
+
+
+    <!--texto-->
+    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+      <!--FECHA Y HORA-->
+      <div class="row event-spacing">
+        <div class="col-xs-2 col-sm-2">
+          <i class="fa fa-calendar fa-3x" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-10 col-sm-10">
+          <strong>FECHA Y HORA</strong>
+          {% if event.startDate|date('d/m/Y') == event.endDate|date('d/m/Y') %}
+          <br>
+          {{event.startDate|date('d/m/Y')}}
+          <br>
+          {{event.startTime|date('h:m')}} - {{event.endTime|date('h:m')}}
+          {% else %}
+          <br><strong>De :</strong> {{event.startDate|date('d/m/Y')}} - {{event.startTime|date('h:m')}}
+          <br><strong>A :</strong> {{event.endDate|date('d/m/Y')}} - {{event.endTime|date('h:m')}}
+          {% endif %}
+        </div>
+      </div>
+
+      <hr class="hr-mobile">
+
+
+      <!--UBICACION-->
+      <div class="row event-spacing">
+        <div class="col-xs-2 col-sm-2">
+          <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-10 col-sm-10">
+          <strong>UBICACIÓN</strong>
+          <a href="/orchard/show/profile/{{event.orchard.id}}"><p>{{event.orchard.name}}</p></a>
+        </div>
+      </div>
+
+      <hr class="hr-mobile">
+
+      <!--PRECIO-->
+      <div class="row event-spacing">
+        <div class="col-xs-2 col-sm-2">
+          <i class="fa fa-money fa-3x" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-10 col-sm-10">
+          <strong>PRECIO</strong>
+          {% if event.price == 0 %}
+          <p>Gratis</p>
+          {% else %}
+          <p>{{event.price}} €</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <hr class="hr-mobile">
+
+      <!--PLAZAS-->
+      {% if event.showPlaces == true %}
+      <div class="row event-spacing">
+        <div class="col-xs-2 col-sm-2">
+          <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
+        </div>
+        <div class="col-xs-10 col-sm-10">
+          <strong>PLAZAS</strong>
+          <p>{{event.places}}</p>
+        </div>
+      </div>
+    {% endif %}
+
+
+    </div>
+  </div>
+</div>
+
+<div class="spacing"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 offset-xl-2 offset-lg-2 offset-md-2">
+      <strong>DESCRIPCIÓN</strong>
+      <p>{{event.description}}</p>
+    </div>
+  </div>
+</div>
+
+</div>
+<div class="container">
+  <div class="row">
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+      {% if app.user %}
+        <div class="btn-event-mobile">
+          {% if eventUser is defined %}
+            <p class="reservadas">Tienes reservadas {{eventUser.amount}} entradas</p>
+          {% else %}
+            <p class="reservadas"></p>
+          {% endif %}
+
+          {% if event.places > 0 or eventUser is defined  %}
+            <button type="button" class="btn save-button unete" onclick="mostrarUnete()" name="button">Únete</button>
+          {% else %}
+            <!-- <p>no quedan plazas para el evento</p> -->
+            <button type="button"  class="btn save-button unete" name="button" data-toggle="tooltip" data-placement="top" title="Ups has llegado tarde, no quedan plazas">Únete</button>
+          {% endif %}
+        </div>
+      {% else %}
+            <a href="/register"><button type="button" class="btn save-button btn-event-mobile unete" name="button">Únete</button></a>
+            </div>
+      {% endif %}
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+      <p>¿ Tienes dudas ?  <a href="{{ path('orchard_show_profile', { 'id_orchard': event.orchard.id }) }}#contact" class="contact">Contacta</a></p>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="modalPlaces">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-right:40px;margin-top:20px;">
+        <span style="font-size:30pt;" aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body" style="margin:60px;">
+        <h1>{{event.title}}</h1>
+        <p>{{event.endDate|date('d-m-y')}}  {{event.endTime|date('h:m')}}</p>
+        <br>
+        <div class="form-group">
+          <label for="places">Número de Plazas reservadas</label><br>
+          <select class="form-control" id="places">
+            {% if eventUser is not defined %}
+              {% set amount = 0 %}
+            {% else %}
+              {% set amount = eventUser.amount %}
+            {% endif %}
+            {% set total = event.places + amount %}
+            {% if total >4 %}
+            {% set total = 4 %}
+            {% endif %}
+            {% for num in 1.. total %}
+              <option value="{{num}}">{{num}}</option>
+            {% endfor %}
+          </select>
+          <br>
+          <br>
+          <button id="reservar" type="button" class="btn save-button" style="width:100%;">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+})
+$('#places option[value="{{amount}}"]').prop('selected', true);
+function mostrarUnete() {
+  $('#modalPlaces').modal('show');
+}
+
+$('#reservar').on("click",function() {
+  $.ajax({
+    method: "POST",
+    url: "/event/add/userevent/{{event.id}}/"+$('#places').val(),
+    success: function(result) {
+      // alert("reservadas "+result+" plazas");
+      $('.reservadas').html("Tienes reservadas " + result+" entradas");
+      $('#modalPlaces').modal('hide');
+    },
+    error: function(result) {
+      alert('Error al reservar plazas. Intentalo otra vez');
+    }
+  })
+});
+</script>
+{% endblock %}

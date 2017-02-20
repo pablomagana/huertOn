@@ -58,20 +58,21 @@ function createImageElement(file){
 
   var img = document.createElement("img");
   var del = document.createElement("span");
-  var contador = document.createElement("span");
-  var des = document.createElement("textarea");
-  //var name = document.createElement("p");
 
+  // ******COMENTADA DESCRIPCIÓN POR FALTA DE TIEMPO.******
+  // var contador = document.createElement("span");
+  // var des = document.createElement("textarea");
+  //var name = document.createElement("p");
   //name.append(document.createTextNode(file.name));
   //name.setAttribute("title",file.name);
+  // contador.append('100');
 
-  contador.append('100');
-
-  des.setAttribute("type","text");
-  des.setAttribute("placeholder","Describe la imagene");
-  des.classList.add("descripcion");
-  des.setAttribute("maxlength","100");
-  des.setAttribute("onkeyup","textAreaAdjust(this)");
+  // ******COMENTADA DESCRIPCIÓN POR FALTA DE TIEMPO.******
+  // des.setAttribute("type","text");
+  // des.setAttribute("placeholder","Describe la imagene");
+  // des.classList.add("descripcion");
+  // des.setAttribute("maxlength","100");
+  // des.setAttribute("onkeyup","textAreaAdjust(this)");
 
   img.file = file;
 
@@ -91,8 +92,9 @@ function createImageElement(file){
   thumb.appendChild(del);
   thumb.appendChild(img);
   //thumb.appendChild(name);
-  thumb.appendChild(contador);
-  thumb.appendChild(des);
+  // ******COMENTADA DESCRIPCIÓN POR FALTA DE TIEMPO.******
+  // thumb.appendChild(contador);
+  // thumb.appendChild(des);
 //añade la imagen al principio del div, antes que todas las imagenes
   gallery.prepend(thumb);
 
@@ -140,14 +142,16 @@ function textAreaAdjust(o) {
 }
 function checkNumImage() {
   if(imagenes.length>0){
-    $("#btn-siguiente").text("Siguiente");
+    $(".btn-siguiente").text("Siguiente");
   }else {
-    $("#btn-siguiente").text("Ahora no");
+    $(".btn-siguiente").text("Ahora no");
   }
   if (imagenes.length<10) {
-    $(".more").removeAttr("hidden");
+    //$(".more").removeAttr("hidden");
+    $(".more").fadeIn(500);
   }else{
-    $(".more").attr("hidden","hidden");
+    //$(".more").attr("hidden","hidden");
+    $(".more").fadeOut(500);
   }
 }
 
@@ -174,6 +178,10 @@ function deleteFromServer(id,element) {
        $(element).parent().remove();console.log($(element).attr("id"));
        if ($('.upload').children().length<10) {
          $("#more").removeAttr("hidden");
+       }
+       if ($('.upload').children().length<1) {
+         $(".btn-siguiente").text("Ahora no");
+         $('#h1Upload').fadeOut(500);
        }
      },
      error: function(){console.log("imagen no borrada");}

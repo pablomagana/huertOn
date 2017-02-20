@@ -1,55 +1,77 @@
 {% extends '::step_base.html.twig' %}
-
+{% block currentStep %}
+    1
+    <span class="step-title">
+        : Empieza con lo esencial
+    </span>
+{% endblock %}
 {% block body %}
 
-<div class="row step-1">
-  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
-    <form>
-      <div class="form-group">
-        <label class="label-control" for="Name" data-toggle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}">{{ 'orchard.step11.title'|trans }}</label>
-        <span style="display:none;color:red">{{ 'orchard.step11.required'|trans }}</span>
-        <input type="text" class="form-control required" id="Name" value="{{ orchard.name }}" placeholder="{{ 'orchard.step11.title-2'|trans }}">
-      </div>
-      <div class="form-group">
-        <label for="form-address" data-toggle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}">{{ 'orchard.step11.where'|trans }}<small id="fileHelp" class="form-text text-muted">
-          <span class="label-control" style="display:none;color:red">{{ 'orchard.step11.required'|trans }}</span>
-          <input type="text" class="form-control required" id="Address" value="{{ orchard.address }}" placeholder="{{ 'orchard.step11.where-2'|trans }}">
-          <i>{{ 'orchard.step11.marker'|trans }}.</i></small></label>
+    <div class="row steps">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-left">
+            <h3>Empieza con lo esencial</h3>
+            <form class="steps-left-content">
+                <div class="form-group steps-left-innerContent">
+                    <label class="label-control" for="Name" data-toggle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}">{{ 'orchard.step11.title'|trans }}</label>
+                    <span style="display:none;color:red">{{ 'orchard.step11.required'|trans }}</span>
+                    <input type="text" class="form-control required" id="Name" value="{{ orchard.name }}" placeholder="{{ 'orchard.step11.title-2'|trans }}">
+                </div>
+                <div class="form-group steps-left-innerContent">
+                    <label for="form-address" data-toggle="tooltip" data-placement="right" title="{{ 'orchard.step11.required'|trans }}">{{ 'orchard.step11.where'|trans }}
+                        <small id="fileHelp" class="form-text text-muted">
+                            <span class="label-control" style="display:none;color:red">{{ 'orchard.step11.required'|trans }}</span>
+                            <input type="text" class="form-control required" id="Address" value="{{ orchard.address }}" placeholder="{{ 'orchard.step11.where-2'|trans }}">
+                            <i>{{ 'orchard.step11.marker'|trans }}</i>
+                        </small>
+                    </label>
 
-          <input type="text" id="Town" value="{{ orchard.town }}" hidden="hidden">
-          <input type="text" id="Street" value="{{ orchard.street }}" hidden="hidden">
-          <input type="text" id="Number" value="{{ orchard.number }}" hidden="hidden">
-          <input type="text" id="Zipcode" value="{{ orchard.zipcode }}" hidden="hidden">
-          <input type="text" id="Geometry" value="{{ orchard.geometry }}" hidden="hidden">
-          <input type="text" id="Latitude" value="{{ orchard.latitude }}" hidden="hidden">
-          <input type="text" id="Longitude" value="{{ orchard.longitude }}" hidden="hidden">
-          <input type="text" id="Step" hidden="hidden" value="12">
+                    <input type="text" id="Town" value="{{ orchard.town }}" hidden="hidden">
+                    <input type="text" id="Street" value="{{ orchard.street }}" hidden="hidden">
+                    <input type="text" id="Number" value="{{ orchard.number }}" hidden="hidden">
+                    <input type="text" id="Zipcode" value="{{ orchard.zipcode }}" hidden="hidden">
+                    <input type="text" id="Geometry" value="{{ orchard.geometry }}" hidden="hidden">
+                    <input type="text" id="Latitude" value="{{ orchard.latitude }}" hidden="hidden">
+                    <input type="text" id="Longitude" value="{{ orchard.longitude }}" hidden="hidden">
+                    <input type="text" id="Step" hidden="hidden" value="12">
+
+                </div>
+            </form>
+
+            <!-- Buttons desktop -->
+            <div class="buttons">
+                <button type="submit" name="button" class="btn btn-outline-primary delete-button btn-atras">{{ 'orchard.step11.back'|trans }}</button>
+                <button type="reset" name="button" class="btn save-button btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
+            </div>
+
+            <!-- Buttons mobile -->
+            <div class="fixed-buttons">
+                <button type="button" class="btn btn-outline-primary delete-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-atras">{{ 'orchard.step11.back'|trans }}</button>
+                <button type="submit" class="btn save-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
+            </div>
 
         </div>
-      </form>
 
-      <div class="fixed-buttons">
-  			<button id="btn-atras" type="button" class="btn btn-secondary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.back'|trans }}</button>
-  			<button id="btn-siguiente" type="submit" class="btn btn-primary col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ 'orchard.step11.next'|trans }}</button>
-  		</div>
+        <!--pantalla de la derecha -->
+        <div class="map col-xs-12 col-sm-12 col-md-6 col-lg-6" style="height: 88vh">
+            <div id="map" class="map"></div>
+        </div>
 
     </div>
 
-    <div class="map col-xs-12 col-sm-12 col-md-7 col-lg-7">
-      <div id="map" class="map"></div>
-    </div>
+    <script type="text/javascript">
+        $('#progressbar').val(localStorage.getItem('lastProgress')).animate({
+            'value': 10 + '%',
+            'aria-valuenow': 10
+        }, {
+            duration: 400,
+            easing: 'linear'
+        });
+    </script>
 
-</div>
+    <script src="{{ asset('/js/map.js') }}"></script>
 
-<script type="text/javascript">
-  $('#progressbar').val(localStorage.getItem('lastProgress')).animate({'value': 25 + '%','aria-valuenow': 25}, {duration: 400, easing: 'linear'});
-</script>
+    <script src="{{ asset('/js/autocomplete.js') }}"></script>
 
-<script src="{{ asset('/js/map.js') }}"></script>
-
-<script src="{{ asset('/js/autocomplete.js') }}"></script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoEnPxI5c67EcNsgznNOqhUn7Vz2RL2Xg&signed_in=true&libraries=places&callback=initAutocomplete"
-async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh_D07OvXgnQRlcMt343Ychz7rdELNs_8&signed_in=true&libraries=places&callback=initAutocomplete" async defer></script>
 
 {% endblock %}

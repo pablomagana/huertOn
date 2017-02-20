@@ -41,56 +41,37 @@
   {% endblock %}
   <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
-<body>
+<body style="margin:0 !important;">
   <!-- Image and text -->
   <nav class="navbar navbar-light bg-faded">
     <a class="navbar-brand" href="/orchard/create/list">
       <img src="{{ asset('/img/logo.png')}}" height="30" class="d-inline-block align-top" alt="">
     </a>
     <ul id="btn-save-exit" class="nav navbar-nav float-xs-right float-sm-right float-md-right float-lg-right">
-      <li class="nav-item">
-        <div id="loading" style="display: none;" class="loading"></div>
+      <li class="nav-item text-muted text-step">
+        Paso {% block currentStep %}{% endblock %}
       </li>
       <li class="nav-item">
-        <span id="loading-text" style="display: none;" class="navbar-text">
+        <div id="loading" style="display: none; float: left; margin: 10px" class="loading"></div>
+        <span id="loading-text" style="display: none; padding-top:10px;" class="navbar-text">
           {{ 'stepBase.loading'|trans }}
         </span>
       </li>
       {% if orchard.step >= 14 %}
       <li class="nav-item">
-        <a class="nav-link" href="#">{{ 'stepBase.saveExit'|trans }}</a>
+        <a href="#"><button id="register-button" type="button" class="btn btn-outline-primary">{{ 'stepBase.saveExit'|trans }}</button></a>
       </li>
       {% endif %}
     </ul>
   </nav>
 
-  <progress id="progressbar" class="progress" max="100" aria-describedby="example-caption-2"></progress>
+  <progress id="progressbar" class="progress progress-huerton" max="100" aria-describedby="example-caption-2"></progress>
 
   <div class="container-fluid">
 
     {% block body %}{% endblock %}
 
   </div>
-
-  <footer id="footer">
-    <div class="text text-muted-footer">
-      Copyright © 2017 huertOn. All rights reserved.
-      <div id="dropdown-lang">
-        <div class="dropup show">
-          <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Idioma
-          </a>
-
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a id="dropdown-es" class="dropdown-item" href="/es">ES</a>
-            <a id="dropdown-en" class="dropdown-item" href="/en">EN</a>
-            <a id="dropdown-ca" class="dropdown-item" href="/ca">CA</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </footer>
 
   <div class="modal fade" id="myModal">
   	<div class="modal-dialog" role="document">
@@ -114,7 +95,7 @@
   <script type="text/javascript">
 
   if($('.required').length === 0) {
-    $("#btn-siguiente").html('Ahora no');
+    $(".btn-siguiente").html('Ahora no');
   }
 
   window.onbeforeunload = function() {
@@ -142,7 +123,7 @@
 
   <script type="text/javascript">
   //FUNCION BOTON SIGUIENTE
-  $('#btn-siguiente').on('click', function() {
+  $('.btn-siguiente').on('click', function() {
 
     if(validateForm()) {
       var form =  {};
@@ -184,7 +165,7 @@
   });
 
   //FUNCION BOTON ATRAS
-  $('#btn-atras').on('click', function() {
+  $('.btn-atras').on('click', function() {
     var form =  {};
     initSave(form);
 

@@ -3,14 +3,12 @@
 {% block body %}
 
 <div class="row steps">
-  <div class="col-xs-12 col-md-5 col-lg-5 steps-left">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-left">
     {% if app.user != null %}
     <h1 class="display-4">¡{{ 'orchard.steps.title'|trans }} {{ app.user.username }}!</h1>
     {% endif %}
-    <h6>{{ 'orchard.steps.title-2'|trans }}</h6>
-
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
+      <div class="col-xs-12 col-md-12 col-lg-12">
         <h6>{{ 'orchard.steps.step'|trans }} 1</h6>
         {% if orchard.step is defined and orchard.step >= 21 %}<!--todos los pasos del 1 completados-->
         <i class="fa fa-check fa-2x" aria-hidden="true"></i>
@@ -18,18 +16,18 @@
         <h5>{{ 'orchard.steps.sub-1'|trans }}</h5>
         {% if orchard.step is defined %}
         {% if orchard.step >= 15 %}
-        <a href="/orchard/create/step/11/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">{{ 'orchard.steps.btn-change'|trans }}</button></a>
+        <a href="/orchard/create/step/11/{{ orchard.id }}"><button type="button" class="btn btn-link btn-steps">{{ 'orchard.steps.btn-change'|trans }}</button></a>
         {% elseif orchard.step == 11 %}
-        <a href="/orchard/create/step/11/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">{{ 'orchard.steps.btn-start'|trans }}</button></a>
+        <a href="/orchard/create/step/11/{{ orchard.id }}"><button type="button" class="btn save-button btn-steps">{{ 'orchard.steps.btn-start'|trans }}</button></a>
         {% else %}
-        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">{{ 'orchard.steps.btn-continue'|trans }}</button></a>
+        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn save-button btn-steps">{{ 'orchard.steps.btn-continue'|trans }}</button></a>
         {% endif %}
         {% endif %}
       </div>
     </div>
-
+<hr>
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
+      <div class="col-xs-12 col-md-12 col-lg-12">
         <h6>{{ 'orchard.steps.step'|trans }}  2</h6>
         {% if orchard.step is defined and orchard.step >= 31 %}<!--todos los pasos del 2 completados-->
         <i class="fa fa-check fa-2x" aria-hidden="true"></i>
@@ -37,18 +35,18 @@
         <h5 class="stepNone" id="paso2">{{ 'orchard.steps.sub-2'|trans }}</h5>
         {% if orchard.step is defined and orchard.step >= 21 %}
         {% if orchard.step >= 31 %}
-        <a href="/orchard/create/step/21/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">{{ 'orchard.steps.btn-change'|trans }}</button></a>
+        <a href="/orchard/create/step/21/{{ orchard.id }}"><button type="button" class="btn btn-link btn-steps">{{ 'orchard.steps.btn-change'|trans }}</button></a>
         {% elseif orchard.step == 21 %}
-        <a href="/orchard/create/step/21/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">{{ 'orchard.steps.btn-start'|trans }}</button></a>
+        <a href="/orchard/create/step/21/{{ orchard.id }}"><button type="button" class="btn save-button btn-steps">{{ 'orchard.steps.btn-start'|trans }}</button></a>
         {% else %}
-        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">{{ 'orchard.steps.btn-continue'|trans }}</button></a>
+        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn save-button btn-steps">{{ 'orchard.steps.btn-continue'|trans }}</button></a>
         {% endif %}
         {% endif %}
       </div>
     </div>
-
+<hr>
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
+      <div class="col-xs-12 col-md-12 col-lg-12">
         <h6>{{ 'orchard.steps.step'|trans }} 3</h6>
         {% if orchard.step is defined and orchard.step >= 34 %}<!--todos los pasos del 3 completados-->
         <i class="fa fa-check fa-2x" aria-hidden="true"></i>
@@ -56,25 +54,28 @@
         <h5 class="stepNone" id="paso3">{{ 'orchard.steps.sub-3'|trans }}</h5>
         {% if orchard.step is defined and orchard.step >= 31 %}
         {% if orchard.step >= 34 %}
-        <a href="/orchard/create/step/31/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">{{ 'orchard.steps.btn-change'|trans }}</button></a>
+        <a href="/orchard/create/step/31/{{ orchard.id }}"><button type="button" class="btn btn-link
+           btn-steps">{{ 'orchard.steps.btn-change'|trans }}</button></a>
         {% elseif orchard.step == 31 %}
-        <a href="/orchard/create/step/31/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">{{ 'orchard.steps.btn-start'|trans }}</button></a>
+        <a href="/orchard/create/step/31/{{ orchard.id }}"><button type="button" class="btn save-button btn-steps">{{ 'orchard.steps.btn-start'|trans }}</button></a>
         {% else %}
-        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn btn-primary btn-steps">{{ 'orchard.steps.btn-continue'|trans }}</button></a>
+        <a href="/orchard/create/step/{{ orchard.step }}/{{ orchard.id }}"><button type="button" class="btn save-button btn-steps">{{ 'orchard.steps.btn-continue'|trans }}</button></a>
         {% endif %}
         {% endif %}
       </div>
     </div>
-    {% if orchard.step >= 14 %}
+<hr>
+    <!-- {% if orchard.step >= 14 %}
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-lg-12 steps-left">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#orchardPreviewModal">{{ 'orchard.steps.btn-preview'|trans }}</button>
+      <div class="col-xs-12 col-md-12 col-lg-12">
+        <button type="button" class="btn save-button" data-toggle="modal" data-target="#orchardPreviewModal">Mira cómo ha quedado</button>
       </div>
     </div>
-    {% endif %}
+  {% endif %} -->
   </div>
 
-  <div class="steps-right col-md-7 col-lg-7">
+  <!--pantalla de la derecha -->
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
     <div class="steps-right-text">
       <h2 class="display-3">{{ 'orchard.steps.title-right'|trans }}</h2>
       <h1 class="display-4">{{ 'orchard.steps.title-right-2'|trans }}</h1>
@@ -122,12 +123,65 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'orchard.steps.preview-btn'|trans }}</button>
-        <a href="/orchard/create/publish/{{ orchard.id }}/true"><button type="button" class="btn btn-primary">{{ 'orchard.steps.preview-btn-1'|trans }}</button></a>
+        <a href="/orchard/create/publish/{{ orchard.id }}/true"><button type="button" class="btn save-button">{{ 'orchard.steps.preview-btn-1'|trans }}</button></a>
       </div>
     </div>
   </div>
 </div>
+<footer class="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <h6>Idioma</h6>
+        <hr>
+        <div class="dropdown show">
+          <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ 'language'|trans }}
+          </a>
 
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="/es">{{ 'language.es'|trans }}</a>
+            <a class="dropdown-item" href="/en">{{ 'language.en'|trans }}</a>
+            <a class="dropdown-item" href="/ca">{{ 'language.ca'|trans }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <h6>Por qué</h6>
+        <hr>
+        <a href="#"><p>Por qué publicar tu huerto</p></a>
+        <a href="#"><p>Por qué participar en un huerto</p></a>
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <h6>Cómo funciona</h6>
+        <hr>
+        <a href="#"><p>Cómo subir mi huerto</p></a>
+        <a href="#"><p>Cómo subo una actividad</p></a>
+      </div>
+      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <h6>Contacto</h6>
+        <hr>
+        <a href="#"><p>Escríbenos</p></a>
+        <a href="#"><p>Prensa</p></a>
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+        <i class="fa fa-twitter-square" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 foot-down">
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+          <img src="{{ asset('/img/logo.png') }}" height="30" class="d-inline-block align-top" alt="" style="margin-top:10px;">
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 foot-down-txt">
+          <p>Research & service design by YADEMÁS</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 foot-down-txt">
+          <p><a href="#">Condiciones privacidad y cookies</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 {% endblock %}
 
 {% block javascripts %}
