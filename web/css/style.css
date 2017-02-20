@@ -684,6 +684,8 @@ footer h6{
     border:4px solid;
 
     font-size:22px;
+
+		color: #07012d;
 }
 
 .numberCircle span {
@@ -696,6 +698,8 @@ footer h6{
 
     margin-left:8px;
     margin-right:8px;
+
+		color: #07012d;
 }
 
 .video-parallax {
