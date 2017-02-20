@@ -42,6 +42,9 @@
 	.spacing-mobile{
 		margin: 50px 0;
 	}
+	.inscribed-desktop {
+		display: none;
+	}
 }
 
 
@@ -663,6 +666,7 @@ footer h6{
   border-color: #0b0146!important;
   color: #0b0146!important;
 	padding:5px 25px;
+	background-color: #fff;
 }
 
 .list-bt-delete{
@@ -718,6 +722,11 @@ footer h6{
 ul#next-prev > li > a.active {
 	background-color: #45ad30;
 	color: #fff !important;
+}
+
+ul#next-prev > li > a > button.active {
+	background-color: transparent;
+	color: #000 !important;
 }
 
 video{
