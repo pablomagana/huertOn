@@ -62,7 +62,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=500)
+     * @ORM\Column(name="description", type="string", length=3500)
      */
     private $description;
 

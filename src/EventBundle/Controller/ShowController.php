@@ -40,6 +40,21 @@ class ShowController extends Controller
     $em->persist($response[0]);
     $em->persist($response[1]);
     $em->flush();
+
+    $message = \Swift_Message::newInstance()
+    ->setContentType("text/html")
+    ->setSubject('Confirmación registro ' . $event->getTitle())
+    ->setFrom('huertOnflorida@gmail.com')
+    ->setTo($user->getEmail())
+    ->setBody(
+      $this->renderView(
+        'OrchardBundle:Suggest:confirmation_email.html.twig',
+        array('event' => $event, 'action' => true, 'user' => $user, 'amount' => $amount, 'orchard' => $event->getOrchard())
+        )
+        )
+        ;
+        $this->get('mailer')->send($message);
+
     return new JsonResponse($response[2]);
   }
 

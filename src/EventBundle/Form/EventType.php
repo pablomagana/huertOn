@@ -48,7 +48,7 @@ class EventType extends AbstractType
               'data-provide' => 'datepicker',
               'data-date-format' => 'yyy-mm-dd']])
           ->add('places', IntegerType::class, ["label" => "Nº DE PLAZAS", 'attr' => ['style' => 'width: 100px', 'min' => 1, 'class' => 'form-control']])
-          ->add('description',TextareaType::class,["label" => "DESCRIPCIÓN", 'attr' => ['style' => 'height: 150px',  'maxlength'=> "500", 'class' => 'form-control']])
+          ->add('description',TextareaType::class,["label" => "DESCRIPCIÓN", 'attr' => ['style' => 'height: 150px',  'maxlength'=> "3500", 'class' => 'form-control']])
           ->add('price',MoneyType::class,["label" => "PRECIO","attr" => ['style' => 'width: 100px', "value" => 0, 'class' => 'form-control']])
           ->add('showPlaces',null,["label" => "Muestra el numero de plazas restantes", 'required' => false, 'attr' => [
           'class' => 'custom-control-input']])
