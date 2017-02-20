@@ -22,15 +22,15 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 col-xl-3" style=" padding:20px;">
       <div class="btn-event-desktop">
-        {% if eventUser != null %}
-        <p class="reservadas">Tienes reservadas {{eventUser.amount}} entradas</p>
+        {% if eventUser is defined %}
+          <p class="reservadas">Tienes reservadas {{eventUser.amount}} entradas</p>
         {% else %}
-        <p class="reservadas"></p>
+          <p class="reservadas"></p>
         {% endif %}
         {% if app.user %}
           <div class="btn-event-desktop">
 
-            {% if event.places > 0 or eventUser != null  %}
+            {% if event.places > 0 or eventUser is defined  %}
               <button type="button" class="btn save-button unete" onclick="mostrarUnete()" name="button">Únete</button>
             {% else %}
               <!-- <p>no quedan plazas para el evento</p> -->
@@ -147,13 +147,13 @@
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
       {% if app.user %}
         <div class="btn-event-mobile">
-          {% if eventUser != null %}
+          {% if eventUser is defined %}
             <p class="reservadas">Tienes reservadas {{eventUser.amount}} entradas</p>
           {% else %}
             <p class="reservadas"></p>
           {% endif %}
 
-          {% if event.places > 0 or eventUser != null  %}
+          {% if event.places > 0 or eventUser is defined  %}
             <button type="button" class="btn save-button unete" onclick="mostrarUnete()" name="button">Únete</button>
           {% else %}
             <!-- <p>no quedan plazas para el evento</p> -->
@@ -186,7 +186,7 @@
         <div class="form-group">
           <label for="places">Número de Plazas reservadas</label><br>
           <select class="form-control" id="places">
-            {% if eventUser == null %}
+            {% if eventUser is not defined %}
               {% set amount = 0 %}
             {% else %}
               {% set amount = eventUser.amount %}
@@ -196,7 +196,7 @@
             {% set total = 4 %}
             {% endif %}
             {% for num in 1.. total %}
-            <option value="{{num}}">{{num}}</option>
+              <option value="{{num}}">{{num}}</option>
             {% endfor %}
           </select>
           <br>

@@ -17,8 +17,10 @@ class ShowController extends Controller
   {
     $user = $this->container->get("orchard_service")->getUser();
     $event = $this->container->get("event_service")->getEvent($id_event);
+    if ($user="anon.") {
+      return $this->render('EventBundle:Show:profile.html.twig', array('event' => $event , 'search' => $search));
+    }
     $eventUser = $this->container->get("event_service")->getEventUser(array('event' => $event->getId(), 'user' => $user->getId()));
-
     return $this->render('EventBundle:Show:profile.html.twig', array('event' => $event , 'eventUser' => $eventUser , 'search' => $search));
   }
 
