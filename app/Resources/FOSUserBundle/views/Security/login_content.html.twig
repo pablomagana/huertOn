@@ -23,14 +23,16 @@
     <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'user.register.type.email'|trans }}" required="required" />
 
     <input class="form-control" type="password" id="password" name="_password" required="required" placeholder="{{ 'user.register.type.passwd'|trans }}"/>
-
+<br>
+    <button type="submit" id="_submit" class="btn list-bt" name="_submit">{{ 'user.login.login'|trans }}</button>
+<br>
     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
     <label for="remember_me">{{ 'user.login.remember'|trans }}</label>
-<br>
-    <button type="submit" id="_submit" class="btn btn-primary" name="_submit">{{ 'user.login.login'|trans }}</button>
 
+<br><br>
     <p>{{ 'user.login.create'|trans }} <a href="/register">{{ 'user.login.register'|trans }}</a>
 <br>
+
       <a href="/resetting/request">{{ 'user.login.forget'|trans }}</a>
     </form>
 

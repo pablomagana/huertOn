@@ -18,11 +18,11 @@
         <div class="custom-control-description legal-desktop">  <a target="_blank" href="{{ asset('html/terms-conditions.html') }}">{{ 'user.register.conditions'|trans }}</a> y la <a target="_blank" href="{{ asset('html/privacy-policy.html') }}">{{ 'user.register.privacy'|trans }}</a>.</div>
         <div class="custom-control-description legal-mobile">{{ 'user.register.read'|trans }} <u data-toggle="modal" data-target="#modalCondicionesUso">{{ 'user.register.conditions'|trans }}</u> y la <u data-toggle="modal" data-target="#modalPrivacidad">{{ 'user.register.privacy'|trans }}</u>.</div>
       </label>
-
+<br>
       <div>
-        <button type="submit" class="btn btn-primary" name="button">{{ 'user.register.submit'|trans }}</button>
+        <button type="submit" class="btn list-bt" name="button">{{ 'user.register.submit'|trans }}</button>
       </div>
-
+<br>
     {{ form_end(form) }}
 
     <a href="/login">{{ 'user.register.acount'|trans }}</a>
