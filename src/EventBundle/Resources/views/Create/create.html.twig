@@ -25,7 +25,7 @@
 <div class="container-fluid event-create">
   <div class="row">
     <br><br>
-    <!-- titulo -->
+    
     {{ form_label(form.title) }}
     {{ form_errors(form.title) }}
     {{ form_widget(form.title) }}
@@ -53,7 +53,7 @@
 
   <div class="row">
     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-3 col-xl-3">
-      <!-- fecha de inicio -->
+      
       <div class="dateblock">
         {{ form_label(form.startDate, 'Fecha de inicio') }}
         {{ form_errors(form.startDate) }}
@@ -63,21 +63,21 @@
     </div>
 
     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3 col-xl-3">
-      <!-- hora de inicio -->
+      
       {{ form_label(form.startTime, 'Hora de inicio') }}
       {{ form_errors(form.startTime) }}
       {{ form_widget(form.startTime) }}
     </div>
 
     <div class="col-xs-7 col-sm-7 col-md-7 col-lg-3 col-xl-3">
-      <!-- fecha de fin -->
+      
       <div class="dateblock">
         {{ form_label(form.endDate, 'Fecha de fin') }}
         {{ form_errors(form.endDate) }}
         {{ form_widget(form.endDate) }}
       </div>
     </div>
-    <!--hora de fin-->
+    
     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-3 col-xl-3">
       {{ form_label(form.endTime, 'Hora de fin')  }}
       {{ form_errors(form.endTime) }}
@@ -87,7 +87,7 @@
   <br>
 
   <div class="row">
-    <!-- descripcion -->
+    
     {{ form_label(form.description) }}
     {{ form_errors(form.description) }}
     <br>
@@ -96,7 +96,7 @@
   <br>
 
   <div class="row">
-    <!-- imagen de evento  -->
+    
     {{ form_label(form.images) }}
     {{ form_errors(form.images) }}
     {{ form_widget(form.images) }}
@@ -112,11 +112,11 @@
   <br>
 
   <div class="row">
-    <!-- nº de plazas -->
+    
     {{ form_label(form.places) }}
     {{ form_errors(form.places) }}
     {{ form_widget(form.places) }}
-    <!-- boolean mostrar nºplazas -->
+    
     <label class="custom-control custom-checkbox">
       {{ form_widget(form.showPlaces) }}
       <span class="custom-control-indicator"></span>
@@ -127,7 +127,7 @@
   <br>
 
   <div class="row">
-    <!-- precio -->
+    
     {{ form_label(form.price) }}
     {{ form_errors(form.price) }}
     {{ form_widget(form.price) }}
@@ -148,7 +148,7 @@ var imagenes = new Array();
 var id = 0;
 var maxfiles = 1;
 $("input:file").change(function(){
-  console.log("detectando cambios en input");
+  
   previewImage(this.files[0]);
 });
 

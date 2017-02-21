@@ -107,7 +107,7 @@ class CreateController extends Controller
           $this->get('mailer')->send($message);
 
       return new JsonResponse("ok");
-      //return $this->redirect($this->generateUrl('event_create_inscribed', array('id_event' => $id_event)));
+      
     }
     public function addInscribedAction($id_event, $mail_user, $amount)
     {

@@ -2,7 +2,7 @@
 	position: relative;
 	z-index: 1;
 	display: inline-block;
-	margin: 10px 0px;	
+	margin: 10px 0px;
 	/*max-width: 350px;*/
 	width: 100%;
 	vertical-align: top;
@@ -216,7 +216,7 @@
 	opacity: 1;
 	-webkit-transition: opacity 0s 0.4s;
 	transition: opacity 0s 0.4s;
-} 
+}
 
 .input__field--nariko:focus + .input__label--nariko::before,
 .input--filled .input__label--nariko::before {
@@ -272,7 +272,7 @@
 	transition: transform 0.7s, stroke 0.7s;
 	-webkit-transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
 	transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
-} 
+}
 
 .input__field--nao:focus + .input__label--nao,
 .input--filled .input__label--nao {
@@ -334,7 +334,7 @@
 	transition: transform 0.7s, stroke 0.7s;
 	-webkit-transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
 	transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
-} 
+}
 
 .input__field--shoko:focus + .input__label--shoko,
 .input--filled .input__label--shoko {
@@ -598,7 +598,7 @@
 	transition: transform 0.7s, fill 0.7s;
 	-webkit-transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
 	transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
-} 
+}
 
 .input__field--kozakura:focus,
 .input--filled .input__field--kozakura {

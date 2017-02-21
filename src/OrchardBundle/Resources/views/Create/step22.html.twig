@@ -6,7 +6,7 @@
     </span>
 {% endblock %}
 {% block stylesheets %}
-    <!-- css step 2.4 carga pdf-->
+    
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/files.css') }}"/>
 {% endblock %}
 
@@ -14,7 +14,7 @@
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-left">
-          <!-- Cargando... -->
+          
           <h1 class="display-3">
             <span id="loading-file" style="display: none;" class="navbar-text">
                 {{ 'orchard.step14.loading'|trans }}
@@ -37,7 +37,7 @@
 
                           </div>
                           <div id="files"></div>
-                          <!-- imprimir fichero subido si lo hay -->
+                          
                           {% if orchard.ruleFile is defined and orchard.ruleFile | length > 0 %}
                               <input type="text" hidden="true" class="required" name="imagesuploaded" value="{{orchard.images|length}}"/>
                               <h1 id="h1Upload">{{ 'orchard.step22.uploaded'|trans }}</h1>
@@ -56,20 +56,20 @@
                       <input type="text" id="Step" hidden="hidden" value="23">
                   </form>
                 </div>
-                <!-- Buttons desktop -->
+                
                 <div class="buttons">
                     <button type="submit" name="button" class="btn btn-outline-primary delete-button btn-atras">{{ 'orchard.step11.back'|trans }}</button>
                     <button type="reset" name="button" class="btn save-button btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
                 </div>
 
-                <!-- Buttons mobile -->
+                
                 <div class="fixed-buttons">
                     <button type="button" class="btn btn-outline-primary delete-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-atras">{{ 'orchard.step11.back'|trans }}</button>
                     <button type="submit" class="btn save-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
                 </div>
             </div>
 
-            <!--pantalla de la derecha -->
+            
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
                 <h1 style="line-height: 1.5; font-weight: bold;">{{ 'orchard.step22.title-right'|trans }}</h1>
                 <p>{{ 'orchard.step22.title-right-2'|trans }}</p>
@@ -94,13 +94,13 @@
                 //cargar el file con click
                 var filesinput = document.querySelector('#fileinput');
                 filesinput.addEventListener('change', function() {
-                    console.log("detectando cambios en input");
+                    
                     $("#loading-file").fadeIn("slow");
                     if (fileNormas == null && this.files.length < 2) {
-                        //console.log(this.files[0]);
+                        //
                         previewImage(this.files[0]);
                     } else {
-                        alert("solo se permite un maximo de 1 archivo");
+                        
                     }
                     $("#loading-file").fadeOut("slow");
                 }, false);
@@ -119,26 +119,26 @@
                         contentType: false,
                         processData: false,
                         success: function(data) {
-                            console.log('success :' + data);
+                            
                             window.location.href = '/orchard/create/steps/{{ orchard.id }}';
                         },
                         error: function(jqXHR, exception) {
                             if (jqXHR.status === 0) {
-                                alert('Not connect.\n Verify Network.');
+                                
                             } else if (jqXHR.status == 404) {
-                                alert('Requested page not found. [404]');
+                                
                             } else if (jqXHR.status == 500) {
-                                alert('Internal Server Error [500].');
+                                
                             } else if (exception === 'parsererror') {
-                                alert('Requested JSON parse failed.');
+                                
                             } else if (exception === 'timeout') {
-                                alert('Time out error.');
+                                
                             } else if (exception === 'abort') {
-                                alert('Ajax request aborted.');
+                                
                             } else {
-                                alert('Uncaught Error.\n' + jqXHR.responseText);
+                                
                             }
-                            console.log('error');
+                            
                         }
                     });
 
@@ -160,26 +160,26 @@
                         contentType: false,
                         processData: false,
                         success: function(data) {
-                            console.log('success :' + data);
+                            
                             window.location.href = '/orchard/create/step/' + data + '/{{ orchard.id }}';
                         },
                         error: function(jqXHR, exception) {
                             if (jqXHR.status === 0) {
-                                alert('Not connect.\n Verify Network.');
+                                
                             } else if (jqXHR.status == 404) {
-                                alert('Requested page not found. [404]');
+                                
                             } else if (jqXHR.status == 500) {
-                                alert('Internal Server Error [500].');
+                                
                             } else if (exception === 'parsererror') {
-                                alert('Requested JSON parse failed.');
+                                
                             } else if (exception === 'timeout') {
-                                alert('Time out error.');
+                                
                             } else if (exception === 'abort') {
-                                alert('Ajax request aborted.');
+                                
                             } else {
-                                alert('Uncaught Error.\n' + jqXHR.responseText);
+                                
                             }
-                            console.log('error');
+                            
                         }
                     });
 
@@ -204,21 +204,21 @@
                         },
                         error: function(jqXHR, exception) {
                             if (jqXHR.status === 0) {
-                                alert('Not connect.\n Verify Network.');
+                                
                             } else if (jqXHR.status == 404) {
-                                alert('Requested page not found. [404]');
+                                
                             } else if (jqXHR.status == 500) {
-                                alert('Internal Server Error [500].');
+                                
                             } else if (exception === 'parsererror') {
-                                alert('Requested JSON parse failed.');
+                                
                             } else if (exception === 'timeout') {
-                                alert('Time out error.');
+                                
                             } else if (exception === 'abort') {
-                                alert('Ajax request aborted.');
+                                
                             } else {
-                                alert('Uncaught Error.\n' + jqXHR.responseText);
+                                
                             }
-                            console.log('error');
+                            
                         }
                     });
 

@@ -58,26 +58,26 @@ $(function () {
       type: 'POST',
       url: '/event/create/orchard/' + $( "#user_orchards option:selected" ).attr('id'),
       success: function(data) {
-        console.log('success');
+        
         $('#events-container').html(data);
       },
       error: function(jqXHR, exception) {
         if (jqXHR.status === 0) {
-          alert('Not connect.\n Verify Network.');
+          
         } else if (jqXHR.status == 404) {
-          alert('Requested page not found. [404]');
+          
         } else if (jqXHR.status == 500) {
-          alert('Internal Server Error [500].');
+          
         } else if (exception === 'parsererror') {
-          alert('Requested JSON parse failed.');
+          
         } else if (exception === 'timeout') {
-          alert('Time out error.');
+          
         } else if (exception === 'abort') {
-          alert('Ajax request aborted.');
+          
         } else {
-          alert('Uncaught Error.\n' + jqXHR.responseText);
+          
         }
-        console.log('error');
+        
       }
     });
 
@@ -90,26 +90,26 @@ $('#user_orchards').on('change', function() {
     type: 'POST',
     url: '/event/create/orchard/' + $( "#user_orchards option:selected" ).attr('id'),
     success: function(data) {
-      console.log('success');
+      
       $('#events-container').html(data);
     },
     error: function(jqXHR, exception) {
       if (jqXHR.status === 0) {
-        alert('Not connect.\n Verify Network.');
+        
       } else if (jqXHR.status == 404) {
-        alert('Requested page not found. [404]');
+        
       } else if (jqXHR.status == 500) {
-        alert('Internal Server Error [500].');
+        
       } else if (exception === 'parsererror') {
-        alert('Requested JSON parse failed.');
+        
       } else if (exception === 'timeout') {
-        alert('Time out error.');
+        
       } else if (exception === 'abort') {
-        alert('Ajax request aborted.');
+        
       } else {
-        alert('Uncaught Error.\n' + jqXHR.responseText);
+        
       }
-      console.log('error');
+      
     }
   });
 });
@@ -131,8 +131,8 @@ $('#user_orchards').on('change', function() {
         <a id="btn-delete-modal" href=""><button type="button" class="btn btn-danger ">{{ 'orchard.list.yesDelete'|trans }}</button></a>
         <a id="btn-unpublish-modal" href=""><button id="btn-unpublish" type="button" class="btn btn-secondary ">{{ 'orchard.list.yesUnpublish'|trans }}</button></a>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
 
 {% endblock %}

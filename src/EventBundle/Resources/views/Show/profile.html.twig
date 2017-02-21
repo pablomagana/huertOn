@@ -33,7 +33,7 @@
             {% if event.places > 0 or eventUser is defined  %}
               <button type="button" class="btn save-button unete" onclick="mostrarUnete()" name="button">Únete</button>
             {% else %}
-              <!-- <p>no quedan plazas para el evento</p> -->
+              
               <button type="button"  class="btn save-button unete" name="button" data-toggle="tooltip" data-placement="top" title="Ups has llegado tarde, no quedan plazas">Únete</button>
             {% endif %}
           </div>
@@ -48,7 +48,7 @@
 <div class="container-fluid" style="height:auto;">
   <div class="row">
 
-    <!--imagen-->
+    
     <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 offset-xl-2 offset-lg-2 offset-md-2">
       {% if event.imageName != null %}
       <img id="profileImg" class="img-response" src="{{ asset('orchard/event/') }}{{event.imageName}}" alt="">
@@ -58,9 +58,9 @@
     </div>
 
 
-    <!--texto-->
+    
     <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-      <!--FECHA Y HORA-->
+      
       <div class="row event-spacing">
         <div class="col-xs-2 col-sm-2">
           <i class="fa fa-calendar fa-3x" aria-hidden="true"></i>
@@ -82,7 +82,7 @@
       <hr class="hr-mobile">
 
 
-      <!--UBICACION-->
+      
       <div class="row event-spacing">
         <div class="col-xs-2 col-sm-2">
           <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
@@ -95,7 +95,7 @@
 
       <hr class="hr-mobile">
 
-      <!--PRECIO-->
+      
       <div class="row event-spacing">
         <div class="col-xs-2 col-sm-2">
           <i class="fa fa-money fa-3x" aria-hidden="true"></i>
@@ -112,7 +112,7 @@
 
       <hr class="hr-mobile">
 
-      <!--PLAZAS-->
+      
       {% if event.showPlaces == true %}
       <div class="row event-spacing">
         <div class="col-xs-2 col-sm-2">
@@ -156,7 +156,7 @@
           {% if event.places > 0 or eventUser is defined  %}
             <button type="button" class="btn save-button unete" onclick="mostrarUnete()" name="button">Únete</button>
           {% else %}
-            <!-- <p>no quedan plazas para el evento</p> -->
+            
             <button type="button"  class="btn save-button unete" name="button" data-toggle="tooltip" data-placement="top" title="Ups has llegado tarde, no quedan plazas">Únete</button>
           {% endif %}
         </div>
@@ -221,12 +221,12 @@ $('#reservar').on("click",function() {
     method: "POST",
     url: "/event/add/userevent/{{event.id}}/"+$('#places').val(),
     success: function(result) {
-      // alert("reservadas "+result+" plazas");
+      // 
       $('.reservadas').html("Tienes reservadas " + result+" entradas");
       $('#modalPlaces').modal('hide');
     },
     error: function(result) {
-      alert('Error al reservar plazas. Intentalo otra vez');
+      
     }
   })
 });

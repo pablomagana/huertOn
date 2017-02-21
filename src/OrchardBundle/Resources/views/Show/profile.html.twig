@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<!--SLIDER-->
+
 <div class="row" id="orchard-img">
   <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 
@@ -25,7 +25,7 @@
           type: 'POST',
           url: '/orchard/upload/images/favourite/{{ orchard.id }}/{{ orchardImage.id }}/false',
           success: function(data) {
-            console.log('success');
+            
             location.reload();
           }
         });
@@ -41,7 +41,7 @@
           type: 'POST',
           url: '/orchard/upload/images/favourite/{{ orchard.id }}/{{ orchardImage.id }}/true',
           success: function(data) {
-            console.log('success');
+            
             location.reload();
           }
         });
@@ -79,14 +79,14 @@
   <div class="spacing"></div>
   <div class="container">
     <div class="row container" id="next-activities">
-      <!-- PRÓXIMAS 3 ACTIVIDADES DE CADA HUERTO (3 COLUMNAS) -->
+      
       <h5>{{ 'orchard.profile.activities'|trans }}</h5>
       <hr class="hr-orchard-profile" align="center">
       <div class="spacing"></div>
       {% for event in orchard.events|slice(0, 3) %}
       <a href="/event/show/profile/{{ event.id }}">
         <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
-          <!-- Imagen -->
+          
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
             {% if event.images is not empty %}
             <div class="find-result" style="background: url({{ asset('/event/image/' ~ event.images[0].nameImage) }});">
@@ -99,7 +99,7 @@
             {% endif %}
           </div>
 
-          <!-- Texto -->
+          
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
             <p><font style="font-size:20px">{{ event.title }}</font><br><strong>{% if event.price == 0 %}Gratis{% else %}{{ event.price }}€{% endif %}</strong>&nbsp;&nbsp;<i>{{ event.orchard.name }}</i></p>
           </div>
@@ -157,7 +157,7 @@
     <div class="row row-centered" id="how-is-it">
       <h5>{{ 'orchard.profile.howIsIt'|trans }}</h5>
       <hr class="hr-orchard-profile">
-      <!-- TIPO DE HUERTO -->
+      
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
         <div class="border">
           <h6>{{ 'orchard.profile.type'|trans }}</h6>
@@ -173,7 +173,7 @@
       {% endif %}
 
 
-      <!-- EQUIPAMIENTO -->
+      
       {% if orchard.orchardService is empty %}
       {% else %}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
@@ -196,7 +196,7 @@
 
   <div class="container">
     <div class="row row-centered" id="how-to-join">
-      <!-- MODALIDADES -->
+      
       {% if orchard.orchardParticipate is empty %}
       {% else %}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
@@ -214,7 +214,7 @@
       {% endif %}
 
 
-      <!-- NORMAS DE HUERTO -->
+      
       {% if orchard.ruleFile is empty %}
       {% else %}
 
@@ -232,7 +232,7 @@
       {% endif %}
 
 
-      <!-- PASOS PARA INSCRIBIRTE -->
+      
       {% if orchard.orchardInscriptionStep is empty %}
       {% else %}
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered" style="margin-top:40px">
@@ -252,7 +252,7 @@
     </div>
   </div>
 
-  <!--DÓNDE SE ENCUENTRA-->
+  
   <div class="row row-centered" id="location">
     <h5>{{ 'orchard.profile.where'|trans }}</h5>
     <hr class="hr-orchard-profile"><br>
@@ -269,7 +269,7 @@
   <div class="container">
     <div class="row row-centered" id="contact">
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="background-color:#f2f2f2; border-radius: 15px; padding: 40px;">
-        <!-- TIENES ALGUNA PREGUNTA -->
+        
         <h3>{{ 'orchard.profile.question'|trans }}</h3>
         <hr class="hr-orchard-profile">
         <br>
@@ -289,7 +289,7 @@
           </div>
         </div>
       </div>
-      <!-- FORMULARIO DE CONTACTO -->
+      
       <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <div class="container">
           {% if app.user != null %}
@@ -326,10 +326,10 @@
 
   <div class="spacing"></div>
 
-</div><!--end desktop nav-->
+</div>
 
 
-<!--this will show only on mobile :) -->
+
 <div id="nav-mobile">
   {% if orchard.governanceModel is empty %}
   {% else %}
@@ -367,19 +367,19 @@
     </ul>
   </div>
 
-  <!-- Tab panes -->
+  
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade in active" id="actividades">
       <div class="container">
         <div class="row container" id="next-activities">
-          <!-- PRÓXIMAS 3 ACTIVIDADES DE CADA HUERTO (3 COLUMNAS) -->
+          
           <h5>{{ 'orchard.profile.activities'|trans }}</h5>
           <hr class="hr-orchard-profile" align="center">
           <div class="spacing"></div>
           {% for event in orchard.events|slice(0, 3) %}
           <a href="/event/show/profile/{{ event.id }}">
             <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
-              <!-- Imagen -->
+              
               <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                 {% if event.images is not empty %}
                 <div class="find-result" style="background: url({{ asset('/event/image/' ~ event.images[0].nameImage) }});">
@@ -392,7 +392,7 @@
                 {% endif %}
               </div>
 
-              <!-- Texto -->
+              
               <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                 <p><font style="font-size:20px">{{ event.title }}</font><br><strong>{% if event.price == 0 %}Gratis{% else %}{{ event.price }}€{% endif %}</strong>&nbsp;&nbsp;<i>{{ event.orchard.name }}</i></p>
               </div>
@@ -433,7 +433,7 @@
         <div class="row row-centered" id="how-is-it">
           <h5>{{ 'orchard.profile.howIsIt'|trans }}</h5>
           <hr class="hr-orchard-profile">
-          <!-- TIPO DE HUERTO -->
+          
           {% if orchard.orchardType is empty %}
           {% else %}
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
@@ -453,7 +453,7 @@
           {% endif %}
 
 
-          <!-- EQUIPAMIENTO -->
+          
           {% if orchard.orchardService is empty %}
           {% else %}
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
@@ -479,7 +479,7 @@
         <div class="row row-centered" id="how-to-join">
           <h5>{{ 'orchard.profile.join'|trans }}</h5>
           <hr class="hr-orchard-profile">
-          <!-- MODALIDADES -->
+          
           {% if orchard.orchardParticipate is empty %}
           {% else %}
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
@@ -497,7 +497,7 @@
           {% endif %}
 
 
-          <!-- NORMAS DE HUERTO -->
+          
           {% if orchard.ruleFile is empty %}
           {% else %}
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered">
@@ -511,7 +511,7 @@
           {% endif %}
 
 
-          <!-- PASOS PARA INSCRIBIRTE -->
+          
           {% if orchard.orchardInscriptionStep is empty %}
           {% else %}
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-centered" style="margin-top:40px">
@@ -547,7 +547,7 @@
       <div class="container">
         <div class="row row-centered" id="contact">
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="background-color:#f2f2f2; border-radius: 15px; padding: 40px;">
-            <!-- TIENES ALGUNA PREGUNTA -->
+            
             <h3>{{ 'orchard.profile.question'|trans }}</h3>
             <hr class="hr-orchard-profile">
             <br>
@@ -568,7 +568,7 @@
             </div>
           </div>
           <br>
-          <!-- FORMULARIO DE CONTACTO -->
+          
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <div class="container">
               {% if app.user != null %}
@@ -609,12 +609,12 @@
 </div>
 
 
-<!--modal-->
+
 <div class="modal fade" id="modalTipoHuerto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <!--mostrar tipos + descripciones-->
+        
         <ul>
           {% for orchardType in orchard.orchardType %}
           <li>
@@ -647,9 +647,9 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'stepBase.close'|trans }}</button>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+  </div>
+</div>
 
 <script src="{{ asset('/js/map_show.js')}}" charset="utf-8"></script>
 <script type="text/javascript">
@@ -742,7 +742,7 @@ $('.scroller-left').click(function() {
 });
 
 $('#btn-send-message').on('click', function() {
-  console.log('Enviando consulta');
+  
 
   if(validateForm()) {
 
@@ -754,21 +754,21 @@ $('#btn-send-message').on('click', function() {
       },
       error: function(jqXHR, exception) {
         if (jqXHR.status === 0) {
-          alert('Not connect.\n Verify Network.');
+          
         } else if (jqXHR.status == 404) {
-          alert('Requested page not found. [404]');
+          
         } else if (jqXHR.status == 500) {
-          alert('Internal Server Error [500].');
+          
         } else if (exception === 'parsererror') {
-          alert('Requested JSON parse failed.');
+          
         } else if (exception === 'timeout') {
-          alert('Time out error.');
+          
         } else if (exception === 'abort') {
-          alert('Ajax request aborted.');
+          
         } else {
-          alert('Uncaught Error.\n' + jqXHR.responseText);
+          
         }
-        console.log('error');
+        
       }
     });
 
@@ -778,7 +778,7 @@ $('#btn-send-message').on('click', function() {
 });
 
 $('#btn-send-message-mobile').on('click', function() {
-  console.log('Enviando consulta');
+  
 
   if(validateFormMobile()) {
 
@@ -790,21 +790,21 @@ $('#btn-send-message-mobile').on('click', function() {
       },
       error: function(jqXHR, exception) {
         if (jqXHR.status === 0) {
-          alert('Not connect.\n Verify Network.');
+          
         } else if (jqXHR.status == 404) {
-          alert('Requested page not found. [404]');
+          
         } else if (jqXHR.status == 500) {
-          alert('Internal Server Error [500].');
+          
         } else if (exception === 'parsererror') {
-          alert('Requested JSON parse failed.');
+          
         } else if (exception === 'timeout') {
-          alert('Time out error.');
+          
         } else if (exception === 'abort') {
-          alert('Ajax request aborted.');
+          
         } else {
-          alert('Uncaught Error.\n' + jqXHR.responseText);
+          
         }
-        console.log('error');
+        
       }
     });
 

@@ -15,7 +15,7 @@ class SuggestController extends Controller
   public function sendAction($entity, $param)
   {
 
-    $this->sendMail($entity, 'Nueva sugerencia', 'ab95david@gmail.com', $param, null);
+    $this->sendMail($entity, 'Nueva sugerencia', 'huertOnflorida@gmail.com', $param, null);
 
     return new Response();
 

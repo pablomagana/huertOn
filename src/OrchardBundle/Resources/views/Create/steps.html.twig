@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12">
         <h6>{{ 'orchard.steps.step'|trans }} 1</h6>
-        {% if orchard.step is defined and orchard.step >= 21 %}<!--todos los pasos del 1 completados-->
+        {% if orchard.step is defined and orchard.step >= 21 %}
         <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <h5>{{ 'orchard.steps.sub-1'|trans }}</h5>
@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12">
         <h6>{{ 'orchard.steps.step'|trans }}  2</h6>
-        {% if orchard.step is defined and orchard.step >= 31 %}<!--todos los pasos del 2 completados-->
+        {% if orchard.step is defined and orchard.step >= 31 %}
         <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <h5 class="stepNone" id="paso2">{{ 'orchard.steps.sub-2'|trans }}</h5>
@@ -48,7 +48,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12">
         <h6>{{ 'orchard.steps.step'|trans }} 3</h6>
-        {% if orchard.step is defined and orchard.step >= 34 %}<!--todos los pasos del 3 completados-->
+        {% if orchard.step is defined and orchard.step >= 34 %}
         <i class="fa fa-check fa-2x" aria-hidden="true"></i>
         {% endif %}
         <h5 class="stepNone" id="paso3">{{ 'orchard.steps.sub-3'|trans }}</h5>
@@ -74,7 +74,7 @@
   {% endif %} -->
   </div>
 
-  <!--pantalla de la derecha -->
+
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
     <div class="steps-right-text">
       <h2 class="display-3">{{ 'orchard.steps.title-right'|trans }}</h2>
@@ -83,7 +83,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+
 <div class="modal fade" id="orchardPreviewModal" tabindex="-1" role="dialog" aria-labelledby="orchardPreviewModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -133,24 +133,6 @@
 <footer class="footer">
   <div class="container-fluid">
     <div class="row">
-      <!--IDIOMA
-      <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
-        <h6>Idioma</h6>
-        <hr>
-        <div class="dropdown show">
-          <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ 'language'|trans }}
-          </a>
-
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="/es">{{ 'language.es'|trans }}</a>
-            <a class="dropdown-item" href="/en">{{ 'language.en'|trans }}</a>
-            <a class="dropdown-item" href="/ca">{{ 'language.ca'|trans }}</a>
-          </div>
-        </div>
-      </div>
-      <!--FIN IDIOMA-->
-
       <div class="footer-desktop">
         <div class="col-xl-4 col-lg-4 col-md-4 col-xs-12 col-sm-12 foot">
           <h6>{{ 'footer.why'|trans }}</h6>

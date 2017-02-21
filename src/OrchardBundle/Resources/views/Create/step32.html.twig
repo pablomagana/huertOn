@@ -45,13 +45,13 @@
 
             </form>
 
-            <!-- Buttons desktop -->
+            
             <div class="buttons">
                 <button type="submit" name="button" class="btn btn-outline-primary delete-button btn-atras">{{ 'orchard.step11.back'|trans }}</button>
                 <button type="reset" name="button" class="btn save-button btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
             </div>
 
-            <!-- Buttons mobile -->
+            
             <div class="fixed-buttons">
                 <button type="button" class="btn btn-outline-primary delete-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-atras">{{ 'orchard.step11.back'|trans }}</button>
                 <button type="submit" class="btn save-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
@@ -59,7 +59,7 @@
 
         </div>
 
-        <!--pantalla de la derecha -->
+        
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
             <h1 style="line-height: 1.5; font-weight: bold;">ENSEÑA AL URBANITA QUÉ TIPO DE SERVICIOS OFRECES EN TU HUERTO</h1>
             <p><img src="/img/stone-oven.png" alt="" style="width: 50px; height: 50px; margin-right:50px; margin-left:0px; margin-top: 15px; margin-bottom: 15px;">Horno</p>
@@ -99,27 +99,27 @@
                     },
                     success: function(data) {
                         saveAnimation();
-                        console.log('success');
+                        
                         window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
                     },
                     error: function(jqXHR, exception) {
                         saveAnimation();
                         if (jqXHR.status === 0) {
-                            alert('Not connect.\n Verify Network.');
+                            
                         } else if (jqXHR.status == 404) {
-                            alert('Requested page not found. [404]');
+                            
                         } else if (jqXHR.status == 500) {
-                            alert('Internal Server Error [500].');
+                            
                         } else if (exception === 'parsererror') {
-                            alert('Requested JSON parse failed.');
+                            
                         } else if (exception === 'timeout') {
-                            alert('Time out error.');
+                            
                         } else if (exception === 'abort') {
-                            alert('Ajax request aborted.');
+                            
                         } else {
-                            alert('Uncaught Error.\n' + jqXHR.responseText);
+                            
                         }
-                        console.log('error');
+                        
                     }
                 });
 
@@ -162,27 +162,27 @@
                     },
                     success: function(data) {
                         saveAnimation();
-                        console.log('success');
+                        
                         window.location.href = '/orchard/create/steps/{{ orchard.id }}';
                     },
                     error: function(jqXHR, exception) {
                         saveAnimation();
                         if (jqXHR.status === 0) {
-                            alert('Not connect.\n Verify Network.');
+                            
                         } else if (jqXHR.status == 404) {
-                            alert('Requested page not found. [404]');
+                            
                         } else if (jqXHR.status == 500) {
-                            alert('Internal Server Error [500].');
+                            
                         } else if (exception === 'parsererror') {
-                            alert('Requested JSON parse failed.');
+                            
                         } else if (exception === 'timeout') {
-                            alert('Time out error.');
+                            
                         } else if (exception === 'abort') {
-                            alert('Ajax request aborted.');
+                            
                         } else {
-                            alert('Uncaught Error.\n' + jqXHR.responseText);
+                            
                         }
-                        console.log('error');
+                        
                     }
                 });
 
@@ -193,7 +193,7 @@
             function initSave(orchard_services) {
                 $("#loading, #loading-text").fadeIn("slow");
                 $(':checkbox:not(#cb-new-service):checked').each(function() {
-                    console.log($(this).attr('id'));
+                    
                     orchard_services.push($(this).attr('id'));
                 });
             }
@@ -225,7 +225,7 @@
 
             $(':checkbox:not(#cb-new-service)').each(function() {
                 if (this.checked) {
-                    console.log('checkeado');
+                    
                     $('.btn-siguiente').html('{{ 'orchard.step11.next'|trans }}')
                 }
             });
@@ -260,26 +260,26 @@
                             type: 'POST',
                             url: '/orchard/suggest/send/orchard_service/' + $('#Service').val(),
                             success: function(data) {
-                                console.log('success');
+                                
                                 $('#myModal').modal('show');
                             },
                             error: function(jqXHR, exception) {
                                 if (jqXHR.status === 0) {
-                                    alert('Not connect.\n Verify Network.');
+                                    
                                 } else if (jqXHR.status == 404) {
-                                    alert('Requested page not found. [404]');
+                                    
                                 } else if (jqXHR.status == 500) {
-                                    alert('Internal Server Error [500].');
+                                    
                                 } else if (exception === 'parsererror') {
-                                    alert('Requested JSON parse failed.');
+                                    
                                 } else if (exception === 'timeout') {
-                                    alert('Time out error.');
+                                    
                                 } else if (exception === 'abort') {
-                                    alert('Ajax request aborted.');
+                                    
                                 } else {
-                                    alert('Uncaught Error.\n' + jqXHR.responseText);
+                                    
                                 }
-                                console.log('error');
+                                
                             }
                         });
                     }

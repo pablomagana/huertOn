@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ShowController extends Controller
 {
-  // mostrar evento segun id en parametro
   public function profileAction($id_event, $search)
   {
     $user = $this->container->get("orchard_service")->getUser();
@@ -24,7 +23,6 @@ class ShowController extends Controller
     return $this->render('EventBundle:Show:profile.html.twig', array('event' => $event , 'eventUser' => $eventUser , 'search' => $search));
   }
 
-  // añade un participante al evento
   public function addUserToEventAction($id_event, $amount, $id_user)
   {
     if ($id_user != null) {
