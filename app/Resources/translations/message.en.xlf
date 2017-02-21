@@ -27,7 +27,7 @@
           </trans-unit>
           <trans-unit id="1467">
               <source>home.orchards</source>
-              <target>Orchards</target>
+              <target>ORCHARDS</target>
           </trans-unit>
           <trans-unit id="1468">
               <source>home.last.orchards</source>
@@ -39,7 +39,7 @@
           </trans-unit>
           <trans-unit id="1470">
               <source>home.activities</source>
-              <target>Activities</target>
+              <target>ACTIVITIES</target>
           </trans-unit>
           <trans-unit id="1471">
               <source>home.agroeco</source>
@@ -167,10 +167,6 @@
               <trans-unit id="17">
                   <source>home.btn.search</source>
                   <target>Search</target>
-              </trans-unit>
-              <trans-unit id="18">
-                  <source>home.activities</source>
-                  <target>Activities</target>
               </trans-unit>
             <!-- End index.html -->
 
