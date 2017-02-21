@@ -41,7 +41,7 @@ function drop(ev) {
   if (f.length+imagenes.length<maxfiles+1) {
     previewImage(f);
   }else{
-    alert("solo se permite un maximo de "+maxfiles+" imagenes");
+    
   }
   $("#loading-images").fadeOut("slow");
 }
@@ -60,7 +60,7 @@ function createImageElement(file){
 
   //funcion que se ejecuta al eliminar una imagen de la interfaz
   del.onclick=function() {
-    //alert("eliminando imagen");
+    //
     imagenes=removeItem();
     $(this).parent().remove();
 

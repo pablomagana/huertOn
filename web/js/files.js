@@ -32,7 +32,7 @@ function createFileElement(file){
   name.appendChild(document.createTextNode(file.name));
   //funcion que se ejecuta al eliminar una imagen de la interfaz
   del.onclick=function() {
-    //alert("eliminando imagen");
+    //
     imagenes=removeItem();
     $(this).parent().remove();
 
@@ -67,7 +67,7 @@ function drop(ev) {
   if (f && fileNormas==null) {
     [].forEach.call(f, previewImage);
   }else {
-    alert("solo se permite un maximo de 1 archivo");
+    
   }
   $("#loading-file").fadeOut("slow");
 }

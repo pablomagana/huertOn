@@ -18,7 +18,7 @@ function previewImage(file) {
     lector.onloadend = function() {
       file.src = lector.result;
       imagenes.push(file);
-      
+
       //createImageElement(file,id);
       checkNumImage();
       createImageElement(file);
@@ -35,7 +35,7 @@ function sendAllImages() {
     url:"/orchard/images/upload",
     data: JSON.stringify(imagenes),
      success: function(step){return step},
-     error: function(){alert("error al añadir imagenes. ajax sendAllImages")}
+     error: function(){}
    });
 }
 function sendImage(file){
@@ -47,8 +47,8 @@ function sendImage(file){
       'src':file.src,
       'description':file.des
     },
-     success: function(id){alert("imagen "+file.name+" enviada con id "+id);},
-     error: function(){alert("Error al subir la imagen "+file.name);}
+     success: function(id){},
+     error: function(){}
    });
 }
 
@@ -81,11 +81,11 @@ function createImageElement(file){
 
   //funcion que se ejecuta al eliminar una imagen de la interfaz
   del.onclick=function() {
-    //alert("eliminando imagen");
+    //
     imagenes=removeItemWithId(imagenes,$(this).attr('id'));
     $(this).parent().remove();
 
-    
+
     checkNumImage();
   };
 
@@ -111,12 +111,12 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
-  
+
   ev.dataTransfer.setData("text", 'gallery');
 }
 
 function drop(ev) {
-  
+
   ev.preventDefault();
   $("#loading-images").fadeIn("slow");
   var data = ev.dataTransfer.getData("text");
@@ -128,7 +128,7 @@ function drop(ev) {
     //[].forEach.call(files, readAndPreview);
     [].forEach.call(f, previewImage);
   }else{
-    alert("solo se permite un maximo de "+maxfiles+" imagenes");
+
   }
   $("#loading-images").fadeOut("slow");
 }
@@ -162,8 +162,8 @@ function removeItemWithId(array,id) {
 }
 
 function mostrarEditor(element) {
-  
-  
+
+
   $(element).parent().children().last().removeAttr("hidden");
 }
 
@@ -193,7 +193,7 @@ function sendNewDescription(description,id) {
     type: "POST",
     url:"/orchard/upload/images/modify/"+id,
     data:{description},
-     success: function(){alert("descripción modificada")},
+     success: function(){},
      error: function(){}
    });
 }

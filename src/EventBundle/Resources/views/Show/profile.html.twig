@@ -221,12 +221,12 @@ $('#reservar').on("click",function() {
     method: "POST",
     url: "/event/add/userevent/{{event.id}}/"+$('#places').val(),
     success: function(result) {
-      // alert("reservadas "+result+" plazas");
+      // 
       $('.reservadas').html("Tienes reservadas " + result+" entradas");
       $('#modalPlaces').modal('hide');
     },
     error: function(result) {
-      alert('Error al reservar plazas. Intentalo otra vez');
+      
     }
   })
 });
