@@ -2,8 +2,8 @@
 parameters:
     database_host: 127.0.0.1
     database_port: 3306
-    database_name: huerton
-    database_user: huerton
+    database_name: parcelles
+    database_user: parcelles
     database_password: Administrador.1
     mailer_transport: gmail
     mailer_user: huertOnflorida@gmail.com
