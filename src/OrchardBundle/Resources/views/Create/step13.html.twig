@@ -48,13 +48,13 @@
                     <i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i>
                 </div>
 
-                <!-- Buttons desktop -->
+                
                 <div class="buttons">
                     <button type="submit" name="button" class="btn btn-outline-primary delete-button btn-atras">{{ 'orchard.step11.back'|trans }}</button>
                     <button type="reset" name="button" class="btn save-button btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
                 </div>
 
-                <!-- Buttons mobile -->
+                
                 <div class="fixed-buttons">
                     <button type="button" class="btn btn-outline-primary delete-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-atras">{{ 'orchard.step11.back'|trans }}</button>
                     <button type="submit" class="btn save-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
@@ -67,7 +67,7 @@
 
         </form>
 
-        <!--pantalla de la derecha -->
+        
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
             <h1 style="line-height: 1.5; font-weight: bold;">AYUDA AL URBANITA A CONOCER LOS DIFERENTES MODELOS DE HUERTO</h1>
             <p>Puedes ver una pequeña descripción pasando por encima de cada uno</p>
@@ -81,12 +81,12 @@
 
     </div>
 
-    <!--modal-->
+    
     <div class="modal fade" id="modalDescripciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <!--mostrar tipos + descripciones-->
+                    
                     <ul>
                         {% for orchardType in orchardTypes %}
                             <li>

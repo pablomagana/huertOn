@@ -6,7 +6,7 @@
     </span>
 {% endblock %}
 {% block stylesheets %}
-    <!--css step 1.3 cargar imagenes-->
+    
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/files.css') }}"/>
 {% endblock %}
 
@@ -14,7 +14,7 @@
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-left">
-            <!-- Cargando... -->
+            
             <h1 class="display-3">
                 <span id="loading-images" style="display: none;" class="navbar-text">
                     {{ 'orchard.step14.loading'|trans }}
@@ -49,7 +49,7 @@
                                                 <a class="editDes" onclick="mostrarEditor(this)">{{ 'orchard.step14.edit'|trans }}</a>
                                                 <div class="edi" hidden="hidden">
                                                     <span>{{100 - img.description|length}}</span>
-                                                    <!-- <textarea type="text" placeholder="	{{ 'orchard.step14.edit'|trans }}" class="descripcion" maxlength="100" onkeyup="textAreaAdjust(this)">{{img.description}}</textarea> -->
+                                                    
                                                     <a onclick="sendNewDescription($(this).prev().val(),{{img.id}})">{{ 'orchard.step14.guardar'|trans }}</a>
                                                 </div>
                                             </div>
@@ -62,20 +62,20 @@
                         <input type="text" id="Step" hidden="hidden" value="21">
                     </form>
                 </div>
-                <!-- Buttons desktop -->
+                
                 <div class="buttons">
                     <button type="submit" name="button" class="btn btn-outline-primary delete-button btn-atras">{{ 'orchard.step11.back'|trans }}</button>
                     <button type="reset" name="button" class="btn save-button btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
                 </div>
 
-                <!-- Buttons mobile -->
+                
                 <div class="fixed-buttons">
                     <button type="button" class="btn btn-outline-primary delete-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-atras">{{ 'orchard.step11.back'|trans }}</button>
                     <button type="submit" class="btn save-button col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-siguiente">{{ 'orchard.step11.next'|trans }}</button>
                 </div>
             </div>
 
-            <!--pantalla de la derecha -->
+            
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 steps-right">
                 <h1 style="line-height: 1.5; font-weight: bold;">HAZ QUE SE IMAGINE CÓMO ES PARTICIPAR EN TU HUERTO</h1>
                 <img src="/img/photo-camera.png" alt="" style="width: 70px; height: 70px; margin:50px; margin-left:0px;">
