@@ -1,1 +1,91 @@
-.cuadro-subidas-pdf{display:inline-block;border-style:dashed;border-radius:5px;padding:50px;cursor:pointer;display:table;overflow:hidden}.centrar-o{margin-left:40%}#gallery{display:inline-block;vertical-align:middle}#gallery .thumbnail{max-width:150px;float:left;margin:15px;text-align:center;vertical-align:bottom;overflow:hidden}#gallery .thumbnail img{width:150px;height:150px;border-radius:10px;box-shadow:4px 5px 5px #888;overflow:hidden}#gallery .thumbnail input{margin-top:5px;border-radius:10px;vertical-align:bottom}.descripcion{width:90%}.more{margin:15px;width:100px;height:100px;display:inline-block;border-style:dashed;border-radius:15px;cursor:pointer;display:table}.more p{text-align:center;vertical-align:middle;display:table-cell}.remove{cursor:pointer}.fa-plus-circle{cursor:pointer}ol{margin-left:0;padding-left:0;counter-reset:item}ol>li{margin-left:0;padding-left:0;counter-increment:item;list-style:none inside}ol>li:before{content:counter(item);padding-right:.5em;color:#110879;display:inline-block}
+.cuadro-subidas-pdf {
+    display: inline-block;
+    border-style: dashed;
+    border-radius: 5px;
+    padding: 50px;
+    cursor: pointer;
+    display: table;
+    overflow: hidden;
+}
+
+.centrar-o {
+    margin-left: 40%;
+}
+
+#gallery {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#gallery .thumbnail {
+    max-width: 150px;
+    /*height: 150px;*/
+    float: left;
+    margin: 15px;
+    text-align: center;
+    vertical-align: bottom;
+    overflow: hidden;
+}
+
+#gallery .thumbnail img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 4px 5px 5px #888888;
+    overflow: hidden;
+}
+
+#gallery .thumbnail input {
+    margin-top: 5px;
+    border-radius: 10px;
+    vertical-align: bottom;
+}
+
+.descripcion {
+    width: 90%;
+}
+
+.more {
+    margin: 15px;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    border-style: dashed;
+    border-radius: 15px;
+    cursor: pointer;
+    display: table;
+}
+
+.more p {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.remove {
+    cursor: pointer;
+}
+
+.fa-plus-circle {
+    cursor: pointer;
+}
+
+ol {
+    margin-left: 0;
+    padding-left: 0;
+    counter-reset: item
+}
+
+ol>li {
+    margin-left: 0;
+    padding-left: 0;
+    counter-increment: item;
+    list-style: none inside
+}
+
+ol>li:before {
+    content: counter(item);
+    padding-right: 0.5em;
+    color: #110879;
+    display: inline-block;
+}
