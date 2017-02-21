@@ -128,9 +128,12 @@
     </div>
   </div>
 </div>
+
+
 <footer class="footer">
   <div class="container-fluid">
     <div class="row">
+      <!--IDIOMA
       <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
         <h6>Idioma</h6>
         <hr>
@@ -146,24 +149,26 @@
           </div>
         </div>
       </div>
+      <!--FIN IDIOMA-->
+
       <div class="footer-desktop">
-        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
-          <h6>Por qué</h6>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-xs-12 col-sm-12 foot">
+          <h6>{{ 'footer.why'|trans }}</h6>
           <hr>
-          <a href="/why"><p>Por qué publicar tu huerto</p></a>
-          <a href="/why#publish"><p>Por qué participar en un huerto</p></a>
+          <a href="/why"><p>{{ 'footer.why1'|trans }}</p></a>
+          <a href="/why#publish"><p>{{ 'footer.why2'|trans }}</p></a>
         </div>
-        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
-          <h6>Cómo funciona</h6>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-xs-12 col-sm-12 foot">
+          <h6>{{ 'footer.how'|trans }}</h6>
           <hr>
-          <a href="/how"><p>Cómo subir mi huerto</p></a>
-          <a href="/how#event"><p>Cómo subo una actividad</p></a>
+          <a href="/how"><p>{{ 'footer.how1'|trans }}</p></a>
+          <a href="/how#event"><p>{{ 'footer.how2'|trans }}</p></a>
         </div>
-        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
-          <h6>Contacto</h6>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-xs-12 col-sm-12 foot">
+          <h6>{{ 'footer.contact'|trans }}</h6>
           <hr>
-          <a href="#"><p>Escríbenos</p></a>
-          <a href="#"><p>Prensa</p></a>
+          <a href="#"><p>{{ 'footer.contact1'|trans }}</p></a>
+          <a href="#"><p>{{ 'footer.contact2'|trans }}</p></a>
           <i class="fa fa-facebook-square" aria-hidden="true"></i>
           <i class="fa fa-twitter-square" aria-hidden="true"></i>
         </div>
@@ -178,12 +183,13 @@
           <p style="color: black;">Research & service design by YADEMÁS</p>
         </div>
         <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 foot-down-txt">
-          <p><a href="#">Condiciones privacidad y cookies</a></p>
+          <p><a href="#">{{ 'footer.legal'|trans }}</a></p>
         </div>
       </div>
     </div>
   </div>
 </footer>
+
 {% endblock %}
 
 {% block javascripts %}

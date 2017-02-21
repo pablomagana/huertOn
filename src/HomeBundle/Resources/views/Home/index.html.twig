@@ -25,7 +25,7 @@
 
 <div class="jumbotron" style="background-color: #ECEEEF; margin-bottom: 0px;">
 <div class="container">
-  <h1>{{ 'home.orchards'|trans }}</h1>
+  <h4 style="color: black; font-weight:bold;">{{ 'home.orchards'|trans }}</h4>
   <small>{{ 'home.last.orchards'|trans }}</small>
   <div class="spacing"></div>
   {% for orchard in orchards %}
@@ -71,8 +71,9 @@
 </div>
 
 <div class="container">
-  <h1>{{ 'home.activities'|trans }}</h1>
-  <small>{{ 'home.sub.events'|trans }}</small>
+  <div class="spacing"></div>
+  <h4 style="color: black; font-weight:bold;">{{ 'home.activities'|trans }}</h4>
+  <small>{{ 'home.agroeco'|trans }}</small>
   <div class="spacing"></div>
   {% for event in events %}
   <a href="/event/show/profile/{{ event.id }}">
@@ -137,19 +138,19 @@
       <!--FIN IDIOMA-->
 
       <div class="footer-desktop">
-        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-xs-12 col-sm-12 foot">
           <h6>{{ 'footer.why'|trans }}</h6>
           <hr>
           <a href="/why"><p>{{ 'footer.why1'|trans }}</p></a>
           <a href="/why#publish"><p>{{ 'footer.why2'|trans }}</p></a>
         </div>
-        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-xs-12 col-sm-12 foot">
           <h6>{{ 'footer.how'|trans }}</h6>
           <hr>
           <a href="/how"><p>{{ 'footer.how1'|trans }}</p></a>
           <a href="/how#event"><p>{{ 'footer.how2'|trans }}</p></a>
         </div>
-        <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-xs-12 col-sm-12 foot">
           <h6>{{ 'footer.contact'|trans }}</h6>
           <hr>
           <a href="#"><p>{{ 'footer.contact1'|trans }}</p></a>
