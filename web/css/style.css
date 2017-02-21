@@ -183,7 +183,7 @@ background-color: #07012D;
 	text-align: center;
 }
 .steps-right {
-	height: 100vh;
+	height: 88vh;
 	background-color: #FFF8EE;
 	padding: 70px;
 	padding-top: 50px;
@@ -696,7 +696,7 @@ ul#next-prev > li > a > button.active {
 
 .video-parallax {
     width: 100%;
-    height: 100%;
+    height: 70vh;
     position: relative;
     overflow: hidden;
 }
