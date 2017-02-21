@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<!--huertos / eventos-->
+
   <div class="row row-centered">
     <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 col-centered" style="background-color:#ECEEEF;">
       <div class="container jumbotron">
@@ -35,14 +35,14 @@
 <input id="type" type="text" value="find" hidden="hidden">
 
 <div class="row">
-  <!--RESULTADOS-->
+  
   <div class="col-lg-7 col-md-7 col-xs-12 col-sm-12">
     <div class="left-scroll">
-      {% if type == 'distance' %}<!-- SI SE TIENE LA UBUCACION DEL USUARIO -->
+      {% if type == 'distance' %}
       {% for event in events %}
       <a href="/event/show/profile/{{ event.0.id }}{% if input_home_search != '' %}/{{ input_home_search }}{% endif %}">
         <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
-          <!-- Imagen -->
+          
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
             {% if event.0.imageName is not empty %}
             <div class="find-result" style="background: url({{ asset('/orchard/event/' ~ event.0.imageName) }});">
@@ -55,7 +55,7 @@
             {% endif %}
           </div>
 
-          <!-- Texto -->
+          
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
             <p><font style="font-size:20px">{{ event.0.title }}</font><br><strong>{% if event.0.price == 0 %}Gratis{% else %}{{ event.0.price }}€{% endif %}</strong>&nbsp;&nbsp;<i>{{ event.0.orchard.name }}</i></p>
           </div>
@@ -65,12 +65,12 @@
       </a>
       {% endfor %}
 
-      {% else %}<!-- SI NO SE TIENE LA UBICACION DEL USUARIO -->
+      {% else %}
       {% for event in events %}
 
       <a href="/event/show/profile/{{ event.id }}{% if input_home_search != '' %}/{{ input_home_search }}{% endif %}">
         <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
-          <!-- Imagen -->
+          
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
             {% if event.imageName is not empty %}
             <div class="find-result" style="background: url({{ asset('/orchard/event/' ~ event.imageName) }});">
@@ -83,7 +83,7 @@
             {% endif %}
           </div>
 
-          <!-- Texto -->
+          
           <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
             <p><font style="font-size:20px">{{ event.title }}</font><br><strong>{% if event.price == 0 %}Gratis{% else %}{{ event.price }}€{% endif %}</strong>&nbsp;&nbsp;<i>{{ event.orchard.name }}</i></p>
           </div>
@@ -97,7 +97,7 @@
     </div>
   </div>
 
-  <!--MAPA-->
+  
   {% if events is not empty %}
   <div class="map col-xs-12 col-sm-12 col-md-5 col-lg-5">
       <div id="map-show" class="map-show" style="height: 63vh;"></div>

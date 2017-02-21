@@ -22,13 +22,10 @@ class OAuthUserProvider extends BaseClass
         $email = $response->getEmail();
         $firstName = $response->getFirstName();
         $lastName = $response->getLastName();
-        //check if the user already has the corresponding social account
         if (null === $user) {
-            //check if the user has a normal account
             $user = $this->userManager->findUserByEmail($email);
 
             if (null === $user || !$user instanceof UserInterface) {
-                //if the user does not have a normal account, set it up:
                 $user = $this->userManager->createUser();
                 $user->setUsername($firstName);
                 $user->setApellidos($lastName);
@@ -36,7 +33,6 @@ class OAuthUserProvider extends BaseClass
                 $user->setPlainPassword(md5(uniqid()));
                 $user->setEnabled(true);
             }
-            //then set its corresponding social id
             $service = $response->getResourceOwner()->getName();
             switch ($service) {
                 case 'google':
@@ -48,7 +44,6 @@ class OAuthUserProvider extends BaseClass
             }
             $this->userManager->updateUser($user);
         } else {
-            //and then login the user
             $checker = new UserChecker();
             $checker->checkPreAuth($user);
         }

@@ -31,7 +31,6 @@ class UploadController extends Controller
         $em->flush();
       }
     }
-    //update step orchard
     if($orchard->getStep()<21){
       $orchard->setStep(21);
       $em->persist($orchard);
@@ -93,7 +92,6 @@ class UploadController extends Controller
         $em->persist($normas);
         $em->flush();
       }
-      //update step orchard
       if($orchard->getStep()<23){
         $orchard->setStep(23);
         $em->persist($orchard);
@@ -104,16 +102,6 @@ class UploadController extends Controller
       return new JsonResponse(null);
     }
   }
-  // public function downloadFileAction(Request $request,$id_orchard)
-  // {
-  //   $orchard=$this->container->get("orchard_service")->getOrchard($id_orchard);
-  //   $entity = $orchard->getRuleFile();
-  //   $helper = $this->container->get('vich_uploader.templating.helper.uploader_helper');
-  //   $path = $helper->asset($entity, 'File');
-  //   $normas=$orchard->getRuleFile();
-  //   return new Response("<a href='/orchard/file/".$entity->getNameFile()."'>descargar</a>");
-  //   return new Response("<a href='".$path."'>descargar</a>");
-  // }
 
   public function deleteFileAction(Request $request,$id_orchard)
   {
