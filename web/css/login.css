@@ -1,15 +1,1 @@
-input{
-  padding: 12px 20px  !important;
-  margin: 8px 0  !important;
-  box-sizing: border-box  !important;
-  border: 2px solid lightblue  !important;
-  border-radius: 10px  !important;
-}
-
-.steps-left-register {
-  padding: 30px  !important;
-  margin-right: 50px  !important;
-  overflow-y: scroll  !important;
-  height: 100%  !important;
-  line-height: 0p  !important;
-}
+input{padding:12px 20px!important;margin:8px 0!important;box-sizing:border-box!important;border:2px solid lightblue!important;border-radius:10px!important}.steps-left-register{padding:30px!important;margin-right:50px!important;overflow-y:scroll!important;height:100%!important;line-height:0p!important}
