@@ -58,7 +58,7 @@ $(function () {
       type: 'POST',
       url: '/event/create/orchard/' + $( "#user_orchards option:selected" ).attr('id'),
       success: function(data) {
-        console.log('success');
+        
         $('#events-container').html(data);
       },
       error: function(jqXHR, exception) {
@@ -77,7 +77,7 @@ $(function () {
         } else {
           alert('Uncaught Error.\n' + jqXHR.responseText);
         }
-        console.log('error');
+        
       }
     });
 
@@ -90,7 +90,7 @@ $('#user_orchards').on('change', function() {
     type: 'POST',
     url: '/event/create/orchard/' + $( "#user_orchards option:selected" ).attr('id'),
     success: function(data) {
-      console.log('success');
+      
       $('#events-container').html(data);
     },
     error: function(jqXHR, exception) {
@@ -109,7 +109,7 @@ $('#user_orchards').on('change', function() {
       } else {
         alert('Uncaught Error.\n' + jqXHR.responseText);
       }
-      console.log('error');
+      
     }
   });
 });

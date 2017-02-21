@@ -18,7 +18,7 @@ function previewImage(file) {
     lector.onloadend = function() {
       file.src = lector.result;
       imagenes.push(file);
-      console.log(imagenes);
+      
       //createImageElement(file,id);
       checkNumImage();
       createImageElement(file);
@@ -34,7 +34,7 @@ function sendAllImages() {
     contentType: 'application/json',
     url:"/orchard/images/upload",
     data: JSON.stringify(imagenes),
-     success: function(step){console.log(step);return step},
+     success: function(step){return step},
      error: function(){alert("error al añadir imagenes. ajax sendAllImages")}
    });
 }
@@ -85,7 +85,7 @@ function createImageElement(file){
     imagenes=removeItemWithId(imagenes,$(this).attr('id'));
     $(this).parent().remove();
 
-    console.log(imagenes);
+    
     checkNumImage();
   };
 
@@ -111,18 +111,18 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
-  console.log("dragevent");
+  
   ev.dataTransfer.setData("text", 'gallery');
 }
 
 function drop(ev) {
-  console.log('dropevent');
+  
   ev.preventDefault();
   $("#loading-images").fadeIn("slow");
   var data = ev.dataTransfer.getData("text");
   var f = ev.dataTransfer.files;
   //var file;
-  //console.log(ev.dataTransfer.files);
+  //
 
   if (f.length+imagenes.length<maxfiles+1) {
     //[].forEach.call(files, readAndPreview);
@@ -162,8 +162,8 @@ function removeItemWithId(array,id) {
 }
 
 function mostrarEditor(element) {
-  console.log("dentro del metodo");
-  console.log($(element).parent().last());
+  
+  
   $(element).parent().children().last().removeAttr("hidden");
 }
 
@@ -175,7 +175,7 @@ function deleteFromServer(id,element) {
     type: "POST",
     url:"/orchard/upload/images/delete/"+id,
      success: function(){
-       $(element).parent().remove();console.log($(element).attr("id"));
+       $(element).parent().remove();
        if ($('.upload').children().length<10) {
          $("#more").removeAttr("hidden");
        }
@@ -184,7 +184,7 @@ function deleteFromServer(id,element) {
          $('#h1Upload').fadeOut(500);
        }
      },
-     error: function(){console.log("imagen no borrada");}
+     error: function(){}
    });
 }
 
@@ -194,6 +194,6 @@ function sendNewDescription(description,id) {
     url:"/orchard/upload/images/modify/"+id,
     data:{description},
      success: function(){alert("descripción modificada")},
-     error: function(){console.log("descripcion NO modificada");}
+     error: function(){}
    });
 }

@@ -39,10 +39,10 @@ function initMap() {
   function success(pos) {
   	var crd = pos.coords;
 
-  	console.log('Your current position is:');
-  	console.log('Latitude : ' + crd.latitude);
-  	console.log('Longitude: ' + crd.longitude);
-  	console.log('More or less ' + crd.accuracy + ' meters.');
+  	
+  	
+  	
+  	
 
   	setMap(crd);
   };
@@ -233,7 +233,7 @@ function setMap(crd){
 
   	layer.on('click', function(e) {
   		if(deleting) {
-  			console.log('Borrando capa no editable');
+  			
   			clearNonEditableLayer(true);
   		}
   	});
@@ -271,7 +271,7 @@ function reverseGeocoding(marker) {
 				$('#Street').attr('value', data.features[0].properties.street).trigger('change');
 				$('#Number').attr('value', data.features[0].properties.housenumber).trigger('change');
 				$('#Zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
-				console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.locality+', CP '+data.features[0].properties.postalcode+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
+				
 			}else{
 				var circle = L.circle([marker.getLatLng().lat, marker.getLatLng().lng], data.features[0].properties.distance*1000).addTo(map);
 				nonEditableItems.addLayer(circle);
@@ -279,7 +279,7 @@ function reverseGeocoding(marker) {
 				$('#Street').attr('value', data.features[0].properties.street).trigger('change');
 				$('#Number').attr('value', data.features[0].properties.housenumber).trigger('change');
 				$('#Zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
-				console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.localadmin+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
+				
 			}
 		}
 	});
@@ -305,7 +305,7 @@ function retrieveGeometry(geometry) {
     //Convertimos el string en un objeto JSON eliminando los errores y lo añadimos al mapa
     var geojsonFeature = JSON.parse(geometry.replace(/&quot;/g,'"'));
 
-		console.log(geojsonFeature);
+		
 
 		//Si es un array es porque contiene un punto y un polígono
 		if(Object.prototype.toString.call(geojsonFeature) === '[object Array]') {

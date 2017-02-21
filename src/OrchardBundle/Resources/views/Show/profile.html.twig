@@ -25,7 +25,7 @@
           type: 'POST',
           url: '/orchard/upload/images/favourite/{{ orchard.id }}/{{ orchardImage.id }}/false',
           success: function(data) {
-            console.log('success');
+            
             location.reload();
           }
         });
@@ -41,7 +41,7 @@
           type: 'POST',
           url: '/orchard/upload/images/favourite/{{ orchard.id }}/{{ orchardImage.id }}/true',
           success: function(data) {
-            console.log('success');
+            
             location.reload();
           }
         });
@@ -742,7 +742,7 @@ $('.scroller-left').click(function() {
 });
 
 $('#btn-send-message').on('click', function() {
-  console.log('Enviando consulta');
+  
 
   if(validateForm()) {
 
@@ -768,7 +768,7 @@ $('#btn-send-message').on('click', function() {
         } else {
           alert('Uncaught Error.\n' + jqXHR.responseText);
         }
-        console.log('error');
+        
       }
     });
 
@@ -778,7 +778,7 @@ $('#btn-send-message').on('click', function() {
 });
 
 $('#btn-send-message-mobile').on('click', function() {
-  console.log('Enviando consulta');
+  
 
   if(validateFormMobile()) {
 
@@ -804,7 +804,7 @@ $('#btn-send-message-mobile').on('click', function() {
         } else {
           alert('Uncaught Error.\n' + jqXHR.responseText);
         }
-        console.log('error');
+        
       }
     });
 

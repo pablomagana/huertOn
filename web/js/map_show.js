@@ -9,7 +9,7 @@ var map_mobile;
 var hasMobile = false;
 
 if ($('#map-show-mobile').length) {
-	console.log('hasMobile');
+
 	hasMobile = true;
 }
 
@@ -83,7 +83,7 @@ function reverseGeocoding(marker, marker_mobile) {
 				$('#Street').attr('value', data.features[0].properties.street).trigger('change');
 				$('#Number').attr('value', data.features[0].properties.housenumber).trigger('change');
 				$('#Zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
-				console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.locality+', CP '+data.features[0].properties.postalcode+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
+				
 			}else{
 				var circle = L.circle([marker.getLatLng().lat, marker.getLatLng().lng], data.features[0].properties.distance*1000).addTo(map);
 				if (hasMobile) {
@@ -93,7 +93,7 @@ function reverseGeocoding(marker, marker_mobile) {
 				$('#Street').attr('value', data.features[0].properties.street).trigger('change');
 				$('#Number').attr('value', data.features[0].properties.housenumber).trigger('change');
 				$('#Zipcode').attr('value', data.features[0].properties.postalcode).trigger('change');
-				console.log('Número '+data.features[0].properties.housenumber+', Calle '+data.features[0].properties.street+', Localidad '+data.features[0].properties.localadmin+', Pais '+data.features[0].properties.country+', Distancia '+data.features[0].properties.distance*1000+' m, Exacto a '+data.features[0].properties.confidence);
+
 			}
 		}
 	});
@@ -104,7 +104,7 @@ function retrieveGeometry(geometry) {
 	//Convertimos el string en un objeto JSON eliminando los errores y lo añadimos al mapa
 	var geojsonFeature = JSON.parse(geometry.replace(/&quot;/g,'"'));
 
-	console.log(geojsonFeature);
+
 
 	//Si es un array es porque contiene un punto y un polígono
 	if(Object.prototype.toString.call(geojsonFeature) === '[object Array]') {

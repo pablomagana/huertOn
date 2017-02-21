@@ -1,6 +1,6 @@
 //capturar imagenes subidas
 function previewImage(file) {
-  console.log(file);
+  
     var filesId = "files";
     var files = document.getElementById(filesId);
     var fileType = /application.*/;
@@ -8,7 +8,7 @@ function previewImage(file) {
     // application/pdf
 
     // if (!file.type.match(fileType)) {
-    //   console.log(file.type);
+    //   
     //     throw "El formato del fichero no es valido. Formatos Validos:.pdf,.docx,.txt,.doc,.odf";
     // }
 
@@ -53,16 +53,16 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
-  console.log("dragevent");
+  
   //ev.dataTransfer.setData("text", 'gallery');
 }
 
 function drop(ev) {
-  console.log('dropevent');
+  
   ev.preventDefault();
   //var data = ev.dataTransfer.getData("text");
   var f = ev.dataTransfer.files;
-  console.log(ev.dataTransfer.files);
+  
   $("#loading-file").fadeIn("slow");
   if (f && fileNormas==null) {
     [].forEach.call(f, previewImage);
@@ -96,11 +96,11 @@ function deleteFromServer(id,element) {
     url:"/orchard/upload/files/delete/"+id,
      success: function(data){
        if (data=="ok") {
-         $(element).parent().remove();console.log($(element).attr("id"));}
+         $(element).parent().remove();}
          $(".more").removeAttr('hidden');
          $("#h1Upload").attr("hidden","hidden");
          $(".btn-siguiente").text("Ahora no");
        },
-     error: function(){console.log("imagen no borrada");}
+     error: function(){}
    });
 }

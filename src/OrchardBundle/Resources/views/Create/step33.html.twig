@@ -101,7 +101,7 @@
                     },
                     success: function(data) {
                         saveAnimation();
-                        console.log('success');
+                        
                         window.location.href = '/orchard/create/steps/{{ orchard.id }}';
                     },
                     error: function(jqXHR, exception) {
@@ -121,7 +121,7 @@
                         } else {
                             alert('Uncaught Error.\n' + jqXHR.responseText);
                         }
-                        console.log('error');
+                        
                     }
                 });
 
@@ -164,7 +164,7 @@
                     },
                     success: function(data) {
                         saveAnimation();
-                        console.log('success');
+                        
                         window.location.href = '/orchard/create/steps/{{ orchard.id }}';
                     },
                     error: function(jqXHR, exception) {
@@ -184,7 +184,7 @@
                         } else {
                             alert('Uncaught Error.\n' + jqXHR.responseText);
                         }
-                        console.log('error');
+                        
                     }
                 });
 
@@ -195,7 +195,7 @@
             function initSave(orchard_activities) {
                 $("#loading, #loading-text").fadeIn("slow");
                 $(':checkbox:not(#cb-new-activity):checked').each(function() {
-                    console.log($(this).attr('id'));
+                    
                     orchard_activities.push($(this).attr('id'));
                 });
             }
@@ -227,7 +227,7 @@
 
             $(':checkbox:not(#cb-new-activity)').each(function() {
                 if (this.checked) {
-                    console.log('checkeado');
+                    
                     $('.btn-siguiente').html('{{ 'orchard.step11.next'|trans }}')
                 }
             });
@@ -262,7 +262,7 @@
                             type: 'POST',
                             url: '/orchard/suggest/send/orchard_activity/' + $('#Activity').val(),
                             success: function(data) {
-                                console.log('success');
+                                
                                 $('#myModal').modal('show');
                             },
                             error: function(jqXHR, exception) {
@@ -281,7 +281,7 @@
                                 } else {
                                     alert('Uncaught Error.\n' + jqXHR.responseText);
                                 }
-                                console.log('error');
+                                
                             }
                         });
                     }

@@ -134,7 +134,7 @@ $(function() {
     $('.add').click(function() {
         $(".base").clone().removeAttr("class style").appendTo(".inscription_steps");
         $('textarea').keyup(function() {
-            console.log('Escribiendo');
+            
             var length = $(this).val().length;
             if (length) {
                 $('.btn-siguiente').html('{{ 'orchard.step11.next'|trans }}');
@@ -166,7 +166,7 @@ $(function() {
             },
             success: function(data) {
                 saveAnimation();
-                console.log('success');
+                
                 window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
             },
             error: function(jqXHR, exception) {
@@ -186,7 +186,7 @@ $(function() {
                 } else {
                     alert('Uncaught Error.\n' + jqXHR.responseText);
                 }
-                console.log('error');
+                
             }
         });
 
@@ -229,7 +229,7 @@ $(function() {
             },
             success: function(data) {
                 saveAnimation();
-                console.log('success');
+                
                 window.location.href = '/orchard/create/steps/{{ orchard.id }}';
             },
             error: function(jqXHR, exception) {
@@ -249,7 +249,7 @@ $(function() {
                 } else {
                     alert('Uncaught Error.\n' + jqXHR.responseText);
                 }
-                console.log('error');
+                
             }
         });
 
@@ -260,12 +260,12 @@ $(function() {
     function initSave(inscription_steps) {
         $("#loading, #loading-text").fadeIn("slow");
         $('textarea').each(function() {
-            console.log($(this).val());
+            
             if ($(this).val()) {
                 inscription_steps.push($(this).val());
             }
         });
-        console.log('inscription_steps', inscription_steps);
+        
     }
 
     function saveAnimation() {

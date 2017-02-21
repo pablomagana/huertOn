@@ -103,18 +103,18 @@
         var imagenes = new Array();
         var id = 0;
         var maxfiles = 10;
-        console.log(imagenes);
+        
         //cargar imagenes con click
         var filesinput = document.querySelector('#imageinput');
         filesinput.addEventListener('change', function() {
-            console.log("detectando cambios en input");
+            
             $("#loading-images").fadeIn("slow");
             //solo se permiten 10 imagenes
             if (this.files.length + imagenes.length < maxfiles + 1) {
                 for (var i = 0; i < this.files.length; i++) {
-                    console.log("dibujando imagen" + i);
+                    
                     previewImage(this.files[i]);
-                    //console.log("preparando imagen "+this.files[i].name);
+                    //
                 }
             } else {
                 alert("{{ 'orchard.step14.max'|trans }}" + maxfiles + " {{ 'orchard.step14.max-2'|trans }}");
@@ -139,7 +139,7 @@
                 formImages.append('image-' + i, imagenes[i]);
             }
             formImages.append("desc", desc);
-            console.log(desc);
+            
             $.ajax({
                 type: "POST",
                 url: "/orchard/upload/images/upload/{{ orchard.id }}",
@@ -148,7 +148,7 @@
                 contentType: false,
                 processData: false,
                 success: function(step) {
-                    console.log(step);
+                    
                     window.location.href = '/orchard/create/steps/{{ orchard.id }}';
                 },
                 error: function(jqXHR, exception) {
@@ -170,7 +170,7 @@
                     } else {
                         alert('Uncaught Error.\n' + jqXHR.responseText);
                     }
-                    console.log('error');
+                    
                 }
             });
         });
@@ -189,7 +189,7 @@
                 formImages.append('image-' + i, imagenes[i]);
             }
             formImages.append("desc", desc);
-            console.log(desc);
+            
             $.ajax({
                 type: "POST",
                 url: "/orchard/upload/images/upload/{{ orchard.id }}",
@@ -198,7 +198,7 @@
                 contentType: false,
                 processData: false,
                 success: function(step) {
-                    console.log(step);
+                    
                     window.location.href = '/orchard/create/step/' + step + '/{{ orchard.id }}';
                 },
                 error: function(jqXHR, exception) {
@@ -220,7 +220,7 @@
                     } else {
                         alert('Uncaught Error.\n' + jqXHR.responseText);
                     }
-                    console.log('error');
+                    
                 }
             });
         });
@@ -238,7 +238,7 @@
                 formImages.append('image-' + i, imagenes[i]);
             }
             formImages.append("desc", desc);
-            console.log(desc);
+            
             $.ajax({
                 type: "POST",
                 contentType: 'application/json',
@@ -269,7 +269,7 @@
                     } else {
                         alert('Uncaught Error.\n' + jqXHR.responseText);
                     }
-                    console.log('error');
+                    
                 }
             });
         });

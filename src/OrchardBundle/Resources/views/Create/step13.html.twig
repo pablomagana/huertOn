@@ -136,7 +136,7 @@
                         },
                         success: function(data) {
                             saveAnimation();
-                            console.log('success');
+                            
                             window.location.href = '/orchard/create/step/' + data.redirect + '/{{ orchard.id }}';
                         },
                         error: function(jqXHR, exception) {
@@ -156,7 +156,7 @@
                             } else {
                                 alert('Uncaught Error.\n' + jqXHR.responseText);
                             }
-                            console.log('error');
+                            
                         }
                     });
 
@@ -215,7 +215,7 @@
                         },
                         success: function(data) {
                             saveAnimation();
-                            console.log('success');
+                            
                             window.location.href = '/orchard/create/steps/{{ orchard.id }}';
                         },
                         error: function(jqXHR, exception) {
@@ -235,7 +235,7 @@
                             } else {
                                 alert('Uncaught Error.\n' + jqXHR.responseText);
                             }
-                            console.log('error');
+                            
                         }
                     });
 
@@ -248,7 +248,7 @@
             function initSave(orchard_types) {
                 $("#loading, #loading-text").fadeIn("slow");
                 $(':checkbox:not(#cb-new-type):checked').each(function() {
-                    console.log($(this).attr('id'));
+                    
                     orchard_types.push($(this).attr('id'));
                 });
             }
@@ -285,7 +285,7 @@
 
             $(':checkbox:not(#cb-new-type)').each(function() {
                 if (this.checked) {
-                    console.log('checkeado');
+                    
                     $('.btn-siguiente').popover('disable')
                     $('#required-hidden-input').remove();
                 }
@@ -321,7 +321,7 @@
                             type: 'POST',
                             url: '/orchard/suggest/send/orchard_type/' + $('#Type').val(),
                             success: function(data) {
-                                console.log('success');
+                                
                                 $('#myModal').modal('show');
                             },
                             error: function(jqXHR, exception) {
@@ -340,7 +340,7 @@
                                 } else {
                                     alert('Uncaught Error.\n' + jqXHR.responseText);
                                 }
-                                console.log('error');
+                                
                             }
                         });
                     }

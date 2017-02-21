@@ -27,12 +27,12 @@ $('#description').keyup(function() {
   $('#btn-description').off('click');
   $('#btn-description').on('click', function() {
     if($('#description').val()) {
-      console.log($('#Type').val());
+      
       $.ajax({
         type: 'POST',
         url: '/orchard/suggest/insert/'+$('#Type').val()+'/'+$('#description').val(),
         success: function(data) {
-          console.log('success');
+          
           window.location.href = '/orchard/create/list';
         },
         error: function(jqXHR, exception) {
@@ -51,7 +51,7 @@ $('#description').keyup(function() {
           } else {
             alert('Uncaught Error.\n' + jqXHR.responseText);
           }
-          console.log('error');
+          
         }
       });
     }

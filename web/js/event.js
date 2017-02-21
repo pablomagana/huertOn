@@ -14,7 +14,7 @@ function previewImage(file) {
     lector.onloadend = function() {
       file.src = lector.result;
       imagenes.push(file);
-      console.log(imagenes);
+      
       //createImageElement(file,id);
       checkNumImage();
       createImageElement(file);
@@ -27,12 +27,12 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
-  console.log("dragevent");
+  
   ev.dataTransfer.setData("text", 'gallery');
 }
 
 function drop(ev) {
-  console.log('dropevent');
+  
   ev.preventDefault();
   $("#loading-images").fadeIn("slow");
   var data = ev.dataTransfer.getData("text");
@@ -64,7 +64,7 @@ function createImageElement(file){
     imagenes=removeItem();
     $(this).parent().remove();
 
-    console.log(imagenes);
+    
     checkNumImage();
   };
 
