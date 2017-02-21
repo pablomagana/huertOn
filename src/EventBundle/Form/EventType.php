@@ -56,7 +56,7 @@ class EventType extends AbstractType
           ->add('places', IntegerType::class, ["label" => "Nº DE PLAZAS", 'attr' => ['required' => true, 'style' => 'width: 100px', 'min' => 1, 'class' => 'form-control']])
           ->add('description',TextareaType::class,["label" => "DESCRIPCIÓN", 'attr' => ['required' => true, 'style' => 'height: 150px',  'maxlength'=> "3500", 'class' => 'form-control']])
           ->add('price',MoneyType::class,["label" => "PRECIO","attr" => ['required' => true, 'style' => 'width: 100px', "value" => 0, 'class' => 'form-control']])
-          ->add('showPlaces',null,["label" => "Muestra el numero de plazas restantes", 'required' => false, 'attr' => ['required' => true,
+          ->add('showPlaces',null,["label" => "Muestra el numero de plazas restantes", 'required' => false, 'attr' => [
           'class' => 'custom-control-input']])
           ->add('images', VichImageType::class, [
             'attr' => ['id' => 'imageinput','hidden' => 'hidden'],

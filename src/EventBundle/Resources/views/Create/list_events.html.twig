@@ -30,6 +30,10 @@
           </div>
           {% if event.imageName != null %}
           <a href="/event/show/profile/{{ event.id }}"><div style="width: 100%; height: 300px; background: url({{ asset('/orchard/event/' ~ event.imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div></a>
+          {% else %}
+          <a href="/orchard/show/profile/{{ orchard.id }}">
+            <div style="width: 100%; height: 300px; background: url({{ asset('/img/event-default.jpg') }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+          </a>
           {% endif %}
 
           <div class="row">
@@ -42,7 +46,7 @@
             </div>
           </div>
           <div class="spacing"></div>
-        
+
         </div>
       </div>
 
@@ -61,7 +65,14 @@
             <div class="col-xl-9 col-lg-9 col-md-9 col-xs-9 col-sm-9 text-xs-left text-sm-left text-lg-left text-xl-left"><h3>{{ event.title }}</h3></div>
           </div>
           {% if event.imageName != null %}
-          <div style="width: 100%; height: 300px; background: url({{ asset('/orchard/event/' ~ event.imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+          <a href="/event/show/profile/{{ event.id }}">
+            <div style="width: 100%; height: 300px; background: url({{ asset('/orchard/event/' ~ event.imageName) }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+          </a>
+          {% else %}
+          <a href="/event/show/profile/{{ event.id }}">
+            <div style="width: 100%; height: 300px; background: url({{ asset('/img/event-default.jpg') }}); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+          </a>
+
           {% endif %}
 
           <div class="row">

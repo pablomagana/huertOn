@@ -105,7 +105,7 @@ class Event
     /**
      * @var string
      *
-     * @ORM\Column(name="imageName", type="string", length=255, unique=true)
+     * @ORM\Column(name="imageName", type="string", length=255, unique=true, nullable=true)
      */
     private $imageName;
 

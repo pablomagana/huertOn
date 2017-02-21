@@ -21,6 +21,74 @@
           </trans-unit>
           <!-- Fin IDIOMA -->
 
+          <trans-unit id="1466">
+              <source>home.subtitle</source>
+              <target>The most complete list of urban orchards and activities in Spain</target>
+          </trans-unit>
+          <trans-unit id="1467">
+              <source>home.orchards</source>
+              <target>Orchards</target>
+          </trans-unit>
+          <trans-unit id="1468">
+              <source>home.last.orchards</source>
+              <target>Last orchards updated</target>
+          </trans-unit>
+          <trans-unit id="1469">
+              <source>home.more</source>
+              <target>See more</target>
+          </trans-unit>
+          <trans-unit id="1470">
+              <source>home.activities</source>
+              <target>Activities</target>
+          </trans-unit>
+          <trans-unit id="1471">
+              <source>home.agroeco</source>
+              <target>Agroecology as responsible, gastronomy, etc.</target>
+          </trans-unit>
+
+
+          <trans-unit id="1472">
+              <source>footer.why</source>
+              <target>Why?</target>
+          </trans-unit>
+          <trans-unit id="1473">
+              <source>footer.why1</source>
+              <target>Why publish your orchard?</target>
+          </trans-unit>
+          <trans-unit id="1474">
+              <source>footer.why2</source>
+              <target>Why participate in an orchard?</target>
+          </trans-unit>
+          <trans-unit id="1475">
+              <source>footer.how</source>
+              <target>How it works?</target>
+          </trans-unit>
+          <trans-unit id="1476">
+              <source>footer.how1</source>
+              <target>How to upload my orchard?</target>
+          </trans-unit>
+          <trans-unit id="1477">
+              <source>footer.how2</source>
+              <target>How do I upload an activity?</target>
+          </trans-unit>
+          <trans-unit id="1478">
+              <source>footer.contact</source>
+              <target>Contact</target>
+          </trans-unit>
+          <trans-unit id="1479">
+              <source>footer.contact1</source>
+              <target>Write to us</target>
+          </trans-unit>
+          <trans-unit id="1480">
+              <source>footer.contact2</source>
+              <target>Press</target>
+          </trans-unit>
+          <trans-unit id="1481">
+              <source>footer.legal</source>
+              <target>Privacy and cookies</target>
+          </trans-unit>
+
+
           <!-- Base -->
             <!-- base.html -->
               <trans-unit id="1">

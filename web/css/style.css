@@ -150,7 +150,7 @@ background-color: #07012D;
 	padding-bottom: 0;
 }
 
-.steps-left-content, .steps-left-innerContent	{
+.steps-left-content	{
 	margin-top: 50px;
 }
 
@@ -169,7 +169,6 @@ background-color: #07012D;
 
 /*scroll left*/
 .steps-left-12 {
-	padding: 50px;
 	padding-bottom: 0;
 }
 
@@ -184,7 +183,7 @@ background-color: #07012D;
 	text-align: center;
 }
 .steps-right {
-	height: 100vh;
+	height: 88vh;
 	background-color: #FFF8EE;
 	padding: 70px;
 	padding-top: 50px;
@@ -697,7 +696,7 @@ ul#next-prev > li > a > button.active {
 
 .video-parallax {
     width: 100%;
-    height: 100%;
+    height: 70vh;
     position: relative;
     overflow: hidden;
 }

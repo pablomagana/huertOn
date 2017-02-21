@@ -11,7 +11,7 @@
   <div class="content-a">
     <div class="content-b">
       <span id="title-home_search">{{ 'home.title'|trans }}</span><br>
-      <span id="subtitle-home_search"style="color: #fff;">La lista de huertos urbanos y actividades más completa de España</span>
+      <span id="subtitle-home_search"style="color: #fff;">{{ 'home.subtitle'|trans }}</span>
       <div class="spacing"></div>
       <form id="form-home_search" action="/find/orchard" method="post">
         <input id="input-home_search" name="input-home_search" type="text" placeholder="{{ 'home.find.placeholder'|trans }}"><button id="btn-home_search" class="button" type="submit">{{ 'home.btn.search'|trans }}</button>
@@ -25,8 +25,8 @@
 
 <div class="jumbotron" style="background-color: #ECEEEF; margin-bottom: 0px;">
 <div class="container">
-  <h1>HUERTOS</h1>
-  <small>Últimos huertos subidos</small>
+  <h1>{{ 'home.orchards'|trans }}</h1>
+  <small>{{ 'home.last.orchards'|trans }}</small>
   <div class="spacing"></div>
   {% for orchard in orchards %}
 
@@ -63,7 +63,7 @@
 
 <div class="container">
   <div class="spacing "></div>
-  <a href="/find/orchard"><button id="register-button" type="button" class="btn btn-outline-primary">Ver más</button></a>
+  <a href="/find/orchard"><button id="register-button" type="button" class="btn btn-outline-primary">{{ 'home.more'|trans }}</button></a>
   <div class="spacing "></div>
 
 </div>
@@ -71,8 +71,8 @@
 </div>
 
 <div class="container">
-  <h1>EVENTOS</h1>
-  <small>Agroecología cómo consumo responsable, gatronomia, etc.</small>
+  <h1>{{ 'home.activities'|trans }}</h1>
+  <small>{{ 'home.sub.events'|trans }}</small>
   <div class="spacing"></div>
   {% for event in events %}
   <a href="/event/show/profile/{{ event.id }}">
@@ -110,7 +110,7 @@
 
 <div class="container">
   <div class="spacing "></div>
-  <a href="/find/event"><button id="register-button" type="button" class="btn btn-outline-primary">Ver más</button></a>
+  <a href="/find/event"><button id="register-button" type="button" class="btn btn-outline-primary">{{ 'home.more'|trans }}</button></a>
   <div class="spacing "></div>
 
 </div>
@@ -118,6 +118,7 @@
 <footer class="footer">
   <div class="container-fluid">
     <div class="row">
+      <!--IDIOMA
       <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
         <h6>Idioma</h6>
         <hr>
@@ -133,24 +134,26 @@
           </div>
         </div>
       </div>
+      <!--FIN IDIOMA-->
+
       <div class="footer-desktop">
         <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
-          <h6>Por qué</h6>
+          <h6>{{ 'footer.why'|trans }}</h6>
           <hr>
-          <a href="/why"><p>Por qué publicar tu huerto</p></a>
-          <a href="/why#publish"><p>Por qué participar en un huerto</p></a>
+          <a href="/why"><p>{{ 'footer.why1'|trans }}</p></a>
+          <a href="/why#publish"><p>{{ 'footer.why2'|trans }}</p></a>
         </div>
         <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
-          <h6>Cómo funciona</h6>
+          <h6>{{ 'footer.how'|trans }}</h6>
           <hr>
-          <a href="/how"><p>Cómo subir mi huerto</p></a>
-          <a href="/how#event"><p>Cómo subo una actividad</p></a>
+          <a href="/how"><p>{{ 'footer.how1'|trans }}</p></a>
+          <a href="/how#event"><p>{{ 'footer.how2'|trans }}</p></a>
         </div>
         <div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 foot">
-          <h6>Contacto</h6>
+          <h6>{{ 'footer.contact'|trans }}</h6>
           <hr>
-          <a href="#"><p>Escríbenos</p></a>
-          <a href="#"><p>Prensa</p></a>
+          <a href="#"><p>{{ 'footer.contact1'|trans }}</p></a>
+          <a href="#"><p>{{ 'footer.contact2'|trans }}</p></a>
           <i class="fa fa-facebook-square" aria-hidden="true"></i>
           <i class="fa fa-twitter-square" aria-hidden="true"></i>
         </div>
@@ -165,7 +168,7 @@
           <p style="color: black;">Research & service design by YADEMÁS</p>
         </div>
         <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4 foot-down-txt">
-          <p><a href="#">Condiciones privacidad y cookies</a></p>
+          <p><a href="#">{{ 'footer.legal'|trans }}</a></p>
         </div>
       </div>
     </div>
